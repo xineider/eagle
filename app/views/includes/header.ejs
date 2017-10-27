@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Sistema Quorp</title>
+    <link rel='stylesheet' href='/assets/css/font-awesome.min.css' />
+    <link rel='stylesheet' href='/assets/css/materialize.min.css' />
+    <link rel='stylesheet' href='/assets/css/style.css' />
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.mask.js"></script>
+		<script src="/assets/js/materialize.min.js"></script>
+		<script src="/assets/js/main.js"></script>
+  </head>
+  <body class="row">
+  	<div class="loader none">
+	  	<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+			<!-- <span class="sr-only">Loading...</span> -->
+  	</div>
+  	<header class="col m2 indigo darken-1">
+			<nav>
+				<div class="nav-wrapper">
+			  	<div class="change-bar">
+			  		<button class="btn white grey-text text-darken-4"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+			  		<button class="btn white grey-text text-darken-4 none"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+			  	</div>
+			  	<div id="big-nav">
+						<a href="#!" class="brand-logo center-align"><img style="max-width: 100%;" src="/assets/imgs/mini-logo.png"></a>
+						<ul class="hide-on-med-and-down">
+						  <li>
+						  	<a class="ajax-load" href="/sistema/"><i class="fa fa-home" aria-hidden="true"></i> Inicio</a>
+						  </li>
+						  <li>						  	
+						  	<a class="ajax-load" href="/sistema/obras"><i class="fa fa-building-o" aria-hidden="true"></i> Obras</a>
+						  </li>
+						  <li>						  	
+						  	<a class="ajax-load" href="/sistema/produtos"><i class="fa fa-shopping-bag" aria-hidden="true"></i> Produtos</a>
+						  </li>
+						  <li>						  	
+						  	<a class="ajax-load" href="/sistema/orcamentos"><i class="fa fa-file-text-o" aria-hidden="true"></i> Orçamentos</a>
+						  	<ul class="sub-menu">
+						  		<li>
+						  			<a href="/sistema/orcamentos/">
+						  				Controle de Orçamentos
+						  			</a>
+						  			<a href="/sistema/orcamentos/externos">
+						  				Orçamentos Externos
+						  			</a>
+						  			<a href="/sistema/orcamentos/solicitacoes">
+						  				Solicitação de Compras
+						  			</a>
+						  			<a href="/sistema/orcamentos/ordens">
+						  				Ordem de Compra
+						  			</a>
+						  			<a href="/sistema/orcamentos/pedidos">
+						  				Pedidos
+						  			</a>
+						  			<a href="/sistema/orcamentos/relatorios">
+						  				Relatório de Orçamentos
+						  			</a>
+						  		</li>
+						  	</ul>
+						  </li>
+						  <li>						  	
+						  	<a class="ajax-load" href="/sistema/diarios"><i class="fa fa-book" aria-hidden="true"></i> Diário de Obras</a>
+						  	<ul class="sub-menu">
+						  		<li>
+						  			<a href="/sistema/diarios/relatorios">
+						  				Ver Relatórios
+						  			</a>
+						  			<a href="/sistema/diarios/relatorios/criar">
+						  				Criação de Relatório
+						  			</a>
+						  			<a href="/sistema/diarios/rdo/criar">
+						  				Criação de RDO
+						  			</a>
+						  		</li>
+						  	</ul>
+						  </li>
+						  <li>						  	
+						  	<a class="ajax-load" href="/sistema/estoques"><i class="fa fa-database" aria-hidden="true"></i> Estoque</a>
+						  	<ul class="sub-menu">
+						  		<li>
+						  			<a href="/sistema/estoques/geral">
+						  				Estoque Geral
+						  			</a>
+						  			<a href="/sistema/estoques/obras">
+						  				Estoque das Obras
+						  			</a>
+						  			<a href="/sistema/estoques/relatorios">
+						  				Relatório do Estoque
+						  			</a>
+						  		</li>
+						  	</ul>
+						  </li>
+						  <li>						  	
+						  	<a class="ajax-load" href="/sistema/ferramentarias"><i class="fa fa-gavel" aria-hidden="true"></i> Ferramentaria</a>
+						  	<ul class="sub-menu">
+						  		<li>
+						  			<a href="/sistema/ferramentarias/geral">
+						  				Ferramentas Gerais
+						  			</a>
+						  			<a href="/sistema/ferramentarias/obras">
+						  				Ferramentas das Obras
+						  			</a>
+						  			<a href="/sistema/ferramentarias/manutencao">
+						  				Ferramentas em Manutenção
+						  			</a>
+						  			<a href="/sistema/ferramentarias/relatorio">
+						  				Relatório das Ferramentas
+						  			</a>
+						  		</li>
+						  	</ul>
+						  </li>
+						  <li>						  	
+						  	<a class="ajax-load" href="/sistema/configuracoes/usuarios"><i class="fa fa-users" aria-hidden="true"></i> Usuários</a>
+						  </li>
+						  <li>
+						  	<a class="ajax-load" href="/sistema/configuracoes"><i class="fa fa-cogs" aria-hidden="true"></i> Configurações</a>
+						  </li>
+						  <li>
+						  	<a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a>
+						  </li>
+						</ul>
+			  	</div>
+			  	<div id="small-nav" class="none">
+						<a href="#!" class="brand-logo center-align"><img style="max-width: 100%;" src="/assets/imgs/mini-mini-logo.png"></a>
+						<ul class="hide-on-med-and-down">
+						  <li>
+						  	<a class="ajax-load" href="/sistema/"><i class="fa fa-home" aria-hidden="true"></i></a>
+						  </li>
+						  <li>
+						  	<a class="ajax-load" href="/sistema/empresas"><i class="fa fa-industry" aria-hidden="true"></i></a>
+						  	<ul class="sub-menu">
+						  		<li>
+						  			<a class="ajax-load" href="/sistema/empresas/cadastrar">
+						  				Criar Empresa
+						  			</a>
+						  		</li>
+						  	</ul>
+						  </li>
+						  <li>						  	
+						  	<a class="ajax-load" href="/sistema/obras"><i class="fa fa-building" aria-hidden="true"></i></a>
+						  </li>
+						  <li>						  	
+						  	<a class="ajax-load" href="/sistema/compras"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+						  </li>		
+						  <li>						  	
+						  	<a class="ajax-load" href="/sistema/pedidos"><i class="fa fa-file-text" aria-hidden="true"></i></a>
+						  </li>			  
+						  <li>
+						  	<a class="ajax-load" href="/sistema/configuracoes"><i class="fa fa-cogs" aria-hidden="true"></i></a>
+						  </li>
+						  <li>
+						  	<a href="/logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+						  </li>
+						</ul>
+			  	</div>
+				</div>
+			</nav>
+  	</header>
