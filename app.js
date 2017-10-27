@@ -11,12 +11,6 @@ var Control = require('./app/controller/control.js');
 var login = require('./app/controller/login');
 var index = require('./app/controller/index');
 var api = require('./app/controller/api');
-var obras = require('./app/controller/obras');
-var produtos = require('./app/controller/produtos');
-var orcamentos = require('./app/controller/orcamentos');
-var diarios = require('./app/controller/diarios');
-var estoques = require('./app/controller/estoques');
-var ferramentarias = require('./app/controller/ferramentarias');
 var configuracoes = require('./app/controller/configuracoes');
 
 var app = express();
@@ -62,12 +56,6 @@ app.use("/assets", express.static(__dirname + '/assets'));
 app.use('/', login);
 app.use('/sistema', index);
 app.use('/sistema/api', api);
-app.use('/sistema/obras', obras);
-app.use('/sistema/produtos', produtos);
-app.use('/sistema/orcamentos', orcamentos);
-app.use('/sistema/diarios', diarios);
-app.use('/sistema/estoques', estoques);
-app.use('/sistema/ferramentarias', ferramentarias);
 app.use('/sistema/configuracoes', configuracoes);
 
 
