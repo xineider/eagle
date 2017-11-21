@@ -3,26 +3,14 @@ var express = require('express');
 var router 	= express.Router();
 var Control = require('./control.js');
 var control = new Control;
+var IndexModel = require('../model/indexModel.js');
+var model = new IndexModel;
 var data = '';
+var app = express();
+app.use(require('express-is-ajax-request'));
 
-// FAZER LEITURA DAS CONFIGURAÇÕES
-var config = control.Config();
-
-// CONEXÃO MYSQL
-var mysql      = require('mysql');
-var connection = mysql.createConnection(config['mysql']);
-connection.connect();
-var query = '';
-var array = [];
-
-
-/* GET pagina de login. */
 router.get('/', function(req, res, next) {
-
-    if (req.isAjaxRequest())
-        res.send('request made through ajax.');
- 
-    res.send('normal http request');
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'configuracoes/index', data: data});
 });
 
 
