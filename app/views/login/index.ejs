@@ -2,45 +2,46 @@
 <html>
   <head>
     <title>Sistema Quorp</title>
-    <link rel='stylesheet' href='/stylesheets/font-awesome.min.css' />
-    <link rel='stylesheet' href='/stylesheets/materialize.min.css' />
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-		<script src="/javascripts/jquery.min.js"></script>
-		<script src="/javascripts/materialize.min.js"></script>
-		<script src="/javascripts/main.js"></script>
+    <link rel='stylesheet' href='/assets/css/font-awesome.min.css' />
+    <link rel='stylesheet' href='/assets/css/materialize.min.css' />
+    <link rel='stylesheet' href='/assets/css/style.css' />
+		<script src="/assets/js/jquery.min.js"></script>
+		<script src="/assets/js/jquery.mask.js"></script>
+		<script src="/assets/js/materialize.min.js"></script>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
   </head>
   <body class="row">
   <main>
 		<section>
 			<div class="login">
 				<form method="POST" action="/">
-					<div class="icon center-align">
-						<img style="max-height: 320px;" src="/images/logo.png">
+					<div class="icon center-align" style="padding: 15px 0;">
+						<img style="max-height: 320px;" src="/assets/imgs/logo.png">
 					</div>
 					<div class="box white arrow_box">
 						<%
 						if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
 						%>
-		        		<div class="card-panel red darken-1 center-align">
-		        			<span class="white-text"><%= erro %></span>
+		        		<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
+		        			<span class="white-text">Usuário ou senha incorreto(s), tente novamente.</span>
 		        		</div>
 						<%
 						} else if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == 'login') {
 						%>
-		        		<div class="card-panel red darken-1 center-align">
-		        			<span class="white-text"><%= erro %></span>
+		        		<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
+		        			<span class="white-text">Usuário ou senha incorreto(s), tente novamente.</span>
 		        		</div>
 						<%
 						}
 						%>
 						<div class="input-field">
 							<i class="fa fa-user prefix" aria-hidden="true"></i>
-							<input type="text" name="login" id="login" class="validate">
+							<input type="text" name="login" id="login" class="validate" autocomplete="off">
 							<label for="login">Usuário</label>
 						</div>
 						<div class="input-field">
 							<i class="fa fa-key prefix" aria-hidden="true"></i>
-							<input type="password" name="senha" id="senha" class="validate">
+							<input type="password" name="senha" id="senha" class="validate" autocomplete="off">
 							<label for="senha">Senha</label>
 						</div>
 						<small><a href="#">Esqueceu sua senha?</a></small>

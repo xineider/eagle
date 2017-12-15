@@ -12,6 +12,10 @@ var login = require('./app/controller/login');
 var index = require('./app/controller/index');
 var api = require('./app/controller/api');
 var configuracoes = require('./app/controller/configuracoes');
+var usuarios = require('./app/controller/usuarios');
+
+var VerificacaoModel = require('./app/model/verificacaoModel');
+var verificacao = new VerificacaoModel;
 
 var app = express();
 var control = new Control;
@@ -27,16 +31,29 @@ app.use(session({
 
 // Verifica usuario se esta logado ou não
 app.use(function (req, res, next) {
-  req.session.id_usuario = 1;
   var pathname = parseurl(req).pathname;
-  if (control.Isset(req.session.id_usuario, false) 
-  	&& (pathname != '/' && pathname != '')
-  		&& (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1)) {
-		res.redirect('/');
+  if ((pathname != '/' && pathname != '') && 
+      (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1) && 
+        req.isAjaxRequest() == true){
+    var id = req.headers['authority-optima-id'];
+    var hash = req.headers['authority-optima-hash'];
+    verificacao.VerificarUsuario(id, hash).then(data => {
+      console.log(data);
+      if (data.length > 0) {
+        next();
+      } else {
+        req.session.destroy(function(err) {
+          res.json('<img src="/assets/imgs/logout.gif"><script>setTimeout(function(){ window.location.replace("/"); }, 4100);</script>');
+        });
+      }
+    });
+  } else if (control.Isset(req.session.usuario, false)
+    && (pathname != '/' && pathname != '')
+      && (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1)) {
+    res.redirect('/');
   } else {
-		next();
+    next();
   }
-
 });
 
 // view engine setup
@@ -57,6 +74,7 @@ app.use('/', login);
 app.use('/sistema', index);
 app.use('/sistema/api', api);
 app.use('/sistema/configuracoes', configuracoes);
+app.use('/sistema/usuarios', usuarios);
 
 
 // catch 404 and forward to error handler

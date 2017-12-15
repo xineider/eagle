@@ -3,7 +3,7 @@ var express = require('express');
 var router 	= express.Router();
 var Control = require('./control.js');
 var control = new Control;
-var data = '';
+var data = {};
 var app = express();
 app.use(require('express-is-ajax-request'));
 

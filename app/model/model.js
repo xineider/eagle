@@ -6,7 +6,7 @@ var config = {"mysql": {
 								    "host"     : "localhost",
 								    "user"     : "root",
 								    "password" : "root",
-								    "database" : "pazze_sistema"
+								    "database" : "base_fw"
 							  	}};
 
 // CONEXÃO MYSQL
@@ -54,8 +54,8 @@ class Helper {
 			// Adicione a query com scape(?) e os respectivos valores em um array simples
 			connection.query(query, array, function (error, results, fields) {
 			  if (error && query != '') console.log('ERROR SQL ------------- '+error+' ------------- SQL ERROR');
+			  console.log(results);
 			  resolve(results);
-
 			});
 		});
 	}
@@ -68,6 +68,39 @@ class Helper {
 
 			});
 		});
+	}
+	// today = new Date();
+	// today.setMonth(today.getMonth + i);
+	// var month = '' + (today.getMonth() + 1);
+	// var day = '' + today.getDate();
+	// var year = today.getFullYear();
+  //
+	// if (month.length < 2) month = '0' + month;
+	// if (day.length < 2) day = '0' + day;
+  // if (month.length < 2) month = '0' + month;
+  // if (day.length < 2) day = '0' + day;
+  //
+  // data_nova = [year, month, day].join('-');
+	PrepareDates(data, array) {
+		var data_nova = "";
+		for(var key in data) {
+			for(var key2 in array) {
+				if (array[key2] == key) {
+					var from = data[key].split("/");
+			    var d = new Date(from[2], from[1] - 1, from[0]);
+	        var month = '' + (d.getMonth() + 1);
+	        var day = '' + d.getDate();
+	        var year = d.getFullYear();
+
+			    if (month.length < 2) month = '0' + month;
+			    if (day.length < 2) day = '0' + day;
+
+			    data_nova = [year, month, day].join('-');
+					data[key] = data_nova;
+				}
+			}
+		}
+		return data;
 	}
 	PrepareMultiple(array, name_key, value_key) {
 		array[name_key] = [];
@@ -92,7 +125,7 @@ class Helper {
 		    if (this.Isset(array[key2], false)) {
 	    		array[key2] = [];
 	    		values[key2] = [];
-		    } 
+		    }
 	    	values[key2].push('?');
 	    	array[key2].push(data[key][key2]);
 		  }
@@ -151,7 +184,7 @@ class Helper {
 			    if (this.Isset(array[key2], false)) {
 		    		array[key2] = [];
 		    		values[key2] = [];
-			    } 
+			    }
 		    	values[key2].push(' '+key + ' = ?');
 		    	array[key2].push(data[key][key2]);
 		    }
@@ -182,19 +215,21 @@ class Helper {
   		if (key == 'id') {
 	    	var where = ' WHERE id = ' + data[key] + ' AND deletado = 0';
   		} else {
-  			values += ','+key + '= ?'; 
+  			values += ','+key + '= ?';
   			array.push(data[key]);
   		}
 		}
-	  values = values.slice(1);
-		return new Promise(function(resolve, reject) {
-			// Adicione a query com scape(?) e os respectivos valores em um array simples
-			connection.query('UPDATE '+ table +' SET ' + values + where, array, function (error, results, fields) {
-			  if (error && query != '') console.log('ERROR SQL ------------- '+error+' ------------- SQL ERROR');
-			  resolve(results);
+		if (data['id'] != undefined && data['id'] != null && data['id'] != '') {
+		  values = values.slice(1);
+			return new Promise(function(resolve, reject) {
+				// Adicione a query com scape(?) e os respectivos valores em um array simples
+				connection.query('UPDATE '+ table +' SET ' + values + where, array, function (error, results, fields) {
+				  if (error && query != '') console.log('ERROR SQL ------------- '+error+' ------------- SQL ERROR');
+				  resolve(results);
 
+				});
 			});
-		});
+		}
 	}
 	Desativar(table, data) {
 		return new Promise(function(resolve, reject) {

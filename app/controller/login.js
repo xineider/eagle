@@ -3,6 +3,8 @@ var express = require('express');
 var router 	= express.Router();
 var Control = require('./control.js');
 var control = new Control;
+var LoginModel = require('../model/loginModel.js');
+var model = new LoginModel;
 var data = '';
 var app = express();
 app.use(require('express-is-ajax-request'));
@@ -21,9 +23,12 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	// Recebendo o valor do post
 	POST = req.body;
+	POST.senha = control.Encrypt(POST.senha);
 	model.Login(POST).then(data => {
-	  if (results.length > 0) {
-			req.session.id_usuario = results[0].id;
+	  if (data.length > 0) {
+			req.session.usuario = {};
+			req.session.usuario.id = data[0].id;
+			req.session.usuario.hash_login = data[0].hash_login;
 			res.redirect('/sistema');
 	  } else {
   		res.render('login/index', { erro: 'Login ou senha incorreto(s).', tipo_erro: 'login' });
