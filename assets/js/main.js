@@ -84,22 +84,22 @@ $(document).on('ready', function () {
 	$(".button-collapse").sideNav();
 
 	window.onpopstate = function() {
-	  GoTo(location.pathname, false);
+		GoTo(location.pathname, false);
 	};
 	// ALTERE CORRETAMENTE PARA FUNCIONAR DE ACORDO
 	$(document).on('click', '.arquivo-escolha', function(e) {
 		e.preventDefault();
 		var nome = $(this).data('nome');
 		$('.uploads').append('\
-					    			<div class="col s12 m6 center-align relative pai">\
-										  <div class="card-panel grey lighten-4">\
-										  	<input type="hidden" name="tarefa_arquivo[arquivo][]" value="'+nome+'">\
-										  	<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
-										  	<b>Arquivo: '+nome+' <br>\
-										  </div>\
-									  </div>\
-					    			');
-	  $('.modal').modal('close');
+			<div class="col s12 m6 center-align relative pai">\
+			<div class="card-panel grey lighten-4">\
+			<input type="hidden" name="tarefa_arquivo[arquivo][]" value="'+nome+'">\
+			<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
+			<b>Arquivo: '+nome+' <br>\
+			</div>\
+			</div>\
+			');
+		$('.modal').modal('close');
 	});
 
 	// EVENTOS ESPECIFICOS
@@ -128,55 +128,57 @@ function InitBar() {
 }
 function GoTo(link, state) {
 	$.ajax({
-	  method: "GET",
-	  async: true,
-	  url: link,
-    beforeSend: function(request) {
+		method: "GET",
+		async: true,
+		url: link,
+		beforeSend: function(request) {
 			console.log('setando');
-    	request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-    	request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
 			adicionarLoader();
-    },
-    success: function(data) {
-  		$('main').html(data);
-    },
+		},
+		success: function(data) {
+			$('main').html(data);
+		},
     error: function(xhr) { // if error occured
     },
     complete: function() {
-			removerLoader();
-			$('.material-tooltip').remove();
-		  $('.tooltipped').tooltip({delay: 50});
-		  $('.modal').modal('close');
-			FormatInputs();
+    	removerLoader();
+    	$('.material-tooltip').remove();
+    	$('.tooltipped').tooltip({delay: 50});
+    	$('.modal').modal('close');
+    	FormatInputs();
     }
-	});
+  });
 	if (state == true) {
 		window.history.pushState('Sistema Quorp', 'Sistema Quorp', link);
 	}
 }
 function LoadTo(link, to) {
 	$.ajax({
-	  method: "GET",
-	  async: true,
-	  url: link,
-    beforeSend: function(request) {
+		method: "GET",
+		async: true,
+		url: link,
+		beforeSend: function(request) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
 			adicionarLoader();
-    },
-    success: function(data) {
-  		$('.'+to).append(data);
-    },
+		},
+		success: function(data) {
+			$('.'+to).append(data);
+		},
     error: function(xhr) { // if error occured
     },
     complete: function() {
-			removerLoader();
-			$('.material-tooltip').remove();
-		  $('.tooltipped').tooltip({delay: 50});
-		  $('.modal').modal('close');
-			FormatInputs();
+    	removerLoader();
+    	$('.material-tooltip').remove();
+    	$('.tooltipped').tooltip({delay: 50});
+    	$('.modal').modal('close');
+    	FormatInputs();
     }
-	});
+  });
 }
 function FormatInputs(focus) {
 	$('.cnpj').mask('00.000.000/0000-00', {reverse: true});
@@ -184,70 +186,71 @@ function FormatInputs(focus) {
 	$('.rg').mask('AAAAAAAAAAAAA', {reverse: true});
 	$('.cep').mask('00000-000');
 	$('.tel').mask('(00) Z0000-0000', {
-    translation: {
-      'Z': {
-        pattern: /[0-9]/, optional: true
-      }
-    }
-  });
-  $('.money').mask('000000000000000,00', {reverse: true});
-  AddFormatEspecifico();
-  ActiveMaterializeInput(focus);
+		translation: {
+			'Z': {
+				pattern: /[0-9]/, optional: true
+			}
+		}
+	});
+	$('.money').mask('000000000000000,00', {reverse: true});
+	AddFormatEspecifico();
+	ActiveMaterializeInput(focus);
 }
 function GetEndereco(cep, pai) {
 	var link = 'https://viacep.com.br/ws/'+cep+'/json/ ';
 	$.ajax({
-	  method: "GET",
-	  async: true,
-	  url: link,
-    beforeSend: function(request) {
+		method: "GET",
+		async: true,
+		url: link,
+		beforeSend: function(request) {
 			adicionarLoader();
-    },
-    success: function(data) {
-    	console.log(data);
-    	if (data['erro'] == true) {
-    		alert('CEP não encontrado');
-	    	$(pai).find('.uf').focus();
-    	} else {
-	    	$(pai).find('.cidade').val(data['localidade']).focus();
-	    	$(pai).find('.rua').val(data['logradouro']).focus();
-	    	$(pai).find('.uf').val(data['uf']).focus();
+		},
+		success: function(data) {
+			console.log(data);
+			if (data['erro'] == true) {
+				alert('CEP não encontrado');
+				$(pai).find('.uf').focus();
+			} else {
+				$(pai).find('.cidade').val(data['localidade']).focus();
+				$(pai).find('.rua').val(data['logradouro']).focus();
+				$(pai).find('.uf').val(data['uf']).focus();
 				$(pai).find('.numero').focus();
-    	}
-    },
+			}
+		},
     error: function(xhr) { // if error occured
-      alert("CEP não encontrado, utilize somente números");
+    	alert("CEP não encontrado, utilize somente números");
     	$(pai).find('.uf').focus();
     },
     complete: function() {
-			removerLoader();
+    	removerLoader();
     }
-	});
+  });
 }
 function SubmitAjax(post, link, back, method) {
 	$.ajax({
-	  method: 'POST',
-	  async: true,
-	  data: post,
-	  url: link,
-    beforeSend: function(request) {
+		method: 'POST',
+		async: true,
+		data: post,
+		url: link,
+		beforeSend: function(request) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
 			adicionarLoader();
-    },
-    success: function(data) {
-    	console.log(data);
-    	if (typeof data != undefined && data > 0) {
-  			Materialize.toast('<div class="center-align" style="width:100%;">Cadastrado com sucesso</div>', 5000, 'rounded');
-    	}
+		},
+		success: function(data) {
+			console.log(data);
+			if (typeof data != undefined && data > 0) {
+				Materialize.toast('<div class="center-align" style="width:100%;">Cadastrado com sucesso</div>', 5000, 'rounded');
+			}
 			GoTo(back, true);
-    },
+		},
     error: function(xhr) { // if error occured
     },
     complete: function() {
-			removerLoader();
+    	removerLoader();
     }
-	});
+  });
 }
 function Reestruturar(str) {
 	var i = 1;
@@ -259,7 +262,7 @@ function Reestruturar(str) {
 }
 function ActiveMaterializeInput(focus) {
 	if (focus != undefined && focus != 'undefined') {
-	console.log(focus);
+		console.log(focus);
 		focus.first().focus();
 		return true;
 	}
@@ -277,28 +280,29 @@ function ActiveMaterializeInput(focus) {
 }
 function MountModal(modal, link) {
 	$.ajax({
-	  method: "GET",
-	  async: true,
-	  url: '/sistema'+link,
-    beforeSend: function(request) {
+		method: "GET",
+		async: true,
+		url: '/sistema'+link,
+		beforeSend: function(request) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
 			adicionarLoader();
-    },
-    success: function(data) {
+		},
+		success: function(data) {
 			console.log(link);
 			$(modal).find('.modal-content').html(data);
 			$(modal).modal('open');
-    },
+		},
     error: function(xhr) { // if error occured
     },
     complete: function() {
-			removerLoader();
-			$('.material-tooltip').remove();
-		  $('.tooltipped').tooltip({delay: 50});
-		  FormatInputs();
+    	removerLoader();
+    	$('.material-tooltip').remove();
+    	$('.tooltipped').tooltip({delay: 50});
+    	FormatInputs();
     }
-	});
+  });
 }
 function VerificarForm() {
 	var error = false;
@@ -322,7 +326,7 @@ function VerificarForm() {
 		};
 	});
 	if (error == false) {
-			return true;
+		return true;
 	}
 }
 function VerificaItem(isso) {
@@ -345,36 +349,37 @@ function UploadFile(isso) {
 	formData.append('arquivo', isso[0].files[0]);
 
 	$.ajax({
-    url: link,
-    type: 'POST',
-    data: formData,
-    dataType: 'json',
-    processData: false,
-    contentType: false,
-    beforeSend: function(request) {
+		url: link,
+		type: 'POST',
+		data: formData,
+		dataType: 'json',
+		processData: false,
+		contentType: false,
+		beforeSend: function(request) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
 			adicionarLoader();
-    },
-    success: function (data) {
-    	$('.file-path').val('');
-    	isso.closest('.row').append('\
-												    			<div class="col s12 m6 center-align relative pai">\
-																	  <div class="card-panel grey lighten-4">\
-																	  	<input type="hidden" name="tarefa_arquivo[arquivo][]" value="'+data+'">\
-																	  	<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
-																	  	<b>Arquivo: '+data+' <br>\
-																	  </div>\
-																  </div>\
-												    			');
-      console.debug(data);
-    },
-    error: function (xhr, e, t) {
-        console.debug((xhr.responseText));
-    },
-    complete: function() {
+		},
+		success: function (data) {
+			$('.file-path').val('');
+			isso.closest('.row').append('\
+				<div class="col s12 m6 center-align relative pai">\
+				<div class="card-panel grey lighten-4">\
+				<input type="hidden" name="tarefa_arquivo[arquivo][]" value="'+data+'">\
+				<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
+				<b>Arquivo: '+data+' <br>\
+				</div>\
+				</div>\
+				');
+			console.debug(data);
+		},
+		error: function (xhr, e, t) {
+			console.debug((xhr.responseText));
+		},
+		complete: function() {
 			removerLoader();
-    }
+		}
 	});
 }
 // ALTERE PARA FUNCIONAR CORRETAMENTE
@@ -384,10 +389,11 @@ function LoadInfosUsuario() {
 	$.ajax({
 		method: "POST",
 		async: true,
-	  data: {id: id, hash_login: hash_login},
+		data: {id: id, hash_login: hash_login},
 		url: '/sistema/usuarios/ver/perfil/',
 		beforeSend: function(request) {
 			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
 			adicionarLoader();
 		},
@@ -404,6 +410,6 @@ function LoadInfosUsuario() {
 
 // ESPECIFICO
 function AddFormatEspecifico() {
-  $('.dropdown-button').dropdown();
-  $('.collapsible').collapsible();
+	$('.dropdown-button').dropdown();
+	$('.collapsible').collapsible();
 }

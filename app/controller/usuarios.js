@@ -9,11 +9,6 @@ var data = {};
 var app = express();
 app.use(require('express-is-ajax-request'));
 
-// ESPECIFICO
-const fileUpload = require('express-fileupload');
-var nodemailer = require('nodemailer');
-router.use(fileUpload());
-
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
 	model.SelecionarUsuarios().then(data => {
@@ -49,42 +44,13 @@ router.get('/editar/perfil/:id', function(req, res, next) {
 		POST = req.body;
 		POST.senha = control.Encrypt('optima');
 		model.CadastrarUsuario(POST).then(data => {
-			nodemailer.createTestAccount((err, account) => {
-
-					// create reusable transporter object using the default SMTP transport
-					let transporter = nodemailer.createTransport({
-							host: 'smtp.ethereal.email',
-							port: 587,
-							secure: false, // true for 465, false for other ports
-							auth: {
-									user: 'jgrhm5kdxr5z3lkt@ethereal.email', // generated ethereal user
-									pass: 'XCEPzh1YBtDC8JkdZb'  // generated ethereal password
-							}
-					});
-
-					// setup email data with unicode symbols
-					let mailOptions = {
-							from: 'jgrhm5kdxr5z3lkt@ethereal.email', // sender address
-							to: 'leonardopeixe42@gmail.com', // list of receivers
-							subject: 'Você foi registrado com sucesso em Optima - QUORP', // Subject line
-							text: 'Bem vindo ao sistema de tarefas Optima. Seu login é: leopeixe42 e sua senha é rr43233. Acesse via o link "bla"', // plain text body
-							html: 'Bem vindo ao sistema de tarefas Optima. Segue abaixo as informações sobre sua conta. \
-										<br> <b>Login: leopeixe42</b> <br> \
-							 			<br> <b>Senha: rr43233</b> <br>Acesse via o link "bla"' // html body
-					};
-
-					// send mail with defined transport object
-					transporter.sendMail(mailOptions, (error, info) => {
-							if (error) {
-									return console.log(error);
-							}
-							console.log('Message sent: %s', info.messageId);
-							res.json(data);
-
-							// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
-							// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
-					});
-			});
+			control.SendMail(POST.email,'Você foi registrado com sucesso em Nodejs-fw',
+				'Bem vindo ao sistema Nodejs-fw. Seu Login é: '+POST.login+' e sua senha é:'+POST.senha+'Acesse via o link http://www.nodejs-fw.com.br/',
+				'Bem vindo ao sistema Nodejs-fw.'+
+				'<br><b>Login</b>:'+POST.login+
+				'<br><b>Senha</b>:'+POST.senha+
+				'<br>Acesse via o link <a href="http://www.nodejs-fw.com.br" target="_blank">http://www.nodejs-fw.com.br</a>');
+			res.json(data);
 		});
 	});
 

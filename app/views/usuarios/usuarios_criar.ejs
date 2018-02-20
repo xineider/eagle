@@ -35,7 +35,7 @@
           </div>
           <div class="col s12 m6">
             <label>Setor</label>
-            <select required="true" class="browser-default" name="id_setor">
+            <select required="true" class="browser-default">
               <option value="" disabled selected>Selecione</option>
               <%
               if (typeof data.setores != 'undefined' && data.setores.length > 0) {
@@ -47,6 +47,8 @@
               }
               %>
             </select>
+            <input type="hidden" name="id_setor" value="2">
+               <input hidden name="hash_login" value="0">
           </div>
         </div>
         <div class="right-align">

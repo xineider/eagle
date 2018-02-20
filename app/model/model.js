@@ -2,17 +2,48 @@
 var crypto = require('crypto');
 
 // FAZER LEITURA DAS CONFIGURAÇÕES
-var config = {"mysql": {
-								    "host"     : "localhost",
-								    "user"     : "root",
-								    "password" : "root",
-								    "database" : "base_fw"
-							  	}};
+var config = {
+						    "host"     : "localhost",
+						    "user"     : "root",
+						    "password" : "root",
+						    "database" : "base_fw"
+					  	};
+// var config = {
+// 						    "host"     : "us-cdbr-iron-east-05.cleardb.net",
+// 						    "user"     : "bc9f7435f43c91",
+// 						    "password" : "d6c51f9d",
+// 						    "database" : "heroku_9d1276cf5a6af09"
+// 					  	};
 
-// CONEXÃO MYSQL
+// // CONEXÃO MYSQL
 var mysql      = require('mysql');
-var connection = mysql.createConnection(config['mysql']);
-connection.connect();
+var connection;
+
+function handleDisconnect() {
+  connection = mysql.createConnection(config); // Recreate the connection, since
+                                                  // the old one cannot be reused.
+
+  connection.connect(function(err) {              // The server is either down
+    if(err) {                                     // or restarting (takes a while sometimes).
+      console.log('error when connecting to db:', err);
+      setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
+    }                                     // to avoid a hot loop, and to allow our node script to
+  });                                     // process asynchronous requests in the meantime.
+                                          // If you're also serving http, display a 503 error.
+  connection.on('error', function(err) {
+    console.log('db error', err);
+    if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+      handleDisconnect();                         // lost due to either server restart, or a
+    } else {                                      // connnection idle timeout (the wait_timeout
+      throw err;                                  // server variable configures this)
+    }
+  });
+}
+
+handleDisconnect();
+
+// var connection = mysql.createConnection(config['mysql']);
+// connection.connect();
 var query = '';
 var array = [];
 
@@ -54,8 +85,8 @@ class Helper {
 			// Adicione a query com scape(?) e os respectivos valores em um array simples
 			connection.query(query, array, function (error, results, fields) {
 			  if (error && query != '') console.log('ERROR SQL ------------- '+error+' ------------- SQL ERROR');
-			  console.log(results);
 			  resolve(results);
+
 			});
 		});
 	}
@@ -69,18 +100,7 @@ class Helper {
 			});
 		});
 	}
-	// today = new Date();
-	// today.setMonth(today.getMonth + i);
-	// var month = '' + (today.getMonth() + 1);
-	// var day = '' + today.getDate();
-	// var year = today.getFullYear();
-  //
-	// if (month.length < 2) month = '0' + month;
-	// if (day.length < 2) day = '0' + day;
-  // if (month.length < 2) month = '0' + month;
-  // if (day.length < 2) day = '0' + day;
-  //
-  // data_nova = [year, month, day].join('-');
+
 	PrepareDates(data, array) {
 		var data_nova = "";
 		for(var key in data) {

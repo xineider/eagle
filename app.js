@@ -7,6 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Control = require('./app/controller/control.js');
+const fileUpload = require('express-fileupload');
 
 var login = require('./app/controller/login');
 var index = require('./app/controller/index');
@@ -37,9 +38,14 @@ app.use(function (req, res, next) {
         req.isAjaxRequest() == true){
     var id = req.headers['authority-optima-id'];
     var hash = req.headers['authority-optima-hash'];
-    verificacao.VerificarUsuario(id, hash).then(data => {
-      console.log(data);
+    var nivel = req.headers['authority-optima-nivel'];
+    verificacao.VerificarUsuario(id, hash,nivel).then(data => {
       if (data.length > 0) {
+        req.session.usuario = {};
+        req.session.usuario.id = id;
+        req.session.usuario.hash_login = hash;
+        req.session.usuario.nivel = nivel;
+        req.session.usuario.id_empresa = data[0].id_empresa;
         next();
       } else {
         req.session.destroy(function(err) {
