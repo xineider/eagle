@@ -1,12 +1,16 @@
 // Eventos DOM
 $(document).on('ready', function () {
-	$('.modal').modal();
+
+	$(document).ready(function(){
+		$('.modal').modal();
+	});
+
 	LoadInfosUsuario();
 	adicionarLoader();
 	FormatInputs();
 
 	$(document).ajaxComplete(function () {
-		Materialize.updateTextFields();
+		M.updateTextFields();
 	});
 	$(document).ajaxError(function () {
 		AddErrorAjax();
@@ -28,6 +32,7 @@ $(document).on('ready', function () {
 		$(modal).find('#id').val(id);
 		$(modal).find('button').data('href', to).data('action', back);
 	});
+
 	$(document).on('click', '.modal-mount', function (e) {
 		e.preventDefault();
 		var modal = $(this).data('href');
@@ -81,7 +86,7 @@ $(document).on('ready', function () {
 		GetEndereco($(this).val(), $(this).closest('.row'));
 	});
 
-	$(".button-collapse").sideNav();
+	$(".sidenav").sidenav({closeOnClick: true});
 
 	window.onpopstate = function() {
 		GoTo(location.pathname, false);

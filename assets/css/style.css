@@ -30,6 +30,11 @@ header {
   min-height: 100%;
   position: fixed;
 }
+
+main{
+  margin-top: 80px;
+}
+
 .none {display: none;}
 
 .center-all th,
@@ -122,7 +127,7 @@ ul > li > ul.sub-menu:before {
 /* Estilos do site */
 
 /* Estilos do sistema */
-.fa-home {
+.nav-wrapper .fas {
   font-size: 1.2em;
 }
 .loader {
@@ -204,5 +209,11 @@ table td {
     position: absolute;
     left: 50%;
     margin-left: -110px;
+  }
+}
+
+@media (min-width: 992px){
+  main{
+    margin-top: 0;
   }
 }
