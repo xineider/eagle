@@ -31,9 +31,26 @@ header {
   position: fixed;
 }
 
+header .header_logo{
+  height: 70px;
+  margin-top: 5px;
+}
+
+header .sidenav-trigger{
+  margin-top: 10px;
+  position: absolute;
+  left: 0;
+}
+
+header .sidenav-trigger i{
+  font-size:40px;
+}
+
 main{
   margin-top: 80px;
 }
+
+
 
 .none {display: none;}
 
@@ -67,41 +84,41 @@ ul > li > ul.sub-menu:before {
   left: -30px;
   margin-top: 1px;
 }
-  ul > li:hover > ul.sub-menu {
-    z-index: 3;
-    opacity: 1;
-    display: block;
-    background-color: rgb(64, 81, 189);
-    left: 170px;
-    width: 170px;
-    height: auto;
-    padding: 0 5px;
-    text-align: left;
-  }
-  #small-nav ul > li:hover > ul.sub-menu {
-    left: 105px;
-  }
-  ul > li:hover > ul.sub-menu:before {
-    z-index: 3;
-    opacity: 1;
-    content: "";
-    position: absolute;
-    vertical-align: middle;
-    width: 0;
-    height: 0;
-    border-top: 31px solid transparent;
-    border-bottom: 31px solid transparent;
-    border-right: 31px solid #4051bd;
-    left: -30px;
-  }
-    ul > li:hover > ul.sub-menu > li > a {
-      transition: 0.2s;
-      padding: 0;
-    }
-      ul > li:hover > ul.sub-menu > li > a:hover {
-        background-color: #4051bd;
-        text-shadow: 1px 1px black;
-      }
+ul > li:hover > ul.sub-menu {
+  z-index: 3;
+  opacity: 1;
+  display: block;
+  background-color: rgb(64, 81, 189);
+  left: 170px;
+  width: 170px;
+  height: auto;
+  padding: 0 5px;
+  text-align: left;
+}
+#small-nav ul > li:hover > ul.sub-menu {
+  left: 105px;
+}
+ul > li:hover > ul.sub-menu:before {
+  z-index: 3;
+  opacity: 1;
+  content: "";
+  position: absolute;
+  vertical-align: middle;
+  width: 0;
+  height: 0;
+  border-top: 31px solid transparent;
+  border-bottom: 31px solid transparent;
+  border-right: 31px solid #4051bd;
+  left: -30px;
+}
+ul > li:hover > ul.sub-menu > li > a {
+  transition: 0.2s;
+  padding: 0;
+}
+ul > li:hover > ul.sub-menu > li > a:hover {
+  background-color: #4051bd;
+  text-shadow: 1px 1px black;
+}
 .modal-mount {
   cursor: pointer;
 }
@@ -137,42 +154,42 @@ ul > li > ul.sub-menu:before {
   height: 100%;
   z-index: 999;
 }
-  .loader i {
-    position: absolute;
-    top: 50%; 
-    left: 50%; 
-    margin-top: -35px; 
-    margin-left: -35px; 
-  }
+.loader i {
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  margin-top: -35px; 
+  margin-left: -35px; 
+}
 .change-bar {
   position: absolute;
   right: -85px;
 }
-  nav .nav-wrapper .change-bar i {
-    height: auto;
-    line-height: normal;
-  }
+nav .nav-wrapper .change-bar i {
+  height: auto;
+  line-height: normal;
+}
 .change-bar:not(.ativo) button {
   transition: 0.3s;
   display: none;
 }
-  .change-bar:not(.ativo) button:first-child {
-    display: block;
-  }
+.change-bar:not(.ativo) button:first-child {
+  display: block;
+}
 .mini-nav > .change-bar.ativo button {
   transition: 0.3s;
   display: block;
 }
-  .mini-nav > .change-bar.ativo button:first-child {
-    display: none;
-  }
+.mini-nav > .change-bar.ativo button:first-child {
+  display: none;
+}
 #toast-container {
   width: 100%;
 }
-  #toast-container .toast.rounded {
-    background-color: #388e3c;
-    font-weight: bold;
-  }
+#toast-container .toast.rounded {
+  background-color: #388e3c;
+  font-weight: bold;
+}
 .table-box {
   height: 400px;
   overflow: scroll;
@@ -182,16 +199,16 @@ ul > li > ul.sub-menu:before {
 .caixa_mes > div {
   margin-bottom: 20px;
 }
-  .caixa_mes > div > div {
-    cursor: pointer;
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    transition: 0.5s;
-  }
-    .caixa_mes > div > div:hover {
-      box-shadow: 0 2px 5px -2px black;
-    }
+.caixa_mes > div > div {
+  cursor: pointer;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  transition: 0.5s;
+}
+.caixa_mes > div > div:hover {
+  box-shadow: 0 2px 5px -2px black;
+}
 table td {
   border-radius: 0 !important;
 }
@@ -216,4 +233,38 @@ table td {
   main{
     margin-top: 0;
   }
+}
+
+.aqua{
+  background: #0165bc;
+}
+
+.aqua.lighten-3{
+  background: #39a5ef;
+}
+
+.aqua.lighten-4{
+  background: #98d3fb;
+}
+
+.sky.lighten-4{
+  background:#98e9fb;
+}
+
+
+.titulo_inicio{
+  font-size: 18px;
+}
+
+.golden.lighten-4{
+  background:#fbef98
+}
+
+.butter.lighten-4{
+  background:#fbca98
+}
+
+
+.aqua-text{
+  color: #0165bc;
 }

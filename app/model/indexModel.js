@@ -12,13 +12,19 @@ class IndexModel {
 			});
 		});
 	}
-	Teste() {
+	GetNoticias() {
 		return new Promise(function(resolve, reject) {
-			// Adicione a query com scape(?) e os respectivos valores em um array simples
-			helper.Query('SELECT * FROM usuarios', []).then(data => {
+			helper.Query('SELECT * FROM noticias ORDER BY data_cadastro', []).then(data => {
 				resolve(data);
 			});
 		});
 	}
+
+
+
+
+
+
+
 }
 module.exports = IndexModel;

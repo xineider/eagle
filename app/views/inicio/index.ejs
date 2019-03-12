@@ -1,4 +1,49 @@
-  	<div class="card-panel white">
-  		<h4>Inicio</h4>
-  	</div>
-  	
+<div class="card white row" style="margin-top:0;">
+	<div class="col s6 center aqua lighten-4">
+		<div class="titulo_inicio aqua-text">Carteira de Aplicação</div>
+		<div class="porcentagem_aplicacoes_inicio green-text text-darken-2">+10% <i class="fas fa-arrow-up green-text text-darken-2"></i></div>
+	</div>
+	<div class="col s6 center sky lighten-4">
+		<div class="titulo_inicio center aqua-text">Carteira de Rendimentos</div>
+		<div class="porcentagem_aplicacoes_inicio green-text text-darken-2">+8% <i class="fas fa-arrow-up green-text text-darken-2"></i></div>
+	</div>
+
+	<div class="col s12 center golden lighten-4">
+		<div class="titulo_inicio">Avisos</div>
+		<div>Não há avisos agora!</div>
+	</div>
+	<div class="col s12 butter lighten-4">
+
+		<div class="col s12 card">
+			<%
+			if (typeof data.noticias != 'undefined' && data.noticias.length > 0) {
+				for (var i = data.noticias.length - 1; i >= 0; i--) { %>
+
+
+				<div class="card-image">
+					<a>
+						<img src="<%= data.noticias[i].arquivo %>" >
+					</a>
+				</div>
+				<div class="card-content">
+					<div class="titulo_inicio_noticia">
+						<%= data.noticias[i].titulo %>
+					</div>
+					<div class="descricao_inicio_noticia">
+						<%= data.noticias[i].descricao%>
+					</div>
+					
+				</div>
+
+
+				<%}
+			}else{ %>
+			Não há noticias no momento
+
+		<%}%>
+	</div>
+</div>
+
+
+
+</div>
