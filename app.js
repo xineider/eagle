@@ -14,6 +14,12 @@ var index = require('./app/controller/index');
 var api = require('./app/controller/api');
 var configuracoes = require('./app/controller/configuracoes');
 var usuarios = require('./app/controller/usuarios');
+var plano = require('./app/controller/plano');
+var financeiro = require('./app/controller/financeiro');
+var coaching = require('./app/controller/coaching');
+var cursos = require('./app/controller/cursos');
+var club = require('./app/controller/club');
+var projetosSociais = require('./app/controller/projetos_sociais');
 
 var VerificacaoModel = require('./app/model/verificacaoModel');
 var verificacao = new VerificacaoModel;
@@ -78,6 +84,12 @@ app.use("/assets", express.static(__dirname + '/assets'));
 
 app.use('/', login);
 app.use('/sistema', index);
+app.use('/sistema/plano', plano);
+app.use('/sistema/financeiro', financeiro);
+app.use('/sistema/coaching', coaching);
+app.use('/sistema/cursos', cursos);
+app.use('/sistema/club', club);
+app.use('/sistema/projetos_sociais', projetosSociais);
 app.use('/sistema/api', api);
 app.use('/sistema/configuracoes', configuracoes);
 app.use('/sistema/usuarios', usuarios);

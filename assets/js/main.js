@@ -154,6 +154,7 @@ function GoTo(link, state) {
     	$('.tooltipped').tooltip({delay: 50});
     	$('.modal').modal('close');
     	FormatInputs();
+    	$('.sidenav').sidenav('close');
     }
   });
 	if (state == true) {
