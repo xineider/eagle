@@ -1,0 +1,97 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+	<div class="col s12 center estatisticas_container secondary">
+		<div class="titulo_inicio">Estatísticas</div>
+
+
+			<div class="col s12 card light">
+			<p>Rendimento por Mês(em %)</p>
+			<canvas id="primeiroChart" width="400" height="400"></canvas>
+			</div>
+
+			<div class="col s12 card light">
+				<p>Quantidade de Usuários</p>
+
+				<canvas id="segundoChart" width="400" height="400"></canvas>
+			
+			</div>
+		
+
+
+		
+
+		<script>
+		var ctx = document.getElementById('primeiroChart').getContext('2d');
+		var primeiroChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: ['Set', 'Out', 'Nov', 'Dez', 'Jan', 'Fev'],
+			datasets: [{
+				label: 'Rendimento por Mês',
+				data: [2.3, 2.35, 2.40, 2.3, 2.5, 2.65],
+				backgroundColor: [
+					'rgb(54, 158, 10)',
+					'rgb(10, 42, 158)',
+					'rgb(54, 158, 10)',
+					'rgb(10, 42, 158)',
+					'rgb(54, 158, 10)',
+					'rgb(10, 42, 158)'
+				],
+				borderColor: [
+					'rgb(54, 158, 10)',
+					'rgb(10, 42, 158)',
+					'rgb(54, 158, 10)',
+					'rgb(10, 42, 158)',
+					'rgb(54, 158, 10)',
+					'rgb(10, 42, 158)'
+				],
+				borderWidth: 1
+			}]
+		},
+		options: {
+			scales: {
+				yAxes: [{
+					ticks: {
+						beginAtZero: true
+					}
+				}]
+			}
+		}
+		});
+
+
+
+		var ctx2 = document.getElementById('segundoChart').getContext('2d');
+		var chart = new Chart(ctx2, {
+			// The type of chart we want to create
+			type: 'line',
+
+			// The data for our dataset
+			data: {
+				labels: ['Set', 'Out', 'Nov', 'Dez', 'Jan', 'Fev'],
+				datasets: [{
+					label: 'Quantidade de Usuários',
+					backgroundColor: 'rgb(54, 158, 10)',
+					borderColor: 'rgb(54, 158, 10)',
+					data: [80, 90, 105, 110, 120, 200]
+				}]
+			},
+
+			// Configuration options go here
+			options: {}
+		});
+
+
+
+
+
+
+
+
+
+
+		</script>
+
+
+
+	</div>
+

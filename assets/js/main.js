@@ -8,8 +8,10 @@ $(document).on('ready', function () {
 	LoadInfosUsuario();
 	adicionarLoader();
 	FormatInputs();
+	calendarioCompromissos();
 
 	$(document).ajaxComplete(function () {
+		calendarioCompromissos();
 		M.updateTextFields();
 	});
 	$(document).ajaxError(function () {
@@ -418,4 +420,80 @@ function LoadInfosUsuario() {
 function AddFormatEspecifico() {
 	$('.dropdown-button').dropdown();
 	$('.collapsible').collapsible();
+}
+
+
+function calendarioCompromissos(){
+	$('#calendar').fullCalendar({
+		header:{
+			left:   'today prev,next',
+			center: '',
+			right:  'month,agendaWeek,agendaDay,listMonth'
+		},
+		buttonText:{
+			today:'Hoje',
+			month:'Mês',
+			week:'Semana',
+			day:'Dia',
+			list:'Lista'
+		},
+		events: {
+			url:'/sistema/agenda/eventos/',
+			method:"GET",
+			async:true,
+			beforeSend:function(request){
+				request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+				request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+				request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			}
+		},
+		timezone:'local',
+		editable:true,
+		eventClick: function(event, jsEvent, view) {
+			$.ajax({
+				method: "GET",
+				async: true,
+				url: '/sistema/agenda/editar/'+event.id,
+				beforeSend: function(request) {
+					console.log('setando');
+					request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Optima-nivel", $('input[name="nivel_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+					adicionarLoader();
+				},
+				success: function(data) {
+					$('#modalinfo').find('.modal-content').html(data);
+					$('#modalinfo').modal('open');
+				},
+				error: function(xhr) { // if error occured
+					removerLoader();
+				},
+				complete: function() {
+					removerLoader();
+					FormatInputs();
+				}
+			});
+		},eventDrop:function(event){
+			$.ajax({
+				method: "POST",
+				async: true,
+				data: {id: event.id, data_inicial: event.start.format('DD/MM/Y'),hora_inicial:event.start.format('HH:mm'),data_final:event.end.format('DD/MM/Y'),hora_final:event.end.format('HH:mm')},
+				url: '/sistema/agenda/atualizar/',
+				beforeSend: function(request) {
+					request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Optima-nivel", $('input[name="nivel_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+				},
+				success: function(data) {
+				},
+				error: function(xhr) { // if error occured
+					removerLoader();
+				},
+				complete: function() {
+					removerLoader();
+				}
+			});
+		}
+
+	});
 }
