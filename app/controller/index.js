@@ -13,10 +13,13 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.GetNoticias().then(data_noticias=>{
 		data.noticias = data_noticias;
-		console.log('------------- DATA NOTICIAS INICIO------------------');
-		console.log(data);
-		console.log('----------------------------------------------');
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+		model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
+			data.carteira_aplicacao = data_valor_carteira;;			
+			console.log('------------- DATA NOTICIAS INICIO------------------');
+			console.log(data);
+			console.log('----------------------------------------------');
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+		});
 	});
 });
 

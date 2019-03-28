@@ -8,8 +8,7 @@ class AgendaModel {
 
 	GetUsuario(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,\
-			 (SELECT nome FROM planos as b WHERE b.id = a.id_plano) as plano\
+			helper.Query('SELECT a.* \
 			  FROM usuarios as a WHERE deletado = ? AND id = ?', [0,id_usuario]).then(data => {
 				resolve(data);
 			});

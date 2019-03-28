@@ -1,166 +1,166 @@
 <!DOCTYPE html>
 <html class="light">
 <head>
-<title>Eagle Finances</title>
-<link rel='stylesheet' href='/assets/css/fontawesome.min.css' />
-<link rel='stylesheet' href='/assets/css/materialize.min.css' />
-<link rel='stylesheet' href='/assets/css/style.css' />
-<script src="/assets/js/jquery.min.js"></script>
-<script src="/assets/js/materialize.min.js"></script>
-<meta name="viewport" content="width=device-width, user-scalable=no">
+	<title>Eagle Finances</title>
+	<link rel='stylesheet' href='/assets/css/fontawesome.min.css' />
+	<link rel='stylesheet' href='/assets/css/materialize.min.css' />
+	<link rel='stylesheet' href='/assets/css/style.css' />
+	<script src="/assets/js/jquery.min.js"></script>
+	<script src="/assets/js/materialize.min.js"></script>
+	<meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
 
 <body class="login">
-<main>
-<section>
-<div>
-<form method="POST" action="/">
-<div class="box">
-<div class="icon center-align">
-<img src="/assets/imgs/logo.png">
-</div>
-<%
-if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
-%>
-<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
-<span class="white-text">Usuário ou senha incorreto(s), tente novamente.</span>
-</div>
-<%
-} else if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == 'login') {
-%>
-<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
-<span class="white-text">Usuário ou senha incorreto(s), tente novamente.</span>
-</div>
-<%
-}
-%>
-<div class="input-field">
-
-<input type="text" name="login" id="login" class="validate" autocomplete="on" placeholder="Usuário">
-
-</div>
-<div class="input-field">
-<input type="password" name="senha" id="senha" class="validate" autocomplete="on" placeholder="Senha">
-
-
-</div>
-<p><a href="#" class="white-text">Esqueceu sua senha?</a></p>
-<p><a href="#" class="white-text">Cadastre-se</a></p>
-<div class="center-align">
-<button class="btn light waves-effect waves-teal waves-light">
-Acessar
-</button>
-</div>
-</div>
-</form>
-</div>
-</section>
-<style type="text/css">
-html {
-height: 100%;
-min-height: 100%;
-}
-
-
-.login main{
-margin-top: 0;
-}
-
-.login .icon {
-font-size: 6em;
-
-}
-
-.login .icon img{
-max-height: 400px;
-max-width: 100%;
-}
-
-
-.login .box {
-width: 80%;
-margin: auto;
-padding: 15px;
-box-sizing: content-box;
-background:#2f3035;
-border-radius:5px;
-margin-top: 20px;
-
-}
-
-.input-field .prefix.active {
-color: #1976D2 ;
-}
-
-
-.login .box .input-field input{
-background: #fff;
-padding-left: 5px;
-border-bottom: 0;
-color: #000;
-height:50px;
-}
-
-.login .box .input-field input::placeholder{
-	color:#000;
-}
-
-.login .box .input-field label{
-margin-left: 5px;
-color: #fff;
-}
-
-input:not([type]):focus:not([readonly]), 
-input[type=text]:not(.browser-default):focus:not([readonly]), 
-input[type=password]:not(.browser-default):focus:not([readonly]), 
-input[type=email]:not(.browser-default):focus:not([readonly]), 
-input[type=url]:not(.browser-default):focus:not([readonly]), 
-input[type=time]:not(.browser-default):focus:not([readonly]), 
-input[type=date]:not(.browser-default):focus:not([readonly]), 
-input[type=datetime]:not(.browser-default):focus:not([readonly]), 
-input[type=datetime-local]:not(.browser-default):focus:not([readonly]), 
-input[type=tel]:not(.browser-default):focus:not([readonly]), 
-input[type=number]:not(.browser-default):focus:not([readonly]), 
-input[type=search]:not(.browser-default):focus:not([readonly]), 
-textarea.materialize-textarea:focus:not([readonly]){
-border-bottom: 0;
-background:#fff;
-box-shadow:1px 1px 1px 0 #000;
-}
-
-input:not([type]):focus:not([readonly])+label, 
-input[type=text]:not(.browser-default):focus:not([readonly])+label, 
-input[type=password]:not(.browser-default):focus:not([readonly])+label, 
-input[type=email]:not(.browser-default):focus:not([readonly])+label, 
-input[type=url]:not(.browser-default):focus:not([readonly])+label, 
-input[type=time]:not(.browser-default):focus:not([readonly])+label, 
-input[type=date]:not(.browser-default):focus:not([readonly])+label, 
-input[type=datetime]:not(.browser-default):focus:not([readonly])+label, 
-input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, 
-input[type=tel]:not(.browser-default):focus:not([readonly])+label, 
-input[type=number]:not(.browser-default):focus:not([readonly])+label, 
-input[type=search]:not(.browser-default):focus:not([readonly])+label, 
-textarea.materialize-textarea:focus:not([readonly])+label{
-color: #000;
-}
-
-.input-field>label:not(.label-icon).active{
--webkit-transform: translateY(-18px) scale(0.8);
-transform: translateY(-18px) scale(0.8);
--webkit-transform-origin: 0 0;
-transform-origin: 0 0;
-}
-
-
-
-/*		input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
-border-bottom: 1px solid #1976D2 ;
-box-shadow: 0 1px 0 0 #1976D2 ;
-}
-input:not([type]):focus:not([readonly])+label, input[type=text]:focus:not([readonly])+label, input[type=password]:focus:not([readonly])+label, input[type=email]:focus:not([readonly])+label, input[type=url]:focus:not([readonly])+label, input[type=time]:focus:not([readonly])+label, input[type=date]:focus:not([readonly])+label, input[type=datetime]:focus:not([readonly])+label, input[type=datetime-local]:focus:not([readonly])+label, input[type=tel]:focus:not([readonly])+label, input[type=number]:focus:not([readonly])+label, input[type=search]:focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
-color: #1976D2 ;
-}*/
-</style>
-</main>
+	<main>
+		<section>
+			<div>
+				<form method="POST" action="/">
+					<div class="box">
+						<div class="icon center-align">
+							<img src="/assets/imgs/logo.png">
+						</div>
+						<%
+						if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
+							%>
+							<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
+								<span class="white-text">Usuário ou senha incorreto(s), tente novamente.</span>
+							</div>
+							<%
+						} else if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == 'login') {
+							%>
+							<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
+								<span class="white-text">Usuário ou senha incorreto(s), tente novamente.</span>
+							</div>
+							<%
+						}
+						%>
+						<div class="input-field">
+							
+							<input type="text" name="login" id="login" class="validate" autocomplete="on" placeholder="Usuário">
+							
+						</div>
+						<div class="input-field">
+							<input type="password" name="senha" id="senha" class="validate" autocomplete="on" placeholder="Senha">
+							
+							
+						</div>
+						<p><a href="#" class="white-text">Esqueceu sua senha?</a></p>
+						<p><a href="#" class="white-text">Cadastre-se</a></p>
+						<div class="center-align">
+							<button class="btn light waves-effect waves-teal waves-light">
+								Acessar
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+		<style type="text/css">
+			html {
+				height: 100%;
+				min-height: 100%;
+			}
+			
+			
+			.login main{
+				margin-top: 0;
+			}
+			
+			.login .icon {
+				font-size: 6em;
+				
+			}
+			
+			.login .icon img{
+				max-height: 400px;
+				max-width: 100%;
+			}
+			
+			
+			.login .box {
+				width: 80%;
+				margin: auto;
+				padding: 15px;
+				box-sizing: content-box;
+				background:#2f3035;
+				border-radius:5px;
+				margin-top: 20px;
+				
+			}
+			
+			.input-field .prefix.active {
+				color: #1976D2 ;
+			}
+			
+			
+			.login .box .input-field input{
+				background: #fff;
+				padding-left: 5px;
+				border-bottom: 0;
+				color: #000;
+				height:50px;
+			}
+			
+			.login .box .input-field input::placeholder{
+				color:#000;
+			}
+			
+			.login .box .input-field label{
+				margin-left: 5px;
+				color: #fff;
+			}
+			
+			input:not([type]):focus:not([readonly]), 
+			input[type=text]:not(.browser-default):focus:not([readonly]), 
+			input[type=password]:not(.browser-default):focus:not([readonly]), 
+			input[type=email]:not(.browser-default):focus:not([readonly]), 
+			input[type=url]:not(.browser-default):focus:not([readonly]), 
+			input[type=time]:not(.browser-default):focus:not([readonly]), 
+			input[type=date]:not(.browser-default):focus:not([readonly]), 
+			input[type=datetime]:not(.browser-default):focus:not([readonly]), 
+			input[type=datetime-local]:not(.browser-default):focus:not([readonly]), 
+			input[type=tel]:not(.browser-default):focus:not([readonly]), 
+			input[type=number]:not(.browser-default):focus:not([readonly]), 
+			input[type=search]:not(.browser-default):focus:not([readonly]), 
+			textarea.materialize-textarea:focus:not([readonly]){
+				border-bottom: 0;
+				background:#fff;
+				box-shadow:1px 1px 1px 0 #000;
+			}
+			
+			input:not([type]):focus:not([readonly])+label, 
+			input[type=text]:not(.browser-default):focus:not([readonly])+label, 
+			input[type=password]:not(.browser-default):focus:not([readonly])+label, 
+			input[type=email]:not(.browser-default):focus:not([readonly])+label, 
+			input[type=url]:not(.browser-default):focus:not([readonly])+label, 
+			input[type=time]:not(.browser-default):focus:not([readonly])+label, 
+			input[type=date]:not(.browser-default):focus:not([readonly])+label, 
+			input[type=datetime]:not(.browser-default):focus:not([readonly])+label, 
+			input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, 
+			input[type=tel]:not(.browser-default):focus:not([readonly])+label, 
+			input[type=number]:not(.browser-default):focus:not([readonly])+label, 
+			input[type=search]:not(.browser-default):focus:not([readonly])+label, 
+			textarea.materialize-textarea:focus:not([readonly])+label{
+				color: #000;
+			}
+			
+			.input-field>label:not(.label-icon).active{
+				-webkit-transform: translateY(-18px) scale(0.8);
+				transform: translateY(-18px) scale(0.8);
+				-webkit-transform-origin: 0 0;
+				transform-origin: 0 0;
+			}
+			
+			
+			
+			/*		input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
+				border-bottom: 1px solid #1976D2 ;
+				box-shadow: 0 1px 0 0 #1976D2 ;
+			}
+			input:not([type]):focus:not([readonly])+label, input[type=text]:focus:not([readonly])+label, input[type=password]:focus:not([readonly])+label, input[type=email]:focus:not([readonly])+label, input[type=url]:focus:not([readonly])+label, input[type=time]:focus:not([readonly])+label, input[type=date]:focus:not([readonly])+label, input[type=datetime]:focus:not([readonly])+label, input[type=datetime-local]:focus:not([readonly])+label, input[type=tel]:focus:not([readonly])+label, input[type=number]:focus:not([readonly])+label, input[type=search]:focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
+				color: #1976D2 ;
+			}*/
+		</style>
+	</main>
 </body>
 </html>

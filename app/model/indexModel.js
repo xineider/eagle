@@ -5,13 +5,7 @@ var Helper = require('./model.js');
 var helper = new Helper;
 
 class IndexModel {
-	Login(POST) {
-		return new Promise(function(resolve, reject) {
-			// Adicione a query com scape(?) e os respectivos valores em um array simples
-			helper.Query('SELECT id FROM usuarios WHERE login = ? AND senha = ?', [POST.login, POST.senha]).then(data => {
-			});
-		});
-	}
+
 	GetNoticias() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT * FROM noticias ORDER BY data_cadastro', []).then(data => {
@@ -19,12 +13,21 @@ class IndexModel {
 			});
 		});
 	}
-
-
-
-
-
-
-
-}
-module.exports = IndexModel;
+	
+	
+	GetValorTotalCarteiraAplicacao(id_usuario) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT ( \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ?) THEN valor ELSE 0 END)) - \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ?) THEN valor ELSE 0 END))\
+				)as carteira_aplicacao FROM caixa', [0,0,id_usuario,1,0,id_usuario]).then(data => {
+					console.log('RRRRRRRRRRRRRRR RESULTADO DA CARTEIRA TOTAL APLICACAO RRRRRRRRRRRRRRRRRRRRRRRRR');
+					console.log(data);
+					console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+					resolve(data);
+				});
+			});
+		}
+		
+	}
+	module.exports = IndexModel;

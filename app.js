@@ -14,7 +14,7 @@ var index = require('./app/controller/index');
 var api = require('./app/controller/api');
 var configuracoes = require('./app/controller/configuracoes');
 var usuarios = require('./app/controller/usuarios');
-var plano = require('./app/controller/plano');
+var investimento = require('./app/controller/investimento');
 var financeiro = require('./app/controller/financeiro');
 var coaching = require('./app/controller/coaching');
 var cursos = require('./app/controller/cursos');
@@ -41,36 +41,35 @@ app.use(session({
 }));
 
 // Verifica usuario se esta logado ou não
-// app.use(function (req, res, next) {
-//   var pathname = parseurl(req).pathname;
-//   if ((pathname != '/' && pathname != '') && 
-//       (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1) && 
-//         req.isAjaxRequest() == true){
-//     var id = req.headers['authority-optima-id'];
-//     var hash = req.headers['authority-optima-hash'];
-//     var nivel = req.headers['authority-optima-nivel'];
-//     verificacao.VerificarUsuario(id, hash,nivel).then(data => {
-//       if (data.length > 0) {
-//         req.session.usuario = {};
-//         req.session.usuario.id = id;
-//         req.session.usuario.hash_login = hash;
-//         req.session.usuario.nivel = nivel;
-//         req.session.usuario.id_empresa = data[0].id_empresa;
-//         next();
-//       } else {
-//         req.session.destroy(function(err) {
-//           res.json('<img src="/assets/imgs/logout.gif"><script>setTimeout(function(){ window.location.replace("/"); }, 4100);</script>');
-//         });
-//       }
-//     });
-//   } else if (control.Isset(req.session.usuario, false)
-//     && (pathname != '/' && pathname != '')
-//       && (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1)) {
-//     res.redirect('/');
-//   } else {
-//     next();
-//   }
-// });
+app.use(function (req, res, next) {
+  var pathname = parseurl(req).pathname;
+  if ((pathname != '/' && pathname != '') && 
+      (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1) && 
+        req.isAjaxRequest() == true){
+    var id = req.headers['authority-eagle-id'];
+    var hash = req.headers['authority-eagle-hash'];
+    var nivel = req.headers['authority-eagle-nivel'];
+    verificacao.VerificarUsuario(id, hash,nivel).then(data => {
+      if (data.length > 0) {
+        req.session.usuario = {};
+        req.session.usuario.id = id;
+        req.session.usuario.hash_login = hash;
+        req.session.usuario.nivel = nivel;
+        next();
+      } else {
+        req.session.destroy(function(err) {
+          res.json('<img src="/assets/imgs/logout.gif"><script>setTimeout(function(){ window.location.replace("/"); }, 4100);</script>');
+        });
+      }
+    });
+  } else if (control.Isset(req.session.usuario, false)
+    && (pathname != '/' && pathname != '')
+      && (pathname.indexOf("css") == -1 && pathname.indexOf("js") == -1 && pathname.indexOf("imgs") == -1 && pathname.indexOf("fonts") == -1)) {
+    res.redirect('/');
+  } else {
+    next();
+  }
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'app/views'));
@@ -88,7 +87,7 @@ app.use("/assets", express.static(__dirname + '/assets'));
 
 app.use('/', login);
 app.use('/sistema', index);
-app.use('/sistema/plano', plano);
+app.use('/sistema/investimento', investimento);
 app.use('/sistema/financeiro', financeiro);
 app.use('/sistema/coaching', coaching);
 app.use('/sistema/cursos', cursos);

@@ -5,27 +5,19 @@ var Helper = require('./model.js');
 var helper = new Helper;
 
 class FinanceiroModel {
-
+	
 	GetUsuario(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,\
-			 (SELECT nome FROM planos as b WHERE b.id = a.id_plano) as plano\
-			  FROM usuarios as a WHERE deletado = ? AND id = ?', [0,id_usuario]).then(data => {
+			helper.Query('SELECT a.*\
+			FROM usuarios as a WHERE deletado = ? AND id = ?', [0,id_usuario]).then(data => {
 				resolve(data);
 			});
 		});
 	}
-
-
-	GetAporte(id_usuario) {
-		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT SUM(valor) as aporte_total\
-			  FROM caixa WHERE deletado = ? AND id_usuario = ? AND tipo= ?', [0,id_usuario,0]).then(data => {
-				resolve(data);
-			});
-		});
-	}
-
+	
+	
+	
+	
 	GetPrimeiroAporte(id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro FROM caixa WHERE deletado = ? AND id_usuario = ? AND tipo= ? ORDER BY data_cadastro ASC LIMIT 1', [0,id_usuario,0]).then(data => {
@@ -33,23 +25,23 @@ class FinanceiroModel {
 			});
 		});
 	}
-
-
-
-
-	GetNoticias() {
+	
+	
+	GetValorTotalCarteiraAplicacao(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM noticias ORDER BY data_cadastro', []).then(data => {
-				resolve(data);
+			helper.Query('SELECT ( \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ?) THEN valor ELSE 0 END)) - \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ?) THEN valor ELSE 0 END))\
+				)as carteira_aplicacao FROM caixa', [0,0,id_usuario,1,0,id_usuario]).then(data => {
+					console.log('RRRRRRRRRRRRRRR RESULTADO DA CARTEIRA TOTAL APLICACAO RRRRRRRRRRRRRRRRRRRRRRRRR');
+					console.log(data);
+					console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
+					resolve(data);
+				});
 			});
-		});
+		}
+		
+		
+		
 	}
-
-
-
-
-
-
-
-}
-module.exports = FinanceiroModel;
+	module.exports = FinanceiroModel;

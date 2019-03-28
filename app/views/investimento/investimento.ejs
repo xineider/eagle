@@ -1,0 +1,40 @@
+
+<div class="col s12 center">
+	<div class="titulo_inicio">Meus Investimentos</div>
+	
+	<div class="card light">
+		
+		<table>
+			<thead>
+				<tr>
+					<th>Perfil</th>
+					<th>Aporte Total:</th>
+					<th>Primeiro Aporte</th>
+					<th>Rendimento Líquido</th>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<%
+				if (typeof data.investimentos != 'undefined' && data.investimentos.length > 0) {
+					for (var i = data.investimentos.length - 1; i >= 0; i--) { %>
+						<tr>
+							<td><%= data.investimentos[i].nome %></td>
+							<td>R$<%= data.investimentos[i].caixa %></td>
+							<td>1° aporte</td>
+							<td>rendimento</td>
+						</tr>
+						<%}
+					}else{%>
+						<tr>
+							<td>Você ainda não possui investimentos!</td>
+						</tr>
+						<%} %>
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+		
+		
+		

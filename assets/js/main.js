@@ -140,9 +140,9 @@ function GoTo(link, state) {
 		url: link,
 		beforeSend: function(request) {
 			console.log('setando');
-			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -169,9 +169,9 @@ function LoadTo(link, to) {
 		async: true,
 		url: link,
 		beforeSend: function(request) {
-			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="id_usuario_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -241,9 +241,9 @@ function SubmitAjax(post, link, back, method) {
 		data: post,
 		url: link,
 		beforeSend: function(request) {
-			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -292,9 +292,9 @@ function MountModal(modal, link) {
 		async: true,
 		url: '/sistema'+link,
 		beforeSend: function(request) {
-			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -364,9 +364,9 @@ function UploadFile(isso) {
 		processData: false,
 		contentType: false,
 		beforeSend: function(request) {
-			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function (data) {
@@ -400,9 +400,9 @@ function LoadInfosUsuario() {
 		data: {id: id, hash_login: hash_login},
 		url: '/sistema/usuarios/ver/perfil/',
 		beforeSend: function(request) {
-			request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
 			adicionarLoader();
 		},
 		success: function(data) {
@@ -442,9 +442,9 @@ function calendarioCompromissos(){
 			method:"GET",
 			async:true,
 			beforeSend:function(request){
-				request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-				request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
-				request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+				request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+				request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+				request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
 			}
 		},
 		timezone:'local',
@@ -456,9 +456,9 @@ function calendarioCompromissos(){
 				url: '/sistema/agenda/editar/'+event.id,
 				beforeSend: function(request) {
 					console.log('setando');
-					request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-					request.setRequestHeader("Authority-Optima-nivel", $('input[name="nivel_usuario_sessao"]').val());
-					request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());					
 					adicionarLoader();
 				},
 				success: function(data) {
@@ -480,9 +480,9 @@ function calendarioCompromissos(){
 				data: {id: event.id, data_inicial: event.start.format('DD/MM/Y'),hora_inicial:event.start.format('HH:mm'),data_final:event.end.format('DD/MM/Y'),hora_final:event.end.format('HH:mm')},
 				url: '/sistema/agenda/atualizar/',
 				beforeSend: function(request) {
-					request.setRequestHeader("Authority-Optima-hash", $('input[name="hash_usuario_sessao"]').val());
-					request.setRequestHeader("Authority-Optima-nivel", $('input[name="nivel_usuario_sessao"]').val());
-					request.setRequestHeader("Authority-Optima-id", $('input[name="id_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
+					request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
 				},
 				success: function(data) {
 				},

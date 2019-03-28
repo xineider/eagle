@@ -1,58 +1,58 @@
 <div class="secondary">
-<div class="row">
-<div class="col s6 center">
-<div class="titulo_inicio gold-text">Carteira de Aplicação</div>
-<div class="porcentagem_aplicacoes_inicio green-text text-darken-2">+10% <i class="fas fa-arrow-up green-text text-darken-2"></i></div>
-</div>
-<div class="col s6 center">
-<div class="titulo_inicio gold-text">Carteira de Rendimentos</div>
-<div class="porcentagem_aplicacoes_inicio green-text text-darken-2">+8% <i class="fas fa-arrow-up green-text text-darken-2"></i></div>
-</div>
-</div>
-
-<hr>
-<div class="row">
-<div class="col s12 center">
-<div class="titulo_inicio">Avisos</div>
-<div>Não há avisos agora!</div>
-</div>
-</div>
-<hr>
-
-<div class="col s12 inicio_noticias center">
-<div class="titulo_inicio">Notícias</div>
-<%
-if (typeof data.noticias != 'undefined' && data.noticias.length > 0) {
-for (var i = data.noticias.length - 1; i >= 0; i--) { %>
-<div class="col s6">
-<div class="card light">
-
-<div class="card-image">
-<a>
-<img src="<%= data.noticias[i].arquivo %>" >
-</a>
-</div>
-<div class="card-content">
-<div class="titulo_inicio_noticia">
-<%= data.noticias[i].titulo %>
-</div>
-<div class="descricao_inicio_noticia center">
-<a src="ajax-load" href="">Leia mais...</a>
-</div>
-
-</div>
-</div>
-</div>
-
-
-<%}
-}else{ %>
-Não há noticias no momento
-
-<%}%>
-
-</div>
-
-
-
-</div>
+    <div class="row">
+        <div class="col s6 center">
+            <div class="titulo_inicio gold-text">Carteira de Aplicação</div>
+            <div class="porcentagem_aplicacoes_inicio green-text text-darken-2">R$<%= data.carteira_aplicacao[0].carteira_aplicacao %></div>
+        </div>
+        <div class="col s6 center">
+            <div class="titulo_inicio gold-text">Carteira de Rendimentos</div>
+            <div class="porcentagem_aplicacoes_inicio green-text text-darken-2">774</div>
+        </div>
+    </div>
+    
+    <hr>
+    <div class="row">
+        <div class="col s12 center">
+            <div class="titulo_inicio">Avisos</div>
+            <div>Não há avisos agora!</div>
+        </div>
+    </div>
+    <hr>
+    
+    <div class="col s12 inicio_noticias center">
+        <div class="titulo_inicio">Notícias</div>
+        <%
+        if (typeof data.noticias != 'undefined' && data.noticias.length > 0) {
+            for (var i = data.noticias.length - 1; i >= 0; i--) { %>
+                <div class="col s6">
+                    <div class="card light">
+                        
+                        <div class="card-image">
+                            <a>
+                                <img src="<%= data.noticias[i].arquivo %>" >
+                            </a>
+                        </div>
+                        <div class="card-content">
+                            <div class="titulo_inicio_noticia">
+                                <%= data.noticias[i].titulo %>
+                            </div>
+                            <div class="descricao_inicio_noticia center">
+                                <a src="ajax-load" href="">Leia mais...</a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                
+                
+                <%}
+            }else{ %>
+                Não há noticias no momento
+                
+                <%}%>
+                
+            </div>
+            
+            
+            
+        </div>
