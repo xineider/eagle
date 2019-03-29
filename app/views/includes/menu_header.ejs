@@ -46,6 +46,106 @@ if (usuario.nivel == 0 || usuario.nivel == 3 ) { %>
 
 <% } %>
 
+<%
+if (usuario.nivel == 1) { %>
+
+
+<li>
+	<a class="ajax-load" href="/sistema/">
+		<i class="fas fa-home"></i> Início
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/agenda">
+		<i class="fas fa-calendar"></i> Agenda
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/coachees">
+		<i class="fas fa-user-friends"></i> Coachees
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/suporte">
+		<i class="fas fa-question"></i> Suporte
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/coaching">
+		<i class="fas fa-book-reader"></i> Coaching
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/simulador">
+		<i class="fas fa-chart-line"></i> Simulador
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/comissoes">
+		<i class="fas fa-comments-dollar"></i> Comissões
+	</a>
+</li>
+
+<li>
+	<a class="ajax-load" href="/sistema/estatisticas">
+		<i class="fas fa-chart-pie"></i> Estatisticas
+	</a>
+</li>
+
+<% } %>
+
+
+
+<%
+if (usuario.nivel == 4 || usuario.nivel == 5) { %>
+
+
+<li>
+	<a class="ajax-load" href="/sistema/">
+		<i class="fas fa-home"></i> Início
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/agenda">
+		<i class="fas fa-calendar"></i> Agenda
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/coachees">
+		<i class="fas fa-user-friends"></i> Coachees
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/suporte">
+		<i class="fas fa-question"></i> Suporte
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/coaching">
+		<i class="fas fa-book-reader"></i> Coaching
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/simulador">
+		<i class="fas fa-chart-line"></i> Simulador
+	</a>
+</li>
+<li>
+	<a class="ajax-load" href="/sistema/comissoes">
+		<i class="fas fa-comments-dollar"></i> Comissões
+	</a>
+</li>
+
+<li>
+	<a class="ajax-load" href="/sistema/estatisticas">
+		<i class="fas fa-chart-pie"></i> Estatisticas
+	</a>
+</li>
+
+<% } %>
+
+
+
 <li>
 	<a href="/logout">
 		<i class="fas fa-sign-out-alt"></i> Sair
