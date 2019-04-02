@@ -27,8 +27,8 @@ router.get('/', function(req, res, next) {
 router.get('/extrato', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
-			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-				data.aporte_primeiro = data_primeiro_aporte
+			model.GetExtrato(req.session.usuario.id).then(data_extrato=>{
+				data.extrato = data_extrato
 				console.log('===================== DATA USUARIO ====================');
 				console.log(data);
 				console.log('=======================================================');

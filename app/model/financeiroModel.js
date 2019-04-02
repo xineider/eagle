@@ -25,6 +25,20 @@ class FinanceiroModel {
 			});
 		});
 	}
+
+
+	GetExtrato(id_usuario) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*,DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
+			CASE WHEN a.tipo = 0 THEN "Depósito em Conta"\
+			WHEN a.tipo = 1 THEN "Saque"\
+			ELSE 0 END as mensagem \
+			FROM caixa as  a WHERE a.deletado = ? AND a.id_usuario = ? \
+			ORDER BY a.data_cadastro', [0,id_usuario]).then(data => {
+				resolve(data);
+			});
+		});
+	}
 	
 	
 	GetValorTotalCarteiraAplicacao(id_usuario) {

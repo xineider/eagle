@@ -1,38 +1,36 @@
 
-	<div class="col s12 center">
+<div class="col s12 center">
 	<div class="titulo_inicio">Extrato</div>
-
+	
 	<div class="card light">
-	<table>
-
-		<thead>
-			<tr>
-				<th>Data</th>
-				<th>Operação</th>
-				<th>Valor</th>
-			</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>02/01/2018</td>
-			<td>Débito em Conta</td>
-			<td>R$1.000,00</td>
-		</tr>
-		<tr>
-		<td>10/02/2018</td>
-		<td>Saque renda Mensal</td>
-		<td>R$100,00</td>
-	</tr>
-
-	<tr>
-	<td>11/02/2018</td>
-	<td>Débito em Conta</td>
-	<td>R$2.000,00</td>
-</tr>
-		</tbody>
-	</table>
-	</div>
-
-	</div>
-
-
+		<table>
+			
+			
+			<thead>
+				<tr>
+					<th>Data</th>
+					<th>Operação</th>
+					<th>Valor</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+				<%
+				if (typeof data.extrato != 'undefined' && data.extrato.length > 0) {
+					for (var i = 0; i < data.extrato.length; i++) { %>
+						<tr>
+							<td><%= data.extrato[i].data_cadastro %></td>
+							<td><%= data.extrato[i].mensagem %></td>
+							<td>R$ <%= data.extrato[i].valor %></td>
+						</tr>
+						
+						<% } }%>
+						
+					</tbody>
+				</table>
+			</div>
+			
+		</div>
+		
+		
+		
