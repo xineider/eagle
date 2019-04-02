@@ -1,49 +1,81 @@
 
-	<div class="col s12 center coaching_container">
-		<div class="titulo_inicio">Coaching</div>
-
+<div class="col s12 center coaching_container">
+	<div class="titulo_inicio">Coaching</div>
+	
+	
+	<%if(usuario.nivel == 0){ %>
+		<div>Nome do Coach: <%=data.nome_coach[0].nome %></div>
+		
 		<div class="center">Progresso</div>
 		<div class="progress">
-			<div class="determinate" style="width:30%"></div>
-		</div>
-
-		<div class="col s6">
-		<div class="card primary lighten-2">
-		Sessão 1
-		</div>
-		</div>
-			
-
-		<div class="col s6">
-		<div class="card light darken-1">
-			Sessão 2
-			</div>
-		</div>
-		<div class="col s6">
-		<div class="card light darken-1">
-			Sessão 3
-		</div>
-		</div>
-
-		<div class="col s6">
-		<div class="card light darken-1">
-			Sessão 4
-		</div>
-		</div>
-
-		<div class="col s6">
-		<div class="card light darken-1">
-			Sessão 5
-		</div>
-		</div>
-		<div class="col s6">
-		<div class="card light darken-1">
-			Sessão 6
-		</div>
+			<div class="determinate" style="width:<%=(100 * data.total_visto[0].numeroVisto)/data.coaching.length %>%"></div>
 		</div>
 		
-
-
-
-	</div>
-
+	
+		
+		<%
+		if (typeof data.coaching != 'undefined' && data.coaching.length > 0) {
+			for (var i = 0; i < data.coaching.length; i++) { %>
+				
+				<div class="col s6">
+					<div class="card <%= data.coaching[i].visto == 1 ? "primary lighten-2":"light darken-1" %>">
+						<% if(data.coaching[i].visto == 1){ %>
+							<%= data.coaching[i].titulo %>
+							<%}else{%>
+								Sessão <%=i+1%>
+								<%}%>
+								
+								
+							</div>
+						</div>
+						
+						<% }} %>
+					
+						
+						
+						<!-- <div class="col s6">
+							<div class="card primary lighten-2">
+								Como Ganhar Mais
+							</div>
+						</div>
+						
+						
+						<div class="col s6">
+							<div class="card light darken-1">
+								Sessão 2
+							</div>
+						</div>
+						<div class="col s6">
+							<div class="card light darken-1">
+								Sessão 3
+							</div>
+						</div>
+						
+						<div class="col s6">
+							<div class="card light darken-1">
+								Sessão 4
+							</div>
+						</div>
+						
+						<div class="col s6">
+							<div class="card light darken-1">
+								Sessão 5
+							</div>
+						</div>
+						<div class="col s6">
+							<div class="card light darken-1">
+								Sessão 6
+							</div>
+						</div> -->
+						<%}else{%>
+							<div class="card light">
+								Ainda não finalizado para outros usuarios
+							</div>
+							
+							<%}%>
+							
+							
+							
+						</div>
+						
+						

@@ -13,8 +13,8 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
-		model.GetAporte(req.session.usuario.id).then(data_aporte_todal=>{
-			data.aporte_total= data_aporte_todal;
+		model.GetTodosCoachees(req.session.usuario.id).then(data_coachees=>{
+			data.coachees= data_coachees;
 			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
 				data.aporte_primeiro = data_primeiro_aporte
 				console.log('===================== DATA USUARIO ====================');
@@ -27,10 +27,55 @@ router.get('/', function(req, res, next) {
 });
 
 
+
+router.get('/cadastrar', function(req, res, next) {	
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'coachees/cadastrar', data: data, usuario: req.session.usuario});
+});
+
+
+
+
+
+
 /* POST enviando o login para verificação. */
-router.post('/', function(req, res, next) {
-	model.GetNoticias().then(data => {
-		res.json(data);
+router.post('/cadastrar', function(req, res, next) {
+	// Recebendo o valor do post
+	POST = req.body;
+	var senha = Math.random().toString(36).substr(2, 8);
+	POST.senha = senha;
+	POST.id_coach = req.session.usuario.id;
+	console.log('UUUUUUUUUUUUUU UUUSUARIO UUUUUUUUUUUUUUUUUUUUUUUUUU');
+	console.log(POST);
+	console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
+
+	model.VerificarSeTemLogin(POST.login).then(tem_login => {
+		console.log('ttttttttttt tem login ttttt');
+		console.log(tem_login);
+		console.log('ttttttttttttttttttttttttttt');
+
+		if(tem_login == ''){
+			model.CadastrarCoachee(POST).then(data => {
+				var to = POST.email;
+				var subject = 'Bem-vindo ao Eagle Finances!';
+				var html = 'Bem vindo ao Ealge Finances. Segue abaixo as informações sobre sua conta. \
+				<br> <b>Login:</b>'+POST.login+'<br> \
+				<br> <b>Senha:</b>'+senha+'<br>\
+				Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita.<br>\
+				Acesse via o aplicativo <a href="www.eagle.finance" target="_blank">Eagle Finances<br> \
+				Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão.<br>\
+				<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>';
+				var text = 'Bem vindo ao Ealge Finances. Segue abaixo as informações sobre sua conta. Segue abaixo as informações sobre sua conta.\
+				Login:'+POST.login+'Senha:'+senha+' Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita.\
+				Acesse via o aplicativo Eagle Finances \
+				Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão.\
+				Por-favor não responda essa mensagem, pois ela é enviada automaticamente!';
+				control.SendMail(to, subject, html, text);
+				res.json(data);
+			});
+		}else{
+			console.log('JJJJJJJJJJJJJJJJJJJ já existe login JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
+			res.json('possui_login');
+		}
 	});
 });
 

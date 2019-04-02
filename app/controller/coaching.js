@@ -13,14 +13,17 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
-		model.GetAporte(req.session.usuario.id).then(data_aporte_todal=>{
-			data.aporte_total= data_aporte_todal;
-			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-				data.aporte_primeiro = data_primeiro_aporte
-				console.log('===================== DATA USUARIO ====================');
-				console.log(data);
-				console.log('=======================================================');
-				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'coaching/coaching', data: data, usuario: req.session.usuario});
+		model.GetNomeCoach(req.session.usuario.id).then(data_nome_coach=>{
+			data.nome_coach= data_nome_coach;
+			model.GetCoachingVistosNaoVistos(req.session.usuario.id).then(data_coaching=>{
+				data.coaching = data_coaching
+				model.GetTotalVistos(req.session.usuario.id).then(data_total_visto=>{
+					data.total_visto = data_total_visto
+					console.log('===================== DATA USUARIO ====================');
+					console.log(data);
+					console.log('=======================================================');
+					res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'coaching/coaching', data: data, usuario: req.session.usuario});
+				});
 			});
 		});
 	});

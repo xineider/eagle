@@ -249,7 +249,7 @@ function SubmitAjax(post, link, back, method) {
 		success: function(data) {
 			console.log(data);
 			if (typeof data != undefined && data > 0) {
-				Materialize.toast('<div class="center-align" style="width:100%;">Cadastrado com sucesso</div>', 5000, 'rounded');
+				M.toast({html:'<div class="center-align" style="width:100%;">Cadastrado com sucesso</div>', displayLength:5000, classes:'rounded'});
 			}
 			GoTo(back, true);
 		},

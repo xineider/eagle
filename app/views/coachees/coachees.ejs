@@ -1,38 +1,41 @@
 
-	<div class="col s12 center coaching_container">
-		<div class="titulo_inicio">Coachees</div>
-
-		<div class="card light">
-			<table>
-				<thead>
-					<tr>
-						<th>Nome</th>
-						<th>Perfil:</th>
-						<th>Status</th>
-					</tr>
+<div class="col s12 center coaching_container">
+	<div class="titulo_inicio">Coachees</div>
+	
+	<a class="btn light ajax-load" href="/sistema/coachees/cadastrar">Cadastrar Novo Coachee</a>
+	
+	<div class="card light">
+		<table>
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Perfil:</th>
+					<th>Status</th>
+				</tr>
 				
-				</thead>
-				<tbody>
-					<tr>
-						<td>Renato Tamáres</td>
-						<td>Arrojado</td>
-						<td>Aplicação Ativa</td>
-					</tr>
-
-					<tr>
-						<td>Julia Banabé</td>
-						<td>Moderado</td>
-						<td>Cadastro</td>
-					</tr>
-					<tr>
-						<td>Ariel Castro</td>
-						<td>Conservador</td>
-						<td>Coaching</td>
-					</tr>
-				</tbody>
-			</table>
-
-	</div>
-
-	</div>
-
+			</thead>
+			<tbody>
+				
+				<%
+				if (typeof data.coachees != 'undefined' && data.coachees.length > 0) {
+					for (var i = data.coachees.length - 1; i >= 0; i--) { %>
+						<tr>
+							<td><%= data.coachees[i].nome %></td>
+							<td><%= data.coachees[i].plano %></td>
+						</tr>
+						
+						<%}}else{ %>
+							<tr>
+								<td>Você não possuí nenhum Coachee!</td>
+							</tr>
+							
+							<%}%>
+							
+						</tbody>
+					</table>
+					
+				</div>
+				
+			</div>
+			
+			
