@@ -90,6 +90,7 @@ app.use("/assets", express.static(__dirname + '/assets'));
 
 app.use('/', login);
 app.use('/sistema', index);
+app.use('/sistema/inicio', index);
 app.use('/sistema/investimento', investimento);
 app.use('/sistema/financeiro', financeiro);
 app.use('/sistema/coaching', coaching);

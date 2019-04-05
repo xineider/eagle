@@ -14,6 +14,23 @@ class IndexModel {
 			});
 		});
 	}
+
+	SelecionarTodasNoticias() {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM noticias WHERE deletado = ? AND club = ? \
+			ORDER BY data_cadastro', [0,0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	
+	SelecionarNoticia(id) {
+		return new Promise(function(resolve, reject) {
+			helper.Query("SELECT * FROM noticias WHERE id = ? AND deletado = ?", [id,0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
 	
 	
 	GetValorTotalCarteiraAplicacao(id_usuario) {
@@ -30,5 +47,8 @@ class IndexModel {
 			});
 		}
 		
+		
+		
 	}
+	
 	module.exports = IndexModel;

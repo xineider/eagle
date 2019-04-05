@@ -1,5 +1,5 @@
-<div class="secondary">
-    <div class="row">
+
+    <div class="equal-columns">
         <div class="col s6 center">
             <div class="titulo_inicio gold-text">Carteira de Aplicação</div>
             <div class="porcentagem_aplicacoes_inicio green-text text-darken-2">R$<%= data.carteira_aplicacao[0].carteira_aplicacao %></div>
@@ -24,8 +24,9 @@
         <%
         if (typeof data.noticias != 'undefined' && data.noticias.length > 0) {
             for (var i = data.noticias.length - 1; i >= 0; i--) { %>
+                
                 <div class="col s6">
-                    <div class="card light">
+                    <div class="card light">                    
                         
                         <div class="card-image">
                             <a>
@@ -36,10 +37,12 @@
                             <div class="titulo_inicio_noticia">
                                 <%= data.noticias[i].titulo %>
                             </div>
-                            <div class="descricao_inicio_noticia center">
-                                <a src="ajax-load" href="">Leia mais...</a>
+                            <div class="descricao_inicio_noticia limitador_3_linhas center">
+                                <%= data.noticias[i].descricao %>
                             </div>
-                            
+                            <a class="ajax-load" href="/sistema/inicio/ver_noticia/<%= data.noticias[i].id %>">
+                                Leia mais ...
+                            </a>                            
                         </div>
                     </div>
                 </div>
@@ -53,12 +56,17 @@
                 
                 <%}%>
                 
+                <div class="col s12">
+                    <a class="ajax-load" href="/sistema/inicio/todas_noticias">Ver Todas Notícias</a>
+                </div>
+                
                 <%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
-                    <a class="btn light ajax-load" href="/sistema/administracao/noticias/criar">Cadastrar Notícia</a>
+                    <div class="col s12 margin-b-10">
+                        <a class="btn light ajax-load" href="/sistema/administracao/noticias">Editar Notícias</a>
+                    </div>
                     <%}%>
                     
                 </div>
                 
                 
                 
-            </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Abr-2019 às 02:49
+-- Generation Time: 05-Abr-2019 às 02:43
 -- Versão do servidor: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -70,12 +70,15 @@ CREATE TABLE `coaching` (
 --
 
 INSERT INTO `coaching` (`id`, `titulo`, `descricao`, `deletado`, `data_cadastro`) VALUES
-(1, 'Como Ganhar Mais', '1° Sessão de como ganhar mais', 0, '2019-04-01 18:10:07'),
+(1, 'Como Ganhar Mais++', '																								1° Sessão de como ganhar mais\r\n					\r\n					\r\n					\r\n					', 0, '2019-04-01 18:10:07'),
 (2, 'IBOVESPA, IMDB ou ISODEC', '2° Sessão IBOVESPA, IMDB ou ISODEC', 0, '2019-04-01 18:10:07'),
 (3, 'Mudando seu Ritmo Financeiro', '3° Sessão sobre mudando o seu ritmo financeiro', 0, '2019-04-01 18:10:07'),
 (4, 'Aplicando melhor o seu dinheiro', '4 Sessão de aplicar melhor o seu dinheiro', 0, '2019-04-01 18:10:07'),
 (5, 'Investir em Tesouro Direto', '5° Sessão Investir em Tesouro Direto', 0, '2019-04-01 18:10:07'),
-(6, 'Última Sessão', '6° e última Sessão sobre como arrecadar dinheiro sem sair de casa', 0, '2019-04-01 18:10:07');
+(6, 'Última Sessão', '6° e última Sessão sobre como arrecadar dinheiro sem sair de casa', 0, '2019-04-01 18:10:07'),
+(7, 'Teste', 'teste', 1, '2019-04-04 18:53:06'),
+(8, 'teste', 'ajax-submit', 1, '2019-04-04 22:43:34'),
+(9, 'cadastro', '111111', 0, '2019-04-04 22:46:30');
 
 -- --------------------------------------------------------
 
@@ -239,7 +242,8 @@ CREATE TABLE `noticias` (
   `id_usuario` int(11) NOT NULL,
   `titulo` varchar(150) NOT NULL,
   `descricao` text NOT NULL,
-  `arquivo` varchar(150) NOT NULL,
+  `arquivo` varchar(150) DEFAULT NULL,
+  `club` int(11) NOT NULL DEFAULT '0' COMMENT '0 - normal, 1 - eagle club',
   `deletado` tinyint(4) NOT NULL DEFAULT '0',
   `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -248,9 +252,11 @@ CREATE TABLE `noticias` (
 -- Extraindo dados da tabela `noticias`
 --
 
-INSERT INTO `noticias` (`id`, `id_usuario`, `titulo`, `descricao`, `arquivo`, `deletado`, `data_cadastro`) VALUES
-(1, 1, 'Após temporal derrubar 700 árvores, empresas começam a plantar', 'A cidade do Rio de Janeiro,está em regime de atenção para temporais. Depois de um temporal derrubar mais de 700 árvores na cidade os empresários começaram a se juntar e propor como reconstruir e plantar as árvores perdidas.', '/assets/uploads/green-tree.jpg', 0, '2019-03-07 22:15:31'),
-(2, 1, 'Então, como declarar o investimento CDB?', '', '/assets/uploads/cdb-declarar.png', 0, '2019-03-26 17:58:54');
+INSERT INTO `noticias` (`id`, `id_usuario`, `titulo`, `descricao`, `arquivo`, `club`, `deletado`, `data_cadastro`) VALUES
+(1, 1, 'Após temporal derrubar 700 árvores, empresas começam a plantar', '																																																						A cidade do Rio de Janeiro,está em regime de atenção para temporais. Depois de um temporal derrubar mais de 700 árvores na cidade os empresários começaram a se juntar e propor como reconstruir e plantar as árvores perdidas.\r\n					\r\n					\r\n					\r\n					\r\n					\r\n					\r\n					\r\n					\r\n					', '/assets/uploads/green-tree.jpg', 0, 0, '2019-03-07 22:15:31'),
+(2, 1, 'Então, como declarar o investimento CDB?', '', '/assets/uploads/cdb-declarar.png', 0, 0, '2019-03-26 17:58:54'),
+(3, 6, 'noticia legal', '																																																						noticia muito topzeira				\r\n						\r\n					\r\n					\r\n					\r\n					\r\n					\r\n					\r\n					\r\n					\r\n					', NULL, 1, 0, '2019-04-04 01:39:47'),
+(4, 6, 'noticia bacana', 'essa é uma noticia bacana				\r\n						', NULL, 0, 0, '2019-04-04 22:56:11');
 
 -- --------------------------------------------------------
 
@@ -301,12 +307,12 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `id_coach`, `login`, `senha`, `imagem`, `nome`, `email`, `telefone`, `hash_login`, `nivel`, `deletado`, `data_cadastro`) VALUES
-(1, 2, 'coachee', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coachee Aluno', 'marcos@eagle.com.br', '(51) 99999-9999', '4f93777304c0aa53eec4917de77946d7', 0, 0, '2017-11-30 18:49:14'),
-(2, 0, 'coach', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coach Professor', 'renato@eagle.com.br', '(51) 99999-9999', 'ffcd9206c1b1636cb91758c02971f4cd', 1, 0, '2017-11-30 18:49:14'),
+(1, 2, 'coachee', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coachee Aluno', 'marcos@eagle.com.br', '(51) 99999-9999', '288f3bfff0592f38cb47c40aa773a1df', 0, 0, '2017-11-30 18:49:14'),
+(2, 0, 'coach', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coach Professor', 'renato@eagle.com.br', '(51) 99999-9999', '6e99b72a20639792bce4c4206a5e7839', 1, 0, '2017-11-30 18:49:14'),
 (3, 0, 'manager', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Manager Gerente', 'renato@eagle.com.br', '(51) 99999-9999', 'f476e0ce532d5e931de23b93f668f61f', 2, 0, '2017-11-30 18:49:14'),
 (4, 0, 'investidor', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Investidor Aluno', 'renato@eagle.com.br', '(51) 99999-9999', 'f476e0ce532d5e931de23b93f668f61f', 3, 0, '2017-11-30 18:49:14'),
-(5, 0, 'coordenacao', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coordenacao Manutencao', 'renato@eagle.com.br', '(51) 99999-9999', 'f476e0ce532d5e931de23b93f668f61f', 4, 0, '2017-11-30 18:49:14'),
-(6, 0, 'admin', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Admin Administrador', 'renato@eagle.com.br', '(51) 99999-9999', '181476a29e52c307aa02c5a0a5d0e59f', 5, 0, '2017-11-30 18:49:14'),
+(5, 0, 'coordenacao', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coordenacao Manutencao', 'renato@eagle.com.br', '(51) 99999-9999', '8a4e7d0d55277ee1ccea7709393acfe8', 4, 0, '2017-11-30 18:49:14'),
+(6, 0, 'admin', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Admin Administrador2', 'renato@eagle.com.br2', '(51) 99999-9999', 'ae4610ad1776a2c1ca08b6720a902ed3', 5, 0, '2017-11-30 18:49:14'),
 (7, 2, 'sandra', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Sandra Pimentel', 'sandra@eagle.com.br', '(51) 99999-9999', '403633934701d8d4f362b28b951de1c6', 0, 0, '2017-11-30 18:49:14'),
 (8, 2, 'mauricio', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Mauricio da Silva', 'mauricio@eagle.com.br', '(51) 99999-9999', '403633934701d8d4f362b28b951de1c6', 0, 0, '2017-11-30 18:49:14'),
 (9, 0, 'coach2', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coach Professor2', 'renato@eagle.com.br', '(51) 99999-9999', 'f5f417d53edcff4454c29019bf6d1151', 1, 0, '2017-11-30 18:49:14'),
@@ -314,7 +320,9 @@ INSERT INTO `usuarios` (`id`, `id_coach`, `login`, `senha`, `imagem`, `nome`, `e
 (22, 2, 'bernardo', '1bdf247a90cad6bd2cadf7cfbe64d660', 'user-padrao.jpg', 'Bernardo Brachiosauros', 'bernardo@eagle.com.br', '(51) 99999-9999', NULL, 0, 0, '2019-03-30 06:21:37'),
 (23, 2, 'larissa', '9553eea9a308658b1bf4ace0e0ed527d', 'user-padrao.jpg', 'Larissa Júnio', 'larissa@gmail.com', '(51) 99999-9999', NULL, 0, 0, '2019-03-30 06:22:31'),
 (24, 2, 'bruno', 'd062710c21452ed451bc763b31d58729', 'user-padrao.jpg', 'Bruno Simão', 'bruno@gmail.com', '(51) 99999-9999', NULL, 0, 0, '2019-03-30 06:25:01'),
-(25, 2, 'julia', 'e5a3e9cacea3fe19c035e429a50e664d', 'user-padrao.jpg', 'Julia Romã', 'julia90@gmail.com', '(51) 99999-9999', NULL, 0, 0, '2019-03-30 06:25:56');
+(25, 2, 'julia', 'e5a3e9cacea3fe19c035e429a50e664d', 'user-padrao.jpg', 'Julia Romã', 'julia90@gmail.com', '(51) 99999-9999', NULL, 0, 0, '2019-03-30 06:25:56'),
+(26, 0, 'brumadinho', '745536f0652656dae49565e5fa26152b', 'user-padrao.jpg', 'brumadinho', 'brumadinho@gmail.com', '(51) 99999-9999', NULL, 0, 0, '2019-04-04 18:09:45'),
+(27, 0, 'brumadinha', '6b5923d7d7450f2b13585d749d72bd77', 'user-padrao.jpg', 'brumadinha', 'brumadinha@gmail.com', '(51) 99999-9999', NULL, 0, 1, '2019-04-04 18:11:34');
 
 -- --------------------------------------------------------
 
@@ -421,7 +429,7 @@ ALTER TABLE `caixa`
 -- AUTO_INCREMENT for table `coaching`
 --
 ALTER TABLE `coaching`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `coaching_usuario`
 --
@@ -446,7 +454,7 @@ ALTER TABLE `log`
 -- AUTO_INCREMENT for table `noticias`
 --
 ALTER TABLE `noticias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `planos`
 --
@@ -456,7 +464,7 @@ ALTER TABLE `planos`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `usuarios_planos`
 --

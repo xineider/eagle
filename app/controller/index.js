@@ -24,6 +24,31 @@ router.get('/', function(req, res, next) {
 });
 
 
+router.get('/ver_noticia/:id', function(req, res, next) {
+	var id = req.params.id;
+	console.log('selecionei a noticia no editar');
+	console.log(id);
+	console.log('_________________________________');
+	model.SelecionarNoticia(id).then(data => {
+		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log(data);	
+		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/ver_noticia', data: data, usuario: req.session.usuario});
+	});
+});
+
+router.get('/todas_noticias', function(req, res, next) {
+
+	model.SelecionarTodasNoticias().then(data_noticias => {
+		data.noticias = data_noticias;
+		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log(data);	
+		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/todas_noticias', data: data, usuario: req.session.usuario});
+	});
+});
+
+
 /* POST enviando o login para verificação. */
 router.post('/', function(req, res, next) {
 	model.GetNoticias().then(data => {
