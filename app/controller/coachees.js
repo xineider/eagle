@@ -47,12 +47,12 @@ router.post('/cadastrar', function(req, res, next) {
 	console.log('UUUUUUUUUUUUUU UUUSUARIO UUUUUUUUUUUUUUUUUUUUUUUUUU');
 	console.log(POST);
 	console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
-
+	
 	model.VerificarSeTemLogin(POST.login).then(tem_login => {
 		console.log('ttttttttttt tem login ttttt');
 		console.log(tem_login);
 		console.log('ttttttttttttttttttttttttttt');
-
+		
 		if(tem_login == ''){
 			model.CadastrarCoachee(POST).then(data => {
 				var to = POST.email;

@@ -106,11 +106,19 @@ main{
 	color: #000000;
 }
 
+.btn-full-width{
+	width: 100%;
+}
+
 
 
 .primary{
 	background:#2f3035;
 	color: #ffffff;
+}
+
+.btn.primary:hover{
+	background-color: #444654;
 }
 
 .primary.lighten-2{
@@ -121,6 +129,10 @@ main{
 .secondary{
 	background:#161616;
 	color: #ffffff;
+}
+
+.btn.secondary:hover{
+	background-color: #353535;
 }
 
 .tertiary{
@@ -178,17 +190,31 @@ main{
 	z-index: 1007 !important;
 }
 
+#modaldeletar p{
+	color: #000000;
+}
+
 .error {
 	position: absolute;
-	bottom: -20px;
-	right: 0px;
-	background-color: #f44336;
-	color: white;
-	padding: 0 10px;
-	max-width: 100px;
-	border-radius: 0 15px;
-	box-shadow: 0px 3px 2px -3px black;
+	bottom: -18px;
+	right: 5px;
+	background-color: #ff3526;
+	color: #fff;
+	padding: 2px 10px;
+	max-width: 110px;
+	border-radius: 5px;
+	box-shadow:1px 3px 8px -3px #c71b0f;
 }
+
+.error_ajax {
+	position: fixed;
+	z-index: 9999;
+	color: #fff;
+	background-color: #d00000;
+	border-radius: 9px 0 9px 9px;
+	padding: 5px;
+	right: 0;
+  }
 /* Estilos do site */
 
 /* Estilos do sistema */
@@ -213,12 +239,34 @@ main{
 }
 
 
+.equal-columns{
+	display: flex;
+	width:100%;
+}
+
+.equal-columns .col{
+	flex: 1;
+}
+
+.equal-columns .btn{
+	line-height:24px;
+	height: 100%;
+}
 
 table td {
 	border-radius: 0 !important;
 }
 
+.limitador_3_linhas{
+	max-height: 60px;
+	overflow: hidden;
+	display: block;
+}
 
+
+.break-all{
+	word-break: break-all;
+}
 
 .gold-text{
 	color: #dccf91;
@@ -318,6 +366,13 @@ textarea.materialize-textarea:focus:not([readonly]){
 	border-bottom:2px solid #dccf91;
 	border-right:2px solid #dccf91;
 }
+
+.dropdown-content li>a, 
+.dropdown-content li>span{
+	color:#9e893b;
+}
+
+
 
 /*Fim Materialize OVER*/
 

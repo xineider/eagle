@@ -1,0 +1,27 @@
+<div class="col s12 center">
+  <div class="titulo_inicio">Alterar Senha</div>
+  
+  <div class="card light row">
+    <form method="POST" action="" enctype="multipart/form-data">
+            
+        <div class="input-field col s12">
+          <label for="senha_atual">Senha Atual</label>
+          <input required="true" class="validate" type="password" name="senha_atual" id="senha_atual">
+        </div>
+        
+        <div class="input-field col s12">
+          <label for="senha">Nova Senha</label>
+          <input required="true" class="validate" type="password" name="senha" id="alterar_senha">
+        </div>
+        
+        <div class="input-field col s12">
+          <label for="confirmar_senha">Confirme a Nova Senha</label>
+          <input required="true" class="validate" type="password" id="confirmar_alterar_senha">
+        </div>
+        
+        <button data-href="/sistema/perfil/alterar-senha/" data-action="/sistema/perfil" class="btn secondary ajax-submit-update margin-b-10">
+          Alterar
+        </button>
+      </form>
+    </div>
+  </div>

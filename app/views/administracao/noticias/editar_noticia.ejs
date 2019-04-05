@@ -1,0 +1,59 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Editar Noticia</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+		
+		
+		<form method="POST" action="" enctype="multipart/form-data">
+			
+			
+			<div class="card light row">
+				<input type="hidden" name="id" value="<%= data[0].id %>">
+				
+				
+				<div class="input-field col s12">
+					<label for="titulo">Título</label>
+					<input class="validate" type="text" name="titulo" value="<%= data[0].titulo %>">
+				</div>
+				
+				<div class="input-field col s12">
+					<label for="descricao">Descrição</label>
+					<textarea class="validate" name="descricao">
+						<%= data[0].descricao %>
+					</textarea>
+				</div>
+				
+				<div class="input-field col s12">
+					<div class="left-align">Imagem</div>
+					<img src="<%= data[0].arquivo %>">
+					<div class="btn primary">Alterar Imagem</div>
+				</div>
+				
+				<div class="input-field col s12">
+					<p>
+						<label>
+							<input type="checkbox" value="1" name="club" <%=data[0].club == 1 ? 'checked' : '' %>>
+							<span>Club</span>
+						</label>
+					</p>
+				</div>
+				
+				<button data-href="/sistema/administracao/noticias/atualizar" data-action="/sistema/administracao/noticias/" class="btn secondary ajax-submit-update margin-b-10">
+					Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+				</button>
+				
+				
+				
+			</div>
+		</form>
+		
+		
+		
+		
+		
+		<%}else{%>
+			<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+			<%}%>
+			
+		</div>

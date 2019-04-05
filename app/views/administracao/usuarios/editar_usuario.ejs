@@ -1,0 +1,86 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Editar Usuário</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+		
+		
+		<form method="POST" action="" enctype="multipart/form-data">
+			
+			
+			<div class="card light row">
+				<input type="hidden" name="id" value="<%= data[0].id %>">
+				
+				
+				<div class="input-field col s12">
+					<label for="login">Login</label>
+					<input class="validate" type="text" name="login" value="<%= data[0].login %>">
+				</div>
+				
+				<div class="input-field col s12">
+					<label for="nome">Nome</label>
+					<input class="validate" type="text" name="nome" value="<%= data[0].nome %>">
+				</div>
+				
+				
+				<div class="input-field col s12">
+					<label for="nome">Email</label>
+					<input class="validate" type="text" name="email" value="<%= data[0].email %>">
+				</div>
+				
+				<div class="input-field col s12">
+					<label for="telefone">Telefone</label>
+					<input class="validate tel" type="text" name="telefone" value="<%= data[0].telefone %>">
+				</div>
+				
+				<div class="input-field col s12">
+										
+					<%if(usuario.nivel == 4 && data[0].nivel == 5){%>
+						<label for="nivel">Nível</label>
+						<select name="nivel">
+							<option disabled selected>Administrador</option>
+						</select>
+						
+						
+						<% }else if(usuario.nivel == 5){ %>
+							
+							
+							<select name="nivel">
+								<option value="0" <%= data[0].nivel == 0 ? 'selected' : '' %> >Coachee</option>
+								<option value="1" <%= data[0].nivel == 1 ? 'selected' : '' %> >Coach</option>
+								<option value="2" <%= data[0].nivel == 2 ? 'selected' : '' %> >Manager</option>
+								<option value="3" <%= data[0].nivel == 3 ? 'selected' : '' %> >Investidor</option>
+								<option value="4" <%= data[0].nivel == 4 ? 'selected' : '' %> >Coordenação</option>
+								<option value="5" <%= data[0].nivel == 5 ? 'selected' : '' %> >Administrador</option>
+							</select>
+							<label for="nivel">Nível</label>
+							
+							
+							<%} %>
+						</div>
+						
+						<%if(usuario.nivel == 4 && data[0].nivel == 5){%>
+							
+							<div>Você não possui permissão para alterar o Administrador!</div>
+							
+							<% }else{ %>
+								
+								<button data-href="/sistema/administracao/usuarios/atualizar" data-action="/sistema/administracao/usuarios/" class="btn secondary ajax-submit-update margin-b-10">
+									Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+								</button>
+								
+								<% } %>
+								
+								
+							</div>
+						</form>
+						
+						
+						
+						
+						
+						<%}else{%>
+							<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+							<%}%>
+							
+						</div>

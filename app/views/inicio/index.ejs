@@ -47,12 +47,18 @@
                 
                 <%}
             }else{ %>
-                Não há noticias no momento
+                <div class="col s12">
+                    Não há noticias no momento
+                </div>
                 
                 <%}%>
                 
+                <%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+                    <a class="btn light ajax-load" href="/sistema/administracao/noticias/criar">Cadastrar Notícia</a>
+                    <%}%>
+                    
+                </div>
+                
+                
+                
             </div>
-            
-            
-            
-        </div>

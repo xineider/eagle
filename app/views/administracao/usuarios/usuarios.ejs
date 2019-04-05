@@ -1,0 +1,97 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Administração de Usuários</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+		
+		
+		
+		<a class="btn light ajax-load" href="/sistema/administracao/usuarios/criar">Cadastrar Usuário</a>
+		
+		<div class="card light">
+			
+			<table>
+				<thead>
+					<tr>
+						<th>Login</th>
+						<th>Nome</th>
+						<th>Email</th>
+						<th>Nível</th>
+						<th class="center">Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<%
+					if (typeof data.usuarios_admin != 'undefined' && data.usuarios_admin.length > 0) {
+						for (var i = 0; i < data.usuarios_admin.length; i++) { %>
+							
+							<tr>
+								<td>
+									<a class="limitador_3_linhas ajax-load black-text break-all" href="/sistema/administracao/usuarios/editar/<%= data.usuarios_admin[i].id %>">
+										<%= data.usuarios_admin[i].login %>
+									</a> 
+								</td>
+								<td>
+									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/usuarios/editar/<%= data.usuarios_admin[i].id %>">
+										<%= data.usuarios_admin[i].nome %> 
+									</a>
+								</td>
+								<td>
+									<a class="limitador_3_linhas ajax-load black-text break-all" href="/sistema/administracao/usuarios/editar/<%= data.usuarios_admin[i].id %>">
+										<%= data.usuarios_admin[i].email %>
+									</a>
+								</td>
+								<td>
+									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/usuarios/editar/<%= data.usuarios_admin[i].id %>">
+										<% switch(data.usuarios_admin[i].nivel){
+											case 0:%>
+											Coachee
+											<% break;
+											case 1:%>
+											Coach
+											<%break;
+											case 2:%>
+											Manager
+											<%break;
+											case 3:%>
+											Investidor
+											<%break;
+											case 4:%>
+											Manager
+											<%break;
+											case 5:%>
+											Administrador
+											<%break;}%>
+									</a>
+								</td>
+								<td style="width: 30%;" class="center">
+									<% if(usuario.nivel == 4 && data.usuarios_admin[i].nivel != 5){ %>
+									<a href="" style="font-size: 1.4em;">
+										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.usuarios_admin[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.usuarios_admin[i].nome %>'? " data-to="/sistema/administracao/usuarios/desativar" data-back="/sistema/administracao/usuarios"></i>
+									</a>
+									<% } %>
+								</td>
+								
+							</tr>
+							
+							<%} 
+						}else{%>
+							<tr>
+								<td>Não há notícias no momento</td>
+							</tr>
+							<%}%>
+						</tbody>
+						
+					</table>
+				</div>
+				
+				
+				
+				
+				
+				<%}else{%>
+					<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+					<%}%>
+					
+				</div>

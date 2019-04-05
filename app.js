@@ -12,7 +12,7 @@ const fileUpload = require('express-fileupload');
 var login = require('./app/controller/login');
 var index = require('./app/controller/index');
 var api = require('./app/controller/api');
-var configuracoes = require('./app/controller/configuracoes');
+var perfil = require('./app/controller/perfil');
 var usuarios = require('./app/controller/usuarios');
 var investimento = require('./app/controller/investimento');
 var financeiro = require('./app/controller/financeiro');
@@ -55,9 +55,9 @@ app.use(function (req, res, next) {
     verificacao.VerificarUsuario(id, hash,nivel).then(data => {
       if (data.length > 0) {
         req.session.usuario = {};
-        req.session.usuario.id = id;
+        req.session.usuario.id = 6;
         req.session.usuario.hash_login = hash;
-        req.session.usuario.nivel = nivel;
+        req.session.usuario.nivel = 5;
         next();
       } else {
         req.session.destroy(function(err) {
@@ -104,7 +104,7 @@ app.use('/sistema/administracao', administracao);
 app.use('/sistema/comissoes', comissoes);
 app.use('/sistema/projetos_sociais', projetosSociais);
 app.use('/sistema/api', api);
-app.use('/sistema/configuracoes', configuracoes);
+app.use('/sistema/perfil', perfil);
 app.use('/sistema/usuarios', usuarios);
 
 

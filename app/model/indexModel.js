@@ -5,10 +5,11 @@ var Helper = require('./model.js');
 var helper = new Helper;
 
 class IndexModel {
-
+	
 	GetNoticias() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM noticias ORDER BY data_cadastro', []).then(data => {
+			helper.Query('SELECT * FROM noticias WHERE deletado = ? AND club = ? \
+			ORDER BY data_cadastro LIMIT 6', [0,0]).then(data => {
 				resolve(data);
 			});
 		});

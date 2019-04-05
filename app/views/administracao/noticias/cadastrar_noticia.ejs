@@ -1,0 +1,57 @@
+<div class="col s12 center">
+		<div class="titulo_inicio">Adicionar Noticia</div>
+		
+		
+		<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+			
+			
+			<form method="POST" action="" enctype="multipart/form-data">
+				
+				
+				<div class="card light row">
+		
+					
+					<div class="input-field col s12">
+						<label for="titulo">Título</label>
+						<input class="validate" type="text" name="titulo">
+					</div>
+					
+					<div class="input-field col s12">
+						<label for="descricao">Descrição</label>
+						<textarea class="validate" name="descricao">
+				
+						</textarea>
+					</div>
+					
+					<div class="input-field col s12">
+						<div class="left-align">Imagem</div>
+						<div class="btn primary">Adicionar Imagem</div>
+					</div>
+					
+					<div class="input-field col s12">
+						<p>
+							<label>
+								<input type="checkbox" value="1" name="club">
+								<span>Club</span>
+							</label>
+						</p>
+					</div>
+					
+					<button data-href="/sistema/administracao/noticias/cadastrar" data-action="/sistema/administracao/noticias/" class="btn secondary ajax-submit margin-b-10">
+						Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+					</button>
+					
+					
+					
+				</div>
+			</form>
+			
+			
+			
+			
+			
+			<%}else{%>
+				<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+				<%}%>
+				
+			</div>

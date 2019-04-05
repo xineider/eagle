@@ -5,18 +5,21 @@
 	<link rel='stylesheet' href='/assets/css/fontawesome.min.css' />
 	<link rel='stylesheet' href='/assets/css/materialize.min.css' />
 	<link rel='stylesheet' href='/assets/css/fullcalendar.min.css' />
+	<link rel='stylesheet' href='/assets/css/fullcalendar.min.css' />
 	<link rel='stylesheet' href='/assets/css/style.css' />
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script> -->
+	<script src="/assets/js/moment.min.js"></script>	
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/locale/pt-br.js"></script>
+	<script src="/assets/js/cropper.min.js"></script>
 	<script src="/assets/js/jquery.min.js"></script>
 	<script src="/assets/js/jquery.mask.js"></script>
 	<script src="/assets/js/materialize.min.js"></script>
 	<script src="/assets/js/fullcalendar.min.js"></script>
 	<script src="/assets/js/main.js"></script>
-
+	
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 </head>
-<body class="row">
+<body class="row primary">
 	<input type="hidden" value="<%= usuario.id %>" name="id_usuario_sessao">
 	<input type="hidden" value="<%= usuario.hash_login %>" name="hash_usuario_sessao">
 	<input type="hidden" value="<%= usuario.nivel %>" name="nivel_usuario_sessao">
@@ -67,16 +70,19 @@
 					<a data-target="slide-header" class="left sidenav-trigger">
 						<i class="fa fa-bars"></i>
 					</a>
-					<div class="img-user">
-						<img src="/assets/imgs/user-padrao.jpg">
-					</div>
-
-
+					<a class="ajax-load" href="/sistema/perfil">
+						<div class="img-user">
+							<img src="/assets/imgs/user-padrao.jpg">
+						</div>
+					</a>
+					
+					
 				</div>
 			</div>
 		</nav>
 	</header>
-
+	
 	<ul id="slide-header" class="sidenav primary">
 		<%- include('menu_header'); %>
 	</ul>
+	
