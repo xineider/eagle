@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 05-Abr-2019 às 02:43
+-- Generation Time: 05-Abr-2019 às 14:12
 -- Versão do servidor: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -196,6 +196,33 @@ INSERT INTO `compromissos` (`id`, `id_usuario`, `id_processo`, `id_recurso`, `id
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `eventos`
+--
+
+CREATE TABLE `eventos` (
+  `id` int(11) NOT NULL,
+  `titulo` varchar(150) NOT NULL,
+  `descricao` text NOT NULL,
+  `imagem` varchar(150) DEFAULT NULL,
+  `preco` double DEFAULT NULL,
+  `data` date NOT NULL,
+  `hora` time DEFAULT NULL,
+  `local` text NOT NULL,
+  `autor` varchar(150) DEFAULT NULL,
+  `deletado` int(11) NOT NULL DEFAULT '0',
+  `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `eventos`
+--
+
+INSERT INTO `eventos` (`id`, `titulo`, `descricao`, `imagem`, `preco`, `data`, `hora`, `local`, `autor`, `deletado`, `data_cadastro`) VALUES
+(1, 'Coaching Quântico', 'No coaching quantico você aprenderá como ser um usuário quântico', '', 15, '2019-04-17', '08:00:00', 'Hospital verusalem', 'Renatinho Augusto', 0, '2019-04-05 14:07:56');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `funcoes`
 --
 
@@ -312,7 +339,7 @@ INSERT INTO `usuarios` (`id`, `id_coach`, `login`, `senha`, `imagem`, `nome`, `e
 (3, 0, 'manager', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Manager Gerente', 'renato@eagle.com.br', '(51) 99999-9999', 'f476e0ce532d5e931de23b93f668f61f', 2, 0, '2017-11-30 18:49:14'),
 (4, 0, 'investidor', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Investidor Aluno', 'renato@eagle.com.br', '(51) 99999-9999', 'f476e0ce532d5e931de23b93f668f61f', 3, 0, '2017-11-30 18:49:14'),
 (5, 0, 'coordenacao', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coordenacao Manutencao', 'renato@eagle.com.br', '(51) 99999-9999', '8a4e7d0d55277ee1ccea7709393acfe8', 4, 0, '2017-11-30 18:49:14'),
-(6, 0, 'admin', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Admin Administrador2', 'renato@eagle.com.br2', '(51) 99999-9999', 'ae4610ad1776a2c1ca08b6720a902ed3', 5, 0, '2017-11-30 18:49:14'),
+(6, 0, 'admin', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Admin Administrador2', 'renato@eagle.com.br2', '(51) 99999-9999', '87ea487e8405fc28b1bbeb2d267f3f98', 5, 0, '2017-11-30 18:49:14'),
 (7, 2, 'sandra', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Sandra Pimentel', 'sandra@eagle.com.br', '(51) 99999-9999', '403633934701d8d4f362b28b951de1c6', 0, 0, '2017-11-30 18:49:14'),
 (8, 2, 'mauricio', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Mauricio da Silva', 'mauricio@eagle.com.br', '(51) 99999-9999', '403633934701d8d4f362b28b951de1c6', 0, 0, '2017-11-30 18:49:14'),
 (9, 0, 'coach2', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coach Professor2', 'renato@eagle.com.br', '(51) 99999-9999', 'f5f417d53edcff4454c29019bf6d1151', 1, 0, '2017-11-30 18:49:14'),
@@ -375,6 +402,12 @@ ALTER TABLE `compromissos`
   ADD KEY `id_recurso` (`id_recurso`),
   ADD KEY `id_apenso` (`id_apenso`),
   ADD KEY `id_advogado_compromisso` (`id_advogado_compromisso`);
+
+--
+-- Indexes for table `eventos`
+--
+ALTER TABLE `eventos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `funcoes`
@@ -440,6 +473,11 @@ ALTER TABLE `coaching_usuario`
 --
 ALTER TABLE `compromissos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+--
+-- AUTO_INCREMENT for table `eventos`
+--
+ALTER TABLE `eventos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `funcoes`
 --
