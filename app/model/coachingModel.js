@@ -28,12 +28,13 @@ class CoachingModel {
 		
 	}
 	
-	GetCoachingVistosNaoVistos(id_usuario){
+	GetCoachingVistosUsuario(id_usuario){
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.*,\
 			CASE WHEN (b.id_coaching = a.id AND b.id_usuario = ? AND b.deletado = ?) THEN 1 ELSE 0 END AS visto\
-			FROM `coaching` as a\
-			LEFT JOIN coaching_usuario as b ON a.id = b.id_coaching', [id_usuario,0]).then(data => {
+			FROM coaching as a\
+			LEFT JOIN coaching_usuario as b ON a.id = b.id_coaching \
+			WHERE b.id_usuario = ?', [id_usuario,0,id_usuario]).then(data => {
 				console.log('VVVVVVVVVVVVVVVVVVV COACHING VISTO E NAO VISTO VVVVVVVVVVVVV');
 				console.log(data);
 				console.log('VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV');
@@ -42,7 +43,61 @@ class CoachingModel {
 		});
 	}
 	
+	
+	// GetCoacheesComCoaching(id_usuario){
+	// 	return new Promise(function(resolve, reject) {
+	// 		helper.Query('SELECT a.id, a.nome, c.titulo \
+	// 		FROM usuarios as a \
+	// 		LEFT JOIN coaching_usuario as b ON b.id_usuario = a.id \
+	// 		LEFT JOIN coaching as c ON c.id = b.id_coaching \
+	// 		WHERE a.id_coach = ? AND a.deletado = ? AND b.deletado = ? AND c.deletado = ? \
+	// 		ORDER BY b.id  DESC LIMIT 1 ', [id_usuario,0,0,0]).then(data => {
+	// 			resolve(data);
+	// 		});
+	// 	});
+	// }
 
+
+	GetCoacheesComCoaching(id_usuario){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.id, a.nome,  \
+			(SELECT c.titulo FROM coaching as c WHERE c.deletado = ? AND c.id IN \
+			(SELECT d.id_coaching FROM coaching_usuario as d WHERE a.id = d.id_usuario AND d.deletado = ?)\
+			ORDER BY c.id DESC LIMIT 1) as titulo\
+			FROM usuarios as a \
+			WHERE a.id_coach = ? AND a.deletado = ?', [0,0,id_usuario,0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+
+
+		
+
+
+	
+	GetTodosCoachees(id_usuario){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.* \
+			FROM usuarios as a \
+			WHERE a.id_coach = ? AND a.deletado = ?', [id_usuario,0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+	GetTodosCoaching(){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.* \
+			FROM coaching as a \
+			WHERE a.deletado = ?', [0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	
+	
 	GetTotalVistos(id_usuario){
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT COUNT(*) as numeroVisto FROM `coaching_usuario` \
@@ -54,37 +109,19 @@ class CoachingModel {
 			});
 		});
 	}
+
+	CadastrarCoachingUsuario(POST) {	
+		return new Promise(function(resolve, reject) {
+			helper.Insert('coaching_usuario', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	
+	
+	
 	
 
-	
-	
-	GetAporte(id_usuario) {
-		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT SUM(valor) as aporte_total\
-			FROM caixa WHERE deletado = ? AND id_usuario = ? AND tipo= ?', [0,id_usuario,0]).then(data => {
-				resolve(data);
-			});
-		});
-	}
-	
-	GetPrimeiroAporte(id_usuario) {
-		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro FROM caixa WHERE deletado = ? AND id_usuario = ? AND tipo= ? ORDER BY data_cadastro ASC LIMIT 1', [0,id_usuario,0]).then(data => {
-				resolve(data);
-			});
-		});
-	}
-	
-	
-	
-	
-	GetNoticias() {
-		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM noticias ORDER BY data_cadastro', []).then(data => {
-				resolve(data);
-			});
-		});
-	}
 	
 	
 	

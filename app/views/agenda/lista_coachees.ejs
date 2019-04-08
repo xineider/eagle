@@ -1,0 +1,12 @@
+
+<div class="input-field col s12">
+	<span>Coachee</span>
+	<select class="browser-default" name="id_coachee">
+		<%
+		if (typeof data.coachee != 'undefined' && data.coachee.length > 0) {
+			for (var i = 0; i < data.coachee.length; i++) { %>
+				<option value=" <%= data.coachee[i].id %>"> <%= data.coachee[i].nome %></option>				
+				<% }
+			} %>
+		</select>
+	</div>

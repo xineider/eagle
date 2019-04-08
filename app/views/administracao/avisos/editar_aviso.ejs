@@ -1,0 +1,74 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Editar Aviso</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+		
+		
+		<form method="POST" action="" enctype="multipart/form-data">
+			
+			
+			<div class="card light row">
+				<input type="hidden" name="id" value="<%= data[0].id %>">
+				
+				
+				<div class="input-field col s12">
+					<label for="aviso">Aviso</label>
+					<input class="validate" type="text" name="aviso" value="<%= data[0].aviso %>">
+				</div>
+				
+				<div class="input-field col s12">
+					<label for="descricao">Descrição(Não Obrigatório)</label>
+					<textarea name="descricao">
+						<%= data[0].descricao %>
+					</textarea>
+				</div>
+				
+				<div class="input-field col s12">
+					<span>Mostrar para:</span>
+					
+					
+					<%if(usuario.nivel == 4 && data[0].id_nivel == 5){%>
+						<select name="id_nivel">
+							<option disabled selected value="5">Administrador</option>
+						</select>
+						
+						<% }else{ %>
+							
+							
+							<select name="id_nivel">
+								<option value="99" <%= data[0].id_nivel == 99 ? 'selected' : '' %> >Todos</option>
+								<option value="0" <%= data[0].id_nivel == 0 ? 'selected' : '' %> >Coachee</option>
+								<option value="1" <%= data[0].id_nivel == 1 ? 'selected' : '' %> >Coach</option>
+								<option value="2" <%= data[0].id_nivel == 2 ? 'selected' : '' %> >Manager</option>
+								<option value="3" <%= data[0].id_nivel == 3 ? 'selected' : '' %> >Investidor</option>
+								<option value="4" <%= data[0].id_nivel == 4 ? 'selected' : '' %> >Coordenação</option>
+								<% if(usuario.nivel == 5) { %>
+									<option value="5" <%= data[0].id_nivel == 5 ? 'selected' : '' %> >Administrador</option>							
+									<%} %>
+								</select>
+								
+								<%} %>
+								
+								
+							</div>
+							
+							
+							<button data-href="/sistema/administracao/aviso/atualizar" data-action="/sistema/administracao/avisos/" class="btn secondary ajax-submit-update margin-b-10">
+								Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+							</button>
+							
+							
+							
+						</div>
+					</form>
+					
+					
+					
+					
+					
+					<%}else{%>
+						<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+						<%}%>
+						
+					</div>

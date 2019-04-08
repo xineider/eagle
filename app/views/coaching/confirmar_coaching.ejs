@@ -1,0 +1,52 @@
+
+<div class="col s12 center coaching_container">
+	<div class="titulo_inicio">Confirmar Coaching</div>
+	
+	
+	<form method="POST" action="" enctype="multipart/form-data">
+		
+		
+		<div class="card light row">
+			
+			
+			<div class="input-field col s12">
+				<span>Coachee</span>
+				<select class="browser-default" name="id_usuario">
+					<%
+					if (typeof data.coachee != 'undefined' && data.coachee.length > 0) {
+						for (var i = 0; i < data.coachee.length; i++) { %>
+							<option value=" <%= data.coachee[i].id %>"> <%= data.coachee[i].nome %></option>				
+							<% }
+						} %>
+					</select>
+				</div>
+				
+				<div class="input-field col s12">
+					<span>Coaching</span>
+					<select class="browser-default" name="id_coaching">
+						<%
+						if (typeof data.coaching != 'undefined' && data.coaching.length > 0) {
+							for (var i = 0; i < data.coaching.length; i++) { %>
+								<option value=" <%= data.coaching[i].id %>"> <%= data.coaching[i].titulo %></option>				
+								<% }
+							} %>
+						</select>
+						
+					</div>
+					
+					<button data-href="/sistema/coaching/confirmar_usuario" data-action="/sistema/coaching/" class="btn secondary ajax-submit margin-b-10">
+						Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+					</button>
+					
+					
+					
+				</div>
+			</form>
+			
+			
+			
+			
+			
+		</div>
+		
+		

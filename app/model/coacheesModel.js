@@ -40,8 +40,13 @@ class CoacheesModel {
 			});
 		});
 	}
+
 	
 	
+
+
+
+
 	
 	
 	GetNoticias() {

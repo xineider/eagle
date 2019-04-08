@@ -15,10 +15,26 @@ class IndexModel {
 		});
 	}
 
+	GetAvisos(nivel) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT *,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro_formatado FROM avisos WHERE deletado = ? AND (id_nivel = ? OR id_nivel = ?) ORDER BY data_cadastro DESC LIMIT 3', [0,99,nivel]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
 	SelecionarTodasNoticias() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT * FROM noticias WHERE deletado = ? AND club = ? \
 			ORDER BY data_cadastro', [0,0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+	SelecionarTodosAvisos(nivel) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT *,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro_formatado FROM avisos WHERE deletado = ? AND (id_nivel = ? OR id_nivel = ?) ORDER BY data_cadastro DESC', [0,99,nivel]).then(data => {
 				resolve(data);
 			});
 		});

@@ -19,14 +19,82 @@ $(document).on('ready', function () {
 	});
 	$(document).ajaxSuccess(function () {
 		$('.error_ajax').fadeOut();
+		$('.timepicker').timepicker({
+			defaultTime: 'now', // Set default time: 'now', '1:30AM', '16:30'
+			twelveHour: false, // Use AM/PM or 24-hour format
+			fromNow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+			i18n:{
+				cancel:'Cancelar',
+				clear:'Limpar',
+				done:'Pronto'
+			},
+			autoClose: true, // automatic close timepicker
+			
+		});
+		
+		$('.datepicker').datepicker({
+			selectMonths: true, // Creates a dropdown to control month
+			selectYears: 190, // Creates a dropdown of 15 years to control year,
+			i18n: {
+				months:['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+				monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+				weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+				weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+				weekdaysAbbrev: ['D','S','T','Q','Q','S','S'],
+				cancel:'Cancelar',
+				clear:'Limpar',
+				done:'Pronto'
+			},    
+			today: 'Hoje',
+			clear: 'Limpar',
+			close: 'Pronto',
+			labelMonthNext: 'Próximo mês',
+			labelMonthPrev: 'Mês anterior',
+			labelMonthSelect: 'Selecione um mês',
+			labelYearSelect: 'Selecione um ano',
+			format: 'dd/mm/yyyy',
+			autoClose: true, // Close upon selecting a date,
+			defaultTime: 'now'
+		});
+
+		$('.datepicker_container_input').datepicker({
+			selectMonths: true, // Creates a dropdown to control month
+			selectYears: 190, // Creates a dropdown of 15 years to control year,
+			i18n: {
+				months:['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+				monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+				weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+				weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+				weekdaysAbbrev: ['D','S','T','Q','Q','S','S'],
+				cancel:'Cancelar',
+				clear:'Limpar',
+				done:'Pronto'
+			},    
+			today: 'Hoje',
+			clear: 'Limpar',
+			close: 'Pronto',
+			labelMonthNext: 'Próximo mês',
+			labelMonthPrev: 'Mês anterior',
+			labelMonthSelect: 'Selecione um mês',
+			labelYearSelect: 'Selecione um ano',
+			format: 'dd/mm/yyyy',
+			autoClose: true, // Close upon selecting a date,
+			defaultTime: 'now',
+			onSelect:function(data_entregada){
+				let mes = (1 + data_entregada.getMonth()).toString().padStart(2, '0');
+				var valorData = data_entregada.getDate()+'/' + mes + '/' + data_entregada.getFullYear();
+				$('#data_final_compromisso').val(valorData);
+			} 
+		  });
+		
 		// var imagem_usuario_perfil = $('#imagem-usuario-config');
 		
 		// if(typeof imagem_usuario_perfil != undefined){
-			
+		
 		// 	console.log('iiiiiiiiiiiiiiiiii imagem_usuario_perfil iiiiiiiiiiiiiiiii');
 		// 	console.log(imagem_usuario_perfil);
 		// 	console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
-			
+		
 		// 	$(imagem_usuario_perfil).cropper({
 		// 		aspectRatio: 1 / 1
 		// 	});
@@ -56,18 +124,18 @@ $(document).on('ready', function () {
 	
 	// $(document).on('click', '.crop-image-servidor', function(e) {
 	// 	e.preventDefault();
-		
+	
 	// 	var cropper = $('#imagem-usuario-config').data('cropper');
 	// 	console.log('croppper');
 	// 	console.log(cropper);
 	// 	var back = $(this).data('action');
 	// 	console.log(back);
-		
+	
 	// 	cropper.getCroppedCanvas().toBlob((blob) => {
 	// 		var formData = new FormData();
 	// 		formData.append('arquivo', blob);
 	// 		console.log(formData);
-			
+	
 	// 		$.ajax({
 	// 			url: '/sistema/perfil/cropImagemPerfil',
 	// 			type: 'POST',
@@ -86,13 +154,13 @@ $(document).on('ready', function () {
 	// 				console.log(data);
 	// 				console.log(typeof data != undefined);
 	// 				console.log(data > 0);
-					
+	
 	// 				if (typeof data != undefined) {
 	// 					M.toast({html:'<div class="center-align" style="width:100%;">Imagem Alterada com sucesso</div>', 
 	// 					displayLength:5000, classes:'green'});
 	// 				}
 	// 				console.log(back);
-					
+	
 	// 				if (typeof back != 'undefined' && back != 'add_name') {
 	// 					console.log('estou caindo no goTo do :D');
 	// 					GoTo(back, true);
@@ -137,8 +205,10 @@ $(document).on('ready', function () {
 		var link = $(this).data('href');
 		var back = $(this).data('action');
 		var sucessMessage = 'Cadastrado com Sucesso';
+		var sucessClass = 'green';
+
 		if (VerificarForm(form) == true) {
-			SubmitAjax(post, link, back,sucessMessage);
+			SubmitAjax(post, link, back,sucessMessage,sucessClass);
 		}
 	});
 	
@@ -149,8 +219,22 @@ $(document).on('ready', function () {
 		var link = $(this).data('href');
 		var back = $(this).data('action');
 		var sucessMessage = 'Atualizado com Sucesso';
+		var sucessClass = 'green';
 		if (VerificarForm(form) == true) {
-			SubmitAjax(post, link, back,sucessMessage);
+			SubmitAjax(post, link, back,sucessMessage,sucessClass);
+		}
+	});
+
+	$(document).on('click', '.ajax-submit-delete', function(e) {
+		e.preventDefault();
+		var form = $(this).parents('form');
+		var post = form.serializeArray();
+		var link = $(this).data('href');
+		var back = $(this).data('action');
+		var sucessMessage = 'Deletado com Sucesso';
+		var sucessClass = 'red';
+		if (VerificarForm(form) == true) {
+			SubmitAjax(post, link, back,sucessMessage,sucessClass);
 		}
 	});
 	
@@ -159,6 +243,20 @@ $(document).on('ready', function () {
 		if($(this).val() != '') {
 			UploadFile($(this));
 		}
+	});
+	
+	$(document).on('change', '.cadastrar_evento_tipo_compromisso_select', function(e) {
+		
+		console.log('----------------- VALOR DO SELECT ---------------');
+		console.log($(this).val());
+		console.log('-------------------------------------------------');
+		
+		if($(this).val() == 1){
+			$('.cadastrar_evento_coachee_container').empty();
+		}else if($(this).val() == 0){
+			LoadTo('/sistema/agenda/lista-coachees', 'cadastrar_evento_coachee_container');
+		}
+		
 	});
 	
 	$(document).on('submit', 'form', function(e) {
@@ -175,6 +273,13 @@ $(document).on('ready', function () {
 		GoTo(location.pathname, false);
 	};
 	// ALTERE CORRETAMENTE PARA FUNCIONAR DE ACORDO
+	
+	$(document).on('change', '.timepicker', function () {
+		$(this).focus();
+	});
+	
+	
+	
 	$(document).on('click', '.arquivo-escolha', function(e) {
 		e.preventDefault();
 		var nome = $(this).data('nome');
@@ -256,7 +361,7 @@ function LoadTo(link, to) {
 			adicionarLoader();
 		},
 		success: function(data) {
-			$('.'+to).append(data);
+			$('.'+to).html(data);
 		},
 		error: function(xhr) { // if error occured
 		},
@@ -285,14 +390,85 @@ function FormatInputs(focus) {
 	AddFormatEspecifico();
 	$('select').formSelect();
 	ActiveMaterializeInput(focus);
+	
+	$('.timepicker').timepicker({
+		defaultTime: 'now', // Set default time: 'now', '1:30AM', '16:30'
+		twelveHour: false, // Use AM/PM or 24-hour format
+		fromNow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+		i18n:{
+			cancel:'Cancelar',
+			clear:'Limpar',
+			done:'Pronto'
+		},
+		autoClose: true // automatic close timepicker
+		
+	});
+	
+	$('.datepicker').datepicker({
+		selectMonths: true, // Creates a dropdown to control month
+		selectYears: 190, // Creates a dropdown of 15 years to control year,
+		i18n: {
+			months:['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+			monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+			weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+			weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+			weekdaysAbbrev: ['D','S','T','Q','Q','S','S'],
+			cancel:'Cancelar',
+			clear:'Limpar',
+			done:'Pronto'
+		},    
+		today: 'Hoje',
+		clear: 'Limpar',
+		close: 'Pronto',
+		labelMonthNext: 'Próximo mês',
+		labelMonthPrev: 'Mês anterior',
+		labelMonthSelect: 'Selecione um mês',
+		labelYearSelect: 'Selecione um ano',
+		format: 'dd/mm/yyyy',
+		autoClose: true, // Close upon selecting a date,
+		defaultTime: 'now'
+	});
+	
+
+	$('.datepicker_container_input').datepicker({
+		selectMonths: true, // Creates a dropdown to control month
+		selectYears: 190, // Creates a dropdown of 15 years to control year,
+		i18n: {
+			months:['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+			monthsShort: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+			weekdays: ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sabádo'],
+			weekdaysShort: ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'],
+			weekdaysAbbrev: ['D','S','T','Q','Q','S','S'],
+			cancel:'Cancelar',
+			clear:'Limpar',
+			done:'Pronto'
+		},    
+		today: 'Hoje',
+		clear: 'Limpar',
+		close: 'Pronto',
+		labelMonthNext: 'Próximo mês',
+		labelMonthPrev: 'Mês anterior',
+		labelMonthSelect: 'Selecione um mês',
+		labelYearSelect: 'Selecione um ano',
+		format: 'dd/mm/yyyy',
+		autoClose: true, // Close upon selecting a date,
+		defaultTime: 'now',
+		onSelect:function(data_entregada){
+			let mes = (1 + data_entregada.getMonth()).toString().padStart(2, '0');
+			var valorData = data_entregada.getDate()+'/' + mes + '/' + data_entregada.getFullYear();
+			$('#data_final_compromisso').val(valorData);
+		} 
+	  });
+	
+	
 	// var imagem_usuario_perfil = $('#imagem-usuario-config');
 	
 	// if(typeof imagem_usuario_perfil != undefined){
-		
+	
 	// 	console.log('iiiiiiiiiiiiiiiiii imagem_usuario_perfil iiiiiiiiiiiiiiiii');
 	// 	console.log(imagem_usuario_perfil);
 	// 	console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
-		
+	
 	// 	$(imagem_usuario_perfil).cropper({
 	// 		aspectRatio: 1 / 1
 	// 	});
@@ -328,7 +504,7 @@ function GetEndereco(cep, pai) {
 		}
 	});
 }
-function SubmitAjax(post, link, back,sucessMessage) {
+function SubmitAjax(post, link, back,sucessMessage,sucessClass) {
 	$.ajax({
 		method: 'POST',
 		async: true,
@@ -342,7 +518,7 @@ function SubmitAjax(post, link, back,sucessMessage) {
 		},
 		success: function(data) {
 			if (typeof data != undefined && data != 'error_alterar_senha_diferente') {
-				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes:'green'});
+				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
 			}
 			if(data == 'error_alterar_senha_diferente'){
 				AddErrorTexto($('#senha_atual'),'Senhas Atual Diferente!');				
@@ -600,7 +776,7 @@ function calendarioCompromissos(){
 			$.ajax({
 				method: "GET",
 				async: true,
-				url: '/sistema/agenda/editar/'+event.id,
+				url: '/sistema/agenda/editar_evento/'+event.id,
 				beforeSend: function(request) {
 					console.log('setando');
 					request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
@@ -609,8 +785,10 @@ function calendarioCompromissos(){
 					adicionarLoader();
 				},
 				success: function(data) {
-					$('#modalinfo').find('.modal-content').html(data);
-					$('#modalinfo').modal('open');
+					console.log('DDDDDDDDD CLIQUEI NO EVENTO DATA SUCCESSS DDDDDDD');
+					console.log(data);
+					console.log('DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD');
+					$('.adicionar_compromisso_container').html(data);
 				},
 				error: function(xhr) { // if error occured
 					removerLoader();
@@ -618,26 +796,6 @@ function calendarioCompromissos(){
 				complete: function() {
 					removerLoader();
 					FormatInputs();
-				}
-			});
-		},eventDrop:function(event){
-			$.ajax({
-				method: "POST",
-				async: true,
-				data: {id: event.id, data_inicial: event.start.format('DD/MM/Y'),hora_inicial:event.start.format('HH:mm'),data_final:event.end.format('DD/MM/Y'),hora_final:event.end.format('HH:mm')},
-				url: '/sistema/agenda/atualizar/',
-				beforeSend: function(request) {
-					request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
-					request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
-					request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
-				},
-				success: function(data) {
-				},
-				error: function(xhr) { // if error occured
-					removerLoader();
-				},
-				complete: function() {
-					removerLoader();
 				}
 			});
 		}

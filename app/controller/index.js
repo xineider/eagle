@@ -13,12 +13,15 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.GetNoticias().then(data_noticias=>{
 		data.noticias = data_noticias;
-		model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
-			data.carteira_aplicacao = data_valor_carteira;;			
-			console.log('------------- DATA NOTICIAS INICIO------------------');
-			console.log(data);
-			console.log('----------------------------------------------');
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+		model.GetAvisos(req.session.usuario.nivel).then(data_avisos => {
+			data.avisos = data_avisos;			
+			model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
+				data.carteira_aplicacao = data_valor_carteira;;			
+				console.log('------------- DATA NOTICIAS INICIO------------------');
+				console.log(data);
+				console.log('----------------------------------------------');
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+			});
 		});
 	});
 });
@@ -38,13 +41,24 @@ router.get('/ver_noticia/:id', function(req, res, next) {
 });
 
 router.get('/todas_noticias', function(req, res, next) {
-
+	
 	model.SelecionarTodasNoticias().then(data_noticias => {
 		data.noticias = data_noticias;
 		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/todas_noticias', data: data, usuario: req.session.usuario});
+	});
+});
+
+router.get('/todos_avisos', function(req, res, next) {
+	
+	model.SelecionarTodosAvisos(req.session.usuario.nivel).then(data_avisos => {
+		data.avisos = data_avisos;
+		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log(data);	
+		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/todos_avisos', data: data, usuario: req.session.usuario});
 	});
 });
 

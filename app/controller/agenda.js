@@ -27,11 +27,73 @@ router.get('/', function(req, res, next) {
 });
 
 
-/* POST enviando o login para verificação. */
-router.post('/', function(req, res, next) {
-	model.GetNoticias().then(data => {
+router.get('/eventos', function(req, res, next) {
+	model.SelecionarEventos(req.session.usuario.id).then(data => {
 		res.json(data);
 	});
 });
+
+
+router.get('/editar_evento/:id', function(req, res, next) {
+	var id = req.params.id;
+
+	model.SelecionarAgenda(id).then(data_evento => {
+		data.evento = data_evento;
+		model.GetCoachees(req.session.usuario.id).then(data_coachee=>{
+			data.coachee = data_coachee;
+			console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+			console.log(data);	
+			console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'agenda/editar_evento', data: data, usuario: req.session.usuario});
+		});
+	});
+});
+
+
+router.get('/adicionar-novo-compromisso', function(req, res, next) {
+	model.GetCoachees(req.session.usuario.id).then(data_coachee=>{
+		data.coachee = data_coachee;
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'agenda/cadastrar_evento', data: data, usuario: req.session.usuario});
+	});
+});
+
+router.get('/lista-coachees', function(req, res, next) {
+	model.GetCoachees(req.session.usuario.id).then(data_coachee=>{
+		data.coachee = data_coachee;
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'agenda/lista_coachees', data: data, usuario: req.session.usuario});
+	});
+});
+
+
+/* POST*/
+router.post('/cadastrar_evento/', function(req, res, next) {
+	POST = req.body;
+	POST.id_usuario = req.session.usuario.id;
+	model.CadastrarEvento(POST).then(data => {
+		res.json(data);
+	});
+});
+
+router.post('/atualizar_evento/', function(req, res, next) {
+	POST = req.body;	
+	POST.id_usuario = req.session.usuario.id;
+
+	model.AtualizarEvento(POST).then(data => {
+		res.json(data);
+	});
+});
+
+
+
+
+router.post('/desativar_evento', function(req, res, next) {
+	// Recebendo o valor do post
+	POST = req.body;
+	model.DesativarEvento(POST).then(data=> {
+		res.json(data);
+	});
+});
+
+
 
 module.exports = router;

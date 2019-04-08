@@ -1,0 +1,31 @@
+<div class="col s12 center avisos_container">
+	<div class="titulo_inicio">Todos Avisos</div>
+	
+	<%
+	if (typeof data.avisos != 'undefined' && data.avisos.length > 0) {
+		for (var i = 0; i < data.avisos.length; i++) { %>
+			
+			<div class="aviso_content">
+				
+				<%= data.avisos[i].aviso %> - <%= data.avisos[i].data_cadastro_formatado %>
+				
+				<div>
+					<%= data.avisos[i].descricao %>
+				</div>
+			</div>
+			
+			<% } 
+		} else{ %>
+			<div>Não há avisos agora!</div>
+			<%} %>
+			
+			<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+				<div class="col s12 margin-b-10">
+					<a class="btn light ajax-load" href="/sistema/administracao/avisos">Editar Avisos</a>
+				</div>
+				<%}%>
+				
+				
+				
+				
+			</div>

@@ -34,8 +34,8 @@ class AdministracaoModel {
 			});
 		});
 	}
-
-		
+	
+	
 	SelecionarUsuario(id) {
 		return new Promise(function(resolve, reject) {
 			helper.Query("SELECT * FROM usuarios WHERE id = ? AND deletado = ?", [id,0]).then(data => {
@@ -43,7 +43,7 @@ class AdministracaoModel {
 			});
 		});
 	}
-
+	
 	SelecionarCoaching(id) {
 		return new Promise(function(resolve, reject) {
 			helper.Query("SELECT * FROM coaching WHERE id = ? AND deletado = ?", [id,0]).then(data => {
@@ -51,15 +51,24 @@ class AdministracaoModel {
 			});
 		});
 	}
-
-
+	
+	
+	SelecionarAviso(id) {
+		return new Promise(function(resolve, reject) {
+			helper.Query("SELECT * FROM avisos WHERE id = ? AND deletado = ?", [id,0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	
+	
 	VerificarSeTemLogin(login){
 		return new Promise(function(resolve, reject) {
 			helper.Query("SELECT login \
-				FROM usuarios WHERE deletado = ? AND login = ?", [0,login]).then(data => {
-					resolve(data);
-				});
+			FROM usuarios WHERE deletado = ? AND login = ?", [0,login]).then(data => {
+				resolve(data);
 			});
+		});
 	}
 	
 	
@@ -72,7 +81,7 @@ class AdministracaoModel {
 			});
 		});
 	}
-
+	
 	GetUsuarios() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT * FROM usuarios WHERE deletado = ?	ORDER BY data_cadastro ', [0]).then(data => {
@@ -80,7 +89,7 @@ class AdministracaoModel {
 			});
 		});
 	}
-
+	
 	GetCoachings() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT *,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro FROM coaching WHERE deletado = ?	ORDER BY data_cadastro ', [0]).then(data => {
@@ -88,7 +97,15 @@ class AdministracaoModel {
 			});
 		});
 	}
-
+	
+	GetAvisos() {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT *,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro FROM avisos WHERE deletado = ? ORDER BY data_cadastro ', [0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	
 	CadastrarNoticia(POST) {
 		return new Promise(function(resolve, reject) {
 			helper.Insert('noticias', POST).then(data => {
@@ -96,7 +113,7 @@ class AdministracaoModel {
 			});
 		});
 	}
-
+	
 	CadastrarUsuario(POST) {	
 		return new Promise(function(resolve, reject) {
 			POST.senha = helper.Encrypt(POST.senha);
@@ -105,7 +122,7 @@ class AdministracaoModel {
 			});
 		});
 	}
-
+	
 	CadastrarCoaching(POST) {	
 		return new Promise(function(resolve, reject) {
 			helper.Insert('coaching', POST).then(data => {
@@ -113,8 +130,16 @@ class AdministracaoModel {
 			});
 		});
 	}
-
-
+	
+	CadastrarAviso(POST) {	
+		return new Promise(function(resolve, reject) {
+			helper.Insert('avisos', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	
+	
 	AtualizarNoticia(POST) {
 		return new Promise(function(resolve, reject) {
 			helper.Update('noticias', POST).then(data => {
@@ -125,7 +150,7 @@ class AdministracaoModel {
 			});
 		});
 	}
-
+	
 	AtualizarUsuario(POST) {
 		return new Promise(function(resolve, reject) {
 			helper.Update('usuarios', POST).then(data => {
@@ -133,7 +158,7 @@ class AdministracaoModel {
 			});
 		});
 	}
-
+	
 	AtualizarCoaching(POST) {
 		return new Promise(function(resolve, reject) {
 			helper.Update('coaching', POST).then(data => {
@@ -141,8 +166,16 @@ class AdministracaoModel {
 			});
 		});
 	}
-
-
+	
+	AtualizarAviso(POST) {
+		return new Promise(function(resolve, reject) {
+			helper.Update('avisos', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	
+	
 	
 	DesativarNoticia(POST) {
 		return new Promise(function(resolve, reject) {
@@ -151,7 +184,7 @@ class AdministracaoModel {
 			});
 		});
 	}
-
+	
 	DesativarUsuario(POST) {
 		return new Promise(function(resolve, reject) {
 			helper.Desativar('usuarios', POST).then(data => {
@@ -163,6 +196,15 @@ class AdministracaoModel {
 	DesativarCoaching(POST) {
 		return new Promise(function(resolve, reject) {
 			helper.Desativar('coaching', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	
+	
+	DesativarAviso(POST) {
+		return new Promise(function(resolve, reject) {
+			helper.Desativar('avisos', POST).then(data => {
 				resolve(data);
 			});
 		});

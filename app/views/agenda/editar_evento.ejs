@@ -1,0 +1,79 @@
+<div class="col s12">
+	
+	<div class="card light row">
+		
+		<form method="POST" action="" enctype="multipart/form-data">
+			
+			<input type="hidden" name="id" value="<%= data.evento[0].id %>">
+			
+			<div class="input-field col s12">
+				<span>Tipo do Compromisso</span>
+				<select class="browser-default cadastrar_evento_tipo_compromisso_select" name="tipo">
+					<option value="0" <%= data.evento[0].tipo == 0 ? 'selected' : '' %> >Coaching</option>
+					<option value="1" <%= data.evento[0].tipo == 1 ? 'selected' : '' %>> Outro</option>
+				</select>
+			</div>
+			
+			<% if(data.evento[0].tipo == 0) { %>
+				<div class="input-field col s12 cadastrar_evento_coachee_container">
+					<span>Coachee</span>
+					<select class="browser-default" name="id_coachee">
+						<%
+						if (typeof data.coachee != 'undefined' && data.coachee.length > 0) {
+							for (var i = 0; i < data.coachee.length; i++) { %>
+								<option value=" <%= data.coachee[i].id %>" <%= data.evento[0].id_coachee == data.coachee[i].id ? 'selected' : '' %> > <%= data.coachee[i].nome %></option>				
+								<% }
+							} %>
+						</select>
+					</div>
+					<% } %>
+					
+					<div class="input-field col s12 margin-t-2rem">
+						<label for="data_inicial">Data Inicial</label>
+						<input type="text" class="datepicker_container_input" name="data_inicial" value="<%= data.evento[0].data_inicial %>">
+					</div>
+					
+					<div class="input-field col s12">
+						<label for="hora_inicial">Hora Inicial(Não Obrigatório)</label>
+						<input type="text" class="timepicker" name="hora_inicial" value="<%= data.evento[0].hora_inicial %>">
+						
+					</div>
+					<div class="input-field col s12">
+						<label name="data_final">Data Final</label>
+						<input type="text" class="datepicker" name="data_final" value="<%= data.evento[0].data_final %>" id="data_final_compromisso">
+					</div>
+					<div class="input-field col s12">
+						<label for="hora_final">Hora Final(Não Obrigatório)</label>
+						<input type="text" class="timepicker" name="hora_final" value="<%= data.evento[0].hora_final %>">
+					</div>
+					
+					<div class="input-field col s12">
+						<label for="local">Local</label>
+						<input type="text" name="local" required="true" value="<%= data.evento[0].local %>">
+					</div>
+					
+					<div class="input-field col s12">
+						<label>Observações(Não Obrigatório)</label>
+						<textarea name="observacoes"><%= data.evento[0].observacoes %></textarea>
+					</div>
+					
+					<button data-href="/sistema/agenda/atualizar_evento" data-action="/sistema/agenda/" class="btn secondary ajax-submit-update margin-b-10">
+						Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+					</button>
+					
+				</form>
+				
+	
+					<div class="margin-t-10 margin-b-10 col s12">
+						<a class="btn red white-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.evento[0].id %>" data-texto="Você tem certeza que quer deletar este evento?" data-to="/sistema/agenda/desativar_evento" data-back="/sistema/agenda/">
+							Apagar Evento
+						</a>
+					</div>
+			
+				
+				
+			</div>
+			
+		</div>
+		
+		

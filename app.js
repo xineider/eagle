@@ -55,9 +55,9 @@ app.use(function (req, res, next) {
     verificacao.VerificarUsuario(id, hash,nivel).then(data => {
       if (data.length > 0) {
         req.session.usuario = {};
-        req.session.usuario.id = 6;
+        req.session.usuario.id = id;
         req.session.usuario.hash_login = hash;
-        req.session.usuario.nivel = 5;
+        req.session.usuario.nivel = nivel;
         next();
       } else {
         req.session.destroy(function(err) {

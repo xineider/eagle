@@ -1,0 +1,71 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Administração de Avisos</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+		
+		
+		
+		<a class="btn light ajax-load" href="/sistema/administracao/avisos/criar">Cadastrar Avisos</a>
+		
+		<div class="card light">
+			
+			<table>
+				<thead>
+					<tr>
+						<th>Aviso</th>
+						<th>Descrição</th>
+						<th>Data Cadastro</th>
+						<th class="center">Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<%
+					if (typeof data.avisos != 'undefined' && data.avisos.length > 0) {
+						for (var i = 0; i < data.avisos.length; i++) { %>
+							
+							<tr>
+								<td>
+									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/aviso/editar/<%= data.avisos[i].id %>">
+										<%= data.avisos[i].aviso %>
+									</a> 
+								</td>
+								<td>
+									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/aviso/editar/<%= data.avisos[i].id %>">
+										<%= data.avisos[i].descricao %> 
+									</a>
+								</td>
+								<td>
+									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/aviso/editar/<%= data.avisos[i].id %>">
+										<%= data.avisos[i].data_cadastro %>
+									</a>
+								</td>
+								<td style="width: 30%;" class="center">
+									<a href="" style="font-size: 1.4em;">
+										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.avisos[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.avisos[i].aviso %>'? " data-to="/sistema/administracao/aviso/desativar" data-back="/sistema/administracao/avisos"></i>
+									</a>
+								</td>
+								
+							</tr>
+							
+							<%} 
+						}else{%>
+							<tr>
+								<td>Não há avisos no momento</td>
+							</tr>
+							<%}%>
+						</tbody>
+						
+					</table>
+				</div>
+				
+				
+				
+				
+				
+				<%}else{%>
+					<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+					<%}%>
+					
+				</div>

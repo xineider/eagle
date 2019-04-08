@@ -11,71 +11,59 @@
 			<div class="determinate" style="width:<%=(100 * data.total_visto[0].numeroVisto)/data.coaching.length %>%"></div>
 		</div>
 		
-	
+		
 		
 		<%
-		if (typeof data.coaching != 'undefined' && data.coaching.length > 0) {
-			for (var i = 0; i < data.coaching.length; i++) { %>
-				
-				<div class="col s6">
-					<div class="card <%= data.coaching[i].visto == 1 ? "primary lighten-2":"light darken-1" %>">
-						<% if(data.coaching[i].visto == 1){ %>
-							<%= data.coaching[i].titulo %>
-							<%}else{%>
-								Sessão <%=i+1%>
-								<%}%>
-								
-								
-							</div>
-						</div>
-						
-						<% }} %>
+		if (typeof data.coaching_vistos != 'undefined' && data.coaching_vistos.length > 0) {
+			for (var i = 0; i < data.coaching.length; i++) { 
+				for (var j = 0; j < data.coaching_vistos.length; j++){
+					%>
 					
-						
-						
-						<!-- <div class="col s6">
+					<% if(data.coaching[i].id == data.coaching_vistos[j].id){ %>
+						<div class="col s6">
 							<div class="card primary lighten-2">
-								Como Ganhar Mais
+								<%= data.coaching[i].titulo %>
 							</div>
 						</div>
-						
-						
-						<div class="col s6">
-							<div class="card light darken-1">
-								Sessão 2
+						<%} else if((i+1 > data.coaching_vistos.length) && (j+1 == data.coaching_vistos.length)) { %>
+							<div class="col s6">
+								<div class="card light darken-1">
+									Sessão <%=i+1%>
+								</div>
 							</div>
-						</div>
-						<div class="col s6">
-							<div class="card light darken-1">
-								Sessão 3
-							</div>
-						</div>
-						
-						<div class="col s6">
-							<div class="card light darken-1">
-								Sessão 4
-							</div>
-						</div>
-						
-						<div class="col s6">
-							<div class="card light darken-1">
-								Sessão 5
-							</div>
-						</div>
-						<div class="col s6">
-							<div class="card light darken-1">
-								Sessão 6
-							</div>
-						</div> -->
-						<%}else{%>
-							<div class="card light">
-								Ainda não finalizado para outros usuarios
-							</div>
-							
-							<%}%>
 							
 							
 							
+							<% }
+						}
+					}
+				}else{%>
+					
+					<%
+					if (typeof data.coaching != 'undefined' && data.coaching.length > 0) {
+						for (var i = 0; i < data.coaching.length; i++) {  %>
+							
+							<div class="col s6">
+								<div class="card light darken-1">
+									Sessão <%=i+1%>
+								</div>
+							</div>
+							
+							<% }
+						}
+					} %>
+					
+					
+					
+					<%}else{%>
+						<div class="card light">
+							Ainda não finalizado para outros usuarios
 						</div>
 						
+						<%}%>
 						
+						
+						
+					</div>
+					
+					

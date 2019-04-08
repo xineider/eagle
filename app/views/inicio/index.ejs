@@ -1,72 +1,100 @@
 
-    <div class="equal-columns">
-        <div class="col s6 center">
-            <div class="titulo_inicio gold-text">Carteira de Aplicação</div>
-            <div class="porcentagem_aplicacoes_inicio green-text text-darken-2">R$<%= data.carteira_aplicacao[0].carteira_aplicacao %></div>
-        </div>
-        <div class="col s6 center">
-            <div class="titulo_inicio gold-text">Carteira de Rendimentos</div>
-            <div class="porcentagem_aplicacoes_inicio green-text text-darken-2">774</div>
-        </div>
+<div class="equal-columns">
+    <div class="col s6 center">
+        <div class="titulo_inicio gold-text">Carteira de Aplicação</div>
+        <div class="porcentagem_aplicacoes_inicio green-text text-darken-2">R$<%= data.carteira_aplicacao[0].carteira_aplicacao %></div>
     </div>
-    
-    <hr>
-    <div class="row">
-        <div class="col s12 center">
-            <div class="titulo_inicio">Avisos</div>
-            <div>Não há avisos agora!</div>
-        </div>
+    <div class="col s6 center">
+        <div class="titulo_inicio gold-text">Carteira de Rendimentos</div>
+        <div class="porcentagem_aplicacoes_inicio green-text text-darken-2">774</div>
     </div>
-    <hr>
-    
-    <div class="col s12 inicio_noticias center">
-        <div class="titulo_inicio">Notícias</div>
+</div>
+
+<hr>
+<div class="row">
+    <div class="col s12 center avisos_container">
+        <div class="titulo_inicio">Avisos</div>
         <%
-        if (typeof data.noticias != 'undefined' && data.noticias.length > 0) {
-            for (var i = data.noticias.length - 1; i >= 0; i--) { %>
+        if (typeof data.avisos != 'undefined' && data.avisos.length > 0) {
+            for (var i = 0; i < data.avisos.length; i++) { %>
                 
-                <div class="col s6">
-                    <div class="card light">                    
-                        
-                        <div class="card-image">
-                            <a>
-                                <img src="<%= data.noticias[i].arquivo %>" >
-                            </a>
-                        </div>
-                        <div class="card-content">
-                            <div class="titulo_inicio_noticia">
-                                <%= data.noticias[i].titulo %>
-                            </div>
-                            <div class="descricao_inicio_noticia limitador_3_linhas center">
-                                <%= data.noticias[i].descricao %>
-                            </div>
-                            <a class="ajax-load" href="/sistema/inicio/ver_noticia/<%= data.noticias[i].id %>">
-                                Leia mais ...
-                            </a>                            
-                        </div>
+                <div class="aviso_content">
+                    
+                    <%= data.avisos[i].aviso %> - <%= data.avisos[i].data_cadastro_formatado %>
+                    
+                    <div>
+                        <%= data.avisos[i].descricao %>
                     </div>
                 </div>
                 
-                
-                <%}
-            }else{ %>
-                <div class="col s12">
-                    Não há noticias no momento
-                </div>
-                
-                <%}%>
+                <% } 
+            } else{ %>
+                <div>Não há avisos agora!</div>
+                <%} %>
                 
                 <div class="col s12">
-                    <a class="ajax-load" href="/sistema/inicio/todas_noticias">Ver Todas Notícias</a>
+                    <a class="ajax-load" href="/sistema/inicio/todos_avisos">Ver Todos Avisos</a>
                 </div>
                 
                 <%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
                     <div class="col s12 margin-b-10">
-                        <a class="btn light ajax-load" href="/sistema/administracao/noticias">Editar Notícias</a>
+                        <a class="btn light ajax-load" href="/sistema/administracao/avisos">Editar Avisos</a>
                     </div>
                     <%}%>
                     
                 </div>
-                
-                
-                
+            </div>
+            <hr>
+            
+            <div class="col s12 inicio_noticias center">
+                <div class="titulo_inicio">Notícias</div>
+                <%
+                if (typeof data.noticias != 'undefined' && data.noticias.length > 0) {
+                    for (var i = data.noticias.length - 1; i >= 0; i--) { %>
+                        
+                        <div class="col s6">
+                            <div class="card light">                    
+                                
+                                <div class="card-image">
+                                    <a>
+                                        <img src="<%= data.noticias[i].arquivo %>" >
+                                    </a>
+                                </div>
+                                <div class="card-content">
+                                    <div class="titulo_inicio_noticia">
+                                        <%= data.noticias[i].titulo %>
+                                    </div>
+                                    <div class="descricao_inicio_noticia limitador_3_linhas center">
+                                        <%= data.noticias[i].descricao %>
+                                    </div>
+                                    <a class="ajax-load" href="/sistema/inicio/ver_noticia/<%= data.noticias[i].id %>">
+                                        Leia mais ...
+                                    </a>                            
+                                </div>
+                            </div>
+                        </div>
+                        
+                        
+                        <%}
+                    }else{ %>
+                        <div class="col s12">
+                            Não há noticias no momento
+                        </div>
+                        
+                        <%}%>
+                        
+                        <div class="col s12">
+                            <a class="ajax-load" href="/sistema/inicio/todas_noticias">Ver Todas Notícias</a>
+                        </div>
+                        
+                        <%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+                            <div class="col s12 margin-b-10">
+                                <a class="btn light ajax-load" href="/sistema/administracao/noticias">Editar Notícias</a>
+                            </div>
+                            <%}%>
+                            
+                        </div>
+                        
+                        
+                        
+                        

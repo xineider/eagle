@@ -42,8 +42,7 @@
 						</select>
 						
 						
-						<% }else if(usuario.nivel == 5){ %>
-							
+						<% }else{ %>						
 							
 							<select name="nivel">
 								<option value="0" <%= data[0].nivel == 0 ? 'selected' : '' %> >Coachee</option>
@@ -51,7 +50,9 @@
 								<option value="2" <%= data[0].nivel == 2 ? 'selected' : '' %> >Manager</option>
 								<option value="3" <%= data[0].nivel == 3 ? 'selected' : '' %> >Investidor</option>
 								<option value="4" <%= data[0].nivel == 4 ? 'selected' : '' %> >Coordenação</option>
+								<% if(usuario.nivel == 5){ %>
 								<option value="5" <%= data[0].nivel == 5 ? 'selected' : '' %> >Administrador</option>
+								<% } %>
 							</select>
 							<label for="nivel">Nível</label>
 							

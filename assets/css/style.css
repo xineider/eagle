@@ -46,7 +46,7 @@ header .img-user{
 	border: 1px solid #fff;
 	border-radius: 50%;
 	overflow: hidden;
-
+	
 }
 
 header .img-user img{
@@ -101,6 +101,12 @@ main{
 	color: #000000;
 }
 
+
+.btn.light:hover{
+	background-color: #cfd2dc;
+}
+
+
 .light.darken-1{
 	background:#dadada;
 	color: #000000;
@@ -153,6 +159,10 @@ main{
 
 .margin-r-10{
 	margin-right: 10px;
+}
+
+.margin-t-2rem{
+	margin-top: 2rem;
 }
 
 
@@ -214,7 +224,7 @@ main{
 	border-radius: 9px 0 9px 9px;
 	padding: 5px;
 	right: 0;
-  }
+}
 /* Estilos do site */
 
 /* Estilos do sistema */
@@ -316,6 +326,17 @@ table td {
 }
 
 
+
+.avisos_container .aviso_content{
+	border-bottom:1px solid #f4f5f8;
+	margin:5px 0;
+	padding: 5px 0;
+}
+
+.avisos_container .aviso_content:last-child{
+	border-bottom: 0;
+}
+
 /*Fim Ínicio*/
 
 
@@ -341,7 +362,7 @@ table td {
 	margin-bottom: 0;
 }
 
-input{
+input,textarea{
 	background: #fff!important;
 }
 
@@ -372,9 +393,69 @@ textarea.materialize-textarea:focus:not([readonly]){
 	color:#9e893b;
 }
 
+.datepicker-date-display,.timepicker-digital-display,.fc-event, .fc-event-dot{
+	background-color: #dac164;
+}
+
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done,.timepicker-close{
+	color: #dac164;
+}
+
+.datepicker-table td.is-today{
+	color: #dac164!important;
+}
+
+.datepicker-table td.is-selected{
+	background-color: #dac164;
+}
+
+.datepicker-day-button:focus,.timepicker-tick.active, .timepicker-tick:hover{
+	background-color: rgba(218, 193, 100,0.4);
+}
+
+.dropdown-content li>a, .dropdown-content li>span{
+	color: #dac164;
+}
+
+.timepicker-canvas line{
+	stroke:#dac164;
+}
+
+.timepicker-canvas-bg{
+	fill:#dac164;
+}
+
+.timepicker-canvas-bearing{
+	fill: #dac164;
+}
+
+
 
 
 /*Fim Materialize OVER*/
+
+/*ínicio Calendar OVER*/
+.fc-button:focus{
+	background-color:#b3b3b3;
+}
+
+.fc-event{
+	border-color: rgb(79, 33, 40);
+}
+
+.fc-unthemed td.fc-today{
+	background:rgb(230, 195, 35);
+}
+
+.fc-content{
+	color:#000;
+}
+/*Fim Calendar OVER*/
+
+
+
+
+
 
 .inicio_noticias .card{
 	padding:0;
@@ -415,4 +496,15 @@ hr{
 
 .saque_container input{
 	border:1px solid #2f3035!important;
+}
+
+
+
+
+
+/*Agenda*/
+
+/*Coloco em 0 para quando eu dar um empty no cadastrar_evento_tipo_compromisso_select não fique uma linha muito grande vazia por causa da margem*/
+.cadastrar_evento_coachee_container{
+	margin: 0;
 }

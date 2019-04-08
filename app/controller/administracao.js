@@ -89,6 +89,16 @@ router.get('/coaching', function(req, res, next) {
 	});
 });
 
+router.get('/avisos', function(req, res, next) {
+	model.GetAvisos().then(data_avisos=>{
+		data.avisos = data_avisos
+		console.log('===================== DATA USUARIO ====================');
+		console.log(data);
+		console.log('=======================================================');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/avisos/avisos', data: data, usuario: req.session.usuario});
+	});	
+});
+
 router.get('/usuarios', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
@@ -129,6 +139,10 @@ router.get('/usuarios/criar', function(req, res, next) {
 
 router.get('/coaching/criar', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/coachings/cadastrar_coaching', data: data, usuario: req.session.usuario});
+});
+
+router.get('/avisos/criar', function(req, res, next) {
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/avisos/cadastrar_aviso', data: data, usuario: req.session.usuario});
 });
 
 /* Editar Administração */
@@ -175,6 +189,19 @@ router.get('/coaching/editar/:id', function(req, res, next) {
 	});
 });
 
+router.get('/aviso/editar/:id', function(req, res, next) {
+	var id = req.params.id;
+	console.log('selecionei a noticia no editar');
+	console.log(id);
+	console.log('_________________________________');
+	model.SelecionarAviso(id).then(data => {
+		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log(data);	
+		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/avisos/editar_aviso', data: data, usuario: req.session.usuario});
+	});
+});
+
 
 
 
@@ -200,16 +227,23 @@ router.post('/coaching/cadastrar/', function(req, res, next) {
 	});
 });
 
+router.post('/aviso/cadastrar/', function(req, res, next) {
+	POST = req.body;
+	model.CadastrarAviso(POST).then(data => {
+		res.json(data);
+	});
+});
+
 router.post('/usuarios/cadastrar/', function(req, res, next) {
 	POST = req.body;
 	var senha = Math.random().toString(36).substr(2, 8);
 	POST.senha = senha;
-
+	
 	model.VerificarSeTemLogin(POST.login).then(tem_login => {
 		console.log('ttttttttttt tem login ttttt');
 		console.log(tem_login);
 		console.log('ttttttttttttttttttttttttttt');
-
+		
 		if(tem_login == ''){
 			model.CadastrarUsuario(POST).then(data => {
 				var to = POST.email;
@@ -262,6 +296,13 @@ router.post('/coaching/atualizar/', function(req, res, next) {
 	});
 });
 
+router.post('/aviso/atualizar/', function(req, res, next) {
+	POST = req.body;	
+	model.AtualizarAviso(POST).then(data => {
+		res.json(data);
+	});
+});
+
 
 router.post('/usuarios/atualizar/', function(req, res, next) {
 	POST = req.body;
@@ -289,6 +330,15 @@ router.post('/usuarios/desativar', function(req, res, next) {
 	// Recebendo o valor do post
 	POST = req.body;
 	model.DesativarUsuario(POST).then(data=> {
+		res.json(data);
+	});
+});
+
+
+router.post('/aviso/desativar', function(req, res, next) {
+	// Recebendo o valor do post
+	POST = req.body;
+	model.DesativarAviso(POST).then(data=> {
 		res.json(data);
 	});
 });

@@ -1,0 +1,75 @@
+
+<div class="col s12 center coaching_container secondary">
+	<div class="titulo_inicio">Coaching</div>
+	
+	<a class="btn primary margin-t-10 ajax-load" href="/sistema/coaching/confirmar_coaching">
+		Confirmar Coaching Usuário
+	</a>
+	
+	<div class="card light">
+		
+		<table>
+			<thead>
+				<tr>
+					<th>Nome</th>
+					<th>Último Coaching</th>
+				</tr>
+			</thead>
+			<tbody>
+				
+				<%
+				if (typeof data.coachees_coaching != 'undefined' && data.coachees_coaching.length > 0) {
+					for (var i = 0; i < data.coachees_coaching.length; i++) { 
+						%>
+						
+						<tr>
+							<td>		
+								<%= data.coachees_coaching[i].nome %>
+							</td>
+							<td>							
+								<% if(data.coachees_coaching[i].titulo != null) { %>
+									
+									<%= data.coachees_coaching[i].titulo %>
+									
+									<%} else{ %>											
+										Não fez nenhuma Sessão	
+										<% } %>							
+									</td>
+									
+									
+								</tr>
+								
+								<%
+							}
+						}else{%>
+							<tr>
+								<td>Não há coachees no momento</td>
+							</tr>
+							<%}%>
+						</tbody>
+						
+					</table>
+				</div>
+
+				<div class="col s12">
+
+				<%
+				if (typeof data.coaching != 'undefined' && data.coaching.length > 0) {
+					for (var i = 0; i < data.coaching.length; i++) {  %>
+						
+						<div class="col s6">
+							<div class="card light darken-1">
+								<%= data.coaching[i].titulo %>
+							</div>
+						</div>
+						
+						<% }
+					} %>
+				
+				</div>
+				
+				
+				
+			</div>
+			
+			
