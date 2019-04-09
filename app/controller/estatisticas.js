@@ -13,16 +13,10 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
-		model.GetAporte(req.session.usuario.id).then(data_aporte_todal=>{
-			data.aporte_total= data_aporte_todal;
-			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-				data.aporte_primeiro = data_primeiro_aporte
-				console.log('===================== DATA USUARIO ====================');
-				console.log(data);
-				console.log('=======================================================');
-				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'estatisticas/estatisticas', data: data, usuario: req.session.usuario});
-			});
-		});
+		console.log('===================== DATA USUARIO ====================');
+		console.log(data);
+		console.log('=======================================================');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'estatisticas/estatisticas', data: data, usuario: req.session.usuario});
 	});
 });
 

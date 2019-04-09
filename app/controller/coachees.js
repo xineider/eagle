@@ -14,14 +14,12 @@ router.get('/', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
 		model.GetTodosCoachees(req.session.usuario.id).then(data_coachees=>{
-			data.coachees= data_coachees;
-			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-				data.aporte_primeiro = data_primeiro_aporte
-				console.log('===================== DATA USUARIO ====================');
-				console.log(data);
-				console.log('=======================================================');
-				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'coachees/coachees', data: data, usuario: req.session.usuario});
-			});
+			data.coachees= data_coachees;			
+			console.log('===================== DATA USUARIO ====================');
+			console.log(data);
+			console.log('=======================================================');
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'coachees/coachees', data: data, usuario: req.session.usuario});
+			
 		});
 	});
 });

@@ -33,29 +33,9 @@ class CoacheesModel {
 		});
 	}
 	
-	GetPrimeiroAporte(id_usuario) {
-		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro FROM caixa WHERE deletado = ? AND id_usuario = ? AND tipo= ? ORDER BY data_cadastro ASC LIMIT 1', [0,id_usuario,0]).then(data => {
-				resolve(data);
-			});
-		});
-	}
 
 	
-	
 
-
-
-
-	
-	
-	GetNoticias() {
-		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM noticias ORDER BY data_cadastro', []).then(data => {
-				resolve(data);
-			});
-		});
-	}
 	
 	
 	CadastrarCoachee(data) {

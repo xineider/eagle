@@ -53,7 +53,7 @@ router.get('/plus', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
 		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-			data.aporte_primeiro = data_primeiro_aporte
+			data.aporte_primeiro = data_primeiro_aporte;
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
@@ -66,7 +66,7 @@ router.get('/porcentagem', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
 		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-			data.aporte_primeiro = data_primeiro_aporte
+			data.aporte_primeiro = data_primeiro_aporte;
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
@@ -80,7 +80,7 @@ router.get('/coaching', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
 		model.GetCoachings().then(data_coaching=>{
-			data.coaching = data_coaching
+			data.coaching = data_coaching;
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
@@ -91,7 +91,7 @@ router.get('/coaching', function(req, res, next) {
 
 router.get('/avisos', function(req, res, next) {
 	model.GetAvisos().then(data_avisos=>{
-		data.avisos = data_avisos
+		data.avisos = data_avisos;
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');
@@ -111,6 +111,41 @@ router.get('/usuarios', function(req, res, next) {
 		});
 	});
 });
+
+
+router.get('/pedidos-saques', function(req, res, next) {
+	model.GetPedidosSaques().then(data_pedido_saque=>{
+		data.pedido_saque = data_pedido_saque;
+		console.log('===================== DATA USUARIO ====================');
+		console.log(data);
+		console.log('=======================================================');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-saques/pedidos_saques', data: data, usuario: req.session.usuario});
+	});
+});
+
+router.get('/porcentagem-comissao', function(req, res, next) {
+	model.GetPorcentagemComissao().then(data_porcentagem_comissao=>{
+		data.porcentagem_comissao = data_porcentagem_comissao;
+		console.log('===================== DATA USUARIO ====================');
+		console.log(data);
+		console.log('=======================================================');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/porcentagem-comissao/porcentagem_comissao', data: data, usuario: req.session.usuario});
+	});
+});
+
+
+router.get('/ganhos-mensais', function(req, res, next) {
+	model.GetGanhosMensais().then(data_ganho_mensais=>{
+		data.ganhos_mensais = data_ganho_mensais;
+		console.log('===================== DATA USUARIO ====================');
+		console.log(data);
+		console.log('=======================================================');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/ganhos-mensais/ganhos_mensais', data: data, usuario: req.session.usuario});
+	});
+});
+
+
+
 
 router.get('/alterar-coach', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
@@ -203,6 +238,32 @@ router.get('/aviso/editar/:id', function(req, res, next) {
 });
 
 
+router.get('/pedido-saque/editar/:id', function(req, res, next) {
+	var id = req.params.id;
+	console.log('selecionei o pedido-saque no editar');
+	console.log(id);
+	console.log('_________________________________');
+	model.SelecionarPedidoSaque(id).then(data => {
+		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log(data);	
+		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-saques/editar_pedido_saque', data: data, usuario: req.session.usuario});
+	});
+});
+
+
+router.get('/porcentagem-comissao/editar/:id', function(req, res, next) {
+	var id = req.params.id;
+	console.log('selecionei o porcentagem-comissao no editar');
+	console.log(id);
+	console.log('_________________________________');
+	model.SelecionarPorcentagemComissao(id).then(data => {
+		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log(data);	
+		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/porcentagem-comissao/editar_porcentagem_comissao', data: data, usuario: req.session.usuario});
+	});
+});
 
 
 
@@ -314,6 +375,28 @@ router.post('/usuarios/atualizar/', function(req, res, next) {
 	});
 });
 
+router.post('/pedido-saque/confirmar/', function(req, res, next) {
+	POST = req.body;
+	POST.confirmado = 1;
+	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log(POST);
+	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	model.AtualizarPedidoSaque(POST).then(data => {
+		res.json(data);
+	});
+});
+
+router.post('/porcentagem-comissao/atualizar/', function(req, res, next) {
+	POST = req.body;
+	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log(POST);
+	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	model.AtualizarPorcentagemComissao(POST).then(data => {
+		res.json(data);
+	});
+});
+
+
 
 
 /*Desativar*/
@@ -347,6 +430,16 @@ router.post('/coaching/desativar', function(req, res, next) {
 	// Recebendo o valor do post
 	POST = req.body;
 	model.DesativarCoaching(POST).then(data=> {
+		res.json(data);
+	});
+});
+
+router.post('/pedido-saque/desativar', function(req, res, next) {
+	POST = req.body;
+	console.log('XXXXXXXXXXX PEDIDO SAQUE DESATIVAR XXXXXXXXXXXXXXXX');
+	console.log(POST);
+	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+	model.DesativarPedidoSaque(POST).then(data=> {
 		res.json(data);
 	});
 });

@@ -1,0 +1,55 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Administração de Porcentagem de Comissão de Nível de Usuários</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+		
+		<div class="card light">
+			
+			<table>
+				<thead>
+					<tr>
+						<th>Nivel</th>
+						<th>Porcentagem</th>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<%
+					if (typeof data.porcentagem_comissao != 'undefined' && data.porcentagem_comissao.length > 0) {
+						for (var i = 0; i < data.porcentagem_comissao.length; i++) { %>
+							
+							<tr>
+								<td>
+									<a class="black-text" href="/sistema/administracao/porcentagem-comissao/editar/<%= data.porcentagem_comissao[i].id %>">
+										<%= data.porcentagem_comissao[i].nivel %>
+									</a> 
+								</td>
+								<td>
+									<a class="ajax-load black-text" href="/sistema/administracao/porcentagem-comissao/editar/<%= data.porcentagem_comissao[i].id %>">
+										<%= data.porcentagem_comissao[i].porcentagem %> %
+									</a>
+								</td>
+								
+							</tr>
+							
+							<%} 
+						}else{%>
+							<tr>
+								<td>Não existe porcentagem de comissão no momento</td>
+							</tr>
+							<%}%>
+						</tbody>
+						
+					</table>
+				</div>
+				
+				
+				
+				
+				
+				<%}else{%>
+					<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+					<%}%>
+					
+				</div>

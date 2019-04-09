@@ -237,6 +237,32 @@ $(document).on('ready', function () {
 			SubmitAjax(post, link, back,sucessMessage,sucessClass);
 		}
 	});
+
+	$(document).on('click', '.pedir-saque', function(e) {
+		e.preventDefault();
+		var form = $(this).parents('form');
+		var post = form.serializeArray();
+		var link = $(this).data('href');
+		var back = $(this).data('action');
+		var sucessMessage = 'Saque Pedido com Sucesso';
+		var sucessClass = 'green';
+
+		if (VerificarForm(form) == true) {
+			var caixa_saque = parseFloat($('#valor_caixa_saque').val());
+			var caixa_saque_total = parseFloat($('#valor_caixa_total_saque').val());
+
+			if(caixa_saque > caixa_saque_total){
+				AddErrorTexto($('#valor_caixa_saque'),'Valor Maior do que tem para Sacar!!');	
+			}else{
+				SubmitAjax(post, link, back,sucessMessage,sucessClass);
+			}
+
+
+			
+		}
+	});
+
+
 	
 	
 	$(document).on('change', 'input[type="file"]', function () {
@@ -256,6 +282,22 @@ $(document).on('ready', function () {
 		}else if($(this).val() == 0){
 			LoadTo('/sistema/agenda/lista-coachees', 'cadastrar_evento_coachee_container');
 		}
+		
+	});
+
+	$(document).on('change', '.perfil_saque_select', function(e) {
+		
+		console.log('----------------- VALOR DO SELECT ---------------');
+		console.log($(this).val());
+		console.log('-------------------------------------------------');
+
+		var valor_perfil = $('#valor_perfil-'+$(this).val()).val();
+		console.log(valor_perfil);
+
+
+
+		$('#valor_para_sacar').html(valor_perfil);
+		$('#valor_caixa_total_saque').val(valor_perfil);
 		
 	});
 	
@@ -517,14 +559,36 @@ function SubmitAjax(post, link, back,sucessMessage,sucessClass) {
 			adicionarLoader();
 		},
 		success: function(data) {
-			if (typeof data != undefined && data != 'error_alterar_senha_diferente') {
-				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
-			}
+			console.log('----------- DATA SUBMITAJAX ---------');
+			console.log(data);
+			console.log('-------------------------------------');
+			console.log(data != 'error_alterar_senha_diferente' );
+			console.log(data != 'error_saque_senha_diferente');
+			console.log(data != 'error_alterar_senha_diferente' || data != 'error_saque_senha_diferente' );
+			console.log(typeof data != undefined);
+
 			if(data == 'error_alterar_senha_diferente'){
-				AddErrorTexto($('#senha_atual'),'Senhas Atual Diferente!');				
-			}else{
+				AddErrorTexto($('#senha_atual'),'Senha Atual Diferente!');				
+			}else if(data == 'error_saque_senha_diferente'){
+				AddErrorTexto($('#senha_saque'),'Senha Não Confere!');	
+			}else if(data != undefined){
+				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
 				GoTo(back, true);
 			}
+
+			// if (typeof data != undefined && (data != 'error_alterar_senha_diferente' || data != 'error_saque_senha_diferente' )) {
+			// 	M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
+			// }
+			// if(data == 'error_alterar_senha_diferente'){
+			// 	AddErrorTexto($('#senha_atual'),'Senhas Atual Diferente!');				
+			// }
+			// if(data == 'error_saque_senha_diferente'){
+			// 	AddErrorTexto($('#senha_saque'),'Senha Não Confere!');	
+			// }
+			
+			// else{
+				
+			// }
 		},
 		error: function(xhr) { // if error occured
 		},

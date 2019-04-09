@@ -1,0 +1,47 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Pedido Saque</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+		
+		
+		<form method="POST" action="" enctype="multipart/form-data">
+			
+			
+			<div class="card light row">
+				<input type="hidden" name="id" value="<%= data[0].id %>">
+				
+				
+				<div class="input-field col s12">
+					<label for="titulo">Nome</label>
+					<input type="text" disabled value="<%= data[0].nome %>">
+				</div>
+				
+				<div class="input-field col s12">
+					<label for="titulo">Perfil</label>
+					<input type="text" disabled value="<%= data[0].plano %>">
+				</div>
+				
+				<div class="input-field col s12">
+					<label for="titulo">Valor</label>
+					<input type="text" disabled value="<%= data[0].valor %>">
+				</div>
+				
+				<button data-href="/sistema/administracao/pedido-saque/confirmar" data-action="/sistema/administracao/pedidos-saques/" class="btn secondary ajax-submit-update margin-b-10">
+					Aceitar Pedido <i class="far fa-save-o" aria-hidden="true"></i>
+				</button>
+				
+				
+				
+			</div>
+		</form>
+		
+		
+		
+		
+		
+		<%}else{%>
+			<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+			<%}%>
+			
+		</div>

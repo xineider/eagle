@@ -15,6 +15,13 @@ class FinanceiroModel {
 		});
 	}
 	
+	ConfirmarSenhaUsuario(id,senhaAtual) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM usuarios WHERE deletado = ? AND id = ? AND senha = ?', [0, id,senhaAtual]).then(data => {
+				resolve(data);
+			});
+		});
+	}
 	
 	
 	
@@ -25,8 +32,8 @@ class FinanceiroModel {
 			});
 		});
 	}
-
-
+	
+	
 	GetExtrato(id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.*,DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
@@ -35,6 +42,14 @@ class FinanceiroModel {
 			ELSE 0 END as mensagem \
 			FROM caixa as  a WHERE a.deletado = ? AND a.id_usuario = ? \
 			ORDER BY a.data_cadastro', [0,id_usuario]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+	CadastrarPedidoSaque(POST) {	
+		return new Promise(function(resolve, reject) {
+			helper.Insert('pedido_saque', POST).then(data => {
 				resolve(data);
 			});
 		});
@@ -55,7 +70,21 @@ class FinanceiroModel {
 			});
 		}
 		
-		
-		
-	}
-	module.exports = FinanceiroModel;
+		GetInvestimentos(id_usuario) {
+			return new Promise(function(resolve, reject) {
+				helper.Query('SELECT b.id, (\
+					(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ?) THEN a.valor ELSE 0 END)) - \
+					(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ?) THEN a.valor ELSE 0 END))\
+					) as caixa, b.nome \
+					FROM caixa as a \
+					LEFT JOIN planos as b ON a.id_plano = b.id\
+					GROUP BY a.id_plano ORDER BY b.id DESC', [0,0,id_usuario,1,0,id_usuario]).then(data => {
+						resolve(data);
+					});
+				});
+			}
+			
+			
+			
+		}
+		module.exports = FinanceiroModel;
