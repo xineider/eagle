@@ -24,8 +24,7 @@
 					
 					<%
 					if (typeof data.usuarios_admin != 'undefined' && data.usuarios_admin.length > 0) {
-						for (var i = 0; i < data.usuarios_admin.length; i++) { %>
-							
+						for (var i = data.usuarios_admin.length - 1; i >= 0; i--) { %>
 							<tr>
 								<td>
 									<a class="limitador_3_linhas ajax-load black-text break-all" href="/sistema/administracao/usuarios/editar/<%= data.usuarios_admin[i].id %>">
