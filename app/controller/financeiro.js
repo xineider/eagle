@@ -68,6 +68,7 @@ router.post('/pedir-saque/', function(req, res, next) {
 	console.log(POST);
 	POST.senha = control.Encrypt(POST.senha);
 	POST.id_usuario = req.session.usuario.id;
+	POST.tipo = 1;
 	console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
 	console.log(POST);
 	console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');

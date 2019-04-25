@@ -65,7 +65,7 @@
 									</a>
 								</td>
 								<td style="width: 30%;" class="center">
-									<% if(usuario.nivel == 4 && data.usuarios_admin[i].nivel != 5){ %>
+									<% if((usuario.nivel == 4 && data.usuarios_admin[i].nivel != 5) || usuario.nivel == 5){ %>
 									<a href="" style="font-size: 1.4em;">
 										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.usuarios_admin[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.usuarios_admin[i].nome %>'? " data-to="/sistema/administracao/usuarios/desativar" data-back="/sistema/administracao/usuarios"></i>
 									</a>

@@ -52,9 +52,12 @@ class IndexModel {
 	GetValorTotalCarteiraAplicacao(id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT ( \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ?) THEN valor ELSE 0 END)) + \
 				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ?) THEN valor ELSE 0 END)) - \
 				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ?) THEN valor ELSE 0 END))\
-				)as carteira_aplicacao FROM caixa', [0,0,id_usuario,1,0,id_usuario]).then(data => {
+				)as carteira_aplicacao,\
+				 (SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ?) THEN valor ELSE 0 END)) as carteira_rendimento \
+				 FROM caixa', [0,0,id_usuario,2,0,id_usuario,1,0,id_usuario,2,0,id_usuario]).then(data => {
 					console.log('RRRRRRRRRRRRRRR RESULTADO DA CARTEIRA TOTAL APLICACAO RRRRRRRRRRRRRRRRRRRRRRRRR');
 					console.log(data);
 					console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');

@@ -123,6 +123,26 @@ router.get('/pedidos-saques', function(req, res, next) {
 	});
 });
 
+router.get('/pedidos-aportes', function(req, res, next) {
+	model.GetPedidosAportes().then(data_pedido_aporte=>{
+		data.pedido_aporte = data_pedido_aporte;
+		console.log('===================== DATA USUARIO ====================');
+		console.log(data);
+		console.log('=======================================================');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-aportes/pedidos_aportes', data: data, usuario: req.session.usuario});
+	});
+});
+
+router.get('/pedidos-rendimentos', function(req, res, next) {
+	model.GetPedidosRendimentos().then(data_pedido_rendimento=>{
+		data.pedido_rendimento = data_pedido_rendimento;
+		console.log('===================== DATA USUARIO ====================');
+		console.log(data);
+		console.log('=======================================================');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-rendimentos/pedidos_rendimentos', data: data, usuario: req.session.usuario});
+	});
+});
+
 router.get('/porcentagem-comissao', function(req, res, next) {
 	model.GetPorcentagemComissao().then(data_porcentagem_comissao=>{
 		data.porcentagem_comissao = data_porcentagem_comissao;
@@ -248,6 +268,33 @@ router.get('/pedido-saque/editar/:id', function(req, res, next) {
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-saques/editar_pedido_saque', data: data, usuario: req.session.usuario});
+	});
+});
+
+
+router.get('/pedido-aporte/editar/:id', function(req, res, next) {
+	var id = req.params.id;
+	console.log('selecionei o pedido-aporte no editar');
+	console.log(id);
+	console.log('_________________________________');
+	model.SelecionarPedidoAporte(id).then(data => {
+		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log(data);	
+		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-aportes/editar_pedido_aporte', data: data, usuario: req.session.usuario});
+	});
+});
+
+router.get('/pedido-rendimento/editar/:id', function(req, res, next) {
+	var id = req.params.id;
+	console.log('selecionei o pedido-rendimento no editar');
+	console.log(id);
+	console.log('_________________________________');
+	model.SelecionarPedidoRendimento(id).then(data => {
+		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log(data);	
+		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-rendimentos/editar_pedido_rendimento', data: data, usuario: req.session.usuario});
 	});
 });
 
@@ -386,6 +433,31 @@ router.post('/pedido-saque/confirmar/', function(req, res, next) {
 	});
 });
 
+router.post('/pedido-aporte/confirmar/', function(req, res, next) {
+	POST = req.body;
+	POST.confirmado = 1;
+	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log(POST);
+	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	model.AtualizarPedidoAporte(POST).then(data => {
+		res.json(data);
+	});
+});
+
+router.post('/pedido-rendimento/confirmar/', function(req, res, next) {
+	POST = req.body;
+	POST.confirmado = 1;
+	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log(POST);
+	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	model.AtualizarPedidoRendimento(POST).then(data => {
+		res.json(data);
+	});
+});
+
+
+
+
 router.post('/porcentagem-comissao/atualizar/', function(req, res, next) {
 	POST = req.body;
 	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
@@ -440,6 +512,27 @@ router.post('/pedido-saque/desativar', function(req, res, next) {
 	console.log(POST);
 	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 	model.DesativarPedidoSaque(POST).then(data=> {
+		res.json(data);
+	});
+});
+
+
+router.post('/pedido-aporte/desativar', function(req, res, next) {
+	POST = req.body;
+	console.log('XXXXXXXXXXX PEDIDO SAQUE DESATIVAR XXXXXXXXXXXXXXXX');
+	console.log(POST);
+	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+	model.DesativarPedidoAporte(POST).then(data=> {
+		res.json(data);
+	});
+});
+
+router.post('/pedido-rendimento/desativar', function(req, res, next) {
+	POST = req.body;
+	console.log('XXXXXXXXXXX PEDIDO SAQUE DESATIVAR XXXXXXXXXXXXXXXX');
+	console.log(POST);
+	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+	model.DesativarPedidoRendimento(POST).then(data=> {
 		res.json(data);
 	});
 });

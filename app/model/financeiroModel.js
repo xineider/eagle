@@ -49,7 +49,7 @@ class FinanceiroModel {
 
 	CadastrarPedidoSaque(POST) {	
 		return new Promise(function(resolve, reject) {
-			helper.Insert('pedido_saque', POST).then(data => {
+			helper.Insert('caixa', POST).then(data => {
 				resolve(data);
 			});
 		});
