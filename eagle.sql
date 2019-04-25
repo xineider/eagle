@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 09-Abr-2019 às 14:24
+-- Generation Time: 25-Abr-2019 às 02:57
 -- Versão do servidor: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -89,7 +89,8 @@ CREATE TABLE `caixa` (
   `id_usuario` int(11) NOT NULL,
   `id_plano` int(11) NOT NULL,
   `valor` double NOT NULL,
-  `tipo` tinyint(1) NOT NULL COMMENT '0 - aporte, 1 - saque',
+  `tipo` tinyint(1) NOT NULL COMMENT '0 - aporte, 1 - saque, 2 - rendimento',
+  `confirmado` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 - não confirmado, 1 - confirmado',
   `deletado` tinyint(4) NOT NULL DEFAULT '0',
   `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -98,16 +99,17 @@ CREATE TABLE `caixa` (
 -- Extraindo dados da tabela `caixa`
 --
 
-INSERT INTO `caixa` (`id`, `id_usuario`, `id_plano`, `valor`, `tipo`, `deletado`, `data_cadastro`) VALUES
-(1, 1, 1, 800, 0, 0, '2019-03-12 19:45:25'),
-(2, 1, 2, 1200, 0, 0, '2019-03-13 19:44:25'),
-(3, 1, 3, 200, 0, 0, '2019-03-14 19:44:25'),
-(4, 1, 4, 100, 0, 0, '2019-03-15 19:44:25'),
-(5, 1, 4, 80, 1, 0, '2019-03-15 19:44:25'),
-(6, 1, 2, 562, 1, 0, '2019-03-15 19:44:25'),
-(7, 7, 3, 1500, 0, 0, '2019-03-15 19:44:25'),
-(8, 8, 1, 5000, 0, 0, '2019-03-15 19:44:25'),
-(9, 10, 1, 780, 0, 0, '2019-03-15 19:44:25');
+INSERT INTO `caixa` (`id`, `id_usuario`, `id_plano`, `valor`, `tipo`, `confirmado`, `deletado`, `data_cadastro`) VALUES
+(1, 1, 1, 800, 0, 1, 0, '2019-03-12 19:45:25'),
+(2, 1, 2, 1200, 0, 1, 0, '2019-03-13 19:44:25'),
+(3, 1, 3, 200, 0, 1, 0, '2019-03-14 19:44:25'),
+(4, 1, 4, 100, 0, 1, 0, '2019-03-15 19:44:25'),
+(5, 1, 4, 80, 2, 1, 0, '2019-03-15 19:44:25'),
+(6, 1, 2, 562, 2, 0, 0, '2019-03-15 19:44:25'),
+(7, 7, 3, 1500, 0, 1, 0, '2019-03-15 19:44:25'),
+(8, 8, 1, 5000, 0, 1, 0, '2019-03-15 19:44:25'),
+(9, 10, 1, 780, 0, 0, 0, '2019-03-15 19:44:25'),
+(10, 1, 1, 800, 1, 0, 0, '2019-04-24 18:54:30');
 
 -- --------------------------------------------------------
 
@@ -291,31 +293,6 @@ INSERT INTO `noticias` (`id`, `id_usuario`, `titulo`, `descricao`, `arquivo`, `c
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `pedido_saque`
---
-
-CREATE TABLE `pedido_saque` (
-  `id` int(11) NOT NULL,
-  `id_usuario` int(11) NOT NULL,
-  `id_plano` int(11) NOT NULL,
-  `valor` double NOT NULL,
-  `confirmado` tinyint(4) NOT NULL DEFAULT '0' COMMENT '0 - Não Confirmado , 1 - Confirmado',
-  `deletado` tinyint(4) NOT NULL DEFAULT '0',
-  `data_cadastro` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-
---
--- Extraindo dados da tabela `pedido_saque`
---
-
-INSERT INTO `pedido_saque` (`id`, `id_usuario`, `id_plano`, `valor`, `confirmado`, `deletado`, `data_cadastro`) VALUES
-(1, 1, 1, 500, 0, 0, '2019-04-08 02:46:53'),
-(2, 1, 4, 12, 0, 0, '2019-04-08 19:00:27'),
-(3, 1, 1, 500, 0, 0, '2019-04-08 19:50:05');
-
--- --------------------------------------------------------
-
---
 -- Estrutura da tabela `planos`
 --
 
@@ -384,12 +361,12 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `id_coach`, `login`, `senha`, `imagem`, `nome`, `email`, `telefone`, `hash_login`, `nivel`, `deletado`, `data_cadastro`) VALUES
-(1, 2, 'coachee', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Arnaldo Lima', 'marcos@eagle.com.br', '(51) 99999-9999', '5406904d7747fe81947557b603a50c61', 0, 0, '2017-11-30 18:49:14'),
+(1, 2, 'coachee', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Arnaldo Lima', 'marcos@eagle.com.br', '(51) 99999-9999', '25e9c291c7cafdc04cd8f6d081aad16d', 0, 0, '2017-11-30 18:49:14'),
 (2, 0, 'coach', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coach Professor', 'renato@eagle.com.br', '(51) 99999-9999', '0ea409ccb60e7dc0cc6af9ecb0154a7a', 1, 0, '2017-11-30 18:49:14'),
 (3, 0, 'manager', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Manager Gerente', 'renato@eagle.com.br', '(51) 99999-9999', 'f476e0ce532d5e931de23b93f668f61f', 2, 0, '2017-11-30 18:49:14'),
 (4, 0, 'investidor', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Investidor Aluno', 'renato@eagle.com.br', '(51) 99999-9999', 'f476e0ce532d5e931de23b93f668f61f', 3, 0, '2017-11-30 18:49:14'),
 (5, 0, 'coordenacao', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coordenacao Manutencao', 'renato@eagle.com.br', '(51) 99999-9999', '8962b0df9f7c1d09a65ec0268104e4da', 4, 0, '2017-11-30 18:49:14'),
-(6, 0, 'admin', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Admin Administrador2', 'renato@eagle.com.br2', '(51) 99999-9999', '9d76b282a8b64a0596a6d8917b0248f3', 5, 0, '2017-11-30 18:49:14'),
+(6, 0, 'admin', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Admin Administrador2', 'renato@eagle.com.br2', '(51) 99999-9999', 'f893cc892b427a45617725e17e6d6834', 5, 0, '2017-11-30 18:49:14'),
 (7, 2, 'sandra', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Sandra Pimentel', 'sandra@eagle.com.br', '(51) 99999-9999', '3fb438d36f0252da3edde7df54bab91f', 0, 0, '2017-11-30 18:49:14'),
 (8, 2, 'mauricio', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Mauricio da Silva', 'mauricio@eagle.com.br', '(51) 99999-9999', '56bcc1ef68210a808f697c291e67d5e6', 0, 0, '2017-11-30 18:49:14'),
 (9, 0, 'coach2', '745536f0652656dae49565e5fa26152b', '/assets/imgs/user-padrao.jpg', 'Coach Professor2', 'renato@eagle.com.br', '(51) 99999-9999', 'f5f417d53edcff4454c29019bf6d1151', 1, 0, '2017-11-30 18:49:14'),
@@ -488,14 +465,6 @@ ALTER TABLE `noticias`
   ADD KEY `id_usuario` (`id_usuario`);
 
 --
--- Indexes for table `pedido_saque`
---
-ALTER TABLE `pedido_saque`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_plano` (`id_plano`);
-
---
 -- Indexes for table `planos`
 --
 ALTER TABLE `planos`
@@ -541,7 +510,7 @@ ALTER TABLE `avisos`
 -- AUTO_INCREMENT for table `caixa`
 --
 ALTER TABLE `caixa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `coaching`
 --
@@ -577,11 +546,6 @@ ALTER TABLE `log`
 --
 ALTER TABLE `noticias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `pedido_saque`
---
-ALTER TABLE `pedido_saque`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `planos`
 --
