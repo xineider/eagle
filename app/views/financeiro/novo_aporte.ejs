@@ -1,55 +1,75 @@
 
-	<div class="col s12 center novo_aporte_container">
+<div class="col s12 center novo_aporte_container">
 	<div class="titulo_inicio">Novo Aporte</div>
 
+	<form method="POST" action="" enctype="multipart/form-data">
 
-	<div class="col s6">
+		<div class="col s6">
 
-		<div class="row">
-			<div class="col s12">
-				Valor:
-				<div class="input-field inline">
-					<input name="valor">
-				</div>		
+
+			<div class="row">
+				<div class="col s12">
+					Perfil
+					<div class="input-field">
+						<select class="browser-default perfil_saque_select" name="id_plano" class="">
+							<%
+							if (typeof data.planos != 'undefined' && data.planos.length > 0) {
+								for (var i = 0; i < data.planos.length; i++) { %>
+								<option value="<%= data.planos[i].id %>"> <%= data.planos[i].nome %></option>				
+								<% }
+							} %>
+						</select>
+					</div>
+				</div>				
+			</div>
 			
-			</div> 
+
+			<div class="row">
+				<div class="col s12">
+					Valor:
+					<div class="input-field inline">
+						<input name="valor">
+					</div>		
+
+				</div> 
+			</div>
+
+			<div class="row">
+				<div class="col s12">
+					Senha:
+					<div class="input-field inline">
+						<input name="senha" type="password">
+					</div>
+
+				</div>
+			</div>
 		</div>
 
-		<div class="row">
-		<div class="col s12">
-		Senha:
-		<div class="input-field inline">
-			<input name="senha" type="password">
+		<div class="card col s6 light">
+			<div class="titulo_inicio">Dados para Novo Aporte</div>
+			<p><strong>Banco:</strong>Banco da Eagle</p>
+			<p><strong>Agência:</strong>0000-00</p>
+			<p><strong>Conta:</strong>0000000000</p>
+			<p><strong>Código para Identificação:</strong>0000000</p>
+
+
 		</div>
-	
-	</div>
-	</div>
-	</div>
 
-	<div class="card col s6 light">
-	<div class="titulo_inicio">Dados para TED</div>
-	<p><strong>Banco:</strong>Banco da Eagle</p>
-	<p><strong>Agência:</strong>0000-00</p>
-	<p><strong>Conta:</strong>0000000000</p>
-	<p><strong>Código para Identificação:</strong>0000000</p>
+		<div class="">
+			<a class="btn light">Enviar Comprovante</a>
 
-	
-	</div>
-
-	<div class="">
-		<a class="btn light">Enviar Comprovante</a>
-
-	</div>
-
-	<div class="row padding-b-10 margin-t-10">
-		<div class="col s12">
-			<a class="btn primary">Novo Aporte</a>
 		</div>
-	
-	</div>
+
+		<div class="row padding-b-10 margin-t-10">
+			<div class="col s12">
+				<button class="btn primary pedir-aporte" data-href="/sistema/financeiro/pedir-aporte" data-action="/sistema/financeiro/">Novo Aporte</button>
+			</div>
+		</div>
+
+	</form>
 
 
 
-	</div>
+</div>
 
 

@@ -17,12 +17,12 @@
 			<tbody>
 				<%
 				if (typeof data.investimentos != 'undefined' && data.investimentos.length > 0) {
-					for (var i = data.investimentos.length - 1; i >= 0; i--) { %>
+					for (var i =0; i < data.investimentos.length; i++) { %>
 						<tr>
 							<td><%= data.investimentos[i].nome %></td>
-							<td>R$<%= data.investimentos[i].caixa %></td>
-							<td>1° aporte</td>
-							<td>rendimento</td>
+							<td>R$<%= data.investimentos[i].aporte_total %></td>
+							<td><%= data.investimentos[i].data_cadastro %></td>
+							<td>R$<%= data.investimentos[i].rendimento %></td>
 						</tr>
 						<%}
 					}else{%>

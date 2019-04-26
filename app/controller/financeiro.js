@@ -48,15 +48,12 @@ router.get('/saque', function(req, res, next) {
 });
 
 router.get('/novo_aporte', function(req, res, next) {
-	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
-		data.perfil = data_perfil;
-		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-			data.aporte_primeiro = data_primeiro_aporte
-			console.log('===================== DATA USUARIO ====================');
-			console.log(data);
-			console.log('=======================================================');
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'financeiro/novo_aporte', data: data, usuario: req.session.usuario});
-		});
+	model.GetNomePlanos().then(data_planos=>{
+		data.planos = data_planos
+		console.log('===================== DATA USUARIO ====================');
+		console.log(data);
+		console.log('=======================================================');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'financeiro/novo_aporte', data: data, usuario: req.session.usuario});
 	});
 });
 

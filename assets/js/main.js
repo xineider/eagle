@@ -85,12 +85,12 @@ $(document).on('ready', function () {
 				var valorData = data_entregada.getDate()+'/' + mes + '/' + data_entregada.getFullYear();
 				$('#data_final_compromisso').val(valorData);
 			} 
-		  });
+		});
 		
 		// var imagem_usuario_perfil = $('#imagem-usuario-config');
 		
 		// if(typeof imagem_usuario_perfil != undefined){
-		
+			
 		// 	console.log('iiiiiiiiiiiiiiiiii imagem_usuario_perfil iiiiiiiiiiiiiiiii');
 		// 	console.log(imagem_usuario_perfil);
 		// 	console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
@@ -262,6 +262,22 @@ $(document).on('ready', function () {
 		}
 	});
 
+	$(document).on('click', '.pedir-aporte', function(e) {
+		e.preventDefault();
+		var form = $(this).parents('form');
+		var post = form.serializeArray();
+		var link = $(this).data('href');
+		var back = $(this).data('action');
+		var sucessMessage = 'Aporte Pedido com Sucesso';
+		var sucessClass = 'green';
+
+		if (VerificarForm(form) == true) {
+			SubmitAjax(post, link, back,sucessMessage,sucessClass);
+			
+		}
+		
+	});
+
 
 	
 	
@@ -326,14 +342,14 @@ $(document).on('ready', function () {
 		e.preventDefault();
 		var nome = $(this).data('nome');
 		$('.uploads').append('\
-		<div class="col s12 m6 center-align relative pai">\
-		<div class="card-panel grey lighten-4">\
-		<input type="hidden" name="tarefa_arquivo[arquivo][]" value="'+nome+'">\
-		<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
-		<b>Arquivo: '+nome+' <br>\
-		</div>\
-		</div>\
-		');
+			<div class="col s12 m6 center-align relative pai">\
+			<div class="card-panel grey lighten-4">\
+			<input type="hidden" name="tarefa_arquivo[arquivo][]" value="'+nome+'">\
+			<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
+			<b>Arquivo: '+nome+' <br>\
+			</div>\
+			</div>\
+			');
 		$('.modal').modal('close');
 	});
 	
@@ -500,13 +516,13 @@ function FormatInputs(focus) {
 			var valorData = data_entregada.getDate()+'/' + mes + '/' + data_entregada.getFullYear();
 			$('#data_final_compromisso').val(valorData);
 		} 
-	  });
+	});
 	
 	
 	// var imagem_usuario_perfil = $('#imagem-usuario-config');
 	
 	// if(typeof imagem_usuario_perfil != undefined){
-	
+		
 	// 	console.log('iiiiiiiiiiiiiiiiii imagem_usuario_perfil iiiiiiiiiiiiiiiii');
 	// 	console.log(imagem_usuario_perfil);
 	// 	console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
@@ -759,14 +775,14 @@ function UploadFile(isso) {
 		success: function (data) {
 			$('.file-path').val('');
 			isso.closest('.row').append('\
-			<div class="col s12 m6 center-align relative pai">\
-			<div class="card-panel grey lighten-4">\
-			<input type="hidden" name="tarefa_arquivo[arquivo][]" value="'+data+'">\
-			<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
-			<b>Arquivo: '+data+' <br>\
-			</div>\
-			</div>\
-			');
+				<div class="col s12 m6 center-align relative pai">\
+				<div class="card-panel grey lighten-4">\
+				<input type="hidden" name="tarefa_arquivo[arquivo][]" value="'+data+'">\
+				<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
+				<b>Arquivo: '+data+' <br>\
+				</div>\
+				</div>\
+				');
 			console.debug(data);
 		},
 		error: function (xhr, e, t) {

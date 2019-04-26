@@ -15,76 +15,75 @@
 							<%
 							if (typeof data.investimento != 'undefined' && data.investimento.length > 0) {
 								for (var i = 0; i < data.investimento.length; i++) { %>
-									<option value="<%= data.investimento[i].id %>"> <%= data.investimento[i].nome %></option>				
-									<% }
-								} %>
-							</select>
-						</div>
-					</div>
-					
-				</div>
-				
-				
-				<div class="row">
-					<div class="col s12">
-						Valor:
-						<div class="input-field inline">
-							<input name="valor" id="valor_caixa_saque">
-						</div>
-						
-						<div>Valor para Sacar: R$<span id="valor_para_sacar"><%= data.investimento[0].caixa %></span></div>
-						<input type="hidden" id="valor_caixa_total_saque" value="<%= data.investimento[0].caixa %>">
-						
-					</div> 
-				</div>
-
-				<div class="perfil_hide_valores hide">
-						<%
-						if (typeof data.investimento != 'undefined' && data.investimento.length > 0) {
-							for (var i = 0; i < data.investimento.length; i++) { %>
-							
-									<input disabled type="hidden" id="valor_perfil-<%= data.investimento[i].id %>" value="<%= data.investimento[i].caixa %>">
-						
-								<% } 
+								<option value="<%= data.investimento[i].id %>"> <%= data.investimento[i].nome %></option>				
+								<% }
 							} %>
-				</div>
-				
-				
-				<div class="row">
-					<div class="col s12">
-						Senha:
-						<div class="input-field inline">
-							<input name="senha" type="password" id="senha_saque">
-						</div>	
+						</select>
 					</div>
 				</div>
 				
+			</div>
+			
+			
+			<div class="row">
 				<div class="col s12">
-					<p>
-						<label>
-							<input type="checkbox" checked disabled>
-							<span>Utilizar os Dados Bancários das Configurações</span>
-						</label>
-					</p>
-					
-				</div>
-				
-				<div class="col s12">
-					* Só é Possível pedir saque nos dias 1 à 5 do começo de cada mês.
-					
-				</div>
-				<div class="row padding-b-10">
-					<div class="col s12">
-						<button class="btn primary pedir-saque" data-href="/sistema/financeiro/pedir-saque" data-action="/sistema/financeiro/">Pedir Saque</button>
+					Valor:
+					<div class="input-field inline">
+						<input name="valor" id="valor_caixa_saque">
 					</div>
+					
+					<div>Valor para Sacar: R$<span id="valor_para_sacar"><%= data.investimento[0].caixa %></span></div>
+					<input type="hidden" id="valor_caixa_total_saque" value="<%= data.investimento[0].caixa %>">
+					
+				</div> 
+			</div>
+
+			<div class="perfil_hide_valores hide">
+				<%
+				if (typeof data.investimento != 'undefined' && data.investimento.length > 0) {
+					for (var i = 0; i < data.investimento.length; i++) { %>
+					
+					<input disabled type="hidden" id="valor_perfil-<%= data.investimento[i].id %>" value="<%= data.investimento[i].caixa %>">
+					
+					<% } 
+				} %>
+			</div>
+			
+			
+			<div class="row">
+				<div class="col s12">
+					Senha:
+					<div class="input-field inline">
+						<input name="senha" type="password" id="senha_saque">
+					</div>	
 				</div>
+			</div>
+			
+			<div class="col s12">
+				<p>
+					<label>
+						<input type="checkbox" checked disabled>
+						<span>Utilizar os Dados Bancários das Configurações</span>
+					</label>
+				</p>
 				
-			</form>
+			</div>
 			
+			<div class="col s12">
+				* Só é Possível pedir saque nos dias 1 à 5 do começo de cada mês.
+				
+			</div>
+			<div class="row padding-b-10">
+				<div class="col s12">
+					<button class="btn primary pedir-saque" data-href="/sistema/financeiro/pedir-saque" data-action="/sistema/financeiro/">Pedir Saque</button>
+				</div>
+			</div>
 			
-		</div>
+		</form>
+		
 		
 	</div>
 	
-	
-	
+</div>
+
+

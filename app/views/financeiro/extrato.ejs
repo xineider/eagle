@@ -10,6 +10,7 @@
 				<tr>
 					<th>Data</th>
 					<th>Operação</th>
+					<th>Plano</th>
 					<th>Valor</th>
 				</tr>
 			</thead>
@@ -21,7 +22,8 @@
 						<tr>
 							<td><%= data.extrato[i].data_cadastro %></td>
 							<td><%= data.extrato[i].mensagem %></td>
-							<td>R$ <%= data.extrato[i].valor %></td>
+							<td><%= data.extrato[i].nome_plano %></td>
+							<td style="width: 30%;">R$ <%= data.extrato[i].valor %></td>
 						</tr>
 						
 						<% } }%>
