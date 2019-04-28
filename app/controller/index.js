@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 			data.noticias = data_noticias;
 			model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
 				data.carteira_aplicacao = data_valor_carteira;;			
-				console.log('------------- DATA NOTICIAS INICIO------------------');
+				console.log('--------------- DATA  INICIO------------------');
 				console.log(data);
 				console.log('----------------------------------------------');
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
