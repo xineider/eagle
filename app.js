@@ -38,7 +38,7 @@ app.use(require('express-is-ajax-request'));
 // INICIANDO SESSION
 app.set('trust proxy', 1); // trust first proxy
 app.use(session({
-  secret: 'sistemapazze',
+  secret: 'eagleapp',
   resave: true,
   saveUninitialized: true
 }));
