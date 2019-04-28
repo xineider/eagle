@@ -90,7 +90,6 @@ app.use("/assets", express.static(__dirname + '/assets'));
 
 app.use('/', login);
 app.use('/sistema', index);
-app.use('/sistema/inicio', index);
 app.use('/sistema/investimento', investimento);
 app.use('/sistema/financeiro', financeiro);
 app.use('/sistema/coaching', coaching);
@@ -126,10 +125,10 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-	if (typeof req.session.id_usuario != 'undefined' && req.session.id_usuario != 0) {
-  	res.render('error', { erro: 'Página não existente.', tipo_erro: '404' });
+  if (typeof req.session.id_usuario != 'undefined' && req.session.id_usuario != 0) {
+    res.render('error', { erro: 'Página não existente.', tipo_erro: '404' });
   } else {
-  	res.render('login/index', { erro: 'Página não existente, faça o login para acessar o sistema.', tipo_erro: '404' });
+    res.render('login/index', { erro: 'Página não existente, faça o login para acessar o sistema.', tipo_erro: '404' });
   }
 });
 // app.listen(3000);

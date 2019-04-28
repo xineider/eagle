@@ -35,7 +35,7 @@
                     <%} %>
                     
                     <div class="col s12">
-                        <a class="ajax-load" href="/sistema/inicio/todos_avisos">Ver Todos Avisos</a>
+                        <a class="ajax-load" href="/sistema/todos_avisos">Ver Todos Avisos</a>
                     </div>
                     
                     <%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
@@ -70,7 +70,7 @@
                                             <div class="descricao_inicio_noticia limitador_3_linhas center">
                                                 <%= data.noticias[i].descricao %>
                                             </div>
-                                            <a class="ajax-load" href="/sistema/inicio/ver_noticia/<%= data.noticias[i].id %>">
+                                            <a class="ajax-load" href="/sistema/ver_noticia/<%= data.noticias[i].id %>">
                                                 Leia mais ...
                                             </a>                            
                                         </div>
@@ -87,7 +87,7 @@
                                 <%}%>
                                 
                                 <div class="col s12">
-                                    <a class="ajax-load" href="/sistema/inicio/todas_noticias">Ver Todas Notícias</a>
+                                    <a class="ajax-load" href="/sistema/todas_noticias">Ver Todas Notícias</a>
                                 </div>
                                 
                                 <%if(usuario.nivel == 4 || usuario.nivel == 5){ %>

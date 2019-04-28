@@ -25,22 +25,28 @@ router.post('/', function(req, res, next) {
 	POST = req.body;
 	POST.senha = control.Encrypt(POST.senha);
 	model.Login(POST).then(data => {
-	  if (data.length > 0) {
-			req.session.usuario = {};
-			req.session.usuario.id = data[0].id;
-			req.session.usuario.hash_login = data[0].hash_login;
-			req.session.usuario.nivel = data[0].nivel;
-			res.redirect('/sistema');
-	  } else {
-  		res.render('login/index', { erro: 'Login ou senha incorreto(s).', tipo_erro: 'login' });
-	  }
+		if (data.length > 0) {
+			model.VerificarDeletado(data[0].id).then(dataDeletado => {
+				if(dataDeletado == ''){
+					req.session.usuario = {};
+					req.session.usuario.id = data[0].id;
+					req.session.usuario.hash_login = data[0].hash_login;
+					req.session.usuario.nivel = data[0].nivel;
+					res.redirect('/sistema');
+				}else{
+					res.render('login/index', { erro: 'Usuário banido do aplicativo pela Administração', tipo_erro: 'login', usuario: req.session.usuario });
+				}
+			});
+		}else {
+			res.render('login/index', { erro: 'Login ou senha incorreto(s).', tipo_erro: 'login', usuario: req.session.usuario });
+		}
 	});
 });
 
 /* GET pagina de login. */
 router.get('/logout', function(req, res, next) {
 	req.session.destroy(function(err) {
-  	console.log(err);
+		console.log(err);
 	});
 	res.render('login/index', {});
 });

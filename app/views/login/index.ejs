@@ -53,13 +53,13 @@
 						if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
 							%>
 							<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
-								<span class="white-text">Usuário ou senha incorreto(s), tente novamente.</span>
+								<span class="white-text"><%= erro %></span>
 							</div>
 							<%
 						} else if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == 'login') {
 							%>
 							<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
-								<span class="white-text">Usuário ou senha incorreto(s), tente novamente.</span>
+								<span class="white-text"><%= erro %></span>
 							</div>
 							<%
 						}
@@ -75,8 +75,7 @@
 							
 							
 						</div>
-						<p><a href="#" class="white-text">Esqueceu sua senha?</a></p>
-						<p><a href="#" class="white-text">Cadastre-se</a></p>
+						<p>	<a class="white-text modal-trigger underline" href="#modalforgot">Esqueceu sua senha?</a></p>
 						<div class="center-align">
 							<button class="btn light waves-effect waves-teal waves-light">
 								Acessar
@@ -90,6 +89,10 @@
 			html {
 				height: 100%;
 				min-height: 100%;
+			}
+
+			.underline{
+				text-decoration: underline;
 			}
 			
 			
@@ -221,7 +224,7 @@
 							}
 						});
 					});
-					
+
 				});
 			</script>
 		</main>

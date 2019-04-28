@@ -11,10 +11,10 @@ app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
-	model.GetNoticias().then(data_noticias=>{
-		data.noticias = data_noticias;
-		model.GetAvisos(req.session.usuario.nivel).then(data_avisos => {
-			data.avisos = data_avisos;			
+	model.GetAvisos(req.session.usuario.nivel).then(data_avisos => {
+		data.avisos = data_avisos;		
+		model.GetNoticias().then(data_noticias=>{
+			data.noticias = data_noticias;
 			model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
 				data.carteira_aplicacao = data_valor_carteira;;			
 				console.log('------------- DATA NOTICIAS INICIO------------------');
@@ -65,9 +65,17 @@ router.get('/todos_avisos', function(req, res, next) {
 
 /* POST enviando o login para verificação. */
 router.post('/', function(req, res, next) {
-	model.GetNoticias().then(data => {
-		res.json(data);
+	// Recebendo o valor do post
+	POST = req.body;
+	model.Login(POST).then(data => {
+		if (data.length > 0) {
+			req.session.id_usuario = data[0].id;
+			res.redirect('/sistema');
+		} else {
+			res.render('login/index', { erro: 'Login ou senha incorreto(s).', tipo_erro: 'login' });
+		}
 	});
+	
 });
 
 module.exports = router;
