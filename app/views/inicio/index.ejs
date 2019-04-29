@@ -3,11 +3,11 @@
     
     <div class="equal-columns">
         <div class="col s6 center">
-            <div class="titulo_inicio gold-text">Carteira de Aplicação</div>
+            <div class="titulo_inicio gold-text bold">Carteira de Aplicação</div>
             <div class="porcentagem_aplicacoes_inicio white-text">R$<%= data.carteira_aplicacao[0].carteira_aplicacao %></div>
         </div>
         <div class="col s6 center">
-            <div class="titulo_inicio gold-text">Carteira de Rendimentos</div>
+            <div class="titulo_inicio gold-text bold">Carteira de Rendimentos</div>
             <div class="porcentagem_aplicacoes_inicio white-text">R$<%= data.carteira_aplicacao[0].carteira_rendimento %></div>
         </div>
     </div>
@@ -34,13 +34,13 @@
                     <div>Não há avisos agora!</div>
                     <%} %>
                     
-                    <div class="col s12">
-                        <a class="ajax-load" href="/sistema/todos_avisos">Ver Todos Avisos</a>
+                    <div class="col s12 margin-t-10">
+                        <a class="ajax-load btn light w12em" href="/sistema/todos_avisos" style="padding-left: 0; padding-right: 0;">Ver Todos Avisos</a>
                     </div>
                     
                     <%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
-                        <div class="col s12 margin-b-10">
-                            <a class="btn light ajax-load" href="/sistema/administracao/avisos">Editar Avisos</a>
+                        <div class="col s12 margin-b-10 margin-t-10">
+                            <a class="btn light ajax-load w12em" href="/sistema/administracao/avisos">Editar Avisos</a>
                         </div>
                         <%}%>
                         
@@ -86,13 +86,13 @@
                                 
                                 <%}%>
                                 
-                                <div class="col s12">
-                                    <a class="ajax-load" href="/sistema/todas_noticias">Ver Todas Notícias</a>
+                                <div class="col s12 margin-t-10">
+                                    <a class="ajax-load btn light w12em" href="/sistema/todas_noticias" style="padding-right: 0;padding-left: 0;margin-bottom: 10px;">Ver Todas Notícias</a>
                                 </div>
                                 
                                 <%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
-                                    <div class="col s12 margin-b-10">
-                                        <a class="btn light ajax-load" href="/sistema/administracao/noticias">Editar Notícias</a>
+                                    <div class="col s12 margin-b-10 margin-t-10">
+                                        <a class="btn light ajax-load w12em" href="/sistema/administracao/noticias">Editar Notícias</a>
                                     </div>
                                     <%}%>
                                     

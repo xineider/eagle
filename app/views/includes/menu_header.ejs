@@ -47,7 +47,7 @@ if (usuario.nivel == 0 || usuario.nivel == 3 ) { %>
 <% } %>
 
 <%
-if (usuario.nivel == 1) { %>
+if (usuario.nivel == 1 || usuario.nivel == 2) { %>
 
 
 <li>
@@ -112,11 +112,6 @@ if (usuario.nivel == 4 || usuario.nivel == 5) { %>
 	</a>
 </li>
 <li>
-	<a class="ajax-load" href="/sistema/coaching">
-		<i class="fas fa-book-reader"></i> Coaching
-	</a>
-</li>
-<li>
 	<a class="ajax-load" href="/sistema/simulador">
 		<i class="fas fa-chart-line"></i> Simulador
 	</a>
@@ -143,7 +138,7 @@ if (usuario.nivel == 4 || usuario.nivel == 5) { %>
 
 
 <li>
-	<a class="ajax-load-back" href="/login-again" onclick="return confirm('Você deseja sair?');">
+	<a class="logout" href="/logout" onclick="return confirm('Você deseja sair?');">
 		<i class="fas fa-sign-out-alt"></i> Sair
 	</a>
 </li>

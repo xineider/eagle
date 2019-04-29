@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
 				});
 			});
 		});
-	}else if(req.session.usuario.nivel == 1){
+	}else if(req.session.usuario.nivel == 1 || req.session.usuario.nivel == 2){
 		model.GetCoacheesComCoaching(req.session.usuario.id).then(data_coachees_coaching=>{
 			data.coachees_coaching = data_coachees_coaching;
 			model.GetTodosCoaching().then(data_coaching=>{
