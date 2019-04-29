@@ -36,9 +36,9 @@ class ComissoesModel {
 
 
 
-	GetNoticias() {
+	GetComissoes(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM noticias ORDER BY data_cadastro', []).then(data => {
+			helper.Query('SELECT *, DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro FROM comissao WHERE deletado = ? AND id_usuario = ? ', [0,id_usuario]).then(data => {
 				resolve(data);
 			});
 		});
