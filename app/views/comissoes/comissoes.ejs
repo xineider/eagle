@@ -17,13 +17,13 @@
 				if (typeof data.comissoes != 'undefined' && data.comissoes.length > 0) {
 					for (var i = data.comissoes.length - 1; i >= 0; i--) { %>
 					<tr>
-						<td>R$<%= data.comissoes[i].valor %></td>
+						<td><%= data.comissoes[i].valor %></td>
 						<td><%= data.comissoes[i].data_cadastro %></td>
 					</tr>
 					
 					<%}}else{ %>
 					<tr>
-						<td>Você não possuí nenhuma Comissão!</td>
+						<td>Você não possuí nenhum Coachee!</td>
 					</tr>
 					
 					<%}%>
