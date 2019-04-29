@@ -89,4 +89,36 @@ router.post('/pedir-saque/', function(req, res, next) {
 	});
 });
 
+
+router.post('/pedir-aporte/', function(req, res, next) {
+	POST = req.body;
+	console.log(POST);
+	POST.senha = control.Encrypt(POST.senha);
+	POST.id_usuario = req.session.usuario.id;
+	POST.tipo = 0;
+	console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
+	console.log(POST);
+	console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+
+	
+	model.ConfirmarSenhaUsuario(req.session.usuario.id,POST.senha).then(data_usuario =>{
+		delete POST.senha;
+
+		console.log('UUUUUUUUUUUUUUUU DATA USUARIO UUUUUUUUUUUUUUUUU');
+		console.log(data_usuario);
+		console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
+
+		if (data_usuario.length > 0){
+			model.CadastrarPedidoAporte(POST).then(data_pedido_saque => {
+				res.json(data_pedido_saque);
+			});
+		}else{
+			res.json('error_saque_senha_diferente');
+		}
+
+	});
+});
+
+
+
 module.exports = router;
