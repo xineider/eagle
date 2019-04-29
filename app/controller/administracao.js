@@ -204,6 +204,13 @@ router.get('/alterar-coach', function(req, res, next) {
 	});
 });
 
+router.get('/lista-coachs', function(req, res, next) {
+	model.GetCoach(req.session.usuario.id).then(data_coach=>{
+		data.coach = data_coach;
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/lista-coach/lista_coach', data: data, usuario: req.session.usuario});
+	});
+});
+
 
 
 /*Cadastrar Administração */
@@ -213,7 +220,10 @@ router.get('/noticias/criar', function(req, res, next) {
 });
 
 router.get('/usuarios/criar', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/usuarios/cadastrar_usuario', data: data, usuario: req.session.usuario});
+	model.GetCoach().then(data_coach=>{
+		data.coach = data_coach;
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/usuarios/cadastrar_usuario', data: data, usuario: req.session.usuario});
+	});
 });
 
 router.get('/coaching/criar', function(req, res, next) {
@@ -264,11 +274,15 @@ router.get('/usuarios/editar/:id', function(req, res, next) {
 	console.log('Selecionei o usuario no editar');
 	console.log(id);
 	console.log('_________________________________');
-	model.SelecionarUsuario(id).then(data => {
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
-		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/usuarios/editar_usuario', data: data, usuario: req.session.usuario});
+	model.GetCoach().then(data_coach=>{
+		data.coach = data_coach;
+		model.SelecionarUsuario(id).then(data_usuario => {
+			data.usuario = data_usuario;
+			console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+			console.log(data);	
+			console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/usuarios/editar_usuario', data: data, usuario: req.session.usuario});
+		});
 	});
 });
 
@@ -444,6 +458,14 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 	POST = req.body;
 	var senha = Math.random().toString(36).substr(2, 8);
 	POST.senha = senha;
+
+	if(POST.id_coach == undefined){
+		POST.id_coach = 0;
+	}
+
+	console.log('POOOOOOSSSSSSSSSTTTTTTTTTTTTTTTT');
+	console.log(POST);
+	console.log('POOOOOOSSSSSSSSSTTTTTTTTTTTTTTTT');
 
 	model.VerificarSeTemLogin(POST.login).then(tem_login => {
 		console.log('ttttttttttt tem login ttttt');

@@ -301,6 +301,23 @@ $(document).on('ready', function () {
 		
 	});
 
+
+	$(document).on('change', '.cadastrar_usuario_nivel_select', function(e) {
+		
+		console.log('----------------- VALOR DO SELECT ---------------');
+		console.log($(this).val());
+		console.log('-------------------------------------------------');
+		
+		if($(this).val() != 0){
+			$('.cadastrar_usuario_coach_container').empty();
+		}else if($(this).val() == 0){
+			LoadTo('/sistema/administracao/lista-coachs', 'cadastrar_usuario_coach_container');
+		}
+		
+	});
+
+	
+
 	$(document).on('change', '.perfil_saque_select', function(e) {
 		
 		console.log('----------------- VALOR DO SELECT ---------------');

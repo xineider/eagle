@@ -1,61 +1,70 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
-	<div class="col s12 center estatisticas_container secondary">
-		<div class="titulo_inicio">Estatísticas</div>
+<div class="col s12 center estatisticas_container secondary">
+	<div class="titulo_inicio">Estatísticas</div>
+
+	<div class="overlay_blur"></div>
+	<div class="overlay_box">
+		<div class="overlay_descricao">
+			Você não possuí dados suficientes para visualizar essa página!
+		</div>
+		<div class="center margin-t-10">
+			<a class="btn light ajax-load" href="/sistema">OK</a> 
+		</div>
+	</div>
+
+	<div class="col s12 card light">
+		<p>Rendimento por Mês(em %)</p>
+		<canvas id="primeiroChart" width="400" height="400"></canvas>
+	</div>
+
+	<div class="col s12 card light">
+		<p>Quantidade de Usuários</p>
+
+		<canvas id="segundoChart" width="400" height="400"></canvas>
+
+	</div>
 
 
-			<div class="col s12 card light">
-			<p>Rendimento por Mês(em %)</p>
-			<canvas id="primeiroChart" width="400" height="400"></canvas>
-			</div>
-
-			<div class="col s12 card light">
-				<p>Quantidade de Usuários</p>
-
-				<canvas id="segundoChart" width="400" height="400"></canvas>
-			
-			</div>
-		
 
 
-		
 
-		<script>
+	<script>
 		var ctx = document.getElementById('primeiroChart').getContext('2d');
 		var primeiroChart = new Chart(ctx, {
-		type: 'bar',
-		data: {
-			labels: ['Set', 'Out', 'Nov', 'Dez', 'Jan', 'Fev'],
-			datasets: [{
-				label: 'Rendimento por Mês',
-				data: [2.3, 2.35, 2.40, 2.3, 2.5, 2.65],
-				backgroundColor: [
+			type: 'bar',
+			data: {
+				labels: ['Set', 'Out', 'Nov', 'Dez', 'Jan', 'Fev'],
+				datasets: [{
+					label: 'Rendimento por Mês',
+					data: [2.3, 2.35, 2.40, 2.3, 2.5, 2.65],
+					backgroundColor: [
 					'rgb(54, 158, 10)',
 					'rgb(10, 42, 158)',
 					'rgb(54, 158, 10)',
 					'rgb(10, 42, 158)',
 					'rgb(54, 158, 10)',
 					'rgb(10, 42, 158)'
-				],
-				borderColor: [
+					],
+					borderColor: [
 					'rgb(54, 158, 10)',
 					'rgb(10, 42, 158)',
 					'rgb(54, 158, 10)',
 					'rgb(10, 42, 158)',
 					'rgb(54, 158, 10)',
 					'rgb(10, 42, 158)'
-				],
-				borderWidth: 1
-			}]
-		},
-		options: {
-			scales: {
-				yAxes: [{
-					ticks: {
-						beginAtZero: true
-					}
+					],
+					borderWidth: 1
 				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
 			}
-		}
 		});
 
 
@@ -89,9 +98,9 @@
 
 
 
-		</script>
+	</script>
 
 
 
-	</div>
+</div>
 

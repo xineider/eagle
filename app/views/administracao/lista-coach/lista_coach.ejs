@@ -1,0 +1,11 @@
+
+
+	<select name="id_coach">
+		<%
+		if (typeof data.coach != 'undefined' && data.coach.length > 0) {
+			for (var i = 0; i < data.coach.length; i++) { %>
+				<option value=" <%= data.coach[i].id %>"> <%= data.coach[i].nome %></option>				
+				<% }
+			} %>
+		</select>
+		<label for="id_coach">Coach</label>	

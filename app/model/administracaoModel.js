@@ -164,6 +164,17 @@ class AdministracaoModel {
 			});
 		});
 	}
+
+	GetCoach() {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM usuarios WHERE deletado = ? AND (nivel = ? OR nivel = ?)', [0,1,2]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+
+	
 	
 	GetCoachings() {
 		return new Promise(function(resolve, reject) {
