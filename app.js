@@ -89,6 +89,7 @@ app.use("/assets", express.static(__dirname + '/assets'));
 // console.log(path.join(__dirname, 'assets'));
 
 app.use('/', login);
+app.use('/login', login);
 app.use('/sistema', index);
 app.use('/sistema/investimento', investimento);
 app.use('/sistema/financeiro', financeiro);

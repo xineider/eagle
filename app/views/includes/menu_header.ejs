@@ -143,7 +143,7 @@ if (usuario.nivel == 4 || usuario.nivel == 5) { %>
 
 
 <li>
-	<a href="/logout">
+	<a class="ajax-load" href="/login" onclick="return confirm('Você deseja sair?');">
 		<i class="fas fa-sign-out-alt"></i> Sair
 	</a>
 </li>
