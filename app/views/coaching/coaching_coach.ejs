@@ -28,48 +28,61 @@
 							</td>
 							<td>							
 								<% if(data.coachees_coaching[i].titulo != null) { %>
-									
-									<%= data.coachees_coaching[i].titulo %>
-									
-									<%} else{ %>											
-										Não fez nenhuma Sessão	
-										<% } %>							
-									</td>
-									
-									
-								</tr>
-								
-								<%
-							}
-						}else{%>
-							<tr>
-								<td>Não há coachees no momento</td>
-							</tr>
-							<%}%>
-						</tbody>
-						
-					</table>
-				</div>
 
-				<div class="col s12">
+								<%= data.coachees_coaching[i].titulo %>
 
-				<%
-				if (typeof data.coaching != 'undefined' && data.coaching.length > 0) {
-					for (var i = 0; i < data.coaching.length; i++) {  %>
-						
-						<div class="col s6">
-							<div class="card light darken-1">
-								<%= data.coaching[i].titulo %>
-							</div>
-						</div>
-						
-						<% }
-					} %>
-				
+								<%} else{ %>											
+								Não fez nenhuma Sessão	
+								<% } %>							
+							</td>
+
+
+						</tr>
+
+						<%
+					}
+				}else{%>
+				<tr>
+					<td>Não há coachees no momento</td>
+				</tr>
+				<%}%>
+			</tbody>
+
+		</table>
+	</div>
+
+	<div class="col s12">
+
+		<%
+		var j = 0;
+		if (typeof data.coaching != 'undefined' && data.coaching.length > 0) {
+			for (var i = 0; i < data.coaching.length; i++) {  
+				if(j<data.coaching.length-1){
+					j = i+1;	
+				}
+				%>
+
+
+				<% if(i%2 == 0){%>
+				<div class="equal-columns">
+					<div class="col s6 light content-columns">
+						<%= data.coaching[i].titulo %>
+					</div>
+					<%if(i != j){%>
+					<div class="col s6 light content-columns">
+						<%= data.coaching[j].titulo %>
+					</div>
+					<%}%>
 				</div>
-				
-				
-				
-			</div>
-			
-			
+				<%}%>
+
+				<% 
+			}
+		} %>
+
+	</div>
+
+
+
+</div>
+

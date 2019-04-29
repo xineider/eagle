@@ -263,6 +263,20 @@ main{
 	height: 100%;
 }
 
+.equal-columns .content-columns{
+	padding: 0;
+}
+
+.equal-columns .content-columns:nth-child(odd) + .content-columns:nth-child(even){
+	margin: 0 0 5px 10px;
+}
+
+.equal-columns .content-columns:nth-child(odd){
+	margin: 0 10px 5px 0;
+}
+
+/*	margin: 0 10px 5px 0;*/
+
 table td {
 	border-radius: 0 !important;
 }
@@ -278,8 +292,19 @@ table td {
 	word-break: break-all;
 }
 
+
+.gold{
+	background: rgb(255,192,19);
+	background: -moz-linear-gradient(top, rgba(255,192,19,1) 0%, rgba(247,209,40,1) 32%, rgba(247,209,40,1) 62%, rgba(255,192,19,1) 100%);
+	background: -webkit-linear-gradient(top, rgba(255,192,19,1) 0%,rgba(247,209,40,1) 32%,rgba(247,209,40,1) 62%,rgba(255,192,19,1) 100%);
+	background: linear-gradient(to bottom, rgba(255,192,19,1) 0%,rgba(247,209,40,1) 32%,rgba(247,209,40,1) 62%,rgba(255,192,19,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffc013', endColorstr='#ffc013',GradientType=0 );
+	color: #000;
+}
+
+
 .gold-text{
-	color: #dccf91;
+	color: rgba(249,212,45,1);
 }
 
 
@@ -312,6 +337,9 @@ table td {
 	color: #0165bc;
 }
 
+.w12em{
+	width: 12em;
+}
 
 
 /*Ínicio*/
@@ -328,7 +356,7 @@ table td {
 
 
 .avisos_container .aviso_content{
-	border-bottom:1px solid #f4f5f8;
+	border-bottom:1px solid rgba(255,192,19,1);
 	margin:5px 0;
 	padding: 5px 0;
 }
