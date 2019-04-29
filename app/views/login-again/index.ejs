@@ -1,0 +1,305 @@
+
+<html class="light">
+<body class="login">
+
+	<div class="loader none">
+		<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+	</div>
+	<!-- Esqueceu Senha -->
+	<div id="modalforgot" class="modal">
+		<div class="modal-content">
+			<p><b>Recuperação de Senha</b></p>
+			<form id="recupera-senha" method="POST" action="" onsubmit="">
+				<div class="row">
+					<div class="col s12 input-field">
+						<label>Digite seu email</label>
+						<input type="email" name="email">
+					</div>
+
+					<div class="col s12 error_container_resend hide">
+						<div class="error_resend_mensagem red white-text" style="margin-bottom: 10px;padding: 5px;text-align: center;"></div>
+					</div>
+					<div class="col s12">
+						<button class="btn primary white-text resend-pass" style="width: 100%;">
+							Confirmar
+						</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<main>
+		<section>
+			<div>
+				<form id="entra-sistema" method="POST" action="" >
+					<div class="box">
+						<div class="icon center-align">
+							<img src="assets/imgs/logo.png">
+						</div>
+
+
+						<div class="error_box hide center-align">
+							<div class="card-panel">
+								<span class="white-text"></span>
+							</div>
+
+						</div>
+
+
+						<div class="input-field">
+							<input type="text" name="login" id="login" class="validate" autocomplete="on" placeholder="Usuário">
+						</div>
+						<div class="input-field">
+							<input type="password" name="senha" id="senha" class="validate" autocomplete="on" placeholder="Senha">
+						</div>
+
+						<p>
+							<a class="white-text modal-trigger" href="#modalforgot">Esqueceu sua senha?</a>
+						</p>
+
+						<div class="center-align">
+							<button class="btn light waves-effect waves-light">
+								Acessar
+							</button>
+						</div>
+
+					</div>
+
+				</form>
+			</div>
+		</section>
+	</main>
+
+
+ <style type="text/css">
+    html {
+      height: 100%;
+      min-height: 100%;
+    }
+
+
+    .login main{
+      margin-top: 0;
+    }
+
+    .login .icon {
+      font-size: 6em;
+
+    }
+
+    .login .icon img{
+      max-height: 400px;
+      max-width: 100%;
+    }
+
+
+    .login .box {
+      width: 80%;
+      margin: auto;
+      padding: 15px;
+      box-sizing: content-box;
+      background:#2f3035;
+      border-radius:5px;
+      margin-top: 20px;
+
+    }
+
+    .input-field .prefix.active {
+      color: #1976D2 ;
+    }
+
+
+    .login .box .input-field input{
+      background: #fff;
+      padding-left: 5px;
+      border-bottom: 0;
+      color: #000;
+      height:50px;
+    }
+
+    .login .box .input-field input::placeholder{
+      color:#000;
+    }
+
+    .login .box .input-field label{
+      margin-left: 5px;
+      color: #fff;
+    }
+
+    input:not([type]):focus:not([readonly]), 
+    input[type=text]:not(.browser-default):focus:not([readonly]), 
+    input[type=password]:not(.browser-default):focus:not([readonly]), 
+    input[type=email]:not(.browser-default):focus:not([readonly]), 
+    input[type=url]:not(.browser-default):focus:not([readonly]), 
+    input[type=time]:not(.browser-default):focus:not([readonly]), 
+    input[type=date]:not(.browser-default):focus:not([readonly]), 
+    input[type=datetime]:not(.browser-default):focus:not([readonly]), 
+    input[type=datetime-local]:not(.browser-default):focus:not([readonly]), 
+    input[type=tel]:not(.browser-default):focus:not([readonly]), 
+    input[type=number]:not(.browser-default):focus:not([readonly]), 
+    input[type=search]:not(.browser-default):focus:not([readonly]), 
+    textarea.materialize-textarea:focus:not([readonly]){
+      border-bottom: 0;
+      background:#fff;
+      box-shadow:1px 1px 1px 0 #000;
+    }
+
+    input:not([type]):focus:not([readonly])+label, 
+    input[type=text]:not(.browser-default):focus:not([readonly])+label, 
+    input[type=password]:not(.browser-default):focus:not([readonly])+label, 
+    input[type=email]:not(.browser-default):focus:not([readonly])+label, 
+    input[type=url]:not(.browser-default):focus:not([readonly])+label, 
+    input[type=time]:not(.browser-default):focus:not([readonly])+label, 
+    input[type=date]:not(.browser-default):focus:not([readonly])+label, 
+    input[type=datetime]:not(.browser-default):focus:not([readonly])+label, 
+    input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, 
+    input[type=tel]:not(.browser-default):focus:not([readonly])+label, 
+    input[type=number]:not(.browser-default):focus:not([readonly])+label, 
+    input[type=search]:not(.browser-default):focus:not([readonly])+label, 
+    textarea.materialize-textarea:focus:not([readonly])+label{
+      color: #000;
+    }
+
+    .input-field>label:not(.label-icon).active{
+      -webkit-transform: translateY(-18px) scale(0.8);
+      transform: translateY(-18px) scale(0.8);
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+    }
+  </style>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    $(document).on('ready', function () {
+
+      $('#entra-sistema').on('submit', function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var post = form.serializeArray();
+        var naoremoveloader = 0;
+
+        $.ajax({
+          method: 'POST',
+          async: true,
+          data: post,
+          url: $('body').data('site') + '/sistema/api/entrar_sistema/',
+          beforeSend: function(request) {
+            request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+            request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
+            request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+            adicionarLoader();
+          },
+          success: function(data) {
+            console.log('@@@@@@@@@@@@@@@@@@@@ ENTRA SISTEMA @@@@@@@@@@@@@@@@@@');
+            console.log(data);
+            console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+            console.log('UUUUUUUU URL UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
+            console.log($('body').data('site') + '/sistema/api/entrar_sistema/');
+            console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
+
+            if(data.result == 'redirect'){
+              console.log('data.result == redirect');
+              console.log('data.result == redirect');
+              console.log('data.result == redirect');
+              GoTo($('body').data('site') + '/sistema', true);
+              naoremoveloader = 1;
+            }else{
+              $('.error_box').removeClass('hide');
+              $('.error_box').find('span').text(data.mensagem);
+
+              var cardpanel = $('.error_box').find('.card-panel');
+
+              if(data.erro == 'warn'){
+                /* Limpar o alert caso ele já está ativo*/            
+                cardpanel.addClass('red darken-1');
+              }
+            }
+          },
+          error: function(xhr) {  
+          },
+          complete: function(data) {
+            if(naoremoveloader == 0){
+              removerLoader();
+            }
+          }
+        });
+
+      });
+
+      $('#recupera-senha').on('submit', function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var post = form.serializeArray();
+
+        $.ajax({
+          method: 'POST',
+          async: true,
+          data: post,
+          url: $('body').data('site') + '/sistema/api/recuperar/senha',
+          success: function(data) {
+            if(data == "email_nao_cadastrado"){
+              $('.error_container_resend').removeClass('hide');
+              $('.error_container_resend').find('.error_resend_mensagem').html('Não existe ninguém cadastrado com este e-mail!');
+            }else{
+              M.toast({html:'<div class="center-align" style="width:100%;">Senha enviada para seu email com sucesso!!!</div>', displayLength:7000, classes: 'rounded green'});
+              $('.modal').modal('close');
+            }
+          },
+          error: function(xhr) { // if error occured
+            alert("Error, contate o administrador ou reinicie a pagina.");
+          },
+          complete: function() {
+          }
+        });
+      });
+
+      function GoTo(link, state) {
+        $.ajax({
+          method: "GET",
+          async: true,
+          url: link,
+          beforeSend: function() {
+            console.log('LINK DO GOTO!!!!!!!!!!!!!!!!!!!!!!!');
+            console.log(link);
+          },
+          success: function(data) {
+            console.log('TTTTTTTTTTTTTTT DATA DO GOTO TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
+            console.log(data);
+            console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
+            $('body').html(data);
+            $('body').removeClass('login');
+            $('body').addClass('row primary');
+          },
+          error: function(xhr) { 
+
+            alert("Error, contate o administrador ou reinicie a pagina.");
+          },
+          complete: function() {
+            removerLoader();
+            $('.material-tooltip').remove();
+            $('.tooltipped').tooltip({delay: 50});
+          }
+        });
+        if (state == true) {
+          window.history.pushState('Sistema Quorp', 'Sistema Quorp', link);
+        }
+      }
+    });
+
+
+  </script>
+
+
+
+
+
+
+
+</body>
+</html>

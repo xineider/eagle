@@ -10,6 +10,7 @@ var Control = require('./app/controller/control.js');
 const fileUpload = require('express-fileupload');
 
 var login = require('./app/controller/login');
+var loginagain = require('./app/controller/login-again');
 var index = require('./app/controller/index');
 var api = require('./app/controller/api');
 var perfil = require('./app/controller/perfil');
@@ -89,7 +90,7 @@ app.use("/assets", express.static(__dirname + '/assets'));
 // console.log(path.join(__dirname, 'assets'));
 
 app.use('/', login);
-app.use('/login', login);
+app.use('/login-again', loginagain);
 app.use('/sistema', index);
 app.use('/sistema/investimento', investimento);
 app.use('/sistema/financeiro', financeiro);
