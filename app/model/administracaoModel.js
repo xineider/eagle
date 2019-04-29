@@ -95,6 +95,8 @@ class AdministracaoModel {
 	}
 
 
+
+
 	SelecionarPorcentagemComissao(id) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT *,  \
@@ -107,9 +109,27 @@ class AdministracaoModel {
 			});
 	}
 
+	SelecionarCaixa(id) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*, DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
+				(SELECT nome FROM planos as b WHERE b.id = a.id_plano) as plano,\
+				(SELECT nome FROM usuarios as c WHERE c.id = a.id_usuario) as nome_usuario\
+				FROM caixa as a WHERE a.deletado = ? and id = ?', [0,id]).then(data => {
+					resolve(data);
+				});
+			});
+	}
 
-
-
+	SelecionarComissao(id) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*, DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
+				(SELECT nome FROM usuarios as c WHERE c.id = a.id_usuario) as nome_usuario\
+				FROM comissao as a WHERE a.deletado = ? and id = ?', [0,id]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+	
 	
 
 	
@@ -156,6 +176,14 @@ class AdministracaoModel {
 	GetAvisos() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT *,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro FROM avisos WHERE deletado = ? ORDER BY data_cadastro ', [0]).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+	GetPlanos() {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM planos WHERE deletado = ?', [0]).then(data => {
 				resolve(data);
 			});
 		});
@@ -241,6 +269,34 @@ class AdministracaoModel {
 			});
 	}
 
+	GetCaixa() {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*, DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
+				(SELECT nome FROM planos as b WHERE b.id = a.id_plano) as plano,\
+				(SELECT nome FROM usuarios as c WHERE c.id = a.id_usuario) as nome_usuario\
+				FROM caixa as a WHERE a.deletado = ?', [0]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
+	GetComissoes() {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*, DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
+				(SELECT nome FROM usuarios as c WHERE c.id = a.id_usuario) as nome_usuario\
+				FROM comissao as a WHERE a.deletado = ?', [0]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
+
+	
+
+
+
+
+
 
 	
 	CadastrarNoticia(POST) {
@@ -275,6 +331,23 @@ class AdministracaoModel {
 			});
 		});
 	}
+
+	CadastrarCaixa(POST) {	
+		return new Promise(function(resolve, reject) {
+			helper.Insert('caixa', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+	CadastrarComissao(POST) {	
+		return new Promise(function(resolve, reject) {
+			helper.Insert('comissao', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+	
 	
 	
 	AtualizarNoticia(POST) {
@@ -343,6 +416,22 @@ class AdministracaoModel {
 			});
 		});
 	}
+
+	AtualizarCaixa(POST) {
+		return new Promise(function(resolve, reject) {
+			helper.Update('caixa', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+	AtualizarComissao(POST) {
+		return new Promise(function(resolve, reject) {
+			helper.Update('comissao', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
 	
 	
 	
@@ -403,7 +492,23 @@ class AdministracaoModel {
 			});
 		});
 	}
+
+	DesativarCaixa(POST) {
+		return new Promise(function(resolve, reject) {
+			helper.Desativar('caixa', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
 	
+
+	DesativarComissao(POST) {
+		return new Promise(function(resolve, reject) {
+			helper.Desativar('comissao', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
 	
 	
 	

@@ -1,0 +1,92 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Administração da Caixa</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+
+	<a class="btn light ajax-load" href="/sistema/administracao/caixa/criar">Cadastrar Caixa</a>
+
+	<div class="card light">
+
+		<table>
+			<thead>
+				<tr>
+					<th>Valor</th>
+					<th>Usuário</th>
+					<th>Tipo</th>
+					<th>Plano</th>
+					<th>Data Cadastro</th>
+					<th class="center">Ação</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<%
+				if (typeof data.caixa != 'undefined' && data.caixa.length > 0) {
+					for (var i = data.caixa.length - 1; i >= 0; i--) { %>
+
+
+					<tr>
+						<td>
+							<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/caixa/editar/<%= data.caixa[i].id %>">
+								R$<%= data.caixa[i].valor %>
+							</a> 
+						</td>
+						<td>
+							<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/caixa/editar/<%= data.caixa[i].id %>">
+								<%= data.caixa[i].nome_usuario %> 
+							</a>
+						</td>
+						<td>
+							<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/caixa/editar/<%= data.caixa[i].id %>">
+
+								<% switch(data.caixa[i].tipo){
+									case 0:%>
+									Aporte
+									<% break;
+									case 1:%>
+									Saque
+									<%break;
+									case 2:%>
+									Rendimento
+									<%break;}%>
+								</a>
+							</td>
+							<td>
+								<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/caixa/editar/<%= data.caixa[i].id %>">
+									<%= data.caixa[i].plano %>
+								</a>
+							</td>
+							<td>
+								<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/caixa/editar/<%= data.caixa[i].id %>">
+									<%= data.caixa[i].data_cadastro %> 
+								</a>
+							</td>
+							<td style="width: 30%;" class="center">
+								<a href="" style="font-size: 1.4em;">
+									<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.caixa[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.caixa[i].valor %>'? " data-to="/sistema/administracao/caixa/desativar" data-back="/sistema/administracao/caixa"></i>
+								</a>
+							</td>
+
+						</tr>
+
+						<%} 
+					}else{%>
+					<tr>
+						<td>Não há caixa no momento</td>
+					</tr>
+					<%}%>
+				</tbody>
+
+			</table>
+		</div>
+
+
+
+
+
+		<%}else{%>
+		<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+		<%}%>
+
+	</div>

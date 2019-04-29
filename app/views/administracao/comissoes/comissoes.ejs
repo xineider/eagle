@@ -1,0 +1,72 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Administração de Comissões</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+
+	<a class="btn light ajax-load" href="/sistema/administracao/comissao/criar">Cadastrar Comissão</a>
+
+	<div class="card light">
+
+		<table>
+			<thead>
+				<tr>
+					<th>Valor</th>
+					<th>Usuário</th>
+					<th>Data Cadastro</th>
+					<th class="center">Ação</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<%
+				if (typeof data.comissao != 'undefined' && data.comissao.length > 0) {
+					for (var i = data.comissao.length - 1; i >= 0; i--) { %>
+
+
+					<tr>
+						<td>
+							<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/comissao/editar/<%= data.comissao[i].id %>">
+								R$<%= data.comissao[i].valor %>
+							</a> 
+						</td>
+						<td>
+							<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/comissao/editar/<%= data.comissao[i].id %>">
+								<%= data.comissao[i].nome_usuario %> 
+							</a>
+						</td>
+
+
+						<td>
+							<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/comissao/editar/<%= data.comissao[i].id %>">
+								<%= data.comissao[i].data_cadastro %> 
+							</a>
+						</td>
+						<td style="width: 30%;" class="center">
+							<a href="" style="font-size: 1.4em;">
+								<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.comissao[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.comissao[i].valor %>'? " data-to="/sistema/administracao/comissao/desativar" data-back="/sistema/administracao/comissoes"></i>
+							</a>
+						</td>
+
+					</tr>
+
+					<%} 
+				}else{%>
+				<tr>
+					<td>Não há comissões no momento</td>
+				</tr>
+				<%}%>
+			</tbody>
+
+		</table>
+	</div>
+
+
+
+
+
+	<%}else{%>
+	<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+	<%}%>
+
+</div>

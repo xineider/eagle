@@ -1,0 +1,52 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Editar Comissão</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+
+
+	<form method="POST" action="" enctype="multipart/form-data">
+
+
+		<div class="card light row">
+			<input type="hidden" name="id" value="<%= data.comissao[0].id %>">
+
+			<div class="input-field col s12">
+				<label for="valor">Valor</label>
+				<input class="validate" type="text" name="valor" value="<%= data.comissao[0].valor %>">
+			</div>
+
+			<div class="input-field col s12">
+				<span>Usuário</span>	
+				<select name="id_usuario" class="browser-default">
+					<%
+					if (typeof data.usuario != 'undefined' && data.usuario.length > 0) {
+						for (var i = 0; i < data.usuario.length; i++) { %>
+						<option value="<%= data.usuario[i].id %>" <%= data.comissao[0].id_usuario == data.usuario[i].id ? 'selected' : '' %>> 
+							<%= data.usuario[i].nome %>								
+						</option>				
+						<% }
+					} %>
+				</select>
+
+			</div>
+
+
+			<button data-href="/sistema/administracao/comissao/atualizar" data-action="/sistema/administracao/comissoes/" class="btn secondary ajax-submit-update margin-b-10">
+				Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+			</button>
+
+
+
+		</div>
+	</form>
+
+
+
+
+
+	<%}else{%>
+	<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+	<%}%>
+
+</div>

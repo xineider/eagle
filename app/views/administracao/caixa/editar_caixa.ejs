@@ -1,0 +1,88 @@
+<div class="col s12 center">
+	<div class="titulo_inicio">Editar Caixa</div>
+	
+	
+	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+
+
+	<form method="POST" action="" enctype="multipart/form-data">
+
+
+		<div class="card light row">
+			<input type="hidden" name="id" value="<%= data.caixa[0].id %>">
+
+			<div class="input-field col s12">
+				<label for="valor">Valor</label>
+				<input class="validate" type="text" name="valor" value="<%= data.caixa[0].valor %>">
+			</div>
+
+			<div class="input-field col s12">
+				<span>Usuário</span>	
+				<select name="id_usuario" class="browser-default">
+					<%
+					if (typeof data.usuario != 'undefined' && data.usuario.length > 0) {
+						for (var i = 0; i < data.usuario.length; i++) { %>
+						<option value="<%= data.usuario[i].id %>" <%= data.caixa[0].id_usuario == data.usuario[i].id ? 'selected' : '' %>> 
+							<%= data.usuario[i].nome %>								
+						</option>				
+						<% }
+					} %>
+				</select>
+
+			</div>
+
+			<div class="input-field col s12">
+				<span>Tipo</span>	
+				<select name="tipo" class="browser-default">
+					<option value="0" <%= data.caixa[0].tipo == 0 ? 'selected' : '' %>>Aporte</option>
+					<option value="1" <%= data.caixa[0].tipo == 1 ? 'selected' : '' %>>Saque</option>
+					<option value="2" <%= data.caixa[0].tipo == 2 ? 'selected' : '' %> >Rendimento</option>
+				</select>
+
+			</div>
+
+
+			<div class="input-field col s12">
+				<span>Plano</span>	
+				<select name="id_plano" class="browser-default">
+					<%
+					if (typeof data.plano != 'undefined' && data.plano.length > 0) {
+						for (var i = 0; i < data.plano.length; i++) { %>
+						<option value=" <%= data.plano[i].id %>" <%= data.caixa[0].id_plano == data.plano[i].id ? 'selected' : '' %>> 
+							<%= data.plano[i].nome %>								
+						</option>				
+						<% }
+					} %>
+				</select>
+				
+			</div>
+
+			<div class="input-field col s12">
+				<p>
+					<label>
+						<input type="checkbox" name="confirmado" value="1" <%= data.caixa[0].confirmado == 1 ? 'checked': ''%> />
+						<span style="color: #161616;">Confirmado</span>
+					</label>
+				</p>
+			</div>
+
+
+
+			<button data-href="/sistema/administracao/caixa/atualizar" data-action="/sistema/administracao/caixa/" class="btn secondary ajax-submit-update margin-b-10">
+				Salvar <i class="far fa-save-o" aria-hidden="true"></i>
+			</button>
+
+
+
+		</div>
+	</form>
+
+
+
+
+
+	<%}else{%>
+	<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+	<%}%>
+
+</div>

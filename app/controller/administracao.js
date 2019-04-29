@@ -133,6 +133,30 @@ router.get('/pedidos-aportes', function(req, res, next) {
 	});
 });
 
+
+router.get('/caixa', function(req, res, next) {
+	model.GetCaixa().then(data_caixa=>{
+		data.caixa = data_caixa;
+		console.log('===================== DATA USUARIO ====================');
+		console.log(data);
+		console.log('=======================================================');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/caixa/caixa', data: data, usuario: req.session.usuario});
+	});
+});
+
+router.get('/comissoes', function(req, res, next) {
+	model.GetComissoes().then(data_comissao=>{
+		data.comissao = data_comissao;
+		console.log('===================== DATA USUARIO ====================');
+		console.log(data);
+		console.log('=======================================================');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/comissoes/comissoes', data: data, usuario: req.session.usuario});
+	});
+});
+
+
+
+
 router.get('/pedidos-rendimentos', function(req, res, next) {
 	model.GetPedidosRendimentos().then(data_pedido_rendimento=>{
 		data.pedido_rendimento = data_pedido_rendimento;
@@ -198,6 +222,23 @@ router.get('/coaching/criar', function(req, res, next) {
 
 router.get('/avisos/criar', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/avisos/cadastrar_aviso', data: data, usuario: req.session.usuario});
+});
+
+router.get('/caixa/criar', function(req, res, next) {
+	model.GetUsuarios().then(data_usuario=>{
+		data.usuario = data_usuario;
+		model.GetPlanos().then(data_plano=>{
+			data.plano = data_plano
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/caixa/cadastrar_caixa', data: data, usuario: req.session.usuario});
+		});
+	});
+});
+
+router.get('/comissao/criar', function(req, res, next) {
+	model.GetUsuarios().then(data_usuario=>{
+		data.usuario = data_usuario;
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/comissoes/cadastrar_comissoes', data: data, usuario: req.session.usuario});
+	});
 });
 
 /* Editar Administração */
@@ -312,6 +353,49 @@ router.get('/porcentagem-comissao/editar/:id', function(req, res, next) {
 	});
 });
 
+router.get('/caixa/editar/:id', function(req, res, next) {
+	var id = req.params.id;
+	console.log('selecionei o porcentagem-comissao no editar');
+	console.log(id);
+	console.log('_________________________________');
+	model.GetUsuarios().then(data_usuario=>{
+		data.usuario = data_usuario;
+		model.SelecionarCaixa(id).then(data_caixa => {
+			data.caixa = data_caixa;
+			model.GetPlanos().then(data_plano=>{
+				data.plano = data_plano;
+				console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+				console.log(data);	
+				console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/caixa/editar_caixa', data: data, usuario: req.session.usuario});
+			});
+		});
+	});
+});
+
+
+router.get('/comissao/editar/:id', function(req, res, next) {
+	var id = req.params.id;
+	console.log('selecionei o porcentagem-comissao no editar');
+	console.log(id);
+	console.log('_________________________________');
+	model.GetUsuarios().then(data_usuario=>{
+		data.usuario = data_usuario;
+		model.SelecionarComissao(id).then(data_comissao => {
+			data.comissao = data_comissao;
+			console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+			console.log(data);	
+			console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/comissoes/editar_comissao', data: data, usuario: req.session.usuario});
+		});
+	});
+});
+
+
+
+
+
+
 
 
 
@@ -335,6 +419,20 @@ router.post('/coaching/cadastrar/', function(req, res, next) {
 	});
 });
 
+router.post('/caixa/cadastrar/', function(req, res, next) {
+	POST = req.body;
+	model.CadastrarCaixa(POST).then(data => {
+		res.json(data);
+	});
+});
+
+router.post('/comissao/cadastrar/', function(req, res, next) {
+	POST = req.body;
+	model.CadastrarComissao(POST).then(data => {
+		res.json(data);
+	});
+});
+
 router.post('/aviso/cadastrar/', function(req, res, next) {
 	POST = req.body;
 	model.CadastrarAviso(POST).then(data => {
@@ -346,12 +444,12 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 	POST = req.body;
 	var senha = Math.random().toString(36).substr(2, 8);
 	POST.senha = senha;
-	
+
 	model.VerificarSeTemLogin(POST.login).then(tem_login => {
 		console.log('ttttttttttt tem login ttttt');
 		console.log(tem_login);
 		console.log('ttttttttttttttttttttttttttt');
-		
+
 		if(tem_login == ''){
 			model.CadastrarUsuario(POST).then(data => {
 				var to = POST.email;
@@ -468,6 +566,26 @@ router.post('/porcentagem-comissao/atualizar/', function(req, res, next) {
 	});
 });
 
+router.post('/caixa/atualizar/', function(req, res, next) {
+	POST = req.body;
+	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log(POST);
+	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	model.AtualizarCaixa(POST).then(data => {
+		res.json(data);
+	});
+});
+
+router.post('/comissao/atualizar/', function(req, res, next) {
+	POST = req.body;
+	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log(POST);
+	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	model.AtualizarComissao(POST).then(data => {
+		res.json(data);
+	});
+});
+
 
 
 
@@ -533,6 +651,26 @@ router.post('/pedido-rendimento/desativar', function(req, res, next) {
 	console.log(POST);
 	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 	model.DesativarPedidoRendimento(POST).then(data=> {
+		res.json(data);
+	});
+});
+
+router.post('/caixa/desativar', function(req, res, next) {
+	POST = req.body;
+	console.log('XXXXXXXXXXX PEDIDO SAQUE DESATIVAR XXXXXXXXXXXXXXXX');
+	console.log(POST);
+	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+	model.DesativarCaixa(POST).then(data=> {
+		res.json(data);
+	});
+});
+
+router.post('/comissao/desativar', function(req, res, next) {
+	POST = req.body;
+	console.log('XXXXXXXXXXX PEDIDO SAQUE DESATIVAR XXXXXXXXXXXXXXXX');
+	console.log(POST);
+	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+	model.DesativarComissao(POST).then(data=> {
 		res.json(data);
 	});
 });
