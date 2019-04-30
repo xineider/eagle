@@ -9,10 +9,10 @@ class CoacheesModel {
 	GetUsuario(id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.*\
-			FROM usuarios as a WHERE deletado = ? AND id = ?', [0,id_usuario]).then(data => {
-				resolve(data);
+				FROM usuarios as a WHERE deletado = ? AND id = ?', [0,id_usuario]).then(data => {
+					resolve(data);
+				});
 			});
-		});
 	}
 
 
@@ -20,17 +20,21 @@ class CoacheesModel {
 
 	GetTodosCoachees(id_coach) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT c.nome, b.nome as plano\
-			FROM `caixa` as a  LEFT JOIN usuarios as c ON a.id_usuario = c.id\
-			LEFT JOIN planos as b ON a.id_plano = b.id\
-			WHERE c.id_coach = ? AND a.deletado = ? \
-			ORDER BY c.id DESC', [id_coach,0]).then(data => {
-				console.log('000000000000 GET TODOS COACHES 000000000');
-				console.log(data);
-				console.log('0000000000000000000000000000000000000000');
-				resolve(data);
+			helper.Query('SELECT a.nome ,a.id, \
+				CASE  \
+				WHEN (SELECT valor FROM caixa as b WHERE b.id_usuario = a.id AND b.deletado = ? AND b.tipo = ? AND b.confirmado = ? LIMIT 1) THEN "Aplicação Ativa" \
+				WHEN (SELECT id_coaching FROM coaching_usuario as c WHERE c.id_usuario = a.id AND c.deletado = ? LIMIT 1) THEN "Coaching em Andamento" \
+				WHEN (SELECT id_usuario FROM agenda as d WHERE d.id_coachee = a.id AND d.deletado = ? LIMIT 1) THEN "Agendado Coaching"  \
+				ELSE "Coaching não iniciado" END as status\
+				FROM usuarios as a  \
+				WHERE a.id_coach = ? AND a.deletado = ?\
+				ORDER BY a.id DESC', [0,0,1,0,0,id_coach,0]).then(data => {
+					console.log('000000000000 GET TODOS COACHES 000000000');
+					console.log(data);
+					console.log('0000000000000000000000000000000000000000');
+					resolve(data);
+				});
 			});
-		});
 	}
 	
 
