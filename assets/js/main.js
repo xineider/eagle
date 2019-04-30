@@ -436,6 +436,9 @@ function LoadTo(link, to) {
 			adicionarLoader();
 		},
 		success: function(data) {
+			console.log('____________________LoadTo______________________');
+			console.log(data);
+			console.log('________________________________________________');
 			$('.'+to).html(data);
 		},
 		error: function(xhr) { // if error occured

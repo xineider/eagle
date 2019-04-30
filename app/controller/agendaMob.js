@@ -53,7 +53,7 @@ router.get('/editar_evento/:id', function(req, res, next) {
 router.get('/adicionar-novo-compromisso', function(req, res, next) {
 	model.GetCoachees(req.session.usuario.id).then(data_coachee=>{
 		data.coachee = data_coachee;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'agenda/cadastrar_evento', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'agenda/cadastrar_evento', data: data, usuario: req.session.usuario});
 	});
 });
 
