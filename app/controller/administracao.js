@@ -474,21 +474,26 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 
 		if(tem_login == ''){
 			model.CadastrarUsuario(POST).then(data => {
-				var to = POST.email;
-				var subject = 'Bem-vindo ao Eagle Finances!';
-				var html = 'Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta. \
-				<br> <b>Login:</b>'+POST.login+'<br> \
-				<br> <b>Senha:</b>'+senha+'<br>\
-				Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita.<br>\
-				Acesse via o aplicativo Eagle Finance<br> \
-				Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão.<br>\
-				<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>';
-				var text = 'Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta.\
-				Login:'+POST.login+'Senha:'+senha+' Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita.\
-				Acesse via o aplicativo Eagle Finances \
-				Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão.\
-				Por-favor não responda essa mensagem, pois ela é enviada automaticamente!';
-				control.SendMail(to, subject, html, text);
+
+				var html = "Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta."+
+				"<br><b>Login:</b> "+POST.login+
+				"<br><b>Senha:</b> "+senha+ 
+				"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita."+
+				"<br>Acesse via o aplicativo Eagle Finance"+
+				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+				"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
+
+				var text = "Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta."+
+				"<br>Login: "+POST.login+
+				"<br>Senha: "+senha+
+				"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita."+
+				"<br>Acesse via o aplicativo Eagle Finance"+
+				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+				"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
+
+
+				control.SendMail(POST.email, 'Bem-vindo ao Eagle Finances!', html, text);
+
 				res.json(data);
 			});
 		}else{
