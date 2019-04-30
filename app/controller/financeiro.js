@@ -66,6 +66,7 @@ router.post('/pedir-saque/', function(req, res, next) {
 	POST.senha = control.Encrypt(POST.senha);
 	POST.id_usuario = req.session.usuario.id;
 	POST.tipo = 1;
+	POST.valor = POST.valor.replace(',','.');
 	console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
 	console.log(POST);
 	console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
@@ -96,9 +97,12 @@ router.post('/pedir-aporte/', function(req, res, next) {
 	POST.senha = control.Encrypt(POST.senha);
 	POST.id_usuario = req.session.usuario.id;
 	POST.tipo = 0;
+	POST.valor = POST.valor.replace(',','.');
+
 	console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
 	console.log(POST);
 	console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+
 
 	
 	model.ConfirmarSenhaUsuario(req.session.usuario.id,POST.senha).then(data_usuario =>{
