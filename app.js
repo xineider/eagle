@@ -9,6 +9,9 @@ var bodyParser = require('body-parser');
 var Control = require('./app/controller/control.js');
 const fileUpload = require('express-fileupload');
 
+var VerificacaoModel = require('./app/model/verificacaoModel');
+var verificacao = new VerificacaoModel;
+
 var login = require('./app/controller/login');
 var loginagain = require('./app/controller/login-again');
 var index = require('./app/controller/index');
@@ -29,8 +32,26 @@ var suporte = require('./app/controller/suporte');
 var agenda = require('./app/controller/agenda');
 var projetosSociais = require('./app/controller/projetos_sociais');
 
-var VerificacaoModel = require('./app/model/verificacaoModel');
-var verificacao = new VerificacaoModel;
+
+var indexMob = require('./app/controller/indexMob');
+var apiMob = require('./app/controller/apiMob');
+var perfilMob = require('./app/controller/perfilMob');
+var usuariosMob = require('./app/controller/usuariosMob');
+var investimentoMob = require('./app/controller/investimentoMob');
+var financeiroMob = require('./app/controller/financeiroMob');
+var coachingMob = require('./app/controller/coachingMob');
+var cursosMob = require('./app/controller/cursosMob');
+var clubMob = require('./app/controller/clubMob');
+var simuladorMob = require('./app/controller/simuladorMob');
+var administracaoMob = require('./app/controller/administracaoMob');
+var comissoesMob = require('./app/controller/comissoesMob');
+var coacheesMob = require('./app/controller/coacheesMob');
+var estatisticasMob = require('./app/controller/estatisticasMob');
+var suporteMob = require('./app/controller/suporteMob');
+var agendaMob = require('./app/controller/agendaMob');
+var projetosSociaisMob = require('./app/controller/projetos_sociaisMob');
+
+
 
 var app = express();
 var control = new Control;
@@ -108,6 +129,26 @@ app.use('/sistema/projetos_sociais', projetosSociais);
 app.use('/sistema/api', api);
 app.use('/sistema/perfil', perfil);
 app.use('/sistema/usuarios', usuarios);
+
+
+
+app.use('/mobsmart', indexMob);
+app.use('/mobsmart/investimento', investimentoMob);
+app.use('/mobsmart/financeiro', financeiroMob);
+app.use('/mobsmart/coaching', coachingMob);
+app.use('/mobsmart/cursos', cursosMob);
+app.use('/mobsmart/estatisticas', estatisticasMob);
+app.use('/mobsmart/suporte', suporteMob);
+app.use('/mobsmart/coachees', coacheesMob);
+app.use('/mobsmart/club', clubMob);
+app.use('/mobsmart/agenda', agendaMob);
+app.use('/mobsmart/simulador', simuladorMob);
+app.use('/mobsmart/administracao', administracaoMob);
+app.use('/mobsmart/comissoes', comissoesMob);
+app.use('/mobsmart/projetos_sociais', projetosSociaisMob);
+app.use('/mobsmart/api', apiMob);
+app.use('/mobsmart/perfil', perfilMob);
+app.use('/mobsmart/usuarios', usuariosMob);
 
 
 // catch 404 and forward to error handler
