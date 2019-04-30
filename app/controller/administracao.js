@@ -476,14 +476,14 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 			model.CadastrarUsuario(POST).then(data => {
 				var to = POST.email;
 				var subject = 'Bem-vindo ao Eagle Finances!';
-				var html = 'Bem vindo ao Ealge Finances. Segue abaixo as informações sobre sua conta. \
+				var html = 'Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta. \
 				<br> <b>Login:</b>'+POST.login+'<br> \
 				<br> <b>Senha:</b>'+senha+'<br>\
-				Recomendamos que você altere sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita.<br>\
-				Acesse via o aplicativo <a href="www.eagle.finance" target="_blank">Eagle Finances<br> \
+				Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita.<br>\
+				Acesse via o aplicativo Eagle Finance<br> \
 				Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão.<br>\
 				<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>';
-				var text = 'Bem vindo ao Ealge Finances. Segue abaixo as informações sobre sua conta. Segue abaixo as informações sobre sua conta.\
+				var text = 'Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta.\
 				Login:'+POST.login+'Senha:'+senha+' Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita.\
 				Acesse via o aplicativo Eagle Finances \
 				Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão.\
