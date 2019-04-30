@@ -17,9 +17,9 @@ router.get('/', function(req, res, next) {
 			data.noticias = data_noticias;
 			model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
 				data.carteira_aplicacao = data_valor_carteira;;			
-				console.log('--------------- DATA  INICIO------------------');
+				console.log('IIIIIIIIIIIIIIIIIIIIIII INDEX MOB IIIIIIIIIIIIIIIIIIIIIIIII');
 				console.log(data);
-				console.log('----------------------------------------------');
+				console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/index', data: data, usuario: req.session.usuario});
 			});
 		});
