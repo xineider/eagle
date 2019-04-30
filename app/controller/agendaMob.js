@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
 				console.log('===================== DATA USUARIO ====================');
 				console.log(data);
 				console.log('=======================================================');
-				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'agenda/agenda', data: data, usuario: req.session.usuario});
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'agenda/agendaMob', data: data, usuario: req.session.usuario});
 			});
 		});
 	});
