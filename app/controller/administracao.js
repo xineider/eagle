@@ -103,7 +103,7 @@ router.get('/usuarios', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
 		model.GetUsuarios().then(data_usuarios=>{
-			data.usuarios_admin = data_usuarios
+			data.usuarios_admin = data_usuarios;
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
@@ -276,11 +276,11 @@ router.get('/usuarios/editar/:id', function(req, res, next) {
 	console.log('_________________________________');
 	model.GetCoach().then(data_coach=>{
 		data.coach = data_coach;
-		model.SelecionarUsuario(id).then(data_usuario => {
-			data.usuario = data_usuario;
-			console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		model.SelecionarUsuario(id).then(data_usuario_sel => {
+			data.usuario_admin = data_usuario_sel;
+			console.log('EEEEEEEEEEEEEEE USUARIOS EDITAR EEEEEEEEEEEEEEEEEEEE');
 			console.log(data);	
-			console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+			console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/usuarios/editar_usuario', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -537,6 +537,10 @@ router.post('/usuarios/atualizar/', function(req, res, next) {
 	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
 	console.log(POST);
 	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	if(POST.id_coach == undefined){
+		POST.id_coach = 0;
+	}
+
 	model.AtualizarUsuario(POST).then(data => {
 		res.json(data);
 	});

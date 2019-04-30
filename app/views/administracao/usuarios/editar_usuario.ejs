@@ -9,33 +9,33 @@
 
 
 		<div class="card light row">
-			<input type="hidden" name="id" value="<%= data.usuario[0].id %>">
+			<input type="hidden" name="id" value="<%= data.usuario_admin[0].id %>">
 
 
 			<div class="input-field col s12">
 				<label for="login">Login</label>
-				<input class="validate" type="text" name="login" value="<%= data.usuario[0].login %>">
+				<input class="validate" type="text" name="login" value="<%= data.usuario_admin[0].login %>">
 			</div>
 
 			<div class="input-field col s12">
 				<label for="nome">Nome</label>
-				<input class="validate" type="text" name="nome" value="<%= data.usuario[0].nome %>">
+				<input class="validate" type="text" name="nome" value="<%= data.usuario_admin[0].nome %>">
 			</div>
 
 
 			<div class="input-field col s12">
 				<label for="nome">Email</label>
-				<input class="validate" type="text" name="email" value="<%= data.usuario[0].email %>">
+				<input class="validate" type="text" name="email" value="<%= data.usuario_admin[0].email %>">
 			</div>
 
 			<div class="input-field col s12">
 				<label for="telefone">Telefone</label>
-				<input class="validate tel" type="text" name="telefone" value="<%= data.usuario[0].telefone %>">
+				<input class="validate tel" type="text" name="telefone" value="<%= data.usuario_admin[0].telefone %>">
 			</div>
 
 			<div class="input-field col s12 ">
 
-				<%if(usuario.nivel == 4 && data.usuario[0].nivel == 5){%>
+				<%if(usuario.nivel == 4 && data.usuario_admin[0].nivel == 5){%>
 				<label for="nivel">Nível</label>
 				<select name="nivel">
 					<option disabled selected>Administrador</option>
@@ -45,13 +45,13 @@
 				<% }else{ %>						
 
 				<select name="nivel" class="cadastrar_usuario_nivel_select">
-					<option value="0" <%= data.usuario[0].nivel == 0 ? 'selected' : '' %> >Coachee</option>
-					<option value="1" <%= data.usuario[0].nivel == 1 ? 'selected' : '' %> >Coach</option>
-					<option value="2" <%= data.usuario[0].nivel == 2 ? 'selected' : '' %> >Manager</option>
-					<option value="3" <%= data.usuario[0].nivel == 3 ? 'selected' : '' %> >Investidor</option>
-					<option value="4" <%= data.usuario[0].nivel == 4 ? 'selected' : '' %> >Coordenação</option>
+					<option value="0" <%= data.usuario_admin[0].nivel == 0 ? 'selected' : '' %> >Coachee</option>
+					<option value="1" <%= data.usuario_admin[0].nivel == 1 ? 'selected' : '' %> >Coach</option>
+					<option value="2" <%= data.usuario_admin[0].nivel == 2 ? 'selected' : '' %> >Manager</option>
+					<option value="3" <%= data.usuario_admin[0].nivel == 3 ? 'selected' : '' %> >Investidor</option>
+					<option value="4" <%= data.usuario_admin[0].nivel == 4 ? 'selected' : '' %> >Coordenação</option>
 					<% if(usuario.nivel == 5){ %>
-					<option value="5" <%= data.usuario[0].nivel == 5 ? 'selected' : '' %> >Administrador</option>
+					<option value="5" <%= data.usuario_admin[0].nivel == 5 ? 'selected' : '' %> >Administrador</option>
 					<% } %>
 				</select>
 				<label for="nivel">Nível</label>
@@ -60,24 +60,31 @@
 				<%} %>
 			</div>
 
+
+			<%if(data.usuario_admin[0].nivel==0){%>
 			<div class="input-field col s12 cadastrar_usuario_coach_container margin-t-2rem">
 				<select name="id_coach">
 					<%
 					if (typeof data.coach != 'undefined' && data.coach.length > 0) {
 						for (var i = 0; i < data.coach.length; i++) { %>
-						<option value=" <%= data.coach[i].id %>" <%= data.coach[0].id == data.usuario[i].id_coach ? 'selected' : ''> <%= data.coach[i].nome %></option>				
+						<option value=" <%= data.coach[i].id %>" <%= data.coach[i].id == data.usuario_admin[0].id_coach ? 'selected' : ''%>> <%= data.coach[i].nome %></option>				
 						<% }
 					} %>
 				</select>
 				<label for="id_coach">Coach</label>					
 			</div>
 
+			<%}else{%>
+			<div class="input-field col s12 cadastrar_usuario_coach_container margin-t-2rem">
+			</div>
+			<%}%>
+
 			<div class="input-field col s12">
 				<label>Cripto Wallet</label>
-				<input type="text" name="crypto_wallet" value="<%= data.usuario[0].crypto_wallet %>">
+				<input type="text" name="crypto_wallet" value="<%= data.usuario_admin[0].crypto_wallet %>">
 			</div>
 
-			<%if(usuario.nivel == 4 && data.usuario[0].nivel == 5){%>
+			<%if(usuario.nivel == 4 && data.usuario_admin[0].nivel == 5){%>
 
 			<div>Você não possui permissão para alterar o Administrador!</div>
 
