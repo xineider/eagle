@@ -45,9 +45,11 @@
 				<form method="POST" action="/">
 
 					<div class="box" style="background: black;">
-						<div class="icon center-align" style="position: relative;">
-								<img class="header_logo" src="https://media.giphy.com/media/JPVQ7yonRZJbtGQGUE/giphy.gif">
-								 <img src="/assets/imgs/logo_subtitle.png" style="position: absolute;margin-top: -15%;left: 0;"> 
+						<div class="icon center-align">
+							<img class="gif_rotatorio" src="https://media.giphy.com/media/JPVQ7yonRZJbtGQGUE/giphy.gif">
+							<div class="imagem_subtitle_container">
+								<img src="/assets/imgs/logo_subtitle.png"> 
+							</div>
 
 							<!-- <img src="/assets/imgs/logo.png"> -->
 						</div>
@@ -107,10 +109,20 @@
 				font-size: 6em;
 				
 			}
-			
-			.login .icon img{
-				max-height: 400px;
+
+			.login .icon .gif_rotatorio{
+				max-height: 300px;
 				max-width: 100%;
+			}
+			
+
+			.login .imagem_subtitle_container{
+				max-width: 700px;
+				margin: 0 auto;
+			}
+
+			.login .imagem_subtitle_container img{
+				width: 100%;
 			}
 			
 			
