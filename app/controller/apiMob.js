@@ -75,7 +75,7 @@ router.post('/recuperar/senha', function(req, res, next) {
 });
 
 router.get('/loginagain', function(req, res, next) {
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'login/login_again', data: data, usuario: req.session.usuario});
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'login/login_again', data: data, usuario: req.session.usuario});
 });
 
 
