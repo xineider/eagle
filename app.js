@@ -13,7 +13,6 @@ var VerificacaoModel = require('./app/model/verificacaoModel');
 var verificacao = new VerificacaoModel;
 
 var login = require('./app/controller/login');
-var loginagain = require('./app/controller/login-again');
 var index = require('./app/controller/index');
 var api = require('./app/controller/api');
 var perfil = require('./app/controller/perfil');
@@ -34,6 +33,7 @@ var projetosSociais = require('./app/controller/projetos_sociais');
 
 
 var indexMob = require('./app/controller/indexMob');
+var loginMob = require('./app/controller/loginMob');
 var apiMob = require('./app/controller/apiMob');
 var perfilMob = require('./app/controller/perfilMob');
 var usuariosMob = require('./app/controller/usuariosMob');
@@ -111,7 +111,6 @@ app.use("/assets", express.static(__dirname + '/assets'));
 // console.log(path.join(__dirname, 'assets'));
 
 app.use('/', login);
-app.use('/login-again', loginagain);
 app.use('/sistema', index);
 app.use('/sistema/investimento', investimento);
 app.use('/sistema/financeiro', financeiro);
@@ -133,6 +132,7 @@ app.use('/sistema/usuarios', usuarios);
 
 
 app.use('/mobsmart', indexMob);
+app.use('/mobsmart/login', loginMob);
 app.use('/mobsmart/investimento', investimentoMob);
 app.use('/mobsmart/financeiro', financeiroMob);
 app.use('/mobsmart/coaching', coachingMob);

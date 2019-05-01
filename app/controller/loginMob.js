@@ -14,8 +14,12 @@ router.get('/', function(req, res, next) {
 	if (typeof req.session.id_usuario != 'undefined' && req.session.id_usuario != 0) {
 		res.redirect('/sistema');
 	} else {
-		res.render('login-again/index', {});
+		res.render('login/index', {});
 	}
+});
+
+router.get('/loginagain', function(req, res, next) {
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'login/login_again', data: data, usuario: req.session.usuario});
 });
 
 
@@ -32,7 +36,7 @@ router.post('/', function(req, res, next) {
 					req.session.usuario.id = data[0].id;
 					req.session.usuario.hash_login = data[0].hash_login;
 					req.session.usuario.nivel = data[0].nivel;
-					res.redirect('/sistema');
+					res.redirect('/mobsmart');
 				}else{
 					res.render('login/index', { erro: 'Usuário banido do aplicativo pela Administração', tipo_erro: 'login', usuario: req.session.usuario });
 				}
