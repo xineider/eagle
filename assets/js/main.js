@@ -816,8 +816,8 @@ function UploadImagem(isso,container) {
 			$(container).append('\
 				<div class="pai">\
 				<img src="/assets/uploads/'+data+'">\
-				<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
-				<input type="hidden" name="arquivo" value="'+data+'">\
+				<button class="btn waves-effect waves-light red close-button remove margin-b-10">Remover Imagem</button>\
+				<input type="hidden" name="arquivo" value="/assets/uploads/'+data+'">\
 				</div>');
 			console.debug(data);
 		},
