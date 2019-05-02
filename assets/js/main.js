@@ -1,10 +1,16 @@
 // Eventos DOM
+document.addEventListener('DOMContentLoaded', function() {
+	var elems = document.querySelectorAll('.sidenav');
+	var options = {edge:'left'};
+	var instances = M.Sidenav.init(elems,options);
+});
+
 $(document).on('ready', function () {
 	
 
+
 	$(document).ready(function(){
 		$('.modal').modal();
-		$('.sidenav').sidenav();
 	});
 	
 	LoadInfosUsuario();
@@ -813,16 +819,16 @@ function UploadImagem(isso,container) {
 				<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
 				<input type="hidden" name="arquivo" value="'+data+'">\
 				</div>');
-				console.debug(data);
-			},
-			error: function (xhr, e, t) {
-				console.debug((xhr.responseText));
-			},
-			complete: function() {
-				removerLoader();
-			}
-		});
-	}
+			console.debug(data);
+		},
+		error: function (xhr, e, t) {
+			console.debug((xhr.responseText));
+		},
+		complete: function() {
+			removerLoader();
+		}
+	});
+}
 	// ALTERE PARA FUNCIONAR CORRETAMENTE
 	function LoadInfosUsuario() {
 		var id = $('input[name="id_usuario_sessao"]').val();
