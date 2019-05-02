@@ -776,8 +776,18 @@ function AddErrorAjax() {
 // ALTERE PARA FUNCIONAR CORRETAMENTE
 function UploadFile(isso) {
 	var link = isso.data('href');
+	console.log('iiiiiiii isso[0].files[0] iiiiiiiiiiiii');
+	console.log(isso[0].files[0]);
+	console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+
 	var formData = new FormData();
+
 	formData.append('arquivo', isso[0].files[0]);
+
+	console.log('fffffffffffffffffff formData ffffffffffffffff');
+	console.log(formData);
+	console.log('fffffffffffffffffffffffffffffffffffffffffffff');
+
 	
 	$.ajax({
 		url: link,
@@ -793,6 +803,11 @@ function UploadFile(isso) {
 			adicionarLoader();
 		},
 		success: function (data) {
+			console.log('dddddddddddddd data ddddddddddddd');
+			console.log(data);
+			console.log('ddddddddddddddddddddddddddddddddd');
+
+
 			$('.file-path').val('');
 			isso.closest('.row').append('\
 				<div class="col s12 m6 center-align relative pai">\

@@ -706,4 +706,29 @@ router.post('/comissao/desativar', function(req, res, next) {
 	});
 });
 
+
+
+router.post('/noticias/uploadarimagem', function(req, res, next) {
+
+	console.log('reqqqqqqqqqqqqqqqqqqqqq');
+	console.log(req.files);
+	console.log('reqqqqqqqqqqqqqqqqqqqqq');
+
+
+	var sampleFile = req.files.arquivo;
+	var nome = control.DateTimeForFile()+'_'+sampleFile.name;
+
+	console.log('SSSSSSSSSSSSSSSSSSS sampleFile SSSSSSSSSSSSSSSSSSSSSS');
+	console.log(sampleFile);
+	console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+
+	sampleFile.mv('./assets/uploads/'+nome, function(err) {
+		if (err) {
+			return res.status(500).send(err);
+		}
+		res.json(nome);
+	});
+});
+
+
 module.exports = router;
