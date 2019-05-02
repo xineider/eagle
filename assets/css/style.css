@@ -594,3 +594,18 @@ hr{
 .cadastrar_evento_coachee_container,.cadastrar_usuario_coach_container{
 	margin: 0;
 }
+
+
+.imagem_container{
+	width: 80%;
+	margin: 0 auto;
+	
+}
+
+.imagem_container img{
+	width: 100%;
+}
+
+.uploads .file-field .btn{
+	float: none;
+}

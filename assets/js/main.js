@@ -1,8 +1,10 @@
 // Eventos DOM
 $(document).on('ready', function () {
 	
+
 	$(document).ready(function(){
 		$('.modal').modal();
+		$('.sidenav').sidenav();
 	});
 	
 	LoadInfosUsuario();
@@ -281,9 +283,9 @@ $(document).on('ready', function () {
 
 	
 	
-	$(document).on('change', 'input[type="file"]', function () {
+	$(document).on('change', '.arquivo_imagem', function () {
 		if($(this).val() != '') {
-			UploadFile($(this));
+			UploadImagem($(this),'.'+$(this).data('container'));
 		}
 	});
 	
@@ -342,7 +344,6 @@ $(document).on('ready', function () {
 		GetEndereco($(this).val(), $(this).closest('.row'));
 	});
 	
-	$(".sidenav").sidenav({closeOnClick: true});
 	
 	window.onpopstate = function() {
 		GoTo(location.pathname, false);
@@ -774,21 +775,19 @@ function AddErrorAjax() {
 	$('.error_ajax').fadeIn();
 }
 // ALTERE PARA FUNCIONAR CORRETAMENTE
-function UploadFile(isso) {
+function UploadImagem(isso,container) {
 	var link = isso.data('href');
-	console.log('iiiiiiii isso[0].files[0] iiiiiiiiiiiii');
+	console.log('FILE UPLOAD');
 	console.log(isso[0].files[0]);
-	console.log('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
-
 	var formData = new FormData();
-
 	formData.append('arquivo', isso[0].files[0]);
-
-	console.log('fffffffffffffffffff formData ffffffffffffffff');
+	console.log('------------------ FORMDATA -----------------------');
 	console.log(formData);
-	console.log('fffffffffffffffffffffffffffffffffffffffffffff');
+	console.log('---------------------------------------------------');
+	console.log('cccccccccccccccccccccccccccccc container ccccccccccccccccccccccc');
+	console.log(container);
+	console.log('cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc');
 
-	
 	$.ajax({
 		url: link,
 		type: 'POST',
@@ -803,47 +802,43 @@ function UploadFile(isso) {
 			adicionarLoader();
 		},
 		success: function (data) {
-			console.log('dddddddddddddd data ddddddddddddd');
-			console.log(data);
-			console.log('ddddddddddddddddddddddddddddddddd');
-
-
 			$('.file-path').val('');
-			isso.closest('.row').append('\
-				<div class="col s12 m6 center-align relative pai">\
-				<div class="card-panel grey lighten-4">\
-				<input type="hidden" name="tarefa_arquivo[arquivo][]" value="'+data+'">\
+
+			console.log(data);
+			$(container).empty();
+
+			$(container).append('\
+				<div class="pai">\
+				<img src="/assets/uploads/'+data+'">\
 				<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
-				<b>Arquivo: '+data+' <br>\
-				</div>\
-				</div>\
-				');
-			console.debug(data);
-		},
-		error: function (xhr, e, t) {
-			console.debug((xhr.responseText));
-		},
-		complete: function() {
-			removerLoader();
-		}
-	});
-}
-// ALTERE PARA FUNCIONAR CORRETAMENTE
-function LoadInfosUsuario() {
-	var id = $('input[name="id_usuario_sessao"]').val();
-	var hash_login = $('input[name="hash_usuario_sessao"]').val();
-	$.ajax({
-		method: "POST",
-		async: true,
-		data: {id: id, hash_login: hash_login},
-		url: '/sistema/usuarios/ver/perfil/',
-		beforeSend: function(request) {
-			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
-			adicionarLoader();
-		},
-		success: function(data) {
+				<input type="hidden" name="arquivo" value="'+data+'">\
+				</div>');
+				console.debug(data);
+			},
+			error: function (xhr, e, t) {
+				console.debug((xhr.responseText));
+			},
+			complete: function() {
+				removerLoader();
+			}
+		});
+	}
+	// ALTERE PARA FUNCIONAR CORRETAMENTE
+	function LoadInfosUsuario() {
+		var id = $('input[name="id_usuario_sessao"]').val();
+		var hash_login = $('input[name="hash_usuario_sessao"]').val();
+		$.ajax({
+			method: "POST",
+			async: true,
+			data: {id: id, hash_login: hash_login},
+			url: '/sistema/usuarios/ver/perfil/',
+			beforeSend: function(request) {
+				request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+				request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+				request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
+				adicionarLoader();
+			},
+			success: function(data) {
 			// MANIPULAR AS INFORMAÇÕES DO USUÁRIO
 		},
 		error: function(xhr) { // if error occured
@@ -852,7 +847,7 @@ function LoadInfosUsuario() {
 			removerLoader();
 		}
 	});
-}
+	}
 
 // ESPECIFICO
 function AddFormatEspecifico() {

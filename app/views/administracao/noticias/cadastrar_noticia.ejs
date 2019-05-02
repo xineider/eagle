@@ -25,16 +25,23 @@
 
 
 			<div class="row uploads word-wrap">
-                <div class="file-field input-field col s12">
-                  <div class="btn primary">
-                    <span >Adicionar Imagem</span>
-                    <input type="file" data-href="/sistema/administracao/noticias/uploadarimagem" id="arquivo">
-                  </div>
-                  <div class="file-path-wrapper">
-                    <input class="file-path validate" type="text" placeholder="Ou arraste seu arquivo aqui">
-                  </div>
-                </div>
-            </div>
+				<div class="file-field input-field col s12">
+					<div class="btn primary">
+						<span>Imagem</span>
+						<input type="file" data-href="/sistema/administracao/uploadarquivo" id="arquivo" class="arquivo_imagem" data-container="imagem_container" accept="image/*">
+					</div>
+					<div class="file-path-wrapper hide">
+						<input class="file-path validate" type="text" placeholder="Ou arraste seu arquivo aqui">
+					</div>
+				</div>
+
+				<div class="imagem_container">
+				</div>
+			</div>
+
+
+
+
 
 <!-- 			<div class="input-field col s12">
 				<div class="left-align">Imagem</div>

@@ -110,6 +110,8 @@ app.use("/assets", express.static(__dirname + '/assets'));
 // app.use(express.static(path.join(__dirname, '/assets')));
 // console.log(path.join(__dirname, 'assets'));
 
+app.use(fileUpload());
+
 app.use('/', login);
 app.use('/sistema', index);
 app.use('/sistema/investimento', investimento);
