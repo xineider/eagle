@@ -7,13 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(document).on('ready', function () {
 	
-
-
 	$(document).ready(function(){
 		$('.modal').modal();
 	});
 	
-	LoadInfosUsuario();
 	adicionarLoader();
 	FormatInputs();
 	calendarioCompromissos();
@@ -396,11 +393,7 @@ function removerLoader() {
 	$('body').css('overflow', 'auto');
 	$('.loader').fadeOut('fast');
 }
-function InitBar() {
-	if (localStorage.bar != 2 && localStorage.bar != 1) {
-		localStorage.setItem("bar", 1);
-	}
-}
+
 function GoTo(link, state) {
 	$.ajax({
 		method: "GET",
@@ -640,14 +633,7 @@ function SubmitAjax(post, link, back,sucessMessage,sucessClass) {
 		}
 	});
 }
-function Reestruturar(str) {
-	var i = 1;
-	$('.'+ str +' > div').each(function () {
-		$(this).data('num', ''+i+'');
-		i += 1;
-	});
-	return i;
-}
+
 function ActiveMaterializeInput(focus) {
 	if (focus != undefined && focus != 'undefined') {
 		console.log(focus);
@@ -787,12 +773,6 @@ function UploadImagem(isso,container) {
 	console.log(isso[0].files[0]);
 	var formData = new FormData();
 	formData.append('arquivo', isso[0].files[0]);
-	console.log('------------------ FORMDATA -----------------------');
-	console.log(formData);
-	console.log('---------------------------------------------------');
-	console.log('cccccccccccccccccccccccccccccc container ccccccccccccccccccccccc');
-	console.log(container);
-	console.log('cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc');
 
 	$.ajax({
 		url: link,
@@ -829,31 +809,7 @@ function UploadImagem(isso,container) {
 		}
 	});
 }
-	// ALTERE PARA FUNCIONAR CORRETAMENTE
-	function LoadInfosUsuario() {
-		var id = $('input[name="id_usuario_sessao"]').val();
-		var hash_login = $('input[name="hash_usuario_sessao"]').val();
-		$.ajax({
-			method: "POST",
-			async: true,
-			data: {id: id, hash_login: hash_login},
-			url: '/sistema/usuarios/ver/perfil/',
-			beforeSend: function(request) {
-				request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
-				request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
-				request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
-				adicionarLoader();
-			},
-			success: function(data) {
-			// MANIPULAR AS INFORMAÇÕES DO USUÁRIO
-		},
-		error: function(xhr) { // if error occured
-		},
-		complete: function() {
-			removerLoader();
-		}
-	});
-	}
+
 
 // ESPECIFICO
 function AddFormatEspecifico() {
