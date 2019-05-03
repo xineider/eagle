@@ -16,7 +16,8 @@ router.get('/', function(req, res, next) {
 		model.GetAporte(req.session.usuario.id).then(data_aporte_todal=>{
 			data.aporte_total= data_aporte_todal;
 			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-				data.aporte_primeiro = data_primeiro_aporte
+				data.aporte_primeiro = data_primeiro_aporte;
+				data.link_sistema = '/mobsmart';
 				console.log('===================== DATA USUARIO ====================');
 				console.log(data);
 				console.log('=======================================================');
