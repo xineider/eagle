@@ -27,7 +27,8 @@ router.get('/', function(req, res, next) {
 
 
 
-router.get('/cadastrar', function(req, res, next) {	
+router.get('/cadastrar', function(req, res, next) {
+	data.link_back = '/sistema/coachees/';
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'coachees/cadastrar', data: data, usuario: req.session.usuario});
 });
 
