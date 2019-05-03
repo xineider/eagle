@@ -14,7 +14,8 @@ router.get('/', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
 		model.GetTodosCoachees(req.session.usuario.id).then(data_coachees=>{
-			data.coachees= data_coachees;			
+			data.coachees= data_coachees;
+			data.link_cadastrar = '/mobsmart/coachees/cadastrar';	
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
