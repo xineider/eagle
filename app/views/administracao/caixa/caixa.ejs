@@ -4,7 +4,7 @@
 	
 	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
 
-	<a class="btn light ajax-load" href="/sistema/administracao/caixa/criar">Cadastrar Caixa</a>
+	<a class="btn light ajax-load" href="<%= data.link_sistema%>/administracao/caixa/criar">Cadastrar Caixa</a>
 
 	<div class="card light">
 
@@ -28,17 +28,17 @@
 
 					<tr>
 						<td>
-							<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/caixa/editar/<%= data.caixa[i].id %>">
+							<a class="limitador_3_linhas break-all ajax-load black-text" href="<%= data.link_sistema%>/administracao/caixa/editar/<%= data.caixa[i].id %>">
 								R$<%= data.caixa[i].valor %>
 							</a> 
 						</td>
 						<td>
-							<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/caixa/editar/<%= data.caixa[i].id %>">
+							<a class="limitador_3_linhas break-all ajax-load black-text" href="<%= data.link_sistema%>/administracao/caixa/editar/<%= data.caixa[i].id %>">
 								<%= data.caixa[i].nome_usuario %> 
 							</a>
 						</td>
 						<td>
-							<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/caixa/editar/<%= data.caixa[i].id %>">
+							<a class="limitador_3_linhas break-all ajax-load black-text" href="<%= data.link_sistema%>/administracao/caixa/editar/<%= data.caixa[i].id %>">
 
 								<% switch(data.caixa[i].tipo){
 									case 0:%>
@@ -53,18 +53,18 @@
 								</a>
 							</td>
 							<td>
-								<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/caixa/editar/<%= data.caixa[i].id %>">
+								<a class="limitador_3_linhas break-all ajax-load black-text" href="<%= data.link_sistema%>/administracao/caixa/editar/<%= data.caixa[i].id %>">
 									<%= data.caixa[i].plano %>
 								</a>
 							</td>
 							<td>
-								<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/caixa/editar/<%= data.caixa[i].id %>">
+								<a class="limitador_3_linhas break-all ajax-load black-text" href="<%= data.link_sistema%>/administracao/caixa/editar/<%= data.caixa[i].id %>">
 									<%= data.caixa[i].data_cadastro %> 
 								</a>
 							</td>
 							<td style="width: 30%;" class="center">
 								<a href="" style="font-size: 1.4em;">
-									<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.caixa[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.caixa[i].valor %>'? " data-to="/sistema/administracao/caixa/desativar" data-back="/sistema/administracao/caixa"></i>
+									<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.caixa[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.caixa[i].valor %>'? " data-to="/sistema/administracao/caixa/desativar" data-back="<%= data.link_sistema%>/administracao/caixa"></i>
 								</a>
 							</td>
 

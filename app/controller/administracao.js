@@ -14,7 +14,8 @@ router.get('/', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
 		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-			data.aporte_primeiro = data_primeiro_aporte
+			data.aporte_primeiro = data_primeiro_aporte;
+			data.link_sistema = '/sistema';
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
@@ -27,7 +28,8 @@ router.get('/noticias', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
 		model.GetNoticias().then(data_noticias=>{
-			data.noticias = data_noticias
+			data.noticias = data_noticias;
+			data.link_sistema = '/sistema';
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
@@ -81,6 +83,7 @@ router.get('/coaching', function(req, res, next) {
 		data.perfil = data_perfil;
 		model.GetCoachings().then(data_coaching=>{
 			data.coaching = data_coaching;
+			data.link_sistema = '/sistema';
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
@@ -92,6 +95,7 @@ router.get('/coaching', function(req, res, next) {
 router.get('/avisos', function(req, res, next) {
 	model.GetAvisos().then(data_avisos=>{
 		data.avisos = data_avisos;
+		data.link_sistema = '/sistema';
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');
@@ -104,6 +108,7 @@ router.get('/usuarios', function(req, res, next) {
 		data.perfil = data_perfil;
 		model.GetUsuarios().then(data_usuarios=>{
 			data.usuarios_admin = data_usuarios;
+			data.link_sistema = '/sistema';
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
@@ -116,6 +121,7 @@ router.get('/usuarios', function(req, res, next) {
 router.get('/pedidos-saques', function(req, res, next) {
 	model.GetPedidosSaques().then(data_pedido_saque=>{
 		data.pedido_saque = data_pedido_saque;
+		data.link_sistema = '/sistema';
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');
@@ -126,6 +132,7 @@ router.get('/pedidos-saques', function(req, res, next) {
 router.get('/pedidos-aportes', function(req, res, next) {
 	model.GetPedidosAportes().then(data_pedido_aporte=>{
 		data.pedido_aporte = data_pedido_aporte;
+		data.link_sistema = '/sistema';
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');
@@ -137,6 +144,7 @@ router.get('/pedidos-aportes', function(req, res, next) {
 router.get('/caixa', function(req, res, next) {
 	model.GetCaixa().then(data_caixa=>{
 		data.caixa = data_caixa;
+		data.link_sistema = '/sistema';
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');
@@ -147,6 +155,7 @@ router.get('/caixa', function(req, res, next) {
 router.get('/comissoes', function(req, res, next) {
 	model.GetComissoes().then(data_comissao=>{
 		data.comissao = data_comissao;
+		data.link_sistema = '/sistema';
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');
@@ -160,6 +169,7 @@ router.get('/comissoes', function(req, res, next) {
 router.get('/pedidos-rendimentos', function(req, res, next) {
 	model.GetPedidosRendimentos().then(data_pedido_rendimento=>{
 		data.pedido_rendimento = data_pedido_rendimento;
+		data.link_sistema = '/sistema';
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');
@@ -170,6 +180,7 @@ router.get('/pedidos-rendimentos', function(req, res, next) {
 router.get('/porcentagem-comissao', function(req, res, next) {
 	model.GetPorcentagemComissao().then(data_porcentagem_comissao=>{
 		data.porcentagem_comissao = data_porcentagem_comissao;
+		data.link_sistema = '/sistema';
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');
@@ -181,6 +192,7 @@ router.get('/porcentagem-comissao', function(req, res, next) {
 router.get('/ganhos-mensais', function(req, res, next) {
 	model.GetGanhosMensais().then(data_ganho_mensais=>{
 		data.ganhos_mensais = data_ganho_mensais;
+		data.link_sistema = '/sistema';
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');
@@ -216,21 +228,25 @@ router.get('/lista-coachs', function(req, res, next) {
 /*Cadastrar Administração */
 
 router.get('/noticias/criar', function(req, res, next) {
+	data.link_sistema = '/sistema';
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/noticias/cadastrar_noticia', data: data, usuario: req.session.usuario});
 });
 
 router.get('/usuarios/criar', function(req, res, next) {
 	model.GetCoach().then(data_coach=>{
 		data.coach = data_coach;
+		data.link_sistema = '/sistema';
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/usuarios/cadastrar_usuario', data: data, usuario: req.session.usuario});
 	});
 });
 
 router.get('/coaching/criar', function(req, res, next) {
+	data.link_sistema = '/sistema';
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/coachings/cadastrar_coaching', data: data, usuario: req.session.usuario});
 });
 
 router.get('/avisos/criar', function(req, res, next) {
+	data.link_sistema = '/sistema';
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/avisos/cadastrar_aviso', data: data, usuario: req.session.usuario});
 });
 
@@ -238,7 +254,8 @@ router.get('/caixa/criar', function(req, res, next) {
 	model.GetUsuarios().then(data_usuario=>{
 		data.usuario = data_usuario;
 		model.GetPlanos().then(data_plano=>{
-			data.plano = data_plano
+			data.plano = data_plano;
+			data.link_sistema = '/sistema';
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/caixa/cadastrar_caixa', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -247,6 +264,7 @@ router.get('/caixa/criar', function(req, res, next) {
 router.get('/comissao/criar', function(req, res, next) {
 	model.GetUsuarios().then(data_usuario=>{
 		data.usuario = data_usuario;
+		data.link_sistema = '/sistema';
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/comissoes/cadastrar_comissoes', data: data, usuario: req.session.usuario});
 	});
 });
@@ -260,6 +278,7 @@ router.get('/noticias/editar/:id', function(req, res, next) {
 	console.log(id);
 	console.log('_________________________________');
 	model.SelecionarNoticia(id).then(data => {
+		data.link_sistema = '/sistema';
 		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -278,6 +297,7 @@ router.get('/usuarios/editar/:id', function(req, res, next) {
 		data.coach = data_coach;
 		model.SelecionarUsuario(id).then(data_usuario_sel => {
 			data.usuario_admin = data_usuario_sel;
+			data.link_sistema = '/sistema';
 			console.log('EEEEEEEEEEEEEEE USUARIOS EDITAR EEEEEEEEEEEEEEEEEEEE');
 			console.log(data);	
 			console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
@@ -292,6 +312,7 @@ router.get('/coaching/editar/:id', function(req, res, next) {
 	console.log(id);
 	console.log('_________________________________');
 	model.SelecionarCoaching(id).then(data => {
+		data.link_sistema = '/sistema';
 		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -305,6 +326,7 @@ router.get('/aviso/editar/:id', function(req, res, next) {
 	console.log(id);
 	console.log('_________________________________');
 	model.SelecionarAviso(id).then(data => {
+		data.link_sistema = '/sistema';
 		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -319,6 +341,7 @@ router.get('/pedido-saque/editar/:id', function(req, res, next) {
 	console.log(id);
 	console.log('_________________________________');
 	model.SelecionarPedidoSaque(id).then(data => {
+		data.link_sistema = '/sistema';
 		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -333,6 +356,7 @@ router.get('/pedido-aporte/editar/:id', function(req, res, next) {
 	console.log(id);
 	console.log('_________________________________');
 	model.SelecionarPedidoAporte(id).then(data => {
+		data.link_sistema = '/sistema';
 		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -346,6 +370,7 @@ router.get('/pedido-rendimento/editar/:id', function(req, res, next) {
 	console.log(id);
 	console.log('_________________________________');
 	model.SelecionarPedidoRendimento(id).then(data => {
+		data.link_sistema = '/sistema';
 		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -360,6 +385,7 @@ router.get('/porcentagem-comissao/editar/:id', function(req, res, next) {
 	console.log(id);
 	console.log('_________________________________');
 	model.SelecionarPorcentagemComissao(id).then(data => {
+		data.link_sistema = '/sistema';
 		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -378,6 +404,7 @@ router.get('/caixa/editar/:id', function(req, res, next) {
 			data.caixa = data_caixa;
 			model.GetPlanos().then(data_plano=>{
 				data.plano = data_plano;
+				data.link_sistema = '/sistema';
 				console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 				console.log(data);	
 				console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -397,6 +424,7 @@ router.get('/comissao/editar/:id', function(req, res, next) {
 		data.usuario = data_usuario;
 		model.SelecionarComissao(id).then(data_comissao => {
 			data.comissao = data_comissao;
+			data.link_sistema = '/sistema';
 			console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 			console.log(data);	
 			console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -709,20 +737,20 @@ router.post('/comissao/desativar', function(req, res, next) {
 
 
 router.post('/uploadarquivo', function(req, res, next) {
-  var sampleFile = req.files.arquivo;
-  var nome = control.DateTimeForFile()+'_'+sampleFile.name;
+	var sampleFile = req.files.arquivo;
+	var nome = control.DateTimeForFile()+'_'+sampleFile.name;
 
-  console.log('SSSSSSSSSSSSSSSSSSS sampleFile SSSSSSSSSSSSSSSSSSSSSS');
-  console.log(sampleFile);
-  console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+	console.log('SSSSSSSSSSSSSSSSSSS sampleFile SSSSSSSSSSSSSSSSSSSSSS');
+	console.log(sampleFile);
+	console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 
   // Use the mv() method to place the file somewhere on your server
   sampleFile.mv('./assets/uploads/'+nome, function(err) {
-    if (err) {
-      return res.status(500).send(err);
-    }
+  	if (err) {
+  		return res.status(500).send(err);
+  	}
 
-		res.json(nome);
+  	res.json(nome);
   });
 });
 

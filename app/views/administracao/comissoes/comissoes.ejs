@@ -4,7 +4,7 @@
 	
 	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
 
-	<a class="btn light ajax-load" href="/sistema/administracao/comissao/criar">Cadastrar Comissão</a>
+	<a class="btn light ajax-load" href="<%= data.link_sistema%>administracao/comissao/criar">Cadastrar Comissão</a>
 
 	<div class="card light">
 
@@ -26,25 +26,25 @@
 
 					<tr>
 						<td>
-							<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/comissao/editar/<%= data.comissao[i].id %>">
+							<a class="limitador_3_linhas ajax-load black-text" href="<%= data.link_sistema%>/administracao/comissao/editar/<%= data.comissao[i].id %>">
 								R$<%= data.comissao[i].valor %>
 							</a> 
 						</td>
 						<td>
-							<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/comissao/editar/<%= data.comissao[i].id %>">
+							<a class="limitador_3_linhas ajax-load black-text" href="<%= data.link_sistema%>/administracao/comissao/editar/<%= data.comissao[i].id %>">
 								<%= data.comissao[i].nome_usuario %> 
 							</a>
 						</td>
 
 
 						<td>
-							<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/comissao/editar/<%= data.comissao[i].id %>">
+							<a class="limitador_3_linhas ajax-load black-text" href="<%= data.link_sistema%>/administracao/comissao/editar/<%= data.comissao[i].id %>">
 								<%= data.comissao[i].data_cadastro %> 
 							</a>
 						</td>
 						<td style="width: 30%;" class="center">
 							<a href="" style="font-size: 1.4em;">
-								<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.comissao[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.comissao[i].valor %>'? " data-to="/sistema/administracao/comissao/desativar" data-back="/sistema/administracao/comissoes"></i>
+								<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.comissao[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.comissao[i].valor %>'? " data-to="/sistema/administracao/comissao/desativar" data-back="<%= data.link_sistema%>/administracao/comissoes"></i>
 							</a>
 						</td>
 

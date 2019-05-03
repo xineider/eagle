@@ -25,28 +25,28 @@
 							
 							<tr>
 								<td>
-									<a class="black-text" href="/sistema/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
+									<a class="black-text ajax-load" href="<%= data.link_sistema%>/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
 										<%= data.pedido_aporte[i].nome %>
 									</a> 
 								</td>
 								<td>
-									<a class="black-text" href="/sistema/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
+									<a class="black-text ajax-load" href="<%= data.link_sistema%>/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
 										<%= data.pedido_aporte[i].plano %> 
 									</a>
 								</td>
 								<td>
-									<a class="black-text" href="/sistema/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
+									<a class="black-text ajax-load" href="<%= data.link_sistema%>/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
 										R$<%= data.pedido_aporte[i].valor %>
 									</a>
 								</td>
 								<td>
-									<a class="black-text" href="/sistema/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
+									<a class="black-text ajax-load" href="<%= data.link_sistema%>/administracao/pedido-aporte/editar/<%= data.pedido_aporte[i].id %>">
 										<%= data.pedido_aporte[i].data_cadastro %>
 									</a>
 								</td>
 								<td style="width: 30%;" class="center">
 									<a href="" style="font-size: 1.4em;">
-										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.pedido_aporte[i].id %>" data-texto="Você tem certeza que quer deletar o pedido de aporte do '<%= data.pedido_aporte[i].nome %>' no valor de R$'<%= data.pedido_aporte[i].valor %>'? " data-to="/sistema/administracao/pedido-aporte/desativar" data-back="/sistema/administracao/pedidos-aportes"></i>
+										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.pedido_aporte[i].id %>" data-texto="Você tem certeza que quer deletar o pedido de aporte do '<%= data.pedido_aporte[i].nome %>' no valor de R$'<%= data.pedido_aporte[i].valor %>'? " data-to="/sistema/administracao/pedido-aporte/desativar" data-back="<%= data.link_sistema%>/administracao/pedidos-aportes"></i>
 									</a>
 								</td>
 								

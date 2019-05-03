@@ -6,7 +6,7 @@
 		
 		
 		
-		<a class="btn light ajax-load" href="/sistema/administracao/ganhos-mensais/criar">Cadastrar Porcentagem Mês</a>
+		<a class="btn light ajax-load" href="<%= data.link_sistema%>/administracao/ganhos-mensais/criar">Cadastrar Porcentagem Mês</a>
 		
 		<div class="card light">
 			
@@ -27,23 +27,23 @@
 							
 							<tr>
 								<td>
-									<a class="ajax-load black-text" href="/sistema/administracao/ganhos-mensais/editar/<%= data.ganhos_mensais[i].id %>">
+									<a class="ajax-load black-text" href="<%= data.link_sistema%>/administracao/ganhos-mensais/editar/<%= data.ganhos_mensais[i].id %>">
 										<%= data.ganhos_mensais[i].nome_mes %>
 									</a> 
 								</td>
 								<td>
-									<a class="ajax-load black-text" href="/sistema/administracao/ganhos-mensais/editar/<%= data.ganhos_mensais[i].id %>">
+									<a class="ajax-load black-text" href="<%= data.link_sistema%>/administracao/ganhos-mensais/editar/<%= data.ganhos_mensais[i].id %>">
 										<%= data.ganhos_mensais[i].plano %> 
 									</a>
 								</td>
 								<td>
-									<a class="ajax-load black-text" href="/sistema/administracao/ganhos-mensais/editar/<%= data.ganhos_mensais[i].id %>">
+									<a class="ajax-load black-text" href="<%= data.link_sistema%>/administracao/ganhos-mensais/editar/<%= data.ganhos_mensais[i].id %>">
 										<%= data.ganhos_mensais[i].porcentagem %> %
 									</a>
 								</td>
 								<td style="width: 30%;" class="center">
 									<a href="" style="font-size: 1.4em;">
-										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.ganhos_mensais[i].id %>" data-texto="Você tem certeza que quer deletar o Ganho mensal de '<%= data.ganhos_mensais[i].nome_mes %>' de Porcentagem de '<%= data.ganhos_mensais[i].porcentagem %>%'? " data-to="/sistema/administracao/ganhos-mensais/desativar" data-back="/sistema/administracao/ganhos-mensais"></i>
+										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.ganhos_mensais[i].id %>" data-texto="Você tem certeza que quer deletar o Ganho mensal de '<%= data.ganhos_mensais[i].nome_mes %>' de Porcentagem de '<%= data.ganhos_mensais[i].porcentagem %>%'? " data-to="<%= data.link_sistema%>/administracao/ganhos-mensais/desativar" data-back="/sistema/administracao/ganhos-mensais"></i>
 									</a>
 								</td>
 								

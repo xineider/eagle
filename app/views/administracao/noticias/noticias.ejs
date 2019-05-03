@@ -6,7 +6,7 @@
 		
 		
 		
-		<a class="btn light ajax-load" href="/sistema/administracao/noticias/criar">Cadastrar Notícia</a>
+		<a class="btn light ajax-load" href="<%= data.link_sistema%>/administracao/noticias/criar">Cadastrar Notícia</a>
 		
 		<div class="card light">
 			
@@ -28,28 +28,28 @@
 							
 							<tr>
 								<td>
-									<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/noticias/editar/<%= data.noticias[i].id %>">
+									<a class="limitador_3_linhas break-all ajax-load black-text" href="<%= data.link_sistema%>/administracao/noticias/editar/<%= data.noticias[i].id %>">
 										<%= data.noticias[i].titulo %>
 									</a> 
 								</td>
 								<td>
-									<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/noticias/editar/<%= data.noticias[i].id %>">
+									<a class="limitador_3_linhas break-all ajax-load black-text" href="<%= data.link_sistema%>/administracao/noticias/editar/<%= data.noticias[i].id %>">
 										<%= data.noticias[i].descricao %> 
 									</a>
 								</td>
 								<td>
-									<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/noticias/editar/<%= data.noticias[i].id %>">
+									<a class="limitador_3_linhas break-all ajax-load black-text" href="<%= data.link_sistema%>/administracao/noticias/editar/<%= data.noticias[i].id %>">
 										<%= data.noticias[i].data_cadastro %>
 									</a>
 								</td>
 								<td>
-									<a class="limitador_3_linhas break-all ajax-load black-text" href="/sistema/administracao/noticias/editar/<%= data.noticias[i].id %>">
+									<a class="limitador_3_linhas break-all ajax-load black-text" href="<%= data.link_sistema%>/administracao/noticias/editar/<%= data.noticias[i].id %>">
 										<%= data.noticias[i].club == 1 ? 'Sim': 'Não' %>
 									</a>
 								</td>
 								<td style="width: 30%;" class="center">
 									<a href="" style="font-size: 1.4em;">
-										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.noticias[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.noticias[i].titulo %>'? " data-to="/sistema/administracao/noticias/desativar" data-back="/sistema/administracao/noticias"></i>
+										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.noticias[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.noticias[i].titulo %>'? " data-to="/sistema/administracao/noticias/desativar" data-back="<%= data.link_sistema%>/administracao/noticias"></i>
 									</a>
 								</td>
 								

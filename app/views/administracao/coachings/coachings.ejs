@@ -6,7 +6,7 @@
 		
 		
 		
-		<a class="btn light ajax-load" href="/sistema/administracao/coaching/criar">Cadastrar Coaching</a>
+		<a class="btn light ajax-load" href="<%= data.link_sistema%>/administracao/coaching/criar">Cadastrar Coaching</a>
 		
 		<div class="card light">
 			
@@ -27,23 +27,23 @@
 							
 							<tr>
 								<td>
-									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/coaching/editar/<%= data.coaching[i].id %>">
+									<a class="limitador_3_linhas ajax-load black-text" href="<%= data.link_sistema%>/administracao/coaching/editar/<%= data.coaching[i].id %>">
 										<%= data.coaching[i].titulo %>
 									</a> 
 								</td>
 								<td>
-									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/coaching/editar/<%= data.coaching[i].id %>">
+									<a class="limitador_3_linhas ajax-load black-text" href="<%= data.link_sistema%>/administracao/coaching/editar/<%= data.coaching[i].id %>">
 										<%= data.coaching[i].descricao %> 
 									</a>
 								</td>
 								<td>
-									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/coaching/editar/<%= data.coaching[i].id %>">
+									<a class="limitador_3_linhas ajax-load black-text" href="<%= data.link_sistema%>/administracao/coaching/editar/<%= data.coaching[i].id %>">
 										<%= data.coaching[i].data_cadastro %>
 									</a>
 								</td>
 								<td style="width: 30%;" class="center">
 									<a href="" style="font-size: 1.4em;">
-										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.coaching[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.coaching[i].titulo %>'? " data-to="/sistema/administracao/coaching/desativar" data-back="/sistema/administracao/coaching"></i>
+										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.coaching[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.coaching[i].titulo %>'? " data-to="/sistema/administracao/coaching/desativar" data-back="<%= data.link_sistema%>/administracao/coaching"></i>
 									</a>
 								</td>
 								

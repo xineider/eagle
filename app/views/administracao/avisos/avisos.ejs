@@ -6,7 +6,7 @@
 		
 		
 		
-		<a class="btn light ajax-load" href="/sistema/administracao/avisos/criar">Cadastrar Avisos</a>
+		<a class="btn light ajax-load" href="<%= data.link_sistema%>/administracao/avisos/criar">Cadastrar Avisos</a>
 		
 		<div class="card light">
 			
@@ -27,23 +27,23 @@
 							
 							<tr>
 								<td>
-									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/aviso/editar/<%= data.avisos[i].id %>">
+									<a class="limitador_3_linhas ajax-load black-text" href="<%= data.link_sistema%>/administracao/aviso/editar/<%= data.avisos[i].id %>">
 										<%= data.avisos[i].aviso %>
 									</a> 
 								</td>
 								<td>
-									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/aviso/editar/<%= data.avisos[i].id %>">
+									<a class="limitador_3_linhas ajax-load black-text" href="<%= data.link_sistema%>/administracao/aviso/editar/<%= data.avisos[i].id %>">
 										<%= data.avisos[i].descricao %> 
 									</a>
 								</td>
 								<td>
-									<a class="limitador_3_linhas ajax-load black-text" href="/sistema/administracao/aviso/editar/<%= data.avisos[i].id %>">
+									<a class="limitador_3_linhas ajax-load black-text" href="<%= data.link_sistema%>/administracao/aviso/editar/<%= data.avisos[i].id %>">
 										<%= data.avisos[i].data_cadastro %>
 									</a>
 								</td>
 								<td style="width: 30%;" class="center">
 									<a href="" style="font-size: 1.4em;">
-										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.avisos[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.avisos[i].aviso %>'? " data-to="/sistema/administracao/aviso/desativar" data-back="/sistema/administracao/avisos"></i>
+										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.avisos[i].id %>" data-texto="Você tem certeza que quer deletar '<%= data.avisos[i].aviso %>'? " data-to="/sistema/administracao/aviso/desativar" data-back="<%= data.link_sistema%>/administracao/avisos"></i>
 									</a>
 								</td>
 								

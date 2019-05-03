@@ -25,28 +25,28 @@
 							
 							<tr>
 								<td>
-									<a class="black-text" href="/sistema/administracao/pedido-saque/editar/<%= data.pedido_saque[i].id %>">
+									<a class="black-text ajax-load" href="<%= data.link_sistema%>/administracao/pedido-saque/editar/<%= data.pedido_saque[i].id %>">
 										<%= data.pedido_saque[i].nome %>
 									</a> 
 								</td>
 								<td>
-									<a class="black-text" href="/sistema/administracao/pedido-saque/editar/<%= data.pedido_saque[i].id %>">
+									<a class="black-text ajax-load" href="<%= data.link_sistema%>/administracao/pedido-saque/editar/<%= data.pedido_saque[i].id %>">
 										<%= data.pedido_saque[i].plano %> 
 									</a>
 								</td>
 								<td>
-									<a class="black-text" href="/sistema/administracao/pedido-saque/editar/<%= data.pedido_saque[i].id %>">
+									<a class="black-text ajax-load" href="<%= data.link_sistema%>/administracao/pedido-saque/editar/<%= data.pedido_saque[i].id %>">
 										R$<%= data.pedido_saque[i].valor %>
 									</a>
 								</td>
 								<td>
-									<a class="black-text" href="/sistema/administracao/pedido-saque/editar/<%= data.pedido_saque[i].id %>">
+									<a class="black-text ajax-load" href="<%= data.link_sistema%>/administracao/pedido-saque/editar/<%= data.pedido_saque[i].id %>">
 										<%= data.pedido_saque[i].data_cadastro %>
 									</a>
 								</td>
 								<td style="width: 30%;" class="center">
 									<a href="" style="font-size: 1.4em;">
-										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.pedido_saque[i].id %>" data-texto="Você tem certeza que quer deletar o pedido de saque do '<%= data.pedido_saque[i].nome %>' no valor de R$'<%= data.pedido_saque[i].valor %>'? " data-to="/sistema/administracao/pedido-saque/desativar" data-back="/sistema/administracao/pedidos-saques"></i>
+										<i class="fas fa-times-circle red-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.pedido_saque[i].id %>" data-texto="Você tem certeza que quer deletar o pedido de saque do '<%= data.pedido_saque[i].nome %>' no valor de R$'<%= data.pedido_saque[i].valor %>'? " data-to="<%= data.link_sistema%>/administracao/pedido-saque/desativar" data-back="/sistema/administracao/pedidos-saques"></i>
 									</a>
 								</td>
 								
