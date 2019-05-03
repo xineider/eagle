@@ -11,12 +11,14 @@ app.use(require('express-is-ajax-request'));
 
 router.get('/', function(req, res, next) {
 	model.GetPerfil(req.session.usuario.id).then(data => {
+		data.link_sistema = '/mobsmart';
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'perfil/perfil', data: data, usuario: req.session.usuario});
 	});
 });
 
 
 router.get('/alterar-senha/', function(req, res, next) {
+	data.link_sistema = '/mobsmart';
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'perfil/alterar_senha', data: data, usuario: req.session.usuario});
 });
 
