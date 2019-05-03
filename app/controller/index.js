@@ -16,7 +16,8 @@ router.get('/', function(req, res, next) {
 		model.GetNoticias().then(data_noticias=>{
 			data.noticias = data_noticias;
 			model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
-				data.carteira_aplicacao = data_valor_carteira;;			
+				data.carteira_aplicacao = data_valor_carteira;
+				data.link_sistema = '/sistema';		
 				console.log('--------------- DATA  INICIO------------------');
 				console.log(data);
 				console.log('----------------------------------------------');
@@ -44,6 +45,7 @@ router.get('/todas_noticias', function(req, res, next) {
 	
 	model.SelecionarTodasNoticias().then(data_noticias => {
 		data.noticias = data_noticias;
+		data.link_sistema = '/sistema';	
 		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -55,6 +57,7 @@ router.get('/todos_avisos', function(req, res, next) {
 	
 	model.SelecionarTodosAvisos(req.session.usuario.nivel).then(data_avisos => {
 		data.avisos = data_avisos;
+		data.link_sistema = '/sistema';
 		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
