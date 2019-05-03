@@ -14,7 +14,8 @@ router.get('/', function(req, res, next) {
 	model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
 		data.carteira_aplicacao = data_valor_carteira;;	
 		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-			data.aporte_primeiro = data_primeiro_aporte
+			data.aporte_primeiro = data_primeiro_aporte;
+			data.link_sistema = '/sistema';
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
@@ -39,7 +40,8 @@ router.get('/extrato', function(req, res, next) {
 
 router.get('/saque', function(req, res, next) {
 	model.GetInvestimentos(req.session.usuario.id).then(data_investimentos=>{
-		data.investimento = data_investimentos;		
+		data.investimento = data_investimentos;
+		data.link_sistema = '/sistema';	
 		console.log('SSSSSSSSSSSSSSSSS SAQUE SSSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -49,7 +51,8 @@ router.get('/saque', function(req, res, next) {
 
 router.get('/novo_aporte', function(req, res, next) {
 	model.GetNomePlanos().then(data_planos=>{
-		data.planos = data_planos
+		data.planos = data_planos;
+		data.link_sistema = '/sistema';
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');

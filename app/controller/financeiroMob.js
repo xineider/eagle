@@ -14,7 +14,8 @@ router.get('/', function(req, res, next) {
 	model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
 		data.carteira_aplicacao = data_valor_carteira;;	
 		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-			data.aporte_primeiro = data_primeiro_aporte
+			data.aporte_primeiro = data_primeiro_aporte;
+			data.link_sistema = '/mobsmart';
 			console.log('===================== DATA USUARIO ====================');
 			console.log(data);
 			console.log('=======================================================');
@@ -49,7 +50,8 @@ router.get('/saque', function(req, res, next) {
 
 router.get('/novo_aporte', function(req, res, next) {
 	model.GetNomePlanos().then(data_planos=>{
-		data.planos = data_planos
+		data.planos = data_planos;
+		data.link_sistema = '/mobsmart';
 		console.log('===================== DATA USUARIO ====================');
 		console.log(data);
 		console.log('=======================================================');
@@ -121,6 +123,25 @@ router.post('/pedir-aporte/', function(req, res, next) {
 		}
 
 	});
+});
+
+
+router.post('/novo_aporte/uploadarcomprovante', function(req, res, next) {
+  var sampleFile = req.files.arquivo;
+  var nome = control.DateTimeForFile()+'_'+sampleFile.name;
+
+  console.log('SSSSSSSSSSSSSSSSSSS sampleFile SSSSSSSSSSSSSSSSSSSSSS');
+  console.log(sampleFile);
+  console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv('./assets/uploads/'+nome, function(err) {
+    if (err) {
+      return res.status(500).send(err);
+    }
+
+		res.json(nome);
+  });
 });
 
 
