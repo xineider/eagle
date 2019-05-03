@@ -55,10 +55,24 @@
 
 		</div>
 
-		<div class="">
-			<a class="btn light">Enviar Comprovante</a>
 
+		<div class="row uploads word-wrap">
+			<div class="file-field input-field col s12">
+				<div class="btn light">
+					<span>Enviar Comprovante</span>
+					<input type="file" data-href="/sistema/financeiro/novo_aporte/uploadarcomprovante" id="arquivo" data-container="comprovante_container" class="arquivo_comprovante" accept="image/*,application/pdf">
+				</div>
+				<div class="file-path-wrapper hide">
+					<input class="file-path validate" type="text" placeholder="Ou arraste seu arquivo aqui">
+				</div>
+			</div>
+
+				<div class="comprovante_container">
+				</div>
 		</div>
+
+
+
 
 		<div class="row padding-b-10 margin-t-10">
 			<div class="col s12">

@@ -1,9 +1,10 @@
-// Eventos DOM
-document.addEventListener('DOMContentLoaded', function() {
-	var elems = document.querySelectorAll('.sidenav');
-	var options = {edge:'left'};
-	var instances = M.Sidenav.init(elems,options);
-});
+(function($){
+	$(function(){
+
+		$('.sidenav').sidenav();
+
+  }); // end of document ready
+})(jQuery); // end of jQuery name space
 
 $(document).on('ready', function () {
 	
@@ -291,6 +292,15 @@ $(document).on('ready', function () {
 			UploadImagem($(this),'.'+$(this).data('container'));
 		}
 	});
+
+	$(document).on('change', '.arquivo_comprovante', function () {
+		if($(this).val() != '') {
+			UploadComprovante($(this),'.'+$(this).data('container'));
+		}
+	});
+
+
+
 	
 	$(document).on('change', '.cadastrar_evento_tipo_compromisso_select', function(e) {
 		
@@ -809,6 +819,55 @@ function UploadImagem(isso,container) {
 		}
 	});
 }
+
+function UploadComprovante(isso,container) {
+	var link = isso.data('href');
+	console.log('FILE UPLOAD');
+	console.log(isso[0].files[0]);
+	var formData = new FormData();
+	formData.append('arquivo', isso[0].files[0]);
+
+	$.ajax({
+		url: link,
+		type: 'POST',
+		data: formData,
+		dataType: 'json',
+		processData: false,
+		contentType: false,
+		beforeSend: function(request) {
+			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
+			adicionarLoader();
+		},
+		success: function (data) {
+			$('.file-path').val('');
+
+			console.log('container cccccccccccccccc');
+			console.log(container);
+
+			$(container).empty();
+
+			$(container).append('\
+				<div class="col s12 m6 center-align relative pai">\
+				<div class="card-panel light break-all">\
+				<input type="hidden" name="arquivo" value="/assets/uploads/'+data+'">\
+				<button class="btn-floating btn waves-effect waves-light red close-button remove"><i class="fa fa-times" aria-hidden="true"></i></button>\
+				<b>Comprovante: '+data+' <br>\
+				</div>\
+				</div>\
+				');
+			console.debug(data);
+		},
+		error: function (xhr, e, t) {
+			console.debug((xhr.responseText));
+		},
+		complete: function() {
+			removerLoader();
+		}
+	});
+}
+
 
 
 // ESPECIFICO
