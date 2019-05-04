@@ -57,7 +57,7 @@
 						<textarea name="observacoes"><%= data.evento[0].observacoes %></textarea>
 					</div>
 					
-					<button data-href="/sistema/agenda/atualizar_evento" data-action="/sistema/agenda/" class="btn secondary ajax-submit-update margin-b-10">
+					<button data-href="/sistema/agenda/atualizar_evento" data-action="<%= data.link_sistema%>/agenda/" class="btn secondary ajax-submit-update margin-b-10">
 						Salvar <i class="far fa-save-o" aria-hidden="true"></i>
 					</button>
 					
@@ -65,7 +65,7 @@
 				
 	
 					<div class="margin-t-10 margin-b-10 col s12">
-						<a class="btn red white-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.evento[0].id %>" data-texto="Você tem certeza que quer deletar este evento?" data-to="/sistema/agenda/desativar_evento" data-back="/sistema/agenda/">
+						<a class="btn red white-text modal-remover-mount" data-href="#modaldeletar" data-id="<%= data.evento[0].id %>" data-texto="Você tem certeza que quer deletar este evento?" data-to="/sistema/agenda/desativar_evento" data-back="<%= data.link_sistema%>/agenda/">
 							Apagar Evento
 						</a>
 					</div>

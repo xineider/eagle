@@ -16,7 +16,8 @@ router.get('/', function(req, res, next) {
 		model.GetAporte(req.session.usuario.id).then(data_aporte_todal=>{
 			data.aporte_total= data_aporte_todal;
 			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-				data.aporte_primeiro = data_primeiro_aporte
+				data.aporte_primeiro = data_primeiro_aporte;
+				data.link_sistema = '/sistema';
 				console.log('===================== DATA USUARIO ====================');
 				console.log(data);
 				console.log('=======================================================');
@@ -41,6 +42,7 @@ router.get('/editar_evento/:id', function(req, res, next) {
 		data.evento = data_evento;
 		model.GetCoachees(req.session.usuario.id).then(data_coachee=>{
 			data.coachee = data_coachee;
+			data.link_sistema = '/sistema';
 			console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 			console.log(data);	
 			console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
@@ -53,6 +55,7 @@ router.get('/editar_evento/:id', function(req, res, next) {
 router.get('/adicionar-novo-compromisso', function(req, res, next) {
 	model.GetCoachees(req.session.usuario.id).then(data_coachee=>{
 		data.coachee = data_coachee;
+		data.link_sistema = '/sistema';
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'agenda/cadastrar_evento', data: data, usuario: req.session.usuario});
 	});
 });
