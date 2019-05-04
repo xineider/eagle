@@ -127,7 +127,7 @@ app.use('/sistema/comissoes', comissoes);
 app.use('/sistema/projetos_sociais', projetosSociais);
 app.use('/sistema/api', api);
 app.use('/sistema/perfil', perfil);
-app.use('/sistema/usuarios', usuarios);
+
 
 
 
@@ -148,7 +148,6 @@ app.use('/mobsmart/comissoes', comissoesMob);
 app.use('/mobsmart/projetos_sociais', projetosSociaisMob);
 app.use('/mobsmart/api', apiMob);
 app.use('/mobsmart/perfil', perfilMob);
-app.use('/mobsmart/usuarios', usuariosMob);
 
 
 // catch 404 and forward to error handler
