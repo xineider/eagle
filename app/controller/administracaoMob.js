@@ -572,10 +572,81 @@ router.post('/usuarios/atualizar/', function(req, res, next) {
 		POST.id_coach = 0;
 	}
 
-	model.AtualizarUsuario(POST).then(data => {
-		res.json(data);
+	var html = "Olá seu email foi alterado pela administração no Eagle Finances. Segue abaixo as informações sobre sua conta."+
+	"<br><b>Login:</b> "+POST.login+
+	"<br><br>Caso você não saiba sua senha por-favor contate o suporte."
+	"<br>Acesse via o aplicativo Eagle Finance"+
+	"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+	"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
+
+	var text = "Olá seu email foi alterado pela administração no Eagle Finances. Segue abaixo as informações sobre sua conta."+
+	"<br>Login: "+POST.login+
+	"<br><br>Caso você não saiba sua senha por-favor contate o suporte."
+	"<br>Acesse via o aplicativo Eagle Finance"+
+	"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+	"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
+
+
+
+	model.VerificarSeTemMesmoLogin(POST).then(tem_mesmo_login => {
+
+		console.log('ttttttttttt tem login ttttt');
+		console.log(tem_mesmo_login);
+		console.log('ttttttttttttttttttttttttttt');
+		/*verificar se o login foi alterado*/
+		if(tem_mesmo_login != ''){
+			/*verificar se o email é o mesmo, se não for enviar um e-mail para o novo informando as alterações*/
+			model.VerificarSeTemMesmoEmail(POST).then(tem_mesmo_email => {
+				console.log('mmmmmmmmmmmmmmmmaiiiiiiilllllllllllll');
+				console.log(tem_mesmo_email);
+				console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
+				if(tem_mesmo_email != ''){
+					model.AtualizarUsuario(POST).then(data => {
+						res.json(data);
+					});
+				}else{
+					model.AtualizarUsuario(POST).then(data => {
+						control.SendMail(POST.email, 'E-mail alterado no Eagle Finances!', html, text);
+						res.json(data);
+					});
+				}
+
+			});
+		}else{
+			/*caso o login seja alterado ver se o novo tem disponibilidade */
+			model.VerificarSeTemLoginDisponivel(POST.login).then(tem_login => {
+				console.log('eeeeeeee login novo para ver se é diferente eeeeeee');
+				console.log(tem_login);
+				console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+
+				if(tem_login == ''){
+					/*se tiver disponibilidade ver se o e-mail foi alterado, se for enviar um e-mail para o novo email*/
+					model.VerificarSeTemMesmoEmail(POST).then(tem_mesmo_email => {
+						console.log('mmmmmmmmmmmmmmmmaiiiiiiilllllllllllll');
+						console.log(tem_mesmo_email);
+						console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
+						if(tem_mesmo_email != ''){
+							model.AtualizarUsuario(POST).then(data => {
+								res.json(data);
+							});
+						}else{
+							model.AtualizarUsuario(POST).then(data => {
+								control.SendMail(POST.email, 'E-mail alterado no Eagle Finances!', html, text);
+								res.json(data);
+							});
+						}
+
+					});
+
+				}else{
+					res.json('possui_login');
+				}
+
+			});
+		}
 	});
 });
+
 
 router.post('/pedido-saque/confirmar/', function(req, res, next) {
 	POST = req.body;
