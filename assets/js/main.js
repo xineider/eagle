@@ -3,8 +3,8 @@
 
 		$('.sidenav').sidenav();
 
-  }); // end of document ready
-})(jQuery); // end of jQuery name space
+	});
+})(jQuery); 
 
 $(document).on('ready', function () {
 	
@@ -231,6 +231,19 @@ $(document).on('ready', function () {
 		}
 	});
 
+	$(document).on('click', '.ajax-submit-update-mensagem', function(e) {
+		e.preventDefault();
+		var form = $(this).parents('form');
+		var post = form.serializeArray();
+		var link = $(this).data('href');
+		var back = $(this).data('action');
+		var sucessMessage = $(this).data('mensagem-sucesso');
+		var sucessClass = 'green';
+		if (VerificarForm(form) == true) {
+			SubmitAjax(post, link, back,sucessMessage,sucessClass);
+		}
+	});
+
 	$(document).on('click', '.ajax-submit-delete', function(e) {
 		e.preventDefault();
 		var form = $(this).parents('form');
@@ -365,6 +378,12 @@ $(document).on('ready', function () {
 	
 	$(document).on('change', '.timepicker', function () {
 		$(this).focus();
+	});
+
+	$(document).on('click', '.sidenav-trigger', function(e) {
+		var navbarE = document.querySelector('.sidenav');
+		var navbarI = M.Sidenav.init(navbarE,{edge:'left'});
+		navbarI.open();
 	});
 	
 	
@@ -617,6 +636,8 @@ function SubmitAjax(post, link, back,sucessMessage,sucessClass) {
 				AddErrorTexto($('#senha_atual'),'Senha Atual Diferente!');				
 			}else if(data == 'error_saque_senha_diferente'){
 				AddErrorTexto($('#senha_saque'),'Senha Não Confere!');	
+			}else if(data == 'possui_login'){
+				AddErrorTexto($('input[name="login"]'),"Login existente, tente outro!")
 			}else if(data != undefined){
 				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
 				GoTo(back, true);
@@ -726,38 +747,6 @@ function VerificarForm(form) {
 		return true;
 	}
 }
-
-
-
-
-
-
-// function VerificarForm() {
-// 	var error = false;
-// 	$('.error').remove();
-
-// 	$('input:enabled:not([type="hidden"])[required="true"]').each(function(){
-// 		if(VerificaItem($(this)) == true) {
-// 			error = true;
-// 			return false;
-// 		};
-// 	});
-// 	$('textarea:enabled[required="true"]').each(function(){
-// 		if(VerificaItem($(this)) == true) {
-// 			error = true;
-// 			return false;
-// 		};
-// 	});
-// 	$('select:enabled[required="true"]').each(function(){
-// 		if(VerificaItem($(this)) == true) {
-// 			error = true;
-// 			return false;
-// 		};
-// 	});
-// 	if (error == false) {
-// 		return true;
-// 	}
-// }
 
 
 function VerificaItem(isso) {
@@ -902,7 +891,7 @@ function calendarioCompromissos(){
 			}
 		},
 		timezone:'local',
-		editable:true,
+		editable:false,
 		eventClick: function(event, jsEvent, view) {
 			$.ajax({
 				method: "GET",

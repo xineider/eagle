@@ -134,7 +134,7 @@ class AdministracaoModel {
 
 	
 	
-	VerificarSeTemLogin(login){
+	VerificarSeTemLoginDisponivel(login){
 		return new Promise(function(resolve, reject) {
 			helper.Query("SELECT login \
 				FROM usuarios WHERE deletado = ? AND login = ?", [0,login]).then(data => {
@@ -142,6 +142,25 @@ class AdministracaoModel {
 				});
 			});
 	}
+
+	VerificarSeTemMesmoLogin(POST){
+		return new Promise(function(resolve, reject) {
+			helper.Query("SELECT login \
+				FROM usuarios WHERE deletado = ? AND login = ? AND id = ?", [0,POST.login,POST.id]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
+	VerificarSeTemMesmoEmail(POST){
+		return new Promise(function(resolve, reject) {
+			helper.Query("SELECT email \
+				FROM usuarios WHERE deletado = ? AND email = ? AND id = ?", [0,POST.email,POST.id]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
 
 
 
