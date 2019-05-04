@@ -19,7 +19,8 @@ router.get('/', function(req, res, next) {
 				model.GetCoachingVistosUsuario(req.session.usuario.id).then(data_coaching_vistos=>{
 					data.coaching_vistos = data_coaching_vistos;
 					model.GetTotalVistos(req.session.usuario.id).then(data_total_visto=>{
-						data.total_visto = data_total_visto
+						data.total_visto = data_total_visto;
+						data.link_sistema = '/mobsmart';
 						console.log('===================== DATA COACHING COACHEE ====================');
 						console.log(data);
 						console.log('=======================================================');
@@ -32,7 +33,8 @@ router.get('/', function(req, res, next) {
 		model.GetCoacheesComCoaching(req.session.usuario.id).then(data_coachees_coaching=>{
 			data.coachees_coaching = data_coachees_coaching;
 			model.GetTodosCoaching().then(data_coaching=>{
-				data.coaching = data_coaching;		
+				data.coaching = data_coaching;
+				data.link_sistema = '/mobsmart';
 				
 				console.log('........................ DATA COACHING COACH .........................');
 				console.log(data);
@@ -49,6 +51,7 @@ router.get('/confirmar_coaching', function(req, res, next) {
 		data.coachee = data_todos_coachees;
 		model.GetTodosCoaching().then(data_coaching=>{
 			data.coaching = data_coaching;
+			data.link_sistema = '/mobsmart';
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'coaching/confirmar_coaching', data: data, usuario: req.session.usuario});
 		});
 	});
