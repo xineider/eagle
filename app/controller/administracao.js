@@ -224,6 +224,22 @@ router.get('/lista-coachs', function(req, res, next) {
 });
 
 
+router.get('/alterar-senha-usuario/:id', function(req, res, next) {
+	var id = req.params.id;
+	console.log('selecionei alterar a senha do usuario');
+	console.log(id);
+	console.log('_________________________________');
+	model.SelecionarUsuario(id).then(data_usuario_admin => {
+		data.usuarios_admin = data_usuario_admin;
+		data.link_sistema = '/sistema';
+		console.log('uuuuuuuuuUUUUUUUUUUUUUUUUUUU usuario uuuuuuuuUUUUUUUUUuuuuuu');
+		console.log(data);	
+		console.log('UUUUUuuuuuuuuuuuuuuuUUUUUUUUUUUUUUUUUuuuuuuuuUUUUUuuuuuuuuuu');
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/usuarios/alterar_senha_usuario', data: data, usuario: req.session.usuario});
+	});
+});
+
+
 
 /*Cadastrar Administração */
 
@@ -530,6 +546,40 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 		}
 	});
 });
+
+
+router.post('/usuarios/alterar-senha/', function(req, res, next) {
+	POST = req.body;
+	var senha = Math.random().toString(36).substr(2, 8);
+	POST.senha = senha;
+
+	console.log('USUARIOS ALTERAR-SENHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	console.log(POST);
+	console.log('USUARIOS ALTERAR-SENHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+
+	model.SelecionarUsuario(POST.id).then(data_usuario => {
+		model.AlterarSenhaUsuario(POST).then(senha_alteradao =>{
+			var html = "Olá sua senha foi alterada pelo administrador do Sistema Eagle Finances. Segue abaixo as informações sobre sua conta."+
+			"<br><b>Login:</b> "+data_usuario[0].login+
+			"<br><b>Senha:</b> "+senha+ 
+			"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita."+
+			"<br>Acesse via o aplicativo Eagle Finance"+
+			"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+			"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
+
+			var text = "Olá sua senha foi alterada pelo administrador do Sistema Eagle Finances. Segue abaixo as informações sobre sua conta."+
+			"<br>Login: "+data_usuario[0].login+
+			"<br>Senha: "+senha+
+			"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita."+
+			"<br>Acesse via o aplicativo Eagle Finance"+
+			"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+			"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
+			control.SendMail(data_usuario[0].email, 'Alterado Senha no Eagle Finances!', html, text);
+			res.json(data);
+		});
+	});
+});
+
 
 
 

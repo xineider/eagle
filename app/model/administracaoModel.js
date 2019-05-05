@@ -399,6 +399,17 @@ class AdministracaoModel {
 		});
 	}
 	
+	AlterarSenhaUsuario(POST) {
+		return new Promise(function(resolve, reject) {
+			POST.senha = helper.Encrypt(POST.senha);
+			helper.Update('usuarios', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+
+
 	AtualizarCoaching(POST) {
 		return new Promise(function(resolve, reject) {
 			helper.Update('coaching', POST).then(data => {

@@ -90,6 +90,20 @@
 
 			<% }else{ %>
 
+
+
+
+			<%if(usuario.nivel == 5 || (usuario.nivel == 4 && data.usuario_admin[0].nivel != 5)){%>
+
+			<div class="row">
+				<a class="modal-mount btn gold margin-b-10" data-href="#modalinfo" data-link="/administracao/alterar-senha-usuario/<%= data.usuario_admin[0].id %>">
+					Alterar Senha Usuário
+				</a>
+			</div>
+
+			<%}%>
+
+
 			<button data-href="/sistema/administracao/usuarios/atualizar" data-action="<%= data.link_sistema%>/administracao/usuarios/" class="btn secondary ajax-submit-update margin-b-10">
 				Salvar <i class="far fa-save-o" aria-hidden="true"></i>
 			</button>
