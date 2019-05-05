@@ -2,15 +2,15 @@
   <div class="titulo_inicio">Perfil do Usuário</div>
   
   <div class="card light row">
-    
+
     <form method="POST" action="">
-      
+
       <input type="hidden" name="id" value="<%= data[0].id %>">
       
       <div class="row">
-        
+
         <div class="col s12 center">
-          
+
           <a class="modal-mount" data-href="#modalinfo" data-link="/perfil/crop_imagem_perfil">
             <img class="mount-modal" src="<%= data[0].imagem %>" style="height: 150px;">
           </a>
@@ -23,18 +23,21 @@
             <div class="file-field input-field col s12">
               <div class="btn primary" style="float:none;">
                 <span>Alterar Imagem</span>
-                <input type="file" data-href="/sistema/configuracoes/uploadimagem" id="upload_imagem_perfil" accept="image/*">
+                <input type="file" data-href="/sistema/perfil/uploadimagem" class="arquivo_imagem_perfil" id="upload_imagem_perfil" data-container="imagem_perfil_container" accept="image/*">
               </div>
               <div class="file-path-wrapper hide">
                 <input class="file-path validate" type="text" placeholder="Ou arraste seu arquivo aqui">
               </div>
+            </div>
+
+            <div class="imagem_perfil_container">
             </div>
           </div>
           
         </div>
       </div>
       <div class="row">
-        
+
         <div class="input-field col s12">
           <label for="nome">Nome *</label>
           <input required="true" class="validate" type="text" name="nome" value="<%= data[0].nome %>">
@@ -51,7 +54,7 @@
         </div>
         
       </div>
-           
+
       
       <div class="margin-b-10">
         <a href="<%= data.link_sistema%>/perfil/alterar-senha/" class="btn primary ajax-load">

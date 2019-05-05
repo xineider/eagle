@@ -28,6 +28,7 @@ router.post('/entrar_sistema', function(req, res, next) {
 					req.session.usuario.id = data[0].id;
 					req.session.usuario.hash_login = data[0].hash_login;
 					req.session.usuario.nivel = data[0].nivel;
+					req.session.usuario.imagem = data[0].imagem;
 					res.send({result: 'redirect', url:'/sistema'});
 
 					/*Usuário deletado*/

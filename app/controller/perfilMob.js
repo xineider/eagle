@@ -113,20 +113,16 @@ router.post('/uploadimagem', function(req, res, next) {
 	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 	
 	// Use the mv() method to place the file somewhere on your server
-	arquivo.mv('./assetsward/imagem_perfil/'+nomeImagem, function(err) {
+	arquivo.mv('./assets/imagem_perfil/'+nomeImagem, function(err) {
 		if (err) {
 			return res.status(500).send(err);
 		}
+
+		res.json(nomeImagem);
 	});
-	var nomeImagemPerfil = '/assetsward/imagem_perfil/' + nomeImagem;
-	
-	
-	data.imagem = nomeImagemPerfil;
-	data.id = req.session.usuario.id;
-	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'perfil/modal_imagem_perfil', data: data, usuario: req.session.usuario});
-	
 	
 });
+
 
 
 

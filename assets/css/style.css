@@ -596,13 +596,13 @@ hr{
 }
 
 
-.imagem_container{
+.imagem_container,.imagem_perfil_container{
 	width: 80%;
 	margin: 0 auto;
 	
 }
 
-.imagem_container img{
+.imagem_container img,.imagem_perfil_container img{
 	width: 100%;
 }
 

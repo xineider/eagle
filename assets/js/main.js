@@ -306,6 +306,12 @@ $(document).on('ready', function () {
 		}
 	});
 
+	$(document).on('change', '.arquivo_imagem_perfil', function () {
+		if($(this).val() != '') {
+			UploadImagemPerfil($(this),'.'+$(this).data('container'));
+		}
+	});
+
 	$(document).on('change', '.arquivo_comprovante', function () {
 		if($(this).val() != '') {
 			UploadComprovante($(this),'.'+$(this).data('container'));
@@ -792,6 +798,7 @@ function UploadImagem(isso,container) {
 		success: function (data) {
 			$('.file-path').val('');
 
+			console.log('data ----------------');
 			console.log(data);
 			$(container).empty();
 
@@ -801,6 +808,51 @@ function UploadImagem(isso,container) {
 				<button class="btn waves-effect waves-light red close-button remove margin-b-10">Remover Imagem</button>\
 				<input type="hidden" name="arquivo" value="/assets/uploads/'+data+'">\
 				</div>');
+			console.debug(data);
+		},
+		error: function (xhr, e, t) {
+			console.debug((xhr.responseText));
+		},
+		complete: function() {
+			removerLoader();
+		}
+	});
+}
+
+function UploadImagemPerfil(isso,container) {
+	var link = isso.data('href');
+	console.log('FILE UPLOAD');
+	console.log(isso[0].files[0]);
+	var formData = new FormData();
+	formData.append('arquivo', isso[0].files[0]);
+
+	$.ajax({
+		url: link,
+		type: 'POST',
+		data: formData,
+		dataType: 'json',
+		processData: false,
+		contentType: false,
+		beforeSend: function(request) {
+			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
+			adicionarLoader();
+		},
+		success: function (data) {
+			$('.file-path').val('');
+
+			console.log('data ----------------');
+			console.log(data);
+			$(container).empty();
+
+			$(container).append('\
+				<div class="pai">\
+				<img src="/assets/imagem_perfil/'+data+'">\
+				<button class="btn waves-effect waves-light red close-button remove margin-b-10">Remover Imagem</button>\
+				<input type="hidden" name="imagem" value="/assets/imagem_perfil/'+data+'">\
+				</div>');
+			$('.img-user img').prop('src','/assets/imagem_perfil/'+data)
 			console.debug(data);
 		},
 		error: function (xhr, e, t) {
