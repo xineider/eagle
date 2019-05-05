@@ -106,7 +106,7 @@ router.get('/avisos', function(req, res, next) {
 router.get('/usuarios', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
-		model.GetUsuarios().then(data_usuarios=>{
+		model.GetUsuariosMenosProprio(req.session.usuario.id).then(data_usuarios=>{
 			data.usuarios_admin = data_usuarios;
 			data.link_sistema = '/mobsmart';
 			console.log('===================== DATA USUARIO ====================');
