@@ -278,7 +278,7 @@ router.get('/caixa/criar', function(req, res, next) {
 });
 
 router.get('/comissao/criar', function(req, res, next) {
-	model.GetUsuarios().then(data_usuario=>{
+	model.GetCoach().then(data_usuario=>{
 		data.usuario = data_usuario;
 		data.link_sistema = '/mobsmart';
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'administracao/comissoes/cadastrar_comissoes', data: data, usuario: req.session.usuario});
