@@ -109,7 +109,7 @@ router.get('/usuarios', function(req, res, next) {
 		model.GetUsuariosMenosProprio(req.session.usuario.id).then(data_usuarios=>{
 			data.usuarios_admin = data_usuarios;
 			data.link_sistema = '/sistema';
-			console.log('===================== DATA USUARIO ====================');
+			console.log('===================== DATA USUARIO ===-================');
 			console.log(data);
 			console.log('=======================================================');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/usuarios/usuarios', data: data, usuario: req.session.usuario});
