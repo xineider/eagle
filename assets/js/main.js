@@ -388,7 +388,7 @@ $(document).on('ready', function () {
 
 	$(document).on('click', '.sidenav-trigger', function(e) {
 		var navbarE = document.querySelector('.sidenav');
-		var navbarI = M.Sidenav.init(navbarE,{edge:'left'});
+		var navbarI = M.Sidenav.init(navbarE,{edge:'right'});
 		navbarI.open();
 	});
 	
@@ -435,7 +435,9 @@ function GoTo(link, state) {
 		async: true,
 		url: link,
 		beforeSend: function(request) {
-			console.log('setando');
+			console.log('lllllllllllllll link llllllllllllll');
+			console.log(link);
+			console.log('lllllllllllllllllllllllllllllllllll');
 			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
 			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
@@ -443,6 +445,11 @@ function GoTo(link, state) {
 		},
 		success: function(data) {
 			$('main').html(data);
+			if(link == '/sistema/'){
+				$('#voltar').addClass('hide');
+			}else{
+				$('#voltar').removeClass('hide');
+			}
 		},
 		error: function(xhr) { // if error occured
 		},
