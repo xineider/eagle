@@ -463,7 +463,7 @@ function GoTo(link, state) {
 		}
 	});
 	if (state == true) {
-		window.history.pushState('Sistema Quorp', 'Sistema Quorp', link);
+		window.history.pushState('Eagle Finance', 'Eagle Finance', link);
 		console.log('history state');
 		console.log(history);
 		console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
