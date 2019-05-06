@@ -1,7 +1,7 @@
 (function($){
 	$(function(){
 
-		$('.sidenav').sidenav();
+		$('.menu_lateral').sidenav();
 
 	});
 })(jQuery); 
@@ -386,9 +386,9 @@ $(document).on('ready', function () {
 		$(this).focus();
 	});
 
-	$(document).on('click', '.sidenav-trigger', function(e) {
-		var navbarE = document.querySelector('.sidenav');
-		var navbarI = M.Sidenav.init(navbarE,{edge:'right'});
+	$(document).on('click', '.botao_menu', function(e) {
+		var navbarE = document.querySelector('.menu_lateral');
+		var navbarI = M.Sidenav.init(navbarE,{edge:'left'});
 		navbarI.open();
 	});
 	
@@ -459,7 +459,7 @@ function GoTo(link, state) {
 			$('.tooltipped').tooltip({delay: 50});
 			$('.modal').modal('close');
 			FormatInputs();
-			$('.sidenav').sidenav('close');
+			$('.menu_lateral').sidenav('close');
 		}
 	});
 	if (state == true) {

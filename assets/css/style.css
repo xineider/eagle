@@ -47,8 +47,8 @@ header .header_logo{
 header .sidenav-trigger{
 	margin-top: 5px;
 	position: absolute;
-	/*left: 0;*/
-	right: 0;
+	left: 0;
+/*	right: 0;*/
 }
 
 header .sidenav-trigger i{
