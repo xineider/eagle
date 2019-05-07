@@ -65,6 +65,11 @@ router.get('/todos_avisos', function(req, res, next) {
 	});
 });
 
+router.get('/menu_lateral', function(req, res, next) {
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'includes/menu_header', data: data, usuario: req.session.usuario});
+
+});
+
 
 /* POST enviando o login para verificação. */
 router.post('/', function(req, res, next) {

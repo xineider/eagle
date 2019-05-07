@@ -610,3 +610,32 @@ hr{
 .uploads .file-field .btn{
 	float: none;
 }
+
+
+.menu-item-ajax-load{
+	list-style-type: none;
+
+	line-height: 48px;
+}
+
+.menu-item-ajax-load a{
+	display: block;
+	width: 100%;
+	font-weight: bold;
+	height: 48px;
+	padding: 0 32px;
+	font-size: 14pt;
+	background: #2f3035;
+	border-bottom: 1px solid #fff;
+}
+
+.menu-item-ajax-load a:hover{
+	background-color: rgba(0,0,0,0.05);
+}
+
+
+
+.menu-item-ajax-load a>i{
+	margin-right: 32px;
+}
+
