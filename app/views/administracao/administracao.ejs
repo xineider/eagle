@@ -44,14 +44,22 @@
 		<div class="equal-columns margin-b-10">
 
 			<div class="col s6">
-				<a href="<%= data.link_sistema%>/administracao/pedidos-saques" class="ajax-load btn white black-text btn-full-width">
+				<a href="<%= data.link_sistema%>/administracao/pedidos-saques" class="ajax-load btn white black-text btn-full-width" style="position: relative;">
 					Aprovação Saques
+					<%if(data.ver_saque.length > 0){%>
+					<div class="red" style="height: 20px;width: 20px; border-radius: 50%; position: absolute;bottom:0;right: 5px; "></div>
+					<%}%>
 				</a>
 			</div>
 
 			<div class="col s6">
-				<a href="<%= data.link_sistema%>/administracao/pedidos-aportes" class="ajax-load btn white black-text btn-full-width">
+				<a href="<%= data.link_sistema%>/administracao/pedidos-aportes" class="ajax-load btn white black-text btn-full-width" style="position: relative;">
 					Aprovação Aportes
+					
+					<%if(data.ver_aporte.length > 0){%>
+					<div class="red" style="height: 20px;width: 20px; border-radius: 50%; position: absolute;bottom:0;right: 5px; "></div>
+					<%}%>
+
 				</a>
 			</div>
 		</div>

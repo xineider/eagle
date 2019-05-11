@@ -13,13 +13,16 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
-		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-			data.aporte_primeiro = data_primeiro_aporte;
-			data.link_sistema = '/mobsmart';
-			console.log('===================== DATA USUARIO ====================');
-			console.log(data);
-			console.log('=======================================================');
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'administracao/administracao', data: data, usuario: req.session.usuario});
+		model.VerSeTemPedidoSaque().then(data_ver_saque=>{
+			data.ver_saque = data_ver_saque;
+			model.VerSeTemPedidoAporte().then(data_ver_aporte=>{
+				data.ver_aporte = data_ver_aporte;
+				data.link_sistema = '/mobsmart';
+				console.log('===================== DATA USUARIO ====================');
+				console.log(data);
+				console.log('=======================================================');
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'administracao/administracao', data: data, usuario: req.session.usuario});
+			});
 		});
 	});
 });
@@ -852,20 +855,20 @@ router.post('/comissao/desativar', function(req, res, next) {
 
 
 router.post('/uploadarquivo', function(req, res, next) {
-  var sampleFile = req.files.arquivo;
-  var nome = control.DateTimeForFile()+'_'+sampleFile.name;
+	var sampleFile = req.files.arquivo;
+	var nome = control.DateTimeForFile()+'_'+sampleFile.name;
 
-  console.log('SSSSSSSSSSSSSSSSSSS sampleFile SSSSSSSSSSSSSSSSSSSSSS');
-  console.log(sampleFile);
-  console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+	console.log('SSSSSSSSSSSSSSSSSSS sampleFile SSSSSSSSSSSSSSSSSSSSSS');
+	console.log(sampleFile);
+	console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 
   // Use the mv() method to place the file somewhere on your server
   sampleFile.mv('./assets/uploads/'+nome, function(err) {
-    if (err) {
-      return res.status(500).send(err);
-    }
+  	if (err) {
+  		return res.status(500).send(err);
+  	}
 
-		res.json(nome);
+  	res.json(nome);
   });
 });
 

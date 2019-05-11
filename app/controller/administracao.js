@@ -13,13 +13,16 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
-		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-			data.aporte_primeiro = data_primeiro_aporte;
-			data.link_sistema = '/sistema';
-			console.log('===================== DATA USUARIO ====================');
-			console.log(data);
-			console.log('=======================================================');
-			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/administracao', data: data, usuario: req.session.usuario});
+		model.VerSeTemPedidoSaque().then(data_ver_saque=>{
+			data.ver_saque = data_ver_saque;
+			model.VerSeTemPedidoAporte().then(data_ver_aporte=>{
+				data.ver_aporte = data_ver_aporte;
+				data.link_sistema = '/sistema';
+				console.log('===================== DATA USUARIO ====================');
+				console.log(data);
+				console.log('=======================================================');
+				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/administracao', data: data, usuario: req.session.usuario});
+			});
 		});
 	});
 });

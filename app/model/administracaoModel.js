@@ -61,6 +61,26 @@ class AdministracaoModel {
 		});
 	}
 
+
+	VerSeTemPedidoSaque() {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.* \
+				FROM caixa as a WHERE a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,1,0]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
+	VerSeTemPedidoAporte() {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.* \
+				FROM caixa as a WHERE a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,0,0]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
+
 	SelecionarPedidoSaque(id) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.*,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
