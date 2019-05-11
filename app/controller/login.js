@@ -11,11 +11,7 @@ app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {
-	if (typeof req.session.id_usuario != 'undefined' && req.session.id_usuario != 0) {
-		res.redirect('/sistema');
-	} else {
 		res.render('login/index', {});
-	}
 });
 
 
