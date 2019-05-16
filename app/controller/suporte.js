@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
 			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
 				data.aporte_primeiro = data_primeiro_aporte;
 				data.link_sistema = '/sistema';
-				console.log('===================== DATA USUARIO ====================');
+				console.log('==================== DATA USUARIO ====================');
 				console.log(data);
 				console.log('=======================================================');
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'suporte/suporte', data: data, usuario: req.session.usuario});
