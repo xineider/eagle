@@ -44,7 +44,7 @@ class FinanceiroModel {
 	
 	GetExtrato(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,b.nome as nome_plano,\
+			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,b.nome as nome_plano,\
 				CASE \
 				WHEN a.tipo = 0 THEN "Depósito em Conta"\
 				WHEN a.tipo = 1 THEN "Saque"\
@@ -78,12 +78,12 @@ class FinanceiroModel {
 	
 	GetValorTotalCarteiraAplicacao(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT ( \
+			helper.Query('SELECT REPLACE(( \
 				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)) + \
 				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)) - \
 				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END))\
-				)as carteira_aplicacao,\
-				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)) as carteira_rendimento \
+				),".",",")as carteira_aplicacao,\
+				REPLACE((SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)),".",",") as carteira_rendimento \
 				FROM caixa', [0,0,id_usuario,1,2,0,id_usuario,1,1,0,id_usuario,1,2,0,id_usuario,1]).then(data => {
 					console.log('RRRRRRRRRRRRRRR RESULTADO DA CARTEIRA TOTAL APLICACAO RRRRRRRRRRRRRRRRRRRRRRRRR');
 					console.log(data);
@@ -95,11 +95,11 @@ class FinanceiroModel {
 
 	GetInvestimentos(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT b.id, (\
+			helper.Query('SELECT b.id, REPLACE((\
 				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND confirmado = ?) THEN a.valor ELSE 0 END)) + \
 				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND confirmado = ?) THEN a.valor ELSE 0 END)) - \
 				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND confirmado = ?) THEN a.valor ELSE 0 END))\
-				) as caixa, b.nome \
+				),".",",") as caixa, b.nome \
 				FROM caixa as a \
 				LEFT JOIN planos as b ON a.id_plano = b.id\
 				GROUP BY a.id_plano ORDER BY b.id DESC', [0,0,id_usuario,1,2,0,id_usuario,1,1,0,id_usuario,1]).then(data => {

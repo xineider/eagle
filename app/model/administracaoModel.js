@@ -83,7 +83,7 @@ class AdministracaoModel {
 
 	SelecionarPedidoSaque(id) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
+			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
 				(SELECT b.nome FROM usuarios as b WHERE b.id = a.id_usuario AND b.deletado = ?) as nome, \
 				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano AND c.deletado = ?) as plano \
 				FROM caixa as a WHERE a.id = ? AND a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,0,id,0,1,0]).then(data => {
@@ -94,7 +94,7 @@ class AdministracaoModel {
 
 	SelecionarPedidoAporte(id) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
+			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
 				(SELECT b.nome FROM usuarios as b WHERE b.id = a.id_usuario AND b.deletado = ?) as nome, \
 				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano AND c.deletado = ?) as plano \
 				FROM caixa as a WHERE a.id = ? AND a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,0,id,0,0,0]).then(data => {
@@ -105,7 +105,7 @@ class AdministracaoModel {
 
 	SelecionarPedidoRendimento(id) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
+			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
 				(SELECT b.nome FROM usuarios as b WHERE b.id = a.id_usuario AND b.deletado = ?) as nome, \
 				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano AND c.deletado = ?) as plano \
 				FROM caixa as a WHERE a.id = ? AND a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,0,id,0,2,0]).then(data => {
@@ -131,7 +131,7 @@ class AdministracaoModel {
 
 	SelecionarCaixa(id) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*, DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
+			helper.Query('SELECT a.*, REPLACE(a.valor,".",",") as valor,DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
 				(SELECT nome FROM planos as b WHERE b.id = a.id_plano) as plano,\
 				(SELECT nome FROM usuarios as c WHERE c.id = a.id_usuario) as nome_usuario\
 				FROM caixa as a WHERE a.deletado = ? and id = ?', [0,id]).then(data => {
@@ -142,7 +142,7 @@ class AdministracaoModel {
 
 	SelecionarComissao(id) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*, DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
+			helper.Query('SELECT a.*, REPLACE(a.valor,".",",") as valor, DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
 				(SELECT nome FROM usuarios as c WHERE c.id = a.id_usuario) as nome_usuario\
 				FROM comissao as a WHERE a.deletado = ? and id = ?', [0,id]).then(data => {
 					resolve(data);
@@ -294,7 +294,7 @@ class AdministracaoModel {
 
 	GetPedidosSaques() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
+			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
 				(SELECT b.nome FROM usuarios as b WHERE b.id = a.id_usuario AND b.deletado = ?) as nome, \
 				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano AND c.deletado = ?) as plano \
 				FROM caixa as a WHERE a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,0,0,1,0]).then(data => {
@@ -306,7 +306,7 @@ class AdministracaoModel {
 
 	GetPedidosAportes() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
+			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
 				(SELECT b.nome FROM usuarios as b WHERE b.id = a.id_usuario AND b.deletado = ?) as nome, \
 				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano AND c.deletado = ?) as plano \
 				FROM caixa as a WHERE a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,0,0,0,0]).then(data => {
@@ -318,7 +318,7 @@ class AdministracaoModel {
 
 	GetPedidosRendimentos() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
+			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
 				(SELECT b.nome FROM usuarios as b WHERE b.id = a.id_usuario AND b.deletado = ?) as nome, \
 				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano AND c.deletado = ?) as plano \
 				FROM caixa as a WHERE a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,0,0,2,0]).then(data => {
@@ -329,7 +329,7 @@ class AdministracaoModel {
 
 	GetCaixa() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*, DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
+			helper.Query('SELECT a.*, REPLACE(a.valor,".",",") as valor,DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
 				(SELECT nome FROM planos as b WHERE b.id = a.id_plano) as plano,\
 				(SELECT nome FROM usuarios as c WHERE c.id = a.id_usuario) as nome_usuario\
 				FROM caixa as a WHERE a.deletado = ?', [0]).then(data => {
@@ -340,7 +340,7 @@ class AdministracaoModel {
 
 	GetComissoes() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*, DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
+			helper.Query('SELECT a.*, REPLACE(a.valor,".",",") as valor,DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,\
 				(SELECT nome FROM usuarios as c WHERE c.id = a.id_usuario) as nome_usuario\
 				FROM comissao as a WHERE a.deletado = ?', [0]).then(data => {
 					resolve(data);

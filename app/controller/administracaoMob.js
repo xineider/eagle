@@ -482,6 +482,15 @@ router.post('/coaching/cadastrar/', function(req, res, next) {
 
 router.post('/caixa/cadastrar/', function(req, res, next) {
 	POST = req.body;
+
+	POST.valor = POST.valor.replace(',','.');
+
+	if(POST.valor < 0){
+		POST.valor = 0;
+	}
+
+
+
 	model.CadastrarCaixa(POST).then(data => {
 		res.json(data);
 	});
@@ -489,6 +498,13 @@ router.post('/caixa/cadastrar/', function(req, res, next) {
 
 router.post('/comissao/cadastrar/', function(req, res, next) {
 	POST = req.body;
+
+	POST.valor = POST.valor.replace(',','.');
+
+	if(POST.valor < 0){
+		POST.valor = 0;
+	}
+	
 	model.CadastrarComissao(POST).then(data => {
 		res.json(data);
 	});
@@ -748,6 +764,14 @@ router.post('/caixa/atualizar/', function(req, res, next) {
 	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
 	console.log(POST);
 	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+
+
+	POST.valor = POST.valor.replace(',','.');
+
+	if(POST.valor<0){
+		POST.valor = 0;
+	}
+
 	model.AtualizarCaixa(POST).then(data => {
 		res.json(data);
 	});
@@ -758,6 +782,14 @@ router.post('/comissao/atualizar/', function(req, res, next) {
 	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
 	console.log(POST);
 	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+
+	POST.valor = POST.valor.replace(',','.');
+
+	if(POST.valor < 0){
+		POST.valor = 0;
+	}
+
+
 	model.AtualizarComissao(POST).then(data => {
 		res.json(data);
 	});

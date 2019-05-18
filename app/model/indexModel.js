@@ -9,10 +9,10 @@ class IndexModel {
 	GetNoticias() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT * FROM noticias WHERE deletado = ? AND club = ? \
-			ORDER BY data_cadastro LIMIT 6', [0,0]).then(data => {
-				resolve(data);
+				ORDER BY data_cadastro LIMIT 6', [0,0]).then(data => {
+					resolve(data);
+				});
 			});
-		});
 	}
 
 	GetAvisos(nivel) {
@@ -26,10 +26,10 @@ class IndexModel {
 	SelecionarTodasNoticias() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT * FROM noticias WHERE deletado = ? AND club = ? \
-			ORDER BY data_cadastro', [0,0]).then(data => {
-				resolve(data);
+				ORDER BY data_cadastro', [0,0]).then(data => {
+					resolve(data);
+				});
 			});
-		});
 	}
 
 	SelecionarTodosAvisos(nivel) {
@@ -56,18 +56,18 @@ class IndexModel {
 				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)) - \
 				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END))\
 				),".",",")as carteira_aplicacao,\
-				 REPLACE((SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)),".",",") as carteira_rendimento \
-				 FROM caixa', [0,0,id_usuario,1,2,0,id_usuario,1,1,0,id_usuario,1,2,0,id_usuario,1]).then(data => {
+				REPLACE((SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)),".",",") as carteira_rendimento \
+				FROM caixa', [0,0,id_usuario,1,2,0,id_usuario,1,1,0,id_usuario,1,2,0,id_usuario,1]).then(data => {
 					console.log('RRRRRRRRRRRRRRR RESULTADO DA CARTEIRA TOTAL APLICACAO RRRRRRRRRRRRRRRRRRRRRRRRR');
 					console.log(data);
 					console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
 					resolve(data);
 				});
 			});
-		}
-		
-		
-		
 	}
 	
-	module.exports = IndexModel;
+	
+	
+}
+
+module.exports = IndexModel;

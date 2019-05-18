@@ -69,6 +69,11 @@ router.post('/pedir-saque/', function(req, res, next) {
 	POST.id_usuario = req.session.usuario.id;
 	POST.tipo = 1;
 	POST.valor = POST.valor.replace(',','.');
+
+	if(POST.valor < 0){
+		POST.valor = 0;
+	}
+
 	console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
 	console.log(POST);
 	console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
@@ -101,6 +106,11 @@ router.post('/pedir-aporte/', function(req, res, next) {
 	POST.tipo = 0;
 	POST.valor = POST.valor.replace(',','.');
 
+
+	if(POST.valor < 0){
+		POST.valor = 0;
+	}
+
 	console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
 	console.log(POST);
 	console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
@@ -127,20 +137,20 @@ router.post('/pedir-aporte/', function(req, res, next) {
 
 
 router.post('/novo_aporte/uploadarcomprovante', function(req, res, next) {
-  var sampleFile = req.files.arquivo;
-  var nome = control.DateTimeForFile()+'_'+sampleFile.name;
+	var sampleFile = req.files.arquivo;
+	var nome = control.DateTimeForFile()+'_'+sampleFile.name;
 
-  console.log('SSSSSSSSSSSSSSSSSSS sampleFile SSSSSSSSSSSSSSSSSSSSSS');
-  console.log(sampleFile);
-  console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+	console.log('SSSSSSSSSSSSSSSSSSS sampleFile SSSSSSSSSSSSSSSSSSSSSS');
+	console.log(sampleFile);
+	console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 
   // Use the mv() method to place the file somewhere on your server
   sampleFile.mv('./assets/uploads/'+nome, function(err) {
-    if (err) {
-      return res.status(500).send(err);
-    }
+  	if (err) {
+  		return res.status(500).send(err);
+  	}
 
-		res.json(nome);
+  	res.json(nome);
   });
 });
 

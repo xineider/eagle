@@ -18,12 +18,12 @@ class PlanoModel {
 	
 	GetInvestimentos(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT (\
+			helper.Query('SELECT REPLACE((\
 				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END)) +\
 				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END)) - \
 				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END))\
-				) as aporte_total, b.nome,\
-       	(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END)) as rendimento,\
+				),".",",") as aporte_total, b.nome,\
+       	REPLACE((SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END)),".",",") as rendimento,\
         DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro\
 				FROM caixa as a \
 				LEFT JOIN planos as b ON a.id_plano = b.id\
