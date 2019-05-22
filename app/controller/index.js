@@ -23,7 +23,9 @@ router.get('/', function(req, res, next) {
 					console.log('cccccccccccccccc confirmação contrato cccccccccccccc');
 					console.log(data_confirmacao_contrato);
 					console.log('cccccccccccccccccccccccccccccccccccccccccccccccccccc');
-					if(data_confirmacao_contrato == '')
+					if(data_confirmacao_contrato != ''){
+						
+					}
 
 					console.log('--------------- DATA  INICIO------------------');
 					console.log(data);

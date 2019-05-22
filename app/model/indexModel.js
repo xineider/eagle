@@ -68,7 +68,7 @@ class IndexModel {
 
 	VerificarConfirmacaoContrato(id){
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT confirmou_contrato FROM usuarios WHERE id = ? AND deletado = ? confirmou_contrato = ?', [id,0,0]).then(data => {
+			helper.Query('SELECT id FROM usuarios WHERE id = ? AND deletado = ? AND confirmou_contrato = ?', [id,0,0]).then(data => {
 				resolve(data);
 			});
 		});
