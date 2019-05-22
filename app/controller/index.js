@@ -17,11 +17,19 @@ router.get('/', function(req, res, next) {
 			data.noticias = data_noticias;
 			model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
 				data.carteira_aplicacao = data_valor_carteira;
-				data.link_sistema = '/sistema';		
-				console.log('--------------- DATA  INICIO------------------');
-				console.log(data);
-				console.log('----------------------------------------------');
-				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+				data.link_sistema = '/sistema';	
+				model.VerificarConfirmacaoContrato(req.session.usuario.id).then(data_confirmacao_contrato =>{
+
+					console.log('cccccccccccccccc confirmação contrato cccccccccccccc');
+					console.log(data_confirmacao_contrato);
+					console.log('cccccccccccccccccccccccccccccccccccccccccccccccccccc');
+					if(data_confirmacao_contrato == '')
+
+					console.log('--------------- DATA  INICIO------------------');
+					console.log(data);
+					console.log('----------------------------------------------');
+					res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+				});
 			});
 		});
 	});
