@@ -1,0 +1,223 @@
+
+<script>
+	// $('.modal-no-close-contrato').modal('open');
+
+	(function() {
+		var elem = document.getElementById("modal-contrato");
+		console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+		console.log(elem);
+		console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
+
+		var instance = M.Modal.getInstance(elem);
+		instance.open();
+
+	})();
+
+
+
+</script>
+
+<div id="modal-contrato" class="modal modal-no-close-contrato">
+	<%- include('contrato'); %>
+</div>
+
+
+<div class="col s12 secondary">
+
+	<div class="equal-columns" style="position: relative;">
+		<div class="col s6 center">
+			<div class="titulo_inicio gold-text bold">Carteira de Aplicação</div>
+			<div class="porcentagem_aplicacoes_inicio white-text">R$<%= data.carteira_aplicacao[0].carteira_aplicacao %></div>
+		</div>
+		<div class="col s6 center">
+			<div class="titulo_inicio gold-text bold">Carteira de Rendimentos</div>
+			<div class="porcentagem_aplicacoes_inicio white-text">R$<%= data.carteira_aplicacao[0].carteira_rendimento %></div>
+		</div>
+		<div style="
+		height: 100%;
+		width: 2px;
+		position: absolute;
+		left: 50%;
+		margin-top: 2px;
+		background: linear-gradient(to bottom, rgba(224,208,172,0) 0%,rgba(237,222,189,1) 25%,rgba(250,236,205,1) 50%,rgba(237,217,171,1) 75%,rgba(224,198,137,0) 100%);background: -moz-linear-gradient(top, rgba(224,198,137,0) 0%, rgba(237,217,171,1) 25%, rgba(250,236,205,1) 50%, rgba(237,222,189,1) 75%, rgba(224,208,172,0) 100%);
+		background: -webkit-linear-gradient(top, rgba(224,198,137,0) 0%,rgba(237,217,171,1) 25%,rgba(250,236,205,1) 50%,rgba(237,222,189,1) 75%,rgba(224,208,172,0) 100%);
+		background: linear-gradient(to bottom, rgba(224,198,137,0) 0%,rgba(237,217,171,1) 25%,rgba(250,236,205,1) 50%,rgba(237,222,189,1) 75%,rgba(224,208,172,0) 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e0c689', endColorstr='#00e0d0ac',GradientType=0 );
+		">
+	</div>
+</div>
+
+<div style="
+width: 100%;
+height: 2px;
+margin: 10px 0;    
+background: -moz-linear-gradient(left, rgba(224,208,172,0) 0%, rgba(237,222,189,1) 25%, rgba(250,236,205,1) 50%, rgba(237,217,171,1) 75%, rgba(224,198,137,0) 100%);
+background: -webkit-linear-gradient(left, rgba(224,208,172,0) 0%,rgba(237,222,189,1) 25%,rgba(250,236,205,1) 50%,rgba(237,217,171,1) 75%,rgba(224,198,137,0) 100%);
+background: linear-gradient(to right, rgba(224,208,172,0) 0%,rgba(237,222,189,1) 25%,rgba(250,236,205,1) 50%,rgba(237,217,171,1) 75%,rgba(224,198,137,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e0d0ac', endColorstr='#00e0c689',GradientType=1 );"></div>
+
+<div class="row">
+	<div class="col s12 center avisos_container">
+		<div class="titulo_inicio">Avisos</div>
+		<%
+		if (typeof data.avisos != 'undefined' && data.avisos.length > 0) {
+			for (var i = 0; i < data.avisos.length; i++) { %>
+
+			<div class="aviso_content">
+
+				<%= data.avisos[i].aviso %> - <%= data.avisos[i].data_cadastro_formatado %>
+
+				<div>
+					<%= data.avisos[i].descricao %>
+				</div>
+			</div>
+
+			<% } 
+		} else{ %>
+		<div>Não há avisos agora!</div>
+		<%} %>
+
+		<div class="col s12 margin-t-10">
+			<a class="ajax-load btn light w12em" href="<%= data.link_sistema%>/todos_avisos" style="padding-left: 0; padding-right: 0;width: 100%;">Ver Todos Avisos</a>
+		</div>
+
+		<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+		<div class="col s12 margin-b-10 margin-t-10">
+			<a class="btn light ajax-load w12em" href="<%= data.link_sistema%>/administracao/avisos">Editar Avisos</a>
+		</div>
+		<%}%>
+
+	</div>
+</div>
+
+
+<div style="
+width: 100%;
+height: 2px;
+margin: 10px 0;    
+background: -moz-linear-gradient(left, rgba(224,208,172,0) 0%, rgba(237,222,189,1) 25%, rgba(250,236,205,1) 50%, rgba(237,217,171,1) 75%, rgba(224,198,137,0) 100%);
+background: -webkit-linear-gradient(left, rgba(224,208,172,0) 0%,rgba(237,222,189,1) 25%,rgba(250,236,205,1) 50%,rgba(237,217,171,1) 75%,rgba(224,198,137,0) 100%);
+background: linear-gradient(to right, rgba(224,208,172,0) 0%,rgba(237,222,189,1) 25%,rgba(250,236,205,1) 50%,rgba(237,217,171,1) 75%,rgba(224,198,137,0) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00e0d0ac', endColorstr='#00e0c689',GradientType=1 );"></div>
+
+<div class="row">
+	<div class="col s12 inicio_noticias center">
+		<div class="titulo_inicio">Notícias</div>
+
+		<%
+		var j = data.noticias.length - 1;
+
+
+		if (typeof data.noticias != 'undefined' && data.noticias.length > 0) {
+			for (var i = data.noticias.length - 1; i >= 0; i--) {
+				if(j == 0){
+					j = i -1;
+				}
+
+				%>
+
+				<% if(i%2 == 0){%>
+
+				<div class="equal-columns margin-t-10">
+
+					<div class="col s6 content-columns light card">
+
+						<div class="card-image">
+							<a>
+								<img src="<%= data.noticias[i].arquivo %>" >
+							</a>
+						</div>
+						<div class="card-content">
+							<div class="titulo_inicio_noticia">
+								<%= data.noticias[i].titulo %>
+							</div>
+							<div class="descricao_inicio_noticia limitador_3_linhas center">
+								<%= data.noticias[i].descricao %>
+							</div>
+							<a class="ajax-load" href="<%= data.link_sistema%>/ver_noticia/<%= data.noticias[i].id %>">
+								Leia mais ...
+							</a>                            
+						</div>
+					</div>
+
+					<%if(i != j){%>
+					<div class="col s6 content-columns light card">
+						<div class="card-image">
+							<a>
+								<img src="<%= data.noticias[j].arquivo %>" >
+							</a>
+						</div>
+
+						<div class="card-content">
+							<div class="titulo_inicio_noticia">
+								<%= data.noticias[j].titulo %>
+							</div>
+							<div class="descricao_inicio_noticia limitador_3_linhas center">
+								<%= data.noticias[j].descricao %>
+							</div>
+							<a class="ajax-load" href="<%= data.link_sistema%>/ver_noticia/<%= data.noticias[j].id %>">
+								Leia mais ...
+							</a>                            
+						</div>
+					</div>
+
+					<%}%>
+
+				</div>
+				
+				<%}%>
+
+
+
+
+
+<!-- 
+				<div class="col s6">
+					<div class="card light">                    
+
+						<div class="card-image">
+							<a>
+								<img src="<%= data.noticias[i].arquivo %>" >
+							</a>
+						</div>
+						<div class="card-content">
+							<div class="titulo_inicio_noticia">
+								<%= data.noticias[i].titulo %>
+							</div>
+							<div class="descricao_inicio_noticia limitador_3_linhas center">
+								<%= data.noticias[i].descricao %>
+							</div>
+							<a class="ajax-load" href="<%= data.link_sistema%>/ver_noticia/<%= data.noticias[i].id %>">
+								Leia mais ...
+							</a>                            
+						</div>
+					</div>
+				</div> -->
+
+
+				<%}
+			}else{ %>
+			<div class="col s12">
+				Não há noticias no momento
+			</div>
+
+			<%}%>
+
+			<div class="col s12 margin-t-10">
+				<a class="ajax-load btn light w12em" href="<%= data.link_sistema%>/todas_noticias" style="padding-right: 0;padding-left: 0;margin-bottom: 10px;width: 100%;">Ver Todas Notícias</a>
+			</div>
+
+			<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+			<div class="col s12 margin-b-10 margin-t-10">
+				<a class="btn light ajax-load w12em" href="<%= data.link_sistema%>/administracao/noticias">Editar Notícias</a>
+			</div>
+			<%}%>
+
+		</div>
+
+
+
+	</div>
+
+
+</div>
