@@ -2,12 +2,12 @@
 var crypto = require('crypto');
 
 // FAZER LEITURA DAS CONFIGURAÇÕES
-// var config = {
-// 	"host"     : "mysql995.umbler.com",
-// 	"user"     : "admin-eagle",
-// 	"password" : "3ae|5q}Ks)T9",
-// 	"database" : "eagle"
-// };
+var config = {
+	"host"     : "mysql995.umbler.com",
+	"user"     : "admin-eagle",
+	"password" : "3ae|5q}Ks)T9",
+	"database" : "eagle"
+};
 
 // var config = {
 // 	"host"     : "mysql995.umbler.com",
@@ -16,12 +16,12 @@ var crypto = require('crypto');
 // 	"database" : "eagle-teste"
 // };
 
-var config = {
-	"host"     : "localhost",
-	"user"     : "root",
-	"password" : "root",
-	"database" : "eagle"
-};
+// var config = {
+// 	"host"     : "localhost",
+// 	"user"     : "root",
+// 	"password" : "root",
+// 	"database" : "eagle"
+// };
 
 
 // // CONEXÃO MYSQL
