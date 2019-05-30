@@ -13,10 +13,10 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
-		model.GetAporte(req.session.usuario.id).then(data_aporte_todal=>{
-			data.aporte_total= data_aporte_todal;
-			model.GetComissoes(req.session.usuario.id).then(data_comissoes=>{
-				data.comissoes = data_comissoes;
+		model.GetComissoes(req.session.usuario.id).then(data_comissoes=>{
+			data.comissoes = data_comissoes;
+			model.GetValorTotalCarteiraCoachees(req.session.usuario.id).then(data_aporte_total_coachee=>{
+				data.valor_total_coachees = data_aporte_total_coachee;
 				console.log('===================== DATA USUARIO ====================');
 				console.log(data);
 				console.log('=======================================================');
