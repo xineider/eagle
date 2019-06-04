@@ -24,12 +24,14 @@ router.get('/', function(req, res, next) {
 					console.log(data_confirmacao_contrato);
 					console.log('cccccccccccccccccccccccccccccccccccccccccccccccccccc');
 					if(data_confirmacao_contrato != ''){
-						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/indexContrato', data: data, usuario: req.session.usuario});
+						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+						// res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
 					}else{
 
 						console.log('--------------- DATA  INICIO------------------');
 						console.log(data);
 						console.log('----------------------------------------------');
+						// res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
 						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
 					}
 				});

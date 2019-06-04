@@ -1,8 +1,6 @@
 (function($){
 	$(function(){
-
 		$('.menu_lateral').sidenav();
-
 	});
 })(jQuery); 
 
@@ -127,6 +125,10 @@ $(document).on('ready', function () {
 		var link = $(this).data('link');
 		MountModal(modal, link);
 	});
+
+	setTimeout(function(){
+		window.location.href="/logout";
+	}, 1800000);
 	
 	// $(document).on('click', '.crop-image-servidor', function(e) {
 	// 	e.preventDefault();
