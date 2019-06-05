@@ -28,7 +28,7 @@
 <main>
   <section>
     <div>
-      <form id="entra-sistema" method="POST" action="" >
+      <form id="entra-sistema-app" method="POST" action="" >
         <div class="box login_app" style="background: #000;">
           <div class="icon center-align" style="position: relative;">
             <img src="assets/imgs/logo_animation.gif">
@@ -164,3 +164,84 @@
     transform-origin: 0 0;
   }
 </style>
+
+
+<script>
+  $('#entra-sistema-app').on('submit', function(e) {
+    e.preventDefault();
+    var form = $(this);
+    var post = form.serializeArray();
+    var naoremoveloader = 0;
+
+    console.log('onsubmit do #entra-sistema-app');
+
+    $.ajax({
+      method: 'POST',
+      async: true,
+      data: post,
+      url: $('body').data('site') + '/sistema/api/entrar_sistema/',
+      beforeSend: function(request) {
+        request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+        request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
+        request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+        adicionarLoader();
+      },
+      success: function(data) {
+        if(data.result == 'redirect'){
+          GoToSistemaApp($('body').data('site') + '/mobsmart', true);
+          naoremoveloader = 1;
+        }else{
+          $('.error_box').removeClass('hide');
+          $('.error_box').find('span').text(data.mensagem);
+
+          var cardpanel = $('.error_box').find('.card-panel');
+
+          if(data.erro == 'warn'){
+            /* Limpar o alert caso ele já está ativo*/            
+            cardpanel.addClass('red darken-1');
+          }
+        }
+      },
+      error: function(xhr) {  
+      },
+      complete: function(data) {
+        if(naoremoveloader == 0){
+          removerLoader();
+        }
+      }
+    });
+
+  });
+
+
+  function GoToSistemaApp(link, state) {
+  $.ajax({
+    method: "GET",
+    async: true,
+    url: link,
+    beforeSend: function() {
+      console.log('jjjjjjjjjjjjjjjjjjjjjj link jjjjjjjjjjjjjjjjj');
+      console.log(link);
+      console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+    },
+    success: function(data) {
+      $('body').html(data);
+      $('body').removeClass('login');
+      $('body').addClass('row primary');
+      LogSistema('GET',link);
+    },
+    error: function(xhr) { 
+      alert("Error, contate o administrador ou reinicie a pagina.");
+    },
+    complete: function() {
+      $('html,body').animate({ scrollTop: 0 }, 'slow');
+      removerLoader();
+      $('.material-tooltip').remove();
+      $('.tooltipped').tooltip({delay: 50});
+    }
+  });
+  if (state == true) {
+    window.history.pushState('Eagle Finance', 'Eagle Finance', link);
+  }
+}
+</script>
