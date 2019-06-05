@@ -22,7 +22,7 @@ router.get('/loginagain', function(req, res, next) {
 	req.session.destroy(function(err) {
 		console.log(err);
 	});
-	res.render('login/login_again', {});
+	res.render('login/login_app', {});
 	// res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'login/login_again', data: data, usuario: req.session.usuario});
 });
 
