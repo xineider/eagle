@@ -3,45 +3,58 @@
 	
 	
 	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
+	
+	
+	<form method="POST" action="" enctype="multipart/form-data">
 		
 		
-		<form method="POST" action="" enctype="multipart/form-data">
+		<div class="card light row">
+			<input type="hidden" name="id" value="<%= data[0].id %>">
 			
 			
-			<div class="card light row">
-				<input type="hidden" name="id" value="<%= data[0].id %>">
-				
-				
-				<div class="input-field col s12">
-					<label for="titulo">Nome</label>
-					<input type="text" disabled value="<%= data[0].nome %>">
-				</div>
-				
-				<div class="input-field col s12">
-					<label for="titulo">Perfil</label>
-					<input type="text" disabled value="<%= data[0].plano %>">
-				</div>
-				
-				<div class="input-field col s12">
-					<label for="titulo">Valor</label>
-					<input type="text" disabled value="<%= data[0].valor %>">
-				</div>
-				
-				<button data-href="/sistema/administracao/pedido-saque/confirmar" data-action="<%= data.link_sistema%>/administracao/pedidos-saques/" class="btn secondary ajax-submit-update-mensagem margin-b-10" data-mensagem-sucesso="Saque Aprovado com Sucesso!">
-					Aceitar Pedido <i class="far fa-save-o" aria-hidden="true"></i>
-				</button>
-				
-				
-				
+			<div class="input-field col s12">
+				<label for="titulo">Nome</label>
+				<input type="text" disabled value="<%= data[0].nome %>">
 			</div>
-		</form>
-		
-		
-		
-		
-		
-		<%}else{%>
-			<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+			
+			<div class="input-field col s12">
+				<label for="titulo">Perfil</label>
+				<input type="text" disabled value="<%= data[0].plano %>">
+			</div>
+			
+			<div class="input-field col s12">
+				<label for="titulo">Valor</label>
+				<input type="text" disabled value="<%= data[0].valor %>">
+			</div>
+
+			<% if(data[0].carteira!=undefined ) {%>
+
+			<div class="input-field col s12">
+				<label for="carteira">Carteira</label>
+				<input type="text" disabled value="<%= data[0].carteira %>">
+			</div>
+
+			<%}else{%>
+			<div class="center margin-b-10">Cliente não enviou carteira!</div>
+
 			<%}%>
+
+			
+			<button data-href="/sistema/administracao/pedido-saque/confirmar" data-action="<%= data.link_sistema%>/administracao/pedidos-saques/" class="btn secondary ajax-submit-update-mensagem margin-b-10" data-mensagem-sucesso="Saque Aprovado com Sucesso!">
+				Aceitar Pedido <i class="far fa-save-o" aria-hidden="true"></i>
+			</button>
+			
+			
 			
 		</div>
+	</form>
+	
+	
+	
+	
+	
+	<%}else{%>
+	<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+	<%}%>
+	
+</div>

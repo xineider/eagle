@@ -67,6 +67,21 @@
 			</div>
 
 
+			<% if(data.caixa[0].tipo == 1){ %>
+
+			<% if(data.caixa[0].carteira!=undefined ) {%>
+
+			<div class="input-field col s12">
+				<label for="carteira">Carteira</label>
+				<input type="text" disabled value="<%= data.caixa[0].carteira %>">
+			</div>
+
+			<%}else{%>
+			<div class="center margin-b-10">Cliente não enviou carteira!</div>
+
+			<%}%>
+			<%}%>
+
 
 			<button data-href="/sistema/administracao/caixa/atualizar" data-action="<%= data.link_sistema%>/administracao/caixa/" class="btn secondary ajax-submit-update margin-b-10">
 				Salvar <i class="far fa-save-o" aria-hidden="true"></i>
