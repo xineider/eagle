@@ -452,6 +452,7 @@ function GoTo(link, state) {
 			}else{
 				$('#voltar').removeClass('hide');
 			}
+			LogSistema('GET',link);
 		},
 		error: function(xhr) { // if error occured
 		},
@@ -487,6 +488,7 @@ function LoadTo(link, to) {
 			console.log(data);
 			console.log('________________________________________________');
 			$('.'+to).html(data);
+			LogSistema('GET',link);
 		},
 		error: function(xhr) { // if error occured
 		},
@@ -660,20 +662,7 @@ function SubmitAjax(post, link, back,sucessMessage,sucessClass) {
 				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
 				GoTo(back, true);
 			}
-
-			// if (typeof data != undefined && (data != 'error_alterar_senha_diferente' || data != 'error_saque_senha_diferente' )) {
-			// 	M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
-			// }
-			// if(data == 'error_alterar_senha_diferente'){
-			// 	AddErrorTexto($('#senha_atual'),'Senhas Atual Diferente!');				
-			// }
-			// if(data == 'error_saque_senha_diferente'){
-			// 	AddErrorTexto($('#senha_saque'),'Senha Não Confere!');	
-			// }
-			
-			// else{
-				
-			// }
+			LogSistema('POST',link);
 		},
 		error: function(xhr) { // if error occured
 		},
@@ -716,6 +705,7 @@ function MountModal(modal, link) {
 			console.log(link);
 			$(modal).find('.modal-content').html(data);
 			$(modal).modal('open');
+			LogSistema('GET',link);
 		},
 		error: function(xhr) { // if error occured
 		},
@@ -818,6 +808,7 @@ function UploadImagem(isso,container) {
 				<input type="hidden" name="arquivo" value="/assets/uploads/'+data+'">\
 				</div>');
 			console.debug(data);
+			LogSistema('POST',link);
 		},
 		error: function (xhr, e, t) {
 			console.debug((xhr.responseText));
@@ -827,6 +818,28 @@ function UploadImagem(isso,container) {
 		}
 	});
 }
+
+
+function LogSistema(metodo,rota){
+	var ip;
+	var arrayValores = [];
+
+	$.getJSON("https://api.ipify.org/?format=json", function(e) {
+		ip = e.ip;
+		arrayValores = [ip,metodo,rota,navigator.userAgent,$('input[name="id_usuario_sessao"]').val()];
+
+		$.ajax({
+			url:'/sistema/log',
+			type:'POST',
+			data:JSON.stringify(arrayValores),
+			contentType: 'application/json', 
+			beforeSend: function(request) {
+			}
+		});
+	});
+}
+
+
 
 function UploadImagemPerfil(isso,container) {
 	var link = isso.data('href');
@@ -863,6 +876,7 @@ function UploadImagemPerfil(isso,container) {
 				</div>');
 			$('.img-user img').prop('src','/assets/imagem_perfil/'+data)
 			console.debug(data);
+			LogSistema('POST',link);
 		},
 		error: function (xhr, e, t) {
 			console.debug((xhr.responseText));
@@ -911,6 +925,7 @@ function UploadComprovante(isso,container) {
 				</div>\
 				');
 			console.debug(data);
+			LogSistema('POST',link);
 		},
 		error: function (xhr, e, t) {
 			console.debug((xhr.responseText));

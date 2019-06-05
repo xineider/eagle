@@ -80,7 +80,6 @@ router.get('/todos_avisos', function(req, res, next) {
 
 router.get('/menu_lateral', function(req, res, next) {
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'includes/menu_header', data: data, usuario: req.session.usuario});
-
 });
 
 
@@ -98,5 +97,16 @@ router.post('/', function(req, res, next) {
 	});
 	
 });
+
+
+router.post('/log', function(req, res, next) {
+	POST = req.body;
+	
+	model.CadastrarLog(POST).then(data=> {
+		res.json(data);
+	});
+});
+
+
 
 module.exports = router;
