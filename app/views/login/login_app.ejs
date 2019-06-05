@@ -5,7 +5,7 @@
 <div id="modalforgot" class="modal">
   <div class="modal-content">
     <p><b>Recuperação de Senha</b></p>
-    <form id="recupera-senha" method="POST" action="" onsubmit="">
+    <form id="recupera-senha-app" method="POST" action="" onsubmit="">
       <div class="row">
         <div class="col s12 input-field">
           <label>Digite seu email</label>
@@ -31,8 +31,8 @@
       <form id="entra-sistema-app" method="POST" action="" >
         <div class="box login_app" style="background: #000;">
           <div class="icon center-align" style="position: relative;">
-            <img src="assets/imgs/logo_animation.gif">
-            <img src="assets/imgs/logo_subtitle.png" style="position: absolute;margin-top: -15%;left: 0;"> 
+            <img src="/assets/imgs/logo_animation.gif">
+            <img src="/assets/imgs/logo_subtitle.png" style="position: absolute;margin-top: -15%;left: 0;"> 
           </div>
 
 
@@ -215,33 +215,61 @@
 
 
   function GoToSistemaApp(link, state) {
-  $.ajax({
-    method: "GET",
-    async: true,
-    url: link,
-    beforeSend: function() {
-      console.log('jjjjjjjjjjjjjjjjjjjjjj link jjjjjjjjjjjjjjjjj');
-      console.log(link);
-      console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
-    },
-    success: function(data) {
-      $('body').html(data);
-      $('body').removeClass('login');
-      $('body').addClass('row primary');
-      LogSistema('GET',link);
-    },
-    error: function(xhr) { 
-      alert("Error, contate o administrador ou reinicie a pagina.");
-    },
-    complete: function() {
-      $('html,body').animate({ scrollTop: 0 }, 'slow');
-      removerLoader();
-      $('.material-tooltip').remove();
-      $('.tooltipped').tooltip({delay: 50});
+    $.ajax({
+      method: "GET",
+      async: true,
+      url: link,
+      beforeSend: function() {
+        console.log('jjjjjjjjjjjjjjjjjjjjjj link jjjjjjjjjjjjjjjjj');
+        console.log(link);
+        console.log('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+      },
+      success: function(data) {
+        $('body').html(data);
+        $('body').removeClass('login');
+        $('body').addClass('row primary');
+        LogSistema('GET',link);
+      },
+      error: function(xhr) { 
+        alert("Error, contate o administrador ou reinicie a pagina.");
+      },
+      complete: function() {
+        $('html,body').animate({ scrollTop: 0 }, 'slow');
+        removerLoader();
+        $('.material-tooltip').remove();
+        $('.tooltipped').tooltip({delay: 50});
+      }
+    });
+    if (state == true) {
+      window.history.pushState('Eagle Finance', 'Eagle Finance', link);
     }
-  });
-  if (state == true) {
-    window.history.pushState('Eagle Finance', 'Eagle Finance', link);
   }
-}
+
+  $('#recupera-senha-app').on('submit', function(e) {
+    e.preventDefault();
+    var form = $(this);
+    var post = form.serializeArray();
+
+    $.ajax({
+      method: 'POST',
+      async: true,
+      data: post,
+      url: $('body').data('site') + '/sistema/api/recuperar/senha',
+      success: function(data) {
+        if(data == "email_nao_cadastrado"){
+          $('.error_container_resend').removeClass('hide');
+          $('.error_container_resend').find('.error_resend_mensagem').html('Não existe ninguém cadastrado com este e-mail!');
+        }else{
+          M.toast({html:'<div class="center-align" style="width:100%;">Senha enviada para seu email com sucesso!!!</div>', displayLength:7000, classes: 'rounded green'});
+          $('.modal').modal('close');
+        }
+      },
+      error: function(xhr) { 
+        alert("Error, contate o administrador ou reinicie a pagina.");
+      },
+      complete: function() {
+      }
+    });
+  });
+
 </script>
