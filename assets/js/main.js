@@ -472,6 +472,7 @@ function GoTo(link, state) {
 		console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
 	}
 }
+
 function LoadTo(link, to) {
 	$.ajax({
 		method: "GET",
@@ -501,6 +502,7 @@ function LoadTo(link, to) {
 		}
 	});
 }
+
 function FormatInputs(focus) {
 	$('.cnpj').mask('00.000.000/0000-00', {reverse: true});
 	$('.cpf').mask('000.000.000-00', {reverse: true});
@@ -601,6 +603,7 @@ function FormatInputs(focus) {
 	// 	});
 	// }
 }
+
 function GetEndereco(cep, pai) {
 	var link = 'https://viacep.com.br/ws/'+cep+'/json/ ';
 	$.ajax({
@@ -631,6 +634,7 @@ function GetEndereco(cep, pai) {
 		}
 	});
 }
+
 function SubmitAjax(post, link, back,sucessMessage,sucessClass) {
 	$.ajax({
 		method: 'POST',
