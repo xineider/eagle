@@ -131,7 +131,7 @@ $(document).on('ready', function () {
 	}, 1800000);
 	
 	// $(document).on('click', '.crop-image-servidor', function(e) {
-	// 	e.preventDefault();
+	// 	e.preventDefault()
 	
 	// 	var cropper = $('#imagem-usuario-config').data('cropper');
 	// 	console.log('croppper');
