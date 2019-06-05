@@ -2,19 +2,19 @@
 var crypto = require('crypto');
 
 // FAZER LEITURA DAS CONFIGURAÇÕES
-// var config = {
-// 	"host"     : "mysql995.umbler.com",
-// 	"user"     : "admin-eagle",
-// 	"password" : "3ae|5q}Ks)T9",
-// 	"database" : "eagle"
-// };
-
 var config = {
 	"host"     : "mysql995.umbler.com",
-	"user"     : "adm-eagle-teste",
-	"password" : "fr(97cL|jD3",
-	"database" : "eagle-teste"
+	"user"     : "admin-eagle",
+	"password" : "3ae|5q}Ks)T9",
+	"database" : "eagle"
 };
+
+// var config = {
+// 	"host"     : "mysql995.umbler.com",
+// 	"user"     : "adm-eagle-teste",
+// 	"password" : "fr(97cL|jD3",
+// 	"database" : "eagle-teste"
+// };
 
 // var config = {
 // 	"host"     : "localhost",
