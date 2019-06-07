@@ -325,12 +325,16 @@
 		<label class="browser-default">
 			<p>
 				<input type="checkbox">
-				Li e aceito.
+				<span>Li e aceito.</span>
 			</p>
 		</label>
 
-			<div class="modal-close btn grey">Cancelar</div>
-			<div class="btn primary">Aceito</div>		
+
+		
+		<button data-href="<%= data.link_sistema%>/index/aceitar-contrato" data-action="<%= data.link_sistema%>/index/" class="btn primary ajax-submit-update margin-b-10">
+			Aceito 
+		</button>
+	
 	</div>
 
 </div>
@@ -340,25 +344,31 @@
 	.contrato_modal{
 		padding:10px;
 		font-family: arial;
+		height: 100%;
+	}
+
+	.contrato_container{
+		overflow-x: auto;
+		height: calc(100% - 150px);
 	}
 
 /*	.contrato_container{
 		overflow: auto;
 		height: 480px;
-	}*/
+		}*/
 
 
-	.contrato_modal b{
-		font-weight: bold;
-	}
+		.contrato_modal b{
+			font-weight: bold;
+		}
 
 
-	.table_contrato{
-		width: 90%;
-		margin: 0 auto;
-	}
+		.table_contrato{
+			width: 90%;
+			margin: 0 auto;
+		}
 
-	.table_contrato td{
-		border: 1px solid #000;
-	}
-</style>
+		.table_contrato td{
+			border: 1px solid #000;
+		}
+	</style>
