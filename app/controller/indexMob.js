@@ -17,11 +17,14 @@ router.get('/', function(req, res, next) {
 			data.noticias = data_noticias;
 			model.GetValorTotalCarteiraAplicacao(req.session.usuario.id).then(data_valor_carteira =>{
 				data.carteira_aplicacao = data_valor_carteira;
-				data.link_sistema = '/mobsmart';	
-				console.log('IIIIIIIIIIIIIIIIIIIIIII INDEX MOB IIIIIIIIIIIIIIIIIIIIIIIII');
-				console.log(data);
-				console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
-				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+				data.link_sistema = '/mobsmart';
+				model.VerificarConfirmacaoContrato(req.session.usuario.id).then(data_confirmacao_contrato =>{
+					if(req.session.usuario.id == 31){
+						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
+					}else{
+						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+					}				
+				});
 			});
 		});
 	});

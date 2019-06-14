@@ -20,19 +20,23 @@ router.get('/', function(req, res, next) {
 				data.link_sistema = '/sistema';	
 				model.VerificarConfirmacaoContrato(req.session.usuario.id).then(data_confirmacao_contrato =>{
 
-					console.log('cccccccccccccccc confirmação contrato cccccccccccccc');
-					console.log(data_confirmacao_contrato);
-					console.log('cccccccccccccccccccccccccccccccccccccccccccccccccccc');
-					if(data_confirmacao_contrato != ''){
-						// res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+					if(req.session.usuario.id == 31){
 						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
 					}else{
+						console.log('cccccccccccccccc confirmação contrato cccccccccccccc');
+						console.log(data_confirmacao_contrato);
+						console.log('cccccccccccccccccccccccccccccccccccccccccccccccccccc');
+						if(data_confirmacao_contrato != ''){
+							res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+							// res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
+						}else{
 
-						console.log('--------------- DATA  INICIO------------------');
-						console.log(data);
-						console.log('----------------------------------------------');
-						// res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
-						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+							console.log('--------------- DATA  INICIO------------------');
+							console.log(data);
+							console.log('----------------------------------------------');
+							// res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
+							res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
+						}
 					}
 				});
 			});
