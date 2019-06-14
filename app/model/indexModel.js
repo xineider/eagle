@@ -88,6 +88,14 @@ class IndexModel {
 			});
 		});
 	}
+
+	AceitoContrato(POST) {
+		return new Promise(function(resolve, reject) {
+			helper.Update('usuarios', data_insert).then(data => {
+				resolve(data);
+			});
+		});
+	}
 	
 	
 	

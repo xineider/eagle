@@ -82,6 +82,15 @@ router.post('/', function(req, res, next) {
 });
 
 
+router.post('/aceitar-contrato/', function(req, res, next) {
+	POST = req.body;
+	data_insert = {id:req.session.usuario.id,confirmou_contrato:1};
+	model.AceitoContrato(data_insert).then(data=>{
+		res.json(data);
+	});
+});
+
+
 router.post('/log', function(req, res, next) {
 	POST = req.body;
 	

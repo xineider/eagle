@@ -322,19 +322,12 @@
 	</div>
 
 	<div class="contrato_button">
-		<label class="browser-default">
-			<p>
-				<input type="checkbox">
-				<span>Li e aceito.</span>
-			</p>
-		</label>
+		<form method="POST" action="" enctype="multipart/form-data">
+			<button data-href="<%= data.link_sistema%>/aceitar-contrato" data-action="<%= data.link_sistema%>/" class="btn primary ajax-submit-update contrato-btn margin-b-10 disabled">
+				Li e Aceito 
+			</button>
+		</form>
 
-
-		
-		<button data-href="<%= data.link_sistema%>/index/aceitar-contrato" data-action="<%= data.link_sistema%>/index/" class="btn primary ajax-submit-update margin-b-10">
-			Aceito 
-		</button>
-	
 	</div>
 
 </div>
@@ -349,7 +342,11 @@
 
 	.contrato_container{
 		overflow-x: auto;
-		height: calc(100% - 150px);
+		height: calc(100% - 120px);
+	}
+
+	.contrato_button{
+		margin-top: 10px;
 	}
 
 /*	.contrato_container{
@@ -372,3 +369,54 @@
 			border: 1px solid #000;
 		}
 	</style>
+
+
+	<script>
+
+
+		$(function() {
+
+			$('.contrato_container').scroll(function(e){
+
+				var scroll = $(this).scrollTop();
+				var height = $(this).height();
+				var scrollHeight = $(this).prop("scrollHeight");
+				
+				console.log('sssssss scrollTop ssssssssssss');
+				console.log(scroll);
+				console.log('ssssssssssssssssssssssssssssss');
+
+
+				console.log('height');
+				console.log(height);
+
+				console.log('scrollHeight');
+				console.log(scrollHeight);
+
+				if(scroll + height == scrollHeight){
+					$('.contrato-btn').removeClass('disabled');
+				}else{
+					$('.contrato-btn').addClass('disabled');
+				}
+
+
+
+			});
+
+
+			$(document).on('click', '.ajax-submit-update', function(e) {
+				e.preventDefault();
+				var form = $(this).parents('form');
+				var post = form.serializeArray();
+				var link = $(this).data('href');
+				var back = $(this).data('action');
+
+				console.log('AJAX SUBMIT CONTRATO');
+
+			});
+
+		});
+
+
+		
+	</script>
