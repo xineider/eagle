@@ -19,8 +19,7 @@ router.get('/', function(req, res, next) {
 				data.carteira_aplicacao = data_valor_carteira;
 				data.link_sistema = '/sistema';	
 				model.VerificarConfirmacaoContrato(req.session.usuario.id).then(data_confirmacao_contrato =>{
-
-					if(req.session.usuario.id == 31){
+					if(req.session.usuario.id == 32 && data_confirmacao_contrato !=''){
 						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
 					}else{
 						console.log('cccccccccccccccc confirmação contrato cccccccccccccc');

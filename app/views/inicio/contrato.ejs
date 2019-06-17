@@ -381,6 +381,8 @@
 				var scroll = $(this).scrollTop();
 				var height = $(this).height();
 				var scrollHeight = $(this).prop("scrollHeight");
+
+				var sum_height = scroll + height;
 				
 				console.log('sssssss scrollTop ssssssssssss');
 				console.log(scroll);
@@ -393,7 +395,10 @@
 				console.log('scrollHeight');
 				console.log(scrollHeight);
 
-				if(scroll + height == scrollHeight){
+				console.log('sum_height');
+				console.log(sum_height);
+
+				if(sum_height >= scrollHeight - 1){
 					$('.contrato-btn').removeClass('disabled');
 				}else{
 					$('.contrato-btn').addClass('disabled');
