@@ -737,7 +737,15 @@ function VerificarForm(form) {
 		{
 			AddErrorTexto($('#confirmar_alterar_senha'),'Senhas são diferentes');
 			qtdErros++;
-			console.log('CAI AQUI DENTRO DO DIFERENTE');
+		}
+	});
+
+	form.find('input:enabled:not([type="hidden"])[required="true"][type="email"]').each(function(){
+		if($(this).val()!= ''){
+			if(!validateEmail($(this).val())){
+				qtdErros++;
+				AddErrorTexto($(this),'Email Incorreto!!');
+			}
 		}
 	});
 	
@@ -773,6 +781,10 @@ function AddError(isso) {
 }
 function AddErrorTexto(isso,texto) {
 	isso.focus().addClass('observe-post').parent().append('<div class="error">'+texto+'</div>');
+}
+
+function AddErrorTextoSemFocus(isso,texto){
+	isso.addClass('observe-post').parent().append('<div class="error">'+texto+'</div>');
 }
 function AddErrorAjax() {
 	$('.error_ajax').fadeIn();
@@ -843,6 +855,11 @@ function LogSistema(metodo,rota){
 	});
 }
 
+
+function validateEmail(email) {
+	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	return regex.test(email);
+}
 
 
 function UploadImagemPerfil(isso,container) {
