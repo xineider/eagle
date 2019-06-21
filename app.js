@@ -63,6 +63,44 @@ app.use(session({
   saveUninitialized: true
 }));
 
+
+// app.use(function (req, res, next){
+//   var pathname = parseurl(req).pathname;
+
+
+//   if((pathname != '/' && pathname != '') && 
+//     (pathname.indexOf('css') == -1 && pathname.indexOf('js') == -1 && pathname.indexOf('imgs') == -1 && pathname.indexOf('fonts') == -1 && pathname.indexOf('uploads') == -1)
+//     && (req.isAjaxRequest() == true))
+//   {
+//    console.log('@@@@@ PATHNAME @@@@');
+//    console.log(pathname);
+//    console.log('@@@@@@@@@@@@@@@@@@@');
+
+//    var id = req.headers['Authority-Eagle-id'];
+//    var hash = req.headers['Authority-Eagle-hash'];
+
+//    console.log('dddddddddd id dddddddddddd');
+//    console.log(id);
+//    console.log('dddddddddddddddddddddddddd');
+
+//    console.log('hhhhhhhhhhhh hash hhhhhhhhhhh');
+//    console.log(hash);
+//    console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhh');
+//    console.log('req headers');
+//    console.log(req.headers);
+//    next();
+//    // var id = req.headers['authority-eagle-id'];
+//    // var hash = req.headers['authority-eagle-hash'];
+//    // var nivel = req.headers['authority-eagle-nivel'];
+
+//  }else{
+
+//    next();
+//  }
+
+
+// });
+
 // Verifica usuario se esta logado ou não
 // app.use(function (req, res, next) {
 //   var pathname = parseurl(req).pathname;

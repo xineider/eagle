@@ -70,31 +70,32 @@ router.post('/pedir-saque/', function(req, res, next) {
 	POST.tipo = 1;
 	POST.valor = POST.valor.replace(',','.');
 
-	if(POST.valor < 0){
-		POST.valor = 0;
+	if(POST.valor > 0){
+
+		console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
+		console.log(POST);
+		console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+
+
+		model.ConfirmarSenhaUsuario(req.session.usuario.id,POST.senha).then(data_usuario =>{
+			delete POST.senha;
+
+			console.log('UUUUUUUUUUUUUUUU DATA USUARIO UUUUUUUUUUUUUUUUU');
+			console.log(data_usuario);
+			console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
+
+			if (data_usuario.length > 0){
+				model.CadastrarPedidoSaque(POST).then(data_pedido_saque => {
+					res.json(data_pedido_saque);
+				});
+			}else{
+				res.json({error:'senha_saque_diferente',element:'#senha_saque',texto:'Senha Não Confere!'});
+			}
+
+		});
+	}else{
+		res.json({error:'valor_negativo_zero',element:'input[name="valor"]',texto:'Valor não pode ser 0 ou Negativo!'});
 	}
-
-	console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
-	console.log(POST);
-	console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
-
-	
-	model.ConfirmarSenhaUsuario(req.session.usuario.id,POST.senha).then(data_usuario =>{
-		delete POST.senha;
-
-		console.log('UUUUUUUUUUUUUUUU DATA USUARIO UUUUUUUUUUUUUUUUU');
-		console.log(data_usuario);
-		console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
-
-		if (data_usuario.length > 0){
-			model.CadastrarPedidoSaque(POST).then(data_pedido_saque => {
-				res.json(data_pedido_saque);
-			});
-		}else{
-			res.json('error_saque_senha_diferente');
-		}
-
-	});
 });
 
 
@@ -107,32 +108,31 @@ router.post('/pedir-aporte/', function(req, res, next) {
 	POST.valor = POST.valor.replace(',','.');
 
 
-	if(POST.valor < 0){
-		POST.valor = 0;
+	if(POST.valor > 0){
+		
+		console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
+		console.log(POST);
+		console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+
+		model.ConfirmarSenhaUsuario(req.session.usuario.id,POST.senha).then(data_usuario =>{
+			delete POST.senha;
+
+			console.log('UUUUUUUUUUUUUUUU DATA USUARIO UUUUUUUUUUUUUUUUU');
+			console.log(data_usuario);
+			console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
+
+			if (data_usuario.length > 0){
+				model.CadastrarPedidoAporte(POST).then(data_pedido_saque => {
+					res.json(data_pedido_saque);
+				});
+			}else{
+				res.json({error:'senha_saque_diferente',element:'#senha_saque',texto:'Senha Não Confere!'});
+			}
+		});
+
+	}else{
+		res.json({error:'valor_negativo_zero',element:'input[name="valor"]',texto:'Valor não pode ser 0 ou Negativo!'});
 	}
-
-	console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
-	console.log(POST);
-	console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
-
-
-	
-	model.ConfirmarSenhaUsuario(req.session.usuario.id,POST.senha).then(data_usuario =>{
-		delete POST.senha;
-
-		console.log('UUUUUUUUUUUUUUUU DATA USUARIO UUUUUUUUUUUUUUUUU');
-		console.log(data_usuario);
-		console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
-
-		if (data_usuario.length > 0){
-			model.CadastrarPedidoAporte(POST).then(data_pedido_saque => {
-				res.json(data_pedido_saque);
-			});
-		}else{
-			res.json('error_saque_senha_diferente');
-		}
-
-	});
 });
 
 

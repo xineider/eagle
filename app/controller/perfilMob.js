@@ -65,7 +65,7 @@ router.post('/alterar-senha', function(req, res, next) {
 				res.json(POST.id);
 			});	
 		} else {
-			res.json('error_alterar_senha_diferente');
+			res.json({error:'senha_atual_errada',element:'#senha_atual',texto:'Senha Atual Diferente!'});
 		}
 		
 	});

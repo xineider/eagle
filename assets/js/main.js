@@ -652,12 +652,8 @@ function SubmitAjax(post, link, back,sucessMessage,sucessClass) {
 			console.log(data);
 			console.log('-------------------------------------');
 
-			if(data == 'error_alterar_senha_diferente'){
-				AddErrorTexto($('#senha_atual'),'Senha Atual Diferente!');				
-			}else if(data == 'error_saque_senha_diferente'){
-				AddErrorTexto($('#senha_saque'),'Senha Não Confere!');
-				/*update tambem retorna objeto, então tenho que validar ele pelo error*/	
-			}else if (typeof data == 'object' && data['error'] != null){
+			/*update tambem retorna objeto, então tenho que validar ele pelo error*/	
+			if (typeof data == 'object' && data['error'] != null){
 				AddErrorTexto($(data['element']),data['texto']);	
 			}else if(data != undefined){
 				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
