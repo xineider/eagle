@@ -534,32 +534,39 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 		console.log('ttttttttttttttttttttttttttt');
 
 		if(tem_login == ''){
-			model.CadastrarUsuario(POST).then(data => {
+			model.VerificarSeTemEmailDisponivel(POST.email).then(tem_email => {
+				if(tem_email == ''){
 
-				var html = "Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta."+
-				"<br><b>Login:</b> "+POST.login+
-				"<br><b>Senha:</b> "+senha+ 
-				"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita."+
-				"<br>Acesse via o aplicativo Eagle Finance"+
-				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
-				"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
+					model.CadastrarUsuario(POST).then(data => {
 
-				var text = "Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta."+
-				"<br>Login: "+POST.login+
-				"<br>Senha: "+senha+
-				"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita."+
-				"<br>Acesse via o aplicativo Eagle Finance"+
-				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
-				"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
+						var html = "Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta."+
+						"<br><b>Login:</b> "+POST.login+
+						"<br><b>Senha:</b> "+senha+ 
+						"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar no menu e ir no item 'Perfil'."+
+						"<br>Acesse via o aplicativo Eagle Finance"+
+						"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+						"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
+
+						var text = "Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta."+
+						"<br>Login: "+POST.login+
+						"<br>Senha: "+senha+
+						"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar no menu e ir no item 'Perfil'."+
+						"<br>Acesse via o aplicativo Eagle Finance"+
+						"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+						"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
 
 
-				control.SendMail(POST.email, 'Bem-vindo ao Eagle Finances!', html, text);
+						control.SendMail(POST.email, 'Bem-vindo ao Eagle Finances!', html, text);
 
-				res.json(data);
+						res.json(data);
+					});
+				}else{
+					res.json({error:'possui_email',element:'input[name="email"]',texto:'Email já cadastrado, por-favor inserir outro!'});
+				}
 			});
 		}else{
 			console.log('JJJJJJJJJJJJJJJJJJJ já existe login JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
-			res.json('possui_login');
+			res.json({error:'possui_login',element:'input[name="login"]',texto:'Login existente, tente outro!'});
 		}
 	});
 });
@@ -659,27 +666,33 @@ router.post('/usuarios/atualizar/', function(req, res, next) {
 
 	model.VerificarSeTemMesmoLogin(POST).then(tem_mesmo_login => {
 
-		console.log('ttttttttttt tem login ttttt');
+		console.log('ttttttttttt tem mesmo login ttttt');
 		console.log(tem_mesmo_login);
 		console.log('ttttttttttttttttttttttttttt');
 		/*verificar se o login foi alterado*/
 		if(tem_mesmo_login != ''){
 			/*verificar se o email é o mesmo, se não for enviar um e-mail para o novo informando as alterações*/
 			model.VerificarSeTemMesmoEmail(POST).then(tem_mesmo_email => {
-				console.log('mmmmmmmmmmmmmmmmaiiiiiiilllllllllllll');
+				console.log('eeeeeeeeeeeeee tem mesmo email eeeeeeeeeeeeeeeeeeeeeeee');
 				console.log(tem_mesmo_email);
-				console.log('mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm');
+				console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
 				if(tem_mesmo_email != ''){
 					model.AtualizarUsuario(POST).then(data => {
 						res.json(data);
 					});
 				}else{
-					model.AtualizarUsuario(POST).then(data => {
-						control.SendMail(POST.email, 'E-mail alterado no Eagle Finances!', html, text);
-						res.json(data);
+					/*Se o e-mail foi alterado verificar se ele está disponivel(unico)*/
+					model.VerificarSeTemEmailDisponivel(POST.email).then(tem_email => {
+						if(tem_email == ''){
+							model.AtualizarUsuario(POST).then(data => {
+								control.SendMail(POST.email, 'E-mail alterado no Eagle Finances!', html, text);
+								res.json(data);
+							});
+						}else{
+							res.json({error:'possui_email',element:'input[name="email"]',texto:'Email já cadastrado, por-favor inserir outro!'});
+						}
 					});
 				}
-
 			});
 		}else{
 			/*caso o login seja alterado ver se o novo tem disponibilidade */
@@ -699,16 +712,24 @@ router.post('/usuarios/atualizar/', function(req, res, next) {
 								res.json(data);
 							});
 						}else{
-							model.AtualizarUsuario(POST).then(data => {
-								control.SendMail(POST.email, 'E-mail alterado no Eagle Finances!', html, text);
-								res.json(data);
+							/*Se o e-mail foi alterado verificar se ele é disponivel(unico)*/
+							model.VerificarSeTemEmailDisponivel(POST.email).then(tem_email => {
+								if(tem_email == ''){
+									model.AtualizarUsuario(POST).then(data => {
+										control.SendMail(POST.email, 'E-mail alterado no Eagle Finances!', html, text);
+										res.json(data);
+									});
+								}else{
+									res.json({error:'possui_email',element:'input[name="email"]',texto:'Email já cadastrado, por-favor inserir outro!'});
+								}
 							});
 						}
+						
 
 					});
 
 				}else{
-					res.json('possui_login');
+					res.json({error:'possui_login',element:'input[name="login"]',texto:'Login existente, tente outro!'});
 				}
 
 			});

@@ -163,6 +163,15 @@ class AdministracaoModel {
 			});
 	}
 
+	VerificarSeTemEmailDisponivel(email){
+		return new Promise(function(resolve, reject) {
+			helper.Query("SELECT email \
+				FROM usuarios WHERE deletado = ? AND email = ?", [0,email]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
 	VerificarSeTemMesmoLogin(POST){
 		return new Promise(function(resolve, reject) {
 			helper.Query("SELECT login \
