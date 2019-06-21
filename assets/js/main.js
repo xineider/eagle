@@ -658,7 +658,7 @@ function SubmitAjax(post, link, back,sucessMessage,sucessClass) {
 				AddErrorTexto($('#senha_saque'),'Senha Não Confere!');
 				/*update tambem retorna objeto, então tenho que validar ele pelo error*/	
 			}else if (typeof data == 'object' && data['error'] != null){
-				AddErrorTexto($(data['element']),data['texto']);				
+				AddErrorTexto($(data['element']),data['texto']);	
 			}else if(data != undefined){
 				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
 				GoTo(back, true);

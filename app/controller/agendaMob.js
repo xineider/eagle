@@ -46,7 +46,7 @@ router.get('/editar_evento/:id', function(req, res, next) {
 			console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 			console.log(data);	
 			console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
-			res.render(req.isAjaxRequest() == true ? 'api' : 'api', {html: 'agenda/editar_evento', data: data, usuario: req.session.usuario});
+			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'agenda/editar_evento', data: data, usuario: req.session.usuario});
 		});
 	});
 });
