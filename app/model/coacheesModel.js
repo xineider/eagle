@@ -56,7 +56,6 @@ class CoacheesModel {
 
 	VerificarSeTemLogin(login){
 		return new Promise(function(resolve, reject) {
-			// Adicione a query com scape(?) e os respectivos valores em um array simples
 			helper.Query("SELECT login \
 				FROM usuarios WHERE deletado = ? AND login = ?", [0,login]).then(data => {
 					resolve(data);
@@ -64,6 +63,15 @@ class CoacheesModel {
 			});
 	}
 	
+
+	VerificarSeTemEmail(email){
+		return new Promise(function(resolve, reject) {
+			helper.Query("SELECT email \
+				FROM usuarios WHERE deletado = ? AND email = ?", [0,email]).then(data => {
+					resolve(data);
+				});
+			});
+	}
 	
 	
 	

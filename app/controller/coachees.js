@@ -34,10 +34,6 @@ router.get('/cadastrar', function(req, res, next) {
 
 
 
-
-
-
-/* POST enviando o login para verificação. */
 router.post('/cadastrar', function(req, res, next) {
 	// Recebendo o valor do post
 	POST = req.body;
@@ -54,30 +50,39 @@ router.post('/cadastrar', function(req, res, next) {
 		console.log('ttttttttttttttttttttttttttt');
 		
 		if(tem_login == ''){
-			model.CadastrarCoachee(POST).then(data => {
-				var html = "Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta."+
-				"<br><b>Login:</b> "+POST.login+
-				"<br><b>Senha:</b> "+senha+ 
-				"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita."+
-				"<br>Acesse via o aplicativo Eagle Finance"+
-				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
-				"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
+			model.VerificarSeTemEmail(POST.email).then(tem_email => {
+				console.log('eeeeeeeeeeeeeeeeeee tem email eeeeeeeeeeeeeeeeee');
+				console.log(tem_email);
+				console.log('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee');
 
-				var text = "Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta."+
-				"<br>Login: "+POST.login+
-				"<br>Senha: "+senha+
-				"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar na imagem no cabeçalho a direita."+
-				"<br>Acesse via o aplicativo Eagle Finance"+
-				"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
-				"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
+				if(tem_email == ''){
+					model.CadastrarCoachee(POST).then(data => {
+						var html = "Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta."+
+						"<br><b>Login:</b> "+POST.login+
+						"<br><b>Senha:</b> "+senha+ 
+						"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar no menu e ir no item 'Perfil'."+
+						"<br>Acesse via o aplicativo Eagle Finance"+
+						"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+						"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
+
+						var text = "Bem vindo ao Eagle Finances. Segue abaixo as informações sobre sua conta."+
+						"<br>Login: "+POST.login+
+						"<br>Senha: "+senha+
+						"<br><br>Recomendamos que você altera sua senha ao acessar o seu perfil ao clicar no menu e ir no item 'Perfil'."+
+						"<br>Acesse via o aplicativo Eagle Finance"+
+						"<br>Os dados da sua conta são responsabilidade sua, não a entregue a pessoas sem permissão."+
+						"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
 
 
-				control.SendMail(POST.email, 'Bem-vindo ao Eagle Finances!', html, text);
-				res.json(data);
+						control.SendMail(POST.email, 'Bem-vindo ao Eagle Finances!', html, text);
+						res.json(data);
+					});
+				}else{
+					res.json({error:'possui_email',element:'input[name="email"]',texto:'Email já cadastrado, por-favor inserir outro!'});
+				};
 			});
 		}else{
-			console.log('JJJJJJJJJJJJJJJJJJJ já existe login JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ');
-			res.json('possui_login');
+			res.json({error:'possui_login',element:'input[name="login"]',texto:'Login existente, tente outro!'});
 		}
 	});
 });

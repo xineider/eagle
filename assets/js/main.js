@@ -651,17 +651,17 @@ function SubmitAjax(post, link, back,sucessMessage,sucessClass) {
 			console.log('----------- DATA SUBMITAJAX ---------');
 			console.log(data);
 			console.log('-------------------------------------');
-			console.log(data != 'error_alterar_senha_diferente' );
-			console.log(data != 'error_saque_senha_diferente');
-			console.log(data != 'error_alterar_senha_diferente' || data != 'error_saque_senha_diferente' );
-			console.log(typeof data != undefined);
 
 			if(data == 'error_alterar_senha_diferente'){
 				AddErrorTexto($('#senha_atual'),'Senha Atual Diferente!');				
 			}else if(data == 'error_saque_senha_diferente'){
 				AddErrorTexto($('#senha_saque'),'Senha Não Confere!');	
 			}else if(data == 'possui_login'){
-				AddErrorTexto($('input[name="login"]'),"Login existente, tente outro!")
+				AddErrorTexto($('input[name="login"]'),"Login existente, tente outro!");
+			}else if (typeof data == 'object'){
+				if(data['error'] != null){
+					AddErrorTexto($(data['element']),data['texto']);
+				}
 			}else if(data != undefined){
 				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
 				GoTo(back, true);
