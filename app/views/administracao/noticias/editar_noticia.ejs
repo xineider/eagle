@@ -39,7 +39,7 @@
 
 				
 				<div class="imagem_container">
-					<%if( data[0].arquivo == undefined){%>
+					<%if( data[0].arquivo != undefined){%>
 					<div class="pai">
 						<img src="<%= data[0].arquivo %>">
 						<button class="btn waves-effect waves-light red close-button remove margin-b-10">Remover Imagem</button>
