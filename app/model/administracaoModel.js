@@ -65,7 +65,7 @@ class AdministracaoModel {
 	VerSeTemPedidoSaque() {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT a.* \
-				FROM caixa as a WHERE a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,1,0]).then(data => {
+				FROM caixa as a WHERE a.deletado = ? AND (a.tipo = ? OR a.tipo = ?)  AND a.confirmado = ?', [0,1,3,0]).then(data => {
 					resolve(data);
 				});
 			});
@@ -86,7 +86,7 @@ class AdministracaoModel {
 			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
 				(SELECT b.nome FROM usuarios as b WHERE b.id = a.id_usuario AND b.deletado = ?) as nome, \
 				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano AND c.deletado = ?) as plano \
-				FROM caixa as a WHERE a.id = ? AND a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,0,id,0,1,0]).then(data => {
+				FROM caixa as a WHERE a.id = ? AND a.deletado = ? AND (a.tipo = ? OR a.tipo = ? )  AND a.confirmado = ?', [0,0,id,0,1,3,0]).then(data => {
 					resolve(data);
 				});
 			});

@@ -32,8 +32,12 @@
 						<input name="valor" id="valor_caixa_saque" type="number">
 					</div>
 					
-					<div>Valor para Sacar: R$<span id="valor_para_sacar"><%= data.investimento[0].caixa %></span></div>
-					<input type="hidden" id="valor_caixa_total_saque" value="<%= data.investimento[0].caixa %>">
+					<div>Valor Total para Sacar: R$<span id="valor_para_sacar"><%= data.investimento[0].carteira_aplicacao %></span></div>
+					<div>Valor Total Rendimento: R$<span id="valor_rendimento_para_sacar">
+						<%= data.investimento[0].carteira_aplicacao%>
+					</div>
+
+					<input type="hidden" id="valor_caixa_total_saque" value="<%= data.investimento[0].carteira_aplicacao %>">
 					
 				</div> 
 			</div>
@@ -43,7 +47,18 @@
 				if (typeof data.investimento != 'undefined' && data.investimento.length > 0) {
 					for (var i = 0; i < data.investimento.length; i++) { %>
 					
-					<input disabled type="hidden" id="valor_perfil-<%= data.investimento[i].id %>" value="<%= data.investimento[i].caixa %>">
+					<input disabled type="hidden" id="valor_perfil-<%= data.investimento[i].id %>" value="<%= data.investimento[i].carteira_aplicacao %>">
+					
+					<% } 
+				} %>
+			</div>
+
+			<div class="perfil_hide_valores_rendimento hide">
+				<%
+				if (typeof data.investimento != 'undefined' && data.investimento.length > 0) {
+					for (var i = 0; i < data.investimento.length; i++) { %>
+					
+					<input disabled type="hidden" id="valor_perfil_rendimento-<%= data.investimento[i].id %>" value="<%= data.investimento[i].carteira_rendimento %>">
 					
 					<% } 
 				} %>

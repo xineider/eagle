@@ -44,7 +44,7 @@ class FinanceiroModel {
 	
 	GetExtrato(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,b.nome as nome_plano,\
+			helper.Query('SELECT a.*,REPLACE(ROUND(a.valor,2),".",",") as valor,DATE_FORMAT(a.data_cadastro, "%d/%m/%Y") as data_cadastro,b.nome as nome_plano,\
 				CASE \
 				WHEN a.tipo = 0 THEN "Depósito em Conta"\
 				WHEN a.tipo = 1 THEN "Saque"\
@@ -104,9 +104,6 @@ class FinanceiroModel {
 			});
 	}
 
-
-	
-	
 	GetValorTotalCarteiraAplicacao(id_usuario) {
 		return new Promise(function(resolve, reject) {
 			helper.Query('SELECT REPLACE(ROUND(( \
@@ -130,14 +127,19 @@ class FinanceiroModel {
 
 	GetInvestimentos(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT b.id, REPLACE((\
-				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND confirmado = ?) THEN a.valor ELSE 0 END)) + \
-				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND confirmado = ?) THEN a.valor ELSE 0 END)) - \
-				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND confirmado = ?) THEN a.valor ELSE 0 END))\
-				),".",",") as caixa, b.nome \
+			helper.Query('SELECT b.id, REPLACE(ROUND((\
+				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END)) + \
+				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END)) - \
+				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END)) - \
+				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END)) \
+				),2),".",",") as carteira_aplicacao, \
+				REPLACE(ROUND((\
+				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END)) - \
+				(SUM(CASE WHEN (a.tipo = ? AND a.deletado = ? AND a.id_usuario = ? AND a.confirmado = ?) THEN a.valor ELSE 0 END))\
+				),2),".",",") as carteira_rendimento, b.nome \
 				FROM caixa as a \
 				LEFT JOIN planos as b ON a.id_plano = b.id\
-				GROUP BY a.id_plano ORDER BY b.id DESC', [0,0,id_usuario,1,2,0,id_usuario,1,1,0,id_usuario,1]).then(data => {
+				GROUP BY a.id_plano ORDER BY b.id DESC', [0,0,id_usuario,1,2,0,id_usuario,1,1,0,id_usuario,1,3,0,id_usuario,1,2,0,id_usuario,1,3,0,id_usuario,1]).then(data => {
 					resolve(data);
 				});
 			});

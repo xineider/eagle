@@ -361,11 +361,12 @@ $(document).on('ready', function () {
 		console.log('-------------------------------------------------');
 
 		var valor_perfil = $('#valor_perfil-'+$(this).val()).val();
+		var valor_rendimento = $('#valor_perfil_rendimento-'+$(this).val()).val();
 		console.log(valor_perfil);
-
-
+		console.log(valor_rendimento);
 
 		$('#valor_para_sacar').html(valor_perfil);
+		$('#valor_rendimento_para_sacar').html(valor_rendimento);
 		$('#valor_caixa_total_saque').val(valor_perfil);
 		
 	});
