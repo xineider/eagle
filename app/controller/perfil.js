@@ -113,6 +113,12 @@ router.post('/cropImagemPerfil/', function(req, res, next) {
 router.post('/uploadimagem', function(req, res, next) {
 	var arquivo = req.files.arquivo;
 	var nomeImagem = control.DateTimeForFile()+'_'+arquivo.name;
+
+	console.log('TTTTTTTTTTTTTT TAMANHO DO ARQUIVO TTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
+	console.log(arquivo.size);
+	console.log(arquivo.mimeType);
+	console.log(arquivo.truncated);
+	console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
 	
 	console.log('@@@@@@@@@@@@@@@ UPLOAD PERFIL ARQUIVO @@@@@@@@@@@@@@@@@@@@@@@@@@@');
 	console.log(arquivo);
