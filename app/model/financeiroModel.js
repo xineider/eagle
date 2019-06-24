@@ -74,17 +74,51 @@ class FinanceiroModel {
 			});
 		});
 	}
+
+	CadastrarPedidoSaqueRendimento(POST) {	
+		return new Promise(function(resolve, reject) {
+			helper.Insert('caixa', POST).then(data => {
+				resolve(data);
+			});
+		});
+	}
+
+
+
+	GetValorTotalPlano(id_usuario,id_plano) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT ( \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ? AND id_plano = ?) THEN valor ELSE 0 END)) + \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ? AND id_plano = ?) THEN valor ELSE 0 END)) - \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ? AND id_plano = ?) THEN valor ELSE 0 END)) - \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ? AND id_plano = ?) THEN valor ELSE 0 END))\
+				) as carteira_aplicacao,\
+				(\
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ? AND id_plano = ?) THEN valor ELSE 0 END)) - \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ? AND id_plano = ?) THEN valor ELSE 0 END))\
+				) as carteira_rendimento \
+				FROM caixa', [0,0,id_usuario,1,id_plano,2,0,id_usuario,1,id_plano,1,0,id_usuario,1,id_plano,3,0,id_usuario,1,id_plano,2,0,id_usuario,1,id_plano,3,0,id_usuario,id_plano,1]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
+
 	
 	
 	GetValorTotalCarteiraAplicacao(id_usuario) {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT REPLACE(( \
+			helper.Query('SELECT REPLACE(ROUND(( \
 				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)) + \
 				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)) - \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)) - \
 				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END))\
-				),".",",")as carteira_aplicacao,\
-				REPLACE((SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)),".",",") as carteira_rendimento \
-				FROM caixa', [0,0,id_usuario,1,2,0,id_usuario,1,1,0,id_usuario,1,2,0,id_usuario,1]).then(data => {
+				),2),".",",")as carteira_aplicacao,\
+				REPLACE(ROUND((\
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END)) - \
+				(SUM(CASE WHEN (tipo = ? AND deletado = ? AND id_usuario = ? AND confirmado = ?) THEN valor ELSE 0 END))\
+				),2),".",",") as carteira_rendimento \
+				FROM caixa', [0,0,id_usuario,1,2,0,id_usuario,1,1,0,id_usuario,1,3,0,id_usuario,1,2,0,id_usuario,1,3,0,id_usuario,1]).then(data => {
 					console.log('RRRRRRRRRRRRRRR RESULTADO DA CARTEIRA TOTAL APLICACAO RRRRRRRRRRRRRRRRRRRRRRRRR');
 					console.log(data);
 					console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
