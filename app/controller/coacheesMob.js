@@ -16,9 +16,9 @@ router.get('/', function(req, res, next) {
 		model.GetTodosCoachees(req.session.usuario.id).then(data_coachees=>{
 			data.coachees= data_coachees;
 			data.link_cadastrar = '/mobsmart/coachees/cadastrar';	
-			console.log('===================== DATA USUARIO ====================');
+			console.log('COCCOCCOCCOCCOCCOCCOC COACHEES COCCOCCOCCOCCOC');
 			console.log(data);
-			console.log('=======================================================');
+			console.log('COCCOCCOCCOCCOCCOCCOCCOCCOCCOCCOCCOCCOCCOCCOCC');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'coachees/coachees', data: data, usuario: req.session.usuario});
 			
 		});
@@ -40,9 +40,9 @@ router.post('/cadastrar', function(req, res, next) {
 	var senha = Math.random().toString(36).substr(2, 8);
 	POST.senha = senha;
 	POST.id_coach = req.session.usuario.id;
-	console.log('UUUUUUUUUUUUUU UUUSUARIO UUUUUUUUUUUUUUUUUUUUUUUUUU');
-	console.log(POST);
-	console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
+	console.log('C_AC_AC_AC_AC_AC_AC_AC_A CADASTRAR COACHEES C_AC_AC_AC_AC_AC_A');
+	console.log(data);
+	console.log('C_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_AC_A');
 	
 	model.VerificarSeTemLogin(POST.login).then(tem_login => {
 		console.log('ttttttttttt tem login ttttt');

@@ -18,9 +18,9 @@ router.get('/', function(req, res, next) {
 			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
 				data.aporte_primeiro = data_primeiro_aporte;
 				data.link_sistema = '/mobsmart';
-				console.log('===================== DATA USUARIO ====================');
+					console.log('AAAAAAAAAAAAAAAAAAAAA AGENDA AAAAAAAAAAAAAA');
 				console.log(data);
-				console.log('=======================================================');
+				console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'agenda/agenda', data: data, usuario: req.session.usuario});
 			});
 		});
@@ -43,9 +43,9 @@ router.get('/editar_evento/:id', function(req, res, next) {
 		model.GetCoachees(req.session.usuario.id).then(data_coachee=>{
 			data.coachee = data_coachee;
 			data.link_sistema = '/mobsmart';
-			console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
-			console.log(data);	
-			console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+			console.log('E_EE_EE_EE_EE_EE_E EDITAR EVENTO E_EE_EE_EE_EE_EE_EE_EE_E');
+			console.log(data);
+			console.log('E_EE_EE_EE_EE_EE_EE_EE_EE_EE_EE_EE_EE_EE_EE_EE_EE_EE_EE_E');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'agenda/editar_evento', data: data, usuario: req.session.usuario});
 		});
 	});

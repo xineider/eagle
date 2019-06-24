@@ -12,6 +12,9 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.GetPerfil(req.session.usuario.id).then(data => {
 		data.link_sistema = '/mobsmart';
+				console.log('PPPPPPPPPPPPPPPPPPP PERFIL PPPPPPPPPPPPPPPPPPPP');
+		console.log(data);
+		console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'perfil/perfil', data: data, usuario: req.session.usuario});
 	});
 });
@@ -19,6 +22,9 @@ router.get('/', function(req, res, next) {
 
 router.get('/alterar-senha/', function(req, res, next) {
 	data.link_sistema = '/mobsmart';
+		console.log('******************** PERFIL ALTERA SENHA ****************');
+	console.log(data);
+	console.log('*********************************************************');
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'perfil/alterar_senha', data: data, usuario: req.session.usuario});
 });
 
@@ -46,7 +52,7 @@ router.post('/alterar-senha', function(req, res, next) {
 	POST.senha = control.Encrypt(POST.senha);
 	POST.id = req.session.usuario.id;
 	POST.senha_atual = control.Encrypt(POST.senha_atual);
-	console.log('PPPPPPPPPPPPPPPPP POST ALTERAR SENHA PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+	console.log('PPPPPPPPPPPPPPPPP PERFIL POST ALTERAR SENHA PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
 	console.log(POST);
 	console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
 	model.GetUsuarioAlterarSenha(req.session.usuario.id,POST.senha_atual).then(data_usuario => {
@@ -108,9 +114,9 @@ router.post('/uploadimagem', function(req, res, next) {
 	var arquivo = req.files.arquivo;
 	var nomeImagem = control.DateTimeForFile()+'_'+arquivo.name;
 	
-	console.log('@@@@@@@@@@@@@@@ arquivo @@@@@@@@@@@@@@@@@@@@@@@@@@@');
+	console.log('@@@@@@@@@@@@@@@ UPLOAD PERFIL ARQUIVO @@@@@@@@@@@@@@@@@@@@@@@@@@@');
 	console.log(arquivo);
-	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 	
 	// Use the mv() method to place the file somewhere on your server
 	arquivo.mv('./assets/imagem_perfil/'+nomeImagem, function(err) {

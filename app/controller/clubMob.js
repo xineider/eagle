@@ -18,9 +18,9 @@ router.get('/', function(req, res, next) {
 			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
 				data.aporte_primeiro = data_primeiro_aporte;
 				data.link_sistema = '/mobsmart';
-				console.log('===================== DATA USUARIO ====================');
+				console.log('CLUCLUCLUCLUCLUCLUCLU CLUB CLUCLUCLUCLUCLUCLU');
 				console.log(data);
-				console.log('=======================================================');
+				console.log('CLUCLUCLUCLUCLUCLUCLUCLUCLUCLUCLUCLUCLUCLUCLU');
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'club/club', data: data, usuario: req.session.usuario});
 			});
 		});

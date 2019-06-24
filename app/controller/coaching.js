@@ -21,9 +21,9 @@ router.get('/', function(req, res, next) {
 					model.GetTotalVistos(req.session.usuario.id).then(data_total_visto=>{
 						data.total_visto = data_total_visto;
 						data.link_sistema = '/sistema';
-						console.log('===================== DATA COACHING COACHEE ====================');
+						console.log('COGCOGCOGCOGCOGCOG COACHING COGCOGCOGCOGCOGCOGCOGCOG');
 						console.log(data);
-						console.log('=======================================================');
+						console.log('COGCOGCOGCOGCOGCOGCOGCOGCOGCOGCOGCOGCOGCOGCOGCOGCOGC');
 						res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'coaching/coaching', data: data, usuario: req.session.usuario});
 					});
 				});

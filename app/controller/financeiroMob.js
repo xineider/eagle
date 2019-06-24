@@ -16,9 +16,9 @@ router.get('/', function(req, res, next) {
 		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
 			data.aporte_primeiro = data_primeiro_aporte;
 			data.link_sistema = '/mobsmart';
-			console.log('===================== DATA USUARIO ====================');
+			console.log('FFFFFFFFFFFFFFFFFFFF FINANCEIRO FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
 			console.log(data);
-			console.log('=======================================================');
+			console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'financeiro/financeiro', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -30,9 +30,9 @@ router.get('/extrato', function(req, res, next) {
 		data.perfil = data_perfil;
 		model.GetExtrato(req.session.usuario.id).then(data_extrato=>{
 			data.extrato = data_extrato
-			console.log('===================== DATA USUARIO ====================');
+	console.log('F_EF_EF_EF_EF_EF_EF_EF_E FINANCEIRO EXTRATO F_EF_EF_EF_EF_EF_EF_EF_E');
 			console.log(data);
-			console.log('=======================================================');
+			console.log('F_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_EF_');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'financeiro/extrato', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -41,9 +41,9 @@ router.get('/extrato', function(req, res, next) {
 router.get('/saque', function(req, res, next) {
 	model.GetInvestimentos(req.session.usuario.id).then(data_investimentos=>{
 		data.investimento = data_investimentos;		
-		console.log('SSSSSSSSSSSSSSSSS SAQUE SSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('SSSSSSSSSSS FINANCEIRO SAQUE SSSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'financeiro/saque', data: data, usuario: req.session.usuario});
 	});
 });
@@ -52,9 +52,9 @@ router.get('/novo_aporte', function(req, res, next) {
 	model.GetNomePlanos().then(data_planos=>{
 		data.planos = data_planos;
 		data.link_sistema = '/mobsmart';
-		console.log('===================== DATA USUARIO ====================');
+		console.log('TTTTTTTTTTTTTTTT FINANCEIRO APORTE TTTTTTTTTTTTTTTTTTTTTT');
 		console.log(data);
-		console.log('=======================================================');
+		console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'financeiro/novo_aporte', data: data, usuario: req.session.usuario});
 	});
 });
@@ -152,7 +152,7 @@ router.post('/pedir-aporte/', function(req, res, next) {
 
 	if(POST.valor > 0){
 		
-		console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
+		console.log('PPPPPPPPPPPPPPPP PEDIR APORTE PPPPPPPPPPPPPPPPPPPPPPPP');
 		console.log(POST);
 		console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
 

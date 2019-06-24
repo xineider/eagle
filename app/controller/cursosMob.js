@@ -18,9 +18,9 @@ router.get('/', function(req, res, next) {
 			model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
 				data.aporte_primeiro = data_primeiro_aporte;
 				data.link_sistema = '/mobsmart';
-				console.log('CURSOS');
+				console.log('CURCURCURCURCURCUR CURSOS CURCURCURCURCURCUR');
 				console.log(data);
-				console.log('=======================================================');
+				console.log('CURCURCURCURCURCURCURCURCURCURCURCURCURCURCU');
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'cursos/cursos', data: data, usuario: req.session.usuario});
 			});
 		});

@@ -19,6 +19,9 @@ router.get('/', function(req, res, next) {
 				data.carteira_aplicacao = data_valor_carteira;
 				data.link_sistema = '/mobsmart';
 				model.VerificarConfirmacaoContrato(req.session.usuario.id).then(data_confirmacao_contrato =>{
+					console.log('IIIIIIIIIIIIIIIIIIIII DATA  INICIO IIIIIIIIIIIIIIIIIIII');
+					console.log(data);
+					console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
 					if(req.session.usuario.id == 32 && data_confirmacao_contrato != ''){
 						res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
 					}else{
@@ -37,7 +40,7 @@ router.get('/ver_noticia/:id', function(req, res, next) {
 	console.log(id);
 	console.log('_________________________________');
 	model.SelecionarNoticia(id).then(data => {
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('SSSSSSSSSSSSSS SELECIONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/ver_noticia', data: data, usuario: req.session.usuario});
@@ -49,9 +52,9 @@ router.get('/todas_noticias', function(req, res, next) {
 	model.SelecionarTodasNoticias().then(data_noticias => {
 		data.noticias = data_noticias;
 		data.link_sistema = '/mobsmart';
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('S_TS_TS_TS_TS_TS_TS_TS_TS_T SELECIONAR TODAS NOTICIA S_TS_TS_TS_TS_TS_TS_TS_T');
 		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('S_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/todas_noticias', data: data, usuario: req.session.usuario});
 	});
 });
@@ -61,9 +64,9 @@ router.get('/todos_avisos', function(req, res, next) {
 	model.SelecionarTodosAvisos(req.session.usuario.nivel).then(data_avisos => {
 		data.avisos = data_avisos;
 		data.link_sistema = '/mobsmart';
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('S_AS_AS_AS_A SELECIONAR TODAS AVISOS S_AS_AS_AS_AS_A');
 		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('S_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'inicio/todos_avisos', data: data, usuario: req.session.usuario});
 	});
 });

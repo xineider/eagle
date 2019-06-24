@@ -14,9 +14,9 @@ router.get('/', function(req, res, next) {
 	model.GetUsuario(req.session.usuario.id).then(data_perfil=>{
 		data.perfil = data_perfil;
 		data.link_sistema = '/mobsmart';
-		console.log('===================== DATA USUARIO ====================');
+		console.log('EEEEEEEEEEEEEEEEEEEEE ESTATISTICAS EEEEEEEEEEEEEEEEEEEEEEE');
 		console.log(data);
-		console.log('=======================================================');
+		console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'estatisticas/estatisticas', data: data, usuario: req.session.usuario});
 	});
 });

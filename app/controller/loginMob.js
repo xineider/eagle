@@ -19,8 +19,12 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/loginagain', function(req, res, next) {
+	console.log('LLLLLLLLLLLLLLLLLLLLLLLL LOGIN AGAIN LLLLLLLLLLLLLLLLLLLLLLLLLLLL');
+	console.log('LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL');
 	req.session.destroy(function(err) {
+		console.log('SSSSSSSSS SESSÃO DESTRUIDA ERR SSSSSSSSSSSSSSSSSSSS');
 		console.log(err);
+		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 	});
 	res.render('login/login_app', {});
 	// res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'login/login_again', data: data, usuario: req.session.usuario});

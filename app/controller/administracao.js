@@ -18,9 +18,9 @@ router.get('/', function(req, res, next) {
 			model.VerSeTemPedidoAporte().then(data_ver_aporte=>{
 				data.ver_aporte = data_ver_aporte;
 				data.link_sistema = '/sistema';
-				console.log('===================== DATA USUARIO ====================');
+				console.log('ADADADADADADADADADAD ADMINISTRAÇÃO ADADADADADADADADADADAD');
 				console.log(data);
-				console.log('=======================================================');
+				console.log('ADADADADADADADADADADADADADADADADADADADADADADADADADADADADA');
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/administracao', data: data, usuario: req.session.usuario});
 			});
 		});
@@ -33,9 +33,9 @@ router.get('/noticias', function(req, res, next) {
 		model.GetNoticias().then(data_noticias=>{
 			data.noticias = data_noticias;
 			data.link_sistema = '/sistema';
-			console.log('===================== DATA USUARIO ====================');
+			console.log('ADNADNADNADN ADMINISTRAÇÃO NOTICIAS ADNADNADNADNADNADNADNADNADNADNADNADN');
 			console.log(data);
-			console.log('=======================================================');
+			console.log('ADNADNADNADNADNADNADNADNADNADNADNADNADNADNADNADNADNADNADNADNADNADNADNADN');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/noticias/noticias', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -46,9 +46,9 @@ router.get('/eventos', function(req, res, next) {
 		data.perfil = data_perfil;
 		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
 			data.aporte_primeiro = data_primeiro_aporte
-			console.log('===================== DATA USUARIO ====================');
+			console.log('ADEADEADEADEADEADEADEADEADE ADMINISTRAÇÃO EVENTOS ADEADEADEADEADEADE');
 			console.log(data);
-			console.log('=======================================================');
+			console.log('ADEADEADEADEADEADEADEADEADEADEADEADEADEADEADEADEADEADEADEADEADEADEAD');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'financeiro/saque', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -59,9 +59,9 @@ router.get('/plus', function(req, res, next) {
 		data.perfil = data_perfil;
 		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
 			data.aporte_primeiro = data_primeiro_aporte;
-			console.log('===================== DATA USUARIO ====================');
+			console.log('ADPADPADPADPADP ADMINISTRAÇÃO PLUS ADPADPADPADPADP');
 			console.log(data);
-			console.log('=======================================================');
+			console.log('ADPADPADPADPADPADPADPADPADPADPADPADPADPADPADPADPAD');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'financeiro/saque', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -72,9 +72,9 @@ router.get('/porcentagem', function(req, res, next) {
 		data.perfil = data_perfil;
 		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
 			data.aporte_primeiro = data_primeiro_aporte;
-			console.log('===================== DATA USUARIO ====================');
+			console.log('ADPADPADPADPADP ADMINISTRAÇÃO PORCENTAGEM ADPADPADPADPADP');
 			console.log(data);
-			console.log('=======================================================');
+			console.log('ADPADPADPADPADPADPADPADPADPADPADPADPADPADPADPADPAD');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'financeiro/saque', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -87,9 +87,9 @@ router.get('/coaching', function(req, res, next) {
 		model.GetCoachings().then(data_coaching=>{
 			data.coaching = data_coaching;
 			data.link_sistema = '/sistema';
-			console.log('===================== DATA USUARIO ====================');
+			console.log('ADCADCADCADCADCADC ADMINISTRAÇÃO COACHING ADCADCADCADCADCADCADCADCADC');
 			console.log(data);
-			console.log('=======================================================');
+			console.log('ADCADCADCADCADCADCADCADCADCADCADCADCADCADCADCADCADCADCADCADCADCADCADC');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/coachings/coachings', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -99,9 +99,9 @@ router.get('/avisos', function(req, res, next) {
 	model.GetAvisos().then(data_avisos=>{
 		data.avisos = data_avisos;
 		data.link_sistema = '/sistema';
-		console.log('===================== DATA USUARIO ====================');
+		console.log('ADAADAADAADAADAADAADAADA ADMINISTRAÇÃO AVISOS ADAADAADAADAADAADAADA');
 		console.log(data);
-		console.log('=======================================================');
+		console.log('ADAADAADAADAADAADAADAADAADAADAADAADAADAADAADAADAADAADAADAADAADAADAAD');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/avisos/avisos', data: data, usuario: req.session.usuario});
 	});	
 });
@@ -112,7 +112,7 @@ router.get('/usuarios', function(req, res, next) {
 		model.GetUsuariosMenosProprio(req.session.usuario.id).then(data_usuarios=>{
 			data.usuarios_admin = data_usuarios;
 			data.link_sistema = '/sistema';
-			console.log('===================== DATA USUARIO ===-================');
+			console.log('===================== ADMINISTRACAO USUARIO ===-================');
 			console.log(data);
 			console.log('=======================================================');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/usuarios/usuarios', data: data, usuario: req.session.usuario});
@@ -125,9 +125,9 @@ router.get('/pedidos-saques', function(req, res, next) {
 	model.GetPedidosSaques().then(data_pedido_saque=>{
 		data.pedido_saque = data_pedido_saque;
 		data.link_sistema = '/sistema';
-		console.log('===================== DATA USUARIO ====================');
+		console.log('ADQADQADQADQADQADQADQADQADQADQ ADMINISTRAÇÃO PEDIDO SAQUE ADQADQADQADQADQ');
 		console.log(data);
-		console.log('=======================================================');
+		console.log('ADQADQADQADQADQADQADQADQADQADQADQADQADQADQADQADQADQADQADQADQADQADQADQADQA');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-saques/pedidos_saques', data: data, usuario: req.session.usuario});
 	});
 });
@@ -136,9 +136,9 @@ router.get('/pedidos-aportes', function(req, res, next) {
 	model.GetPedidosAportes().then(data_pedido_aporte=>{
 		data.pedido_aporte = data_pedido_aporte;
 		data.link_sistema = '/sistema';
-		console.log('===================== DATA USUARIO ====================');
+		console.log('ADTADTADTADT ADMINISTRAÇÃO PEDIDO APORTE ADTADTADTADTADTADTADTADT');
 		console.log(data);
-		console.log('=======================================================');
+		console.log('ADTADTADTADTADTADTADTADTADTADTADTADTADTADTADTADTADTADTADTADTADTAD');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-aportes/pedidos_aportes', data: data, usuario: req.session.usuario});
 	});
 });
@@ -148,9 +148,9 @@ router.get('/caixa', function(req, res, next) {
 	model.GetCaixa().then(data_caixa=>{
 		data.caixa = data_caixa;
 		data.link_sistema = '/sistema';
-		console.log('===================== DATA USUARIO ====================');
+		console.log('CAIXACAIXACAIXACAIXACAIXA ADMINISTRAÇÃO CAIXA CAIXACAIXACAIXA');
 		console.log(data);
-		console.log('=======================================================');
+		console.log('CAIXACAIXACAIXACAIXACAIXACAIXACAIXACAIXACAIXACAIXACAIXACAIXA');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/caixa/caixa', data: data, usuario: req.session.usuario});
 	});
 });
@@ -159,9 +159,9 @@ router.get('/comissoes', function(req, res, next) {
 	model.GetComissoes().then(data_comissao=>{
 		data.comissao = data_comissao;
 		data.link_sistema = '/sistema';
-		console.log('===================== DATA USUARIO ====================');
+		console.log('COMCOMCOMCOMCOMCOMCOM ADMINISTRAÇÃO COMISSOES COMCOMCOMCOMCOM');
 		console.log(data);
-		console.log('=======================================================');
+		console.log('COMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMC');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/comissoes/comissoes', data: data, usuario: req.session.usuario});
 	});
 });
@@ -173,9 +173,9 @@ router.get('/pedidos-rendimentos', function(req, res, next) {
 	model.GetPedidosRendimentos().then(data_pedido_rendimento=>{
 		data.pedido_rendimento = data_pedido_rendimento;
 		data.link_sistema = '/sistema';
-		console.log('===================== DATA USUARIO ====================');
+		console.log('RRRRRRRRRR ADMINISTRAÇÃO RENDIMENTOS RRRRRRRRRRRRRRRRRR');
 		console.log(data);
-		console.log('=======================================================');
+		console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-rendimentos/pedidos_rendimentos', data: data, usuario: req.session.usuario});
 	});
 });
@@ -184,9 +184,9 @@ router.get('/porcentagem-comissao', function(req, res, next) {
 	model.GetPorcentagemComissao().then(data_porcentagem_comissao=>{
 		data.porcentagem_comissao = data_porcentagem_comissao;
 		data.link_sistema = '/sistema';
-		console.log('===================== DATA USUARIO ====================');
+		console.log('CCCCCCCCC ADMINISTRAÇÃO COMISSAO CCCCCCCCCCCC');
 		console.log(data);
-		console.log('=======================================================');
+		console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/porcentagem-comissao/porcentagem_comissao', data: data, usuario: req.session.usuario});
 	});
 });
@@ -196,9 +196,9 @@ router.get('/ganhos-mensais', function(req, res, next) {
 	model.GetGanhosMensais().then(data_ganho_mensais=>{
 		data.ganhos_mensais = data_ganho_mensais;
 		data.link_sistema = '/sistema';
-		console.log('===================== DATA USUARIO ====================');
+		console.log('GGGGGGGGGGGG ADMINISTRAÇÃO GANHOS MENSAIS GGGGGGGGGGGGGGG');
 		console.log(data);
-		console.log('=======================================================');
+		console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/ganhos-mensais/ganhos_mensais', data: data, usuario: req.session.usuario});
 	});
 });
@@ -211,9 +211,9 @@ router.get('/alterar-coach', function(req, res, next) {
 		data.perfil = data_perfil;
 		model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
 			data.aporte_primeiro = data_primeiro_aporte
-			console.log('===================== DATA USUARIO ====================');
+			console.log('AAAAAAAAAAACCCCC ADMINISTRAÇÃO ALTERAR COACH AAAAAAAAAACCCCCC');
 			console.log(data);
-			console.log('=======================================================');
+			console.log('AAAAAAAAAAAAAAAAAAAAAAAACCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'financeiro/saque', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -235,9 +235,9 @@ router.get('/alterar-senha-usuario/:id', function(req, res, next) {
 	model.SelecionarUsuario(id).then(data_usuario_admin => {
 		data.usuarios_admin = data_usuario_admin;
 		data.link_sistema = '/sistema';
-		console.log('uuuuuuuuuUUUUUUUUUUUUUUUUUUU usuario uuuuuuuuUUUUUUUUUuuuuuu');
-		console.log(data);	
-		console.log('UUUUUuuuuuuuuuuuuuuuUUUUUUUUUUUUUUUUUuuuuuuuuUUUUUuuuuuuuuuu');
+		console.log('***************** ADMINISTRAÇÃO ALTERAR SENHA USUARIO ***************');
+		console.log(data);
+		console.log('*********************************************************************');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/usuarios/alterar_senha_usuario', data: data, usuario: req.session.usuario});
 	});
 });
@@ -298,7 +298,7 @@ router.get('/noticias/editar/:id', function(req, res, next) {
 	console.log('_________________________________');
 	model.SelecionarNoticia(id).then(data => {
 		data.link_sistema = '/sistema';
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('SSSSSSSSSSSSSS SELECIONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/noticias/editar_noticia', data: data, usuario: req.session.usuario});
@@ -332,9 +332,9 @@ router.get('/coaching/editar/:id', function(req, res, next) {
 	console.log('_________________________________');
 	model.SelecionarCoaching(id).then(data => {
 		data.link_sistema = '/sistema';
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('CCCCCCCCCCCCC COACHING EDITAR CCCCCCCCCCCCCCC');
 		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/coachings/editar_coaching', data: data, usuario: req.session.usuario});
 	});
 });
@@ -346,9 +346,9 @@ router.get('/aviso/editar/:id', function(req, res, next) {
 	console.log('_________________________________');
 	model.SelecionarAviso(id).then(data => {
 		data.link_sistema = '/sistema';
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('AAAAAAAAAAAA AVISOS EDITAR AAAAAAAAAAAAAAAAA');
 		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/avisos/editar_aviso', data: data, usuario: req.session.usuario});
 	});
 });
@@ -361,9 +361,9 @@ router.get('/pedido-saque/editar/:id', function(req, res, next) {
 	console.log('_________________________________');
 	model.SelecionarPedidoSaque(id).then(data => {
 		data.link_sistema = '/sistema';
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('QQQQQQQQQQQQQQ PEDIDO SAQUE EDITAR QQQQQQQQQQQQQQQQQQQ');
 		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-saques/editar_pedido_saque', data: data, usuario: req.session.usuario});
 	});
 });
@@ -376,9 +376,9 @@ router.get('/pedido-aporte/editar/:id', function(req, res, next) {
 	console.log('_________________________________');
 	model.SelecionarPedidoAporte(id).then(data => {
 		data.link_sistema = '/sistema';
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('TTTTTTTTTTTTTTTTTT PEDIDO APORTE EDITAR TTTTTTTTTTTTTTTTTTTT');
 		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-aportes/editar_pedido_aporte', data: data, usuario: req.session.usuario});
 	});
 });
@@ -390,9 +390,9 @@ router.get('/pedido-rendimento/editar/:id', function(req, res, next) {
 	console.log('_________________________________');
 	model.SelecionarPedidoRendimento(id).then(data => {
 		data.link_sistema = '/sistema';
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('RRRRRRRRRRRRRRRRR PEDIDO RENDIMENTO EDITAR RRRRRRRRRRRRRRRR');
 		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/pedidos-rendimentos/editar_pedido_rendimento', data: data, usuario: req.session.usuario});
 	});
 });
@@ -405,9 +405,9 @@ router.get('/porcentagem-comissao/editar/:id', function(req, res, next) {
 	console.log('_________________________________');
 	model.SelecionarPorcentagemComissao(id).then(data => {
 		data.link_sistema = '/sistema';
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('GGGGGGGGGGGGGGG PORCENTAGEM COMISSAO EDITAR GGGGGGGGGGGGGGGG');
 		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/porcentagem-comissao/editar_porcentagem_comissao', data: data, usuario: req.session.usuario});
 	});
 });
@@ -424,9 +424,9 @@ router.get('/caixa/editar/:id', function(req, res, next) {
 			model.GetPlanos().then(data_plano=>{
 				data.plano = data_plano;
 				data.link_sistema = '/sistema';
-				console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+				console.log('$$$$$$$$$$$$$$$$$$ CAIXA EDITAR $$$$$$$$$$$$$$$$$');
 				console.log(data);	
-				console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+				console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/caixa/editar_caixa', data: data, usuario: req.session.usuario});
 			});
 		});
@@ -444,9 +444,9 @@ router.get('/comissao/editar/:id', function(req, res, next) {
 		model.SelecionarComissao(id).then(data_comissao => {
 			data.comissao = data_comissao;
 			data.link_sistema = '/sistema';
-			console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+			console.log('$$$$$$$$$$$$$$$$$$ COMISSAO EDITAR $$$$$$$$$$$$$$$$$');
 			console.log(data);	
-			console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+			console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$');
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'administracao/comissoes/editar_comissao', data: data, usuario: req.session.usuario});
 		});
 	});
@@ -524,9 +524,9 @@ router.post('/usuarios/cadastrar/', function(req, res, next) {
 		POST.id_coach = 0;
 	}
 
-	console.log('POOOOOOSSSSSSSSSTTTTTTTTTTTTTTTT');
+	console.log('PPPPPPPPPPOOOOOOOOOOOST USUARIOS POOOOOOSSSSSSSSSTTTTTTTTTTTTTTTT');
 	console.log(POST);
-	console.log('POOOOOOSSSSSSSSSTTTTTTTTTTTTTTTT');
+	console.log('PPPPPPPPPPPPPPPPOOOOOOOOOOOSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTT');
 
 	model.VerificarSeTemLoginDisponivel(POST.login).then(tem_login => {
 		console.log('ttttttttttt tem login ttttt');
@@ -740,9 +740,9 @@ router.post('/usuarios/atualizar/', function(req, res, next) {
 router.post('/pedido-saque/confirmar/', function(req, res, next) {
 	POST = req.body;
 	POST.confirmado = 1;
-	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log('SQQQQQQQQ CONFIRMAR PEDIDO SAQUE  SSSSSSSSQQQQQQ');
 	console.log(POST);
-	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	console.log('SQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ');
 	model.AtualizarPedidoSaque(POST).then(data => {
 		res.json(data);
 	});
@@ -751,9 +751,9 @@ router.post('/pedido-saque/confirmar/', function(req, res, next) {
 router.post('/pedido-aporte/confirmar/', function(req, res, next) {
 	POST = req.body;
 	POST.confirmado = 1;
-	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log('ATATATATATAT CONFIRMAR PEDIDO APORTE  ATATATATATAT');
 	console.log(POST);
-	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	console.log('ATTATATATATATATATATATATATATATATATATATATATATATATATA');
 	model.AtualizarPedidoAporte(POST).then(data => {
 		res.json(data);
 	});
@@ -762,9 +762,9 @@ router.post('/pedido-aporte/confirmar/', function(req, res, next) {
 router.post('/pedido-rendimento/confirmar/', function(req, res, next) {
 	POST = req.body;
 	POST.confirmado = 1;
-	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log('PRPPRPPRPRRRPRPP CONFIRMAR PEDIDO RENDIMENTO  PRPPRPPRPRRRPRPP');
 	console.log(POST);
-	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	console.log('PRPPRPPRPRRRPRPPPRPPRPPRPRRRPRPPPRPPRPPRPRRRPRPPPRPPRPPRPRRRPR');
 	model.AtualizarPedidoRendimento(POST).then(data => {
 		res.json(data);
 	});
@@ -775,9 +775,9 @@ router.post('/pedido-rendimento/confirmar/', function(req, res, next) {
 
 router.post('/porcentagem-comissao/atualizar/', function(req, res, next) {
 	POST = req.body;
-	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log('APCAPCAPCAPCAPCAPC ATUALIZAR PORCENTAGEM COMISSAO APCAPCAPCAPC');
 	console.log(POST);
-	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	console.log('APCAPCAPCAPCAPCAPCAPCAPCAPCAPCAPCAPCAPCAPCAPCAPCAPCAPCAPCAPCAP');
 	model.AtualizarPorcentagemComissao(POST).then(data => {
 		res.json(data);
 	});
@@ -792,9 +792,9 @@ router.post('/caixa/atualizar/', function(req, res, next) {
 	}
 
 
-	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log('ACCCCCCCCCC ATUALIZAR CAIXA ACCCCCCCCCCCCCCCCCCC');
 	console.log(POST);
-	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	console.log('ACCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
 	model.AtualizarCaixa(POST).then(data => {
 		res.json(data);
 	});
@@ -802,9 +802,9 @@ router.post('/caixa/atualizar/', function(req, res, next) {
 
 router.post('/comissao/atualizar/', function(req, res, next) {
 	POST = req.body;
-	console.log('AAAAAAAAA ATUALIZAR USUARIO AAAAAAAAAAAAAA');
+	console.log('ACCCCCCCCCC ATUALIZAR COMISSAO ACCCCCCCCCCCCCCCCC');
 	console.log(POST);
-	console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA');
+	console.log('ACCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC');
 
 	POST.valor = POST.valor.replace(',','.');
 
@@ -869,7 +869,7 @@ router.post('/pedido-saque/desativar', function(req, res, next) {
 
 router.post('/pedido-aporte/desativar', function(req, res, next) {
 	POST = req.body;
-	console.log('XXXXXXXXXXX PEDIDO SAQUE DESATIVAR XXXXXXXXXXXXXXXX');
+	console.log('XXXXXXXXXXX PEDIDO APORTE DESATIVAR XXXXXXXXXXXXXXXX');
 	console.log(POST);
 	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 	model.DesativarPedidoAporte(POST).then(data=> {
@@ -879,7 +879,7 @@ router.post('/pedido-aporte/desativar', function(req, res, next) {
 
 router.post('/pedido-rendimento/desativar', function(req, res, next) {
 	POST = req.body;
-	console.log('XXXXXXXXXXX PEDIDO SAQUE DESATIVAR XXXXXXXXXXXXXXXX');
+	console.log('XXXXXXXXXXX PEDIDO RENDIMENTO DESATIVAR XXXXXXXXXXXXXXXX');
 	console.log(POST);
 	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 	model.DesativarPedidoRendimento(POST).then(data=> {
@@ -889,7 +889,7 @@ router.post('/pedido-rendimento/desativar', function(req, res, next) {
 
 router.post('/caixa/desativar', function(req, res, next) {
 	POST = req.body;
-	console.log('XXXXXXXXXXX PEDIDO SAQUE DESATIVAR XXXXXXXXXXXXXXXX');
+	console.log('XXXXXXXXXXX CAIXA DESATIVAR XXXXXXXXXXXXXXXX');
 	console.log(POST);
 	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 	model.DesativarCaixa(POST).then(data=> {
@@ -899,7 +899,7 @@ router.post('/caixa/desativar', function(req, res, next) {
 
 router.post('/comissao/desativar', function(req, res, next) {
 	POST = req.body;
-	console.log('XXXXXXXXXXX PEDIDO SAQUE DESATIVAR XXXXXXXXXXXXXXXX');
+	console.log('XXXXXXXXXXX COMISSAO DESATIVAR XXXXXXXXXXXXXXXX');
 	console.log(POST);
 	console.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX');
 	model.DesativarComissao(POST).then(data=> {

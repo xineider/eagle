@@ -30,9 +30,9 @@ router.get('/', function(req, res, next) {
 							// res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
 						}else{
 
-							console.log('--------------- DATA  INICIO------------------');
+							console.log('IIIIIIIIIIIIIIIIIIIII DATA  INICIO IIIIIIIIIIIIIIIIIIII');
 							console.log(data);
-							console.log('----------------------------------------------');
+							console.log('IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII');
 							// res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/contrato', data: data, usuario: req.session.usuario});
 							res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/index', data: data, usuario: req.session.usuario});
 						}
@@ -50,7 +50,7 @@ router.get('/ver_noticia/:id', function(req, res, next) {
 	console.log(id);
 	console.log('_________________________________');
 	model.SelecionarNoticia(id).then(data => {
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('SSSSSSSSSSSSSS SELECIONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
 		console.log(data);	
 		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/ver_noticia', data: data, usuario: req.session.usuario});
@@ -62,9 +62,9 @@ router.get('/todas_noticias', function(req, res, next) {
 	model.SelecionarTodasNoticias().then(data_noticias => {
 		data.noticias = data_noticias;
 		data.link_sistema = '/sistema';	
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('S_TS_TS_TS_TS_TS_TS_TS_TS_T SELECIONAR TODAS NOTICIA S_TS_TS_TS_TS_TS_TS_TS_T');
 		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('S_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_TS_');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/todas_noticias', data: data, usuario: req.session.usuario});
 	});
 });
@@ -74,9 +74,9 @@ router.get('/todos_avisos', function(req, res, next) {
 	model.SelecionarTodosAvisos(req.session.usuario.nivel).then(data_avisos => {
 		data.avisos = data_avisos;
 		data.link_sistema = '/sistema';
-		console.log('SSSSSSSSSSSSSS SELEICONAR NOTICIA SSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('S_AS_AS_AS_A SELECIONAR TODAS AVISOS S_AS_AS_AS_AS_A');
 		console.log(data);	
-		console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
+		console.log('S_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS_AS');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'inicio/todos_avisos', data: data, usuario: req.session.usuario});
 	});
 });

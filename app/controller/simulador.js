@@ -11,22 +11,12 @@ app.use(require('express-is-ajax-request'));
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {	
-	model.GetPrimeiroAporte(req.session.usuario.id).then(data_primeiro_aporte=>{
-		data.aporte_primeiro = data_primeiro_aporte;
-		data.link_sistema = '/sistema';
-		console.log('===================== DATA USUARIO ====================');
-		console.log(data);
-		console.log('=======================================================');
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'simulador/simulador', data: data, usuario: req.session.usuario});
-	});
-});
+	data.link_sistema = '/sistema';
+	console.log('^^^^^^^^^^^^^^^^^^^^^^^^ SIMULADOR ^^^^^^^^^^^^^^^^^^^^^^');
+	console.log(data);
+	console.log('^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^');
+	res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'simulador/simulador', data: data, usuario: req.session.usuario});
 
-
-/* POST enviando o login para verificação. */
-router.post('/', function(req, res, next) {
-	model.GetNoticias().then(data => {
-		res.json(data);
-	});
 });
 
 module.exports = router;

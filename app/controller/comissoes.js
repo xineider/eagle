@@ -17,9 +17,9 @@ router.get('/', function(req, res, next) {
 			data.comissoes = data_comissoes;
 			model.GetValorTotalCarteiraCoachees(req.session.usuario.id).then(data_aporte_total_coachee=>{
 				data.valor_total_coachees = data_aporte_total_coachee;
-				console.log('===================== DATA USUARIO ====================');
+				console.log('COMCOMCOMCOMCOMCOMCOMCOM COMISSOES COMCOMCOMCOMCOMCOMCOM');
 				console.log(data);
-				console.log('=======================================================');
+				console.log('COMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCOMCO');
 				res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'comissoes/comissoes', data: data, usuario: req.session.usuario});
 			});
 		});
