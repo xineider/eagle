@@ -67,15 +67,13 @@ router.post('/pedir-saque/', function(req, res, next) {
 	console.log(POST);
 	POST.senha = control.Encrypt(POST.senha);
 	POST.id_usuario = req.session.usuario.id;
-	POST.tipo = 1;
+	
 	POST.valor = POST.valor.replace(',','.');
 
 	if(POST.valor > 0){
-
 		console.log('PPPPPPPPPPPPPPPP PEDIR SAQUE PPPPPPPPPPPPPPPPPPPPPPPP');
 		console.log(POST);
 		console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
-
 
 		model.ConfirmarSenhaUsuario(req.session.usuario.id,POST.senha).then(data_usuario =>{
 			delete POST.senha;
@@ -85,8 +83,52 @@ router.post('/pedir-saque/', function(req, res, next) {
 			console.log('UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU');
 
 			if (data_usuario.length > 0){
-				model.CadastrarPedidoSaque(POST).then(data_pedido_saque => {
-					res.json(data_pedido_saque);
+
+				model.GetValorTotalPlano(req.session.usuario.id,POST.id_plano).then(data_plano =>{
+					console.log('PPPPPPPPPPPPPPPPP DATA PLANO PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+					console.log(data_plano);
+					console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
+
+					console.log('carteira rendimento');
+					console.log(data_plano[0].carteira_rendimento);
+
+					console.log('valor');
+					console.log(POST.valor);
+
+					console.log(parseFloat(POST.valor) > parseFloat(data_plano[0].carteira_rendimento));
+
+					//Se o valor colocado for maior que o rendimento ele deve zerar o rendimento e fazer a diminuicao do saque
+					if(parseFloat(POST.valor) > parseFloat(data_plano[0].carteira_rendimento)){
+						var novo_valor_saque = parseFloat(POST.valor) - parseFloat(data_plano[0].carteira_rendimento);
+
+						data_insert = {id_plano:POST.id_plano, valor:parseFloat(data_plano[0].carteira_rendimento), carteira:POST.carteira, tipo:3, id_usuario:POST.id_usuario};
+						
+						POST.tipo = 1;
+
+						POST.valor = novo_valor_saque;
+
+						console.log('QQQQQQQQQQQQQQQ POST DO SAQUE QQQQQQQQQQQQQQQQQQQQQQQQQQQQ');
+						console.log(POST);
+						console.log('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ');
+
+						console.log('KKKKKKKKKKKKKKKKKKKKKK POST DO RENDIMENTO SAQUE KKKKKKKKKKKKKKKKKKKKKKKK');
+						console.log(data_insert);
+						console.log('KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK');
+
+						model.CadastrarPedidoSaqueRendimento(data_insert).then(data_valor_saque_rendimento => {
+							model.CadastrarPedidoSaque(POST).then(data_pedido_saque => {
+								res.json(data_pedido_saque);
+							});
+						});
+
+
+					}else{
+						//se o valor não for menor só inserir o valor do tipo 3
+						POST.tipo = 3;
+						model.CadastrarPedidoSaqueRendimento(POST).then(data_pedido_saque => {
+							res.json(data_pedido_saque);
+						});
+					}
 				});
 			}else{
 				res.json({error:'senha_saque_diferente',element:'#senha_saque',texto:'Senha Não Confere!'});

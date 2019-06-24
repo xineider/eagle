@@ -49,6 +49,7 @@ class FinanceiroModel {
 				WHEN a.tipo = 0 THEN "Depósito em Conta"\
 				WHEN a.tipo = 1 THEN "Saque"\
 				WHEN a.tipo = 2 THEN "Rendimento"\
+				WHEN a.tipo = 3 THEN "Saque"\
 				ELSE 0 END as mensagem \
 				FROM caixa as  a \
 				LEFT JOIN planos as b ON a.id_plano = b.id\
