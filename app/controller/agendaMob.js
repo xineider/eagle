@@ -63,7 +63,7 @@ router.get('/adicionar-novo-compromisso', function(req, res, next) {
 router.get('/lista-coachees', function(req, res, next) {
 	model.GetCoachees(req.session.usuario.id).then(data_coachee=>{
 		data.coachee = data_coachee;
-		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'agenda/lista_coachees', data: data, usuario: req.session.usuario});
+		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorLimpo', {html: 'agenda/lista_coachees', data: data, usuario: req.session.usuario});
 	});
 });
 
