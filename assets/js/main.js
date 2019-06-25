@@ -805,20 +805,24 @@ function UploadImagem(isso,container) {
 			adicionarLoader();
 		},
 		success: function (data) {
-			$('.file-path').val('');
-
 			console.log('data ----------------');
 			console.log(data);
-			$(container).empty();
+			if (typeof data == 'object' && data['error'] != null){
+				AddErrorTexto($(data['element']),data['texto']);	
+			}else if(data != undefined){
+				$('.file-path').val('');
 
-			$(container).append('\
-				<div class="pai">\
-				<img src="/assets/uploads/'+data+'">\
-				<button class="btn waves-effect waves-light red close-button remove margin-b-10">Remover Imagem</button>\
-				<input type="hidden" name="arquivo" value="/assets/uploads/'+data+'">\
-				</div>');
-			console.debug(data);
-			LogSistema('POST',link);
+				$(container).empty();
+
+				$(container).append('\
+					<div class="pai">\
+					<img src="/assets/uploads/'+data+'">\
+					<button class="btn waves-effect waves-light red close-button remove margin-b-10">Remover Imagem</button>\
+					<input type="hidden" name="arquivo" value="/assets/uploads/'+data+'">\
+					</div>');
+				console.debug(data);
+				LogSistema('POST',link);
+			}
 		},
 		error: function (xhr, e, t) {
 			console.debug((xhr.responseText));
@@ -857,49 +861,63 @@ function validateEmail(email) {
 
 
 function UploadImagemPerfil(isso,container) {
-	var link = isso.data('href');
-	console.log('FILE UPLOAD');
-	console.log(isso[0].files[0]);
-	var formData = new FormData();
-	formData.append('arquivo', isso[0].files[0]);
 
-	$.ajax({
-		url: link,
-		type: 'POST',
-		data: formData,
-		dataType: 'json',
-		processData: false,
-		contentType: false,
-		beforeSend: function(request) {
-			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
-			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
-			adicionarLoader();
-		},
-		success: function (data) {
-			$('.file-path').val('');
+	if(isso[0].files[0].size < 5120000){
+		var link = isso.data('href');
+		var formData = new FormData();
+		formData.append('arquivo', isso[0].files[0]);
 
-			console.log('data ----------------');
-			console.log(data);
-			$(container).empty();
+		$.ajax({
+			url: link,
+			type: 'POST',
+			data: formData,
+			dataType: 'json',
+			processData: false,
+			contentType: false,
+			beforeSend: function(request) {
+				request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+				request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+				request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
+				adicionarLoader();
+			},
+			success: function (data) {
 
-			$(container).append('\
-				<div class="pai">\
-				<img src="/assets/imagem_perfil/'+data+'">\
-				<button class="btn waves-effect waves-light red close-button remove margin-b-10">Remover Imagem</button>\
-				<input type="hidden" name="imagem" value="/assets/imagem_perfil/'+data+'">\
-				</div>');
-			$('.img-user img').prop('src','/assets/imagem_perfil/'+data)
-			console.debug(data);
-			LogSistema('POST',link);
-		},
-		error: function (xhr, e, t) {
-			console.debug((xhr.responseText));
-		},
-		complete: function() {
-			removerLoader();
-		}
-	});
+				if (typeof data == 'object' && data['error'] != null){
+					AddErrorTexto($(data['element']),data['texto']);	
+				}else if(data != undefined){
+					$('.file-path').val('');
+
+					console.log('data ----------------');
+					console.log(data);
+					$(container).empty();
+
+					$(container).append('\
+						<div class="pai">\
+						<img src="/assets/imagem_perfil/'+data+'">\
+						<button class="btn waves-effect waves-light red close-button remove margin-b-10">Remover Imagem</button>\
+						<input type="hidden" name="imagem" value="/assets/imagem_perfil/'+data+'">\
+						</div>');
+					$('.img-user img').prop('src','/assets/imagem_perfil/'+data);
+					console.debug(data);
+					LogSistema('POST',link);
+				}
+			},
+			error: function (xhr, e, t) {
+				console.debug((xhr.responseText));
+			},
+			complete: function() {
+				removerLoader();
+			}
+		});
+	}
+	else{
+		AddErrorTexto(isso,'Arquivo Muito Grande, envie outro!');
+	}
+
+
+
+
+
 }
 
 function UploadComprovante(isso,container) {

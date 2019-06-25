@@ -12,7 +12,7 @@ app.use(require('express-is-ajax-request'));
 router.get('/', function(req, res, next) {
 	model.GetPerfil(req.session.usuario.id).then(data => {
 		data.link_sistema = '/mobsmart';
-				console.log('PPPPPPPPPPPPPPPPPPP PERFIL PPPPPPPPPPPPPPPPPPPP');
+		console.log('PPPPPPPPPPPPPPPPPPP PERFIL PPPPPPPPPPPPPPPPPPPP');
 		console.log(data);
 		console.log('PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP');
 		res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'perfil/perfil', data: data, usuario: req.session.usuario});
@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
 
 router.get('/alterar-senha/', function(req, res, next) {
 	data.link_sistema = '/mobsmart';
-		console.log('******************** PERFIL ALTERA SENHA ****************');
+	console.log('******************** PERFIL ALTERA SENHA ****************');
 	console.log(data);
 	console.log('*********************************************************');
 	res.render(req.isAjaxRequest() == true ? 'api' : 'montadorMobile', {html: 'perfil/alterar_senha', data: data, usuario: req.session.usuario});
@@ -63,11 +63,11 @@ router.post('/alterar-senha', function(req, res, next) {
 		if (data_usuario.length > 0){
 			model.AtualizarUsuario(POST).then(data => {
 				control.SendMail(data_usuario[0].email,'Sua senha foi Atualizada em Eagle Finances',
-				'Olá sua senha foi alterada com sucesso no Eagle Finances.',
-				'Olá Sua senha foi alterada com sucesso no Eagle Finances. Segue abaixo as informações sobre sua conta.'+
-				'<br><b>Login</b>:'+data_usuario[0].login+ 
-				'<br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
-				'<br>Não responda esta mensagem, ela é enviada automaticamente.');
+					'Olá sua senha foi alterada com sucesso no Eagle Finances.',
+					'Olá Sua senha foi alterada com sucesso no Eagle Finances. Segue abaixo as informações sobre sua conta.'+
+					'<br><b>Login</b>:'+data_usuario[0].login+ 
+					'<br>Não mostre seu login e senha para ninguém. A sua conta é responsabilidade sua.'+
+					'<br>Não responda esta mensagem, ela é enviada automaticamente.');
 				res.json(POST.id);
 			});	
 		} else {
@@ -113,20 +113,28 @@ router.post('/cropImagemPerfil/', function(req, res, next) {
 router.post('/uploadimagem', function(req, res, next) {
 	var arquivo = req.files.arquivo;
 	var nomeImagem = control.DateTimeForFile()+'_'+arquivo.name;
-	
+
 	console.log('@@@@@@@@@@@@@@@ UPLOAD PERFIL ARQUIVO @@@@@@@@@@@@@@@@@@@@@@@@@@@');
 	console.log(arquivo);
 	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
-	
-	// Use the mv() method to place the file somewhere on your server
-	arquivo.mv('./assets/imagem_perfil/'+nomeImagem, function(err) {
-		if (err) {
-			return res.status(500).send(err);
-		}
 
-		res.json(nomeImagem);
-	});
-	
+	// Use the mv() method to place the file somewhere on your server
+
+	if(arquivo.mimetype == 'image/jpeg' || arquivo.mimetype == 'image/png' || arquivo.mimetype == 'image/svg+xml' || 
+		arquivo.mimetype == 'image/tiff' || arquivo.mimetype == 'image/webp' || arquivo.mimetype == 'image/x-icon' || 
+		arquivo.mimetype == 'image/gif')
+	{
+		arquivo.mv('./assets/imagem_perfil/'+nomeImagem, function(err) {
+			if (err) {
+				return res.status(500).send(err);
+			}
+
+			res.json(nomeImagem);
+		});
+	}else{
+		res.json({error:'nao_imagem',element:'input[type="file"]',texto:'Arquivo Enviado não é uma imagem!'});
+	}
+
 });
 
 

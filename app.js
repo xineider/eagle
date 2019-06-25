@@ -8,6 +8,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var Control = require('./app/controller/control.js');
 const fileUpload = require('express-fileupload');
+var Busboy = require('busboy');
 
 var VerificacaoModel = require('./app/model/verificacaoModel');
 var verificacao = new VerificacaoModel;
@@ -149,6 +150,12 @@ app.use("/assets", express.static(__dirname + '/assets'));
 app.use(fileUpload({
   limitHandler:500
 }));
+
+// app.use(fileUpload({
+//   limits: { 
+//     fileSize: 50 * 1024 * 1024 
+//   }
+// }));
 
 app.use('/', login);
 app.use('/sistema', index);
