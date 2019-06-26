@@ -178,21 +178,28 @@ router.post('/pedir-aporte/', function(req, res, next) {
 });
 
 router.post('/novo_aporte/uploadarcomprovante', function(req, res, next) {
-	var sampleFile = req.files.arquivo;
-	var nome = control.DateTimeForFile()+'_'+sampleFile.name;
+	var arquivo = req.files.arquivo;
+	var nome = control.DateTimeForFile()+'_'+arquivo.name;
 
-	console.log('SSSSSSSSSSSSSSSSSSS sampleFile SSSSSSSSSSSSSSSSSSSSSS');
-	console.log(sampleFile);
+	console.log('SSSSSSSSSSSSSSSSSSS arquivo SSSSSSSSSSSSSSSSSSSSSS');
+	console.log(arquivo);
 	console.log('SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS');
 
-  // Use the mv() method to place the file somewhere on your server
-  sampleFile.mv('./assets/uploads/'+nome, function(err) {
-  	if (err) {
-  		return res.status(500).send(err);
-  	}
+	
+	if(arquivo.mimetype == 'image/jpeg' || arquivo.mimetype == 'image/png' || arquivo.mimetype == 'image/svg+xml' || 
+		arquivo.mimetype == 'image/tiff' || arquivo.mimetype == 'image/webp' || arquivo.mimetype == 'image/x-icon' || 
+		arquivo.mimetype == 'image/gif' || arquivo.mimetype == 'application/pdf')
+	{
+		arquivo.mv('./assets/uploads/'+nome, function(err) {
+			if (err) {
+				return res.status(500).send(err);
+			}
 
-  	res.json(nome);
-  });
+			res.json(nome);
+		});
+	}else{
+		res.json({error:'nao_imagem_pdf',element:'input[type="file"]',texto:'Só é aceitado imagem ou pdf!'});
+	}
 });
 
 
