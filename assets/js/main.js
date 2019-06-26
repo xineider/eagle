@@ -254,7 +254,6 @@ $(document).on('ready', function () {
 		var sucessMessage = $(this).data('mensagem-sucesso');
 		var sucessClass = 'green';
 		EnviarUmaInformacao(informacao,link,sucessMessage,sucessClass);
-
 	});
 
 	$(document).on('click', '.ajax-submit-delete', function(e) {
