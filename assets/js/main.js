@@ -239,10 +239,6 @@ $(document).on('ready', function () {
 		var post = form.serializeArray();
 		var link = $(this).data('href');
 		var back = $(this).data('action');
-		console.log('bbbbbbbbbbbb back bbbbbbbbb');
-		console.log(back);
-		console.log('bbbbbbbbbbbb back bbbbbbbbb');
-
 		var sucessMessage = $(this).data('mensagem-sucesso');
 		var sucessClass = 'green';
 		if (VerificarForm(form) == true) {
