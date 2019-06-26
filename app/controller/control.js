@@ -168,5 +168,50 @@ class Control {
 						});
 				});
 	}
+
+	SendMailAttachmentNoFileName(para, assunto,text, html,caminhoAnexo) {
+		nodemailer.createTestAccount((err, account) => {
+
+					// create reusable transporter object using the default SMTP transport
+					let transporter = nodemailer.createTransport({
+						host: 'smtp.hostinger.com.br',
+						port: 587,
+							secure: false, // true for 465, false for other ports
+							auth: {
+									user: 'noreply@eagle.finance', // generated ethereal user
+									pass: 'QeRCn2yixWyi'  // generated ethereal password
+								},
+								tls: {
+									rejectUnauthorized: false
+								}
+							});
+
+					// setup email data with unicode symbols
+					let mailOptions = {
+							from: 'noreply@eagle.finance', // sender address
+							to: para, // list of receivers
+							subject: assunto, // Subject line
+							text: text, 
+							html: html,
+							attachments: [
+							{
+								path:caminhoAnexo
+							}				
+							] // html body
+						};
+
+
+					// send mail with defined transport object
+					transporter.sendMail(mailOptions, (error, info) => {
+						if (error) {
+							return console.log(error);
+						}
+						console.log('Message sent: %s', info.messageId);
+							// Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@blurdybloop.com>
+							// Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+						});
+				});
+	}
+
 }
 module.exports = Control;

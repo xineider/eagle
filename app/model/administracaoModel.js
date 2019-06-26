@@ -15,6 +15,29 @@ class AdministracaoModel {
 			});
 	}
 	
+	DescobrirUsuarioPorCaixaId(id_caixa) {
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT * FROM usuarios as a \
+				WHERE a.id IN (SELECT id_usuario FROM caixa as b WHERE b.id = ? AND b.deletado = ?) AND a.deletado = ?', [id_caixa,0,0]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
+	DescobrirCaixaValorPorCaixaId(id_caixa){
+		return new Promise(function(resolve, reject) {
+			helper.Query('SELECT a.*, REPLACE(ROUND(a.valor,2),".",",") as valor,\
+				(SELECT nome FROM planos as b WHERE a.id_plano = b.id AND b.deletado = ?) as nome_plano \
+				FROM caixa as a WHERE id =  ? AND deletado = ?', [0,id_caixa,0]).then(data => {
+					resolve(data);
+				});
+			});
+	}
+
+
+
+
+
 	
 	
 	

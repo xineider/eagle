@@ -765,16 +765,25 @@ router.post('/pedido-aporte/enviar-email/', function(req, res, next) {
 	console.log(POST);
 	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 
+	model.DescobrirUsuarioPorCaixaId(POST.id).then(data_usuario_caixa=>{
+		model.DescobrirCaixaValorPorCaixaId(POST.id).then(data_caixa=>{
 
-	var html = "Olá Você está recebendo este e-mail pois pediu o comprovante por e-mail. O mesmo está em anexo."+
-	"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
+			var html = "Olá Você está recebendo este e-mail pois pediu o comprovante por e-mail. <br>"+
+			"O comprovante do usuário <b>"+data_usuario_caixa[0].nome+"</b> com o login "+ data_usuario_caixa[0].login + " no plano <b>"+data_caixa[0].nome_plano+ "</b> com o valor de R$" +data_caixa[0].valor+ "."+
+			"<br>O comprovante está em anexo."+
+			"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
 
-	var text = "Olá Você está recebendo este e-mail pois pediu o comprovante por e-mail. O mesmo está em anexo."+
-	"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
+			var text = "Olá Você está recebendo este e-mail pois pediu o comprovante por e-mail. <br>."+
+			"O comprovante do usuário "+data_usuario_caixa[0].nome+" com o login "+ data_usuario_caixa[0].login + " no plano "+data_caixa[0].nome_plano+ " com o valor de R$" +data_caixa[0].valor+ "."+
+			"<br>O comprovante está em anexo."+
+			"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
 
-	model.GetUsuario(req.session.usuario.id).then(data_usuario =>{
-		control.SendMailAttachment(data_usuario[0].email, 'Comprovante Deposito', text, html,'comprovante.png','.'+POST.arquivo);
-		res.json(POST.informacao);
+
+			model.GetUsuario(req.session.usuario.id).then(data_usuario =>{
+				control.SendMailAttachmentNoFileName(data_usuario[0].email, 'Comprovante Deposito', text, html,'.'+POST.arquivo);
+				res.json(POST.informacao);
+			});
+		});
 	});
 });
 
