@@ -759,6 +759,27 @@ router.post('/pedido-aporte/confirmar/', function(req, res, next) {
 	});
 });
 
+router.post('/pedido-aporte/enviar-email/', function(req, res, next) {
+	POST = req.body;
+	console.log('@@@@@@@@@@@@@ PEDIDO APORTE ENVIO DE EMAIL @@@@@@@@');
+	console.log(POST);
+	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
+
+	var html = "Olá Você está recebendo este e-mail pois pediu o comprovante por e-mail. O mesmo está em anexo."+
+	"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
+
+	var text = "Olá Você está recebendo este e-mail pois pediu o comprovante por e-mail. O mesmo está em anexo."+
+	"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
+
+	model.GetUsuario(req.session.usuario.id).then(data_usuario =>{
+		control.SendMailAttachment(data_usuario[0].email, 'Comprovante Deposito', text, html,'Comprovante',POST.informacao);
+		res.json(POST.informacao);
+	});
+});
+
+
+
+
 router.post('/pedido-rendimento/confirmar/', function(req, res, next) {
 	POST = req.body;
 	POST.confirmado = 1;

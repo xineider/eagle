@@ -3,54 +3,61 @@
 	
 	
 	<%if(usuario.nivel == 4 || usuario.nivel == 5){ %>
-		
-		
-		<form method="POST" action="" enctype="multipart/form-data">
-			
-			
-			<div class="card light row">
-				<input type="hidden" name="id" value="<%= data[0].id %>">
-				
-				
-				<div class="input-field col s12">
-					<label for="titulo">Nome</label>
-					<input type="text" disabled value="<%= data[0].nome %>">
-				</div>
-				
-				<div class="input-field col s12">
-					<label for="titulo">Perfil</label>
-					<input type="text" disabled value="<%= data[0].plano %>">
-				</div>
-				
-				<div class="input-field col s12">
-					<label for="titulo">Valor</label>
-					<input type="text" disabled value="<%= data[0].valor %>">
-				</div>
 
-				<%if(data[0].arquivo!=undefined){%>
-				<div class="input-field col s12">
-					<a download class="btn primary" href="<%= data[0].arquivo %>">Baixar Comprovante</a>					
-				</div>
 
-				<%}else{%>
-					<div class="center margin-b-10">Cliente não enviou comprovante!</div>
-				<%}%>
-				
-				<button data-href="/sistema/administracao/pedido-aporte/confirmar" data-action="<%= data.link_sistema%>/administracao/pedidos-aportes/" class="btn secondary ajax-submit-update-mensagem margin-b-10" data-mensagem-sucesso="Aporte Aprovado com Sucesso!">
-					Aceitar Pedido <i class="far fa-save-o" aria-hidden="true"></i>
-				</button>
-				
-				
-				
+	<form method="POST" action="" enctype="multipart/form-data">
+
+
+		<div class="card light row">
+			<input type="hidden" name="id" value="<%= data[0].id %>">
+
+
+			<div class="input-field col s12">
+				<label for="titulo">Nome</label>
+				<input type="text" disabled value="<%= data[0].nome %>">
 			</div>
-		</form>
-		
-		
-		
-		
-		
-		<%}else{%>
-			<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+
+			<div class="input-field col s12">
+				<label for="titulo">Perfil</label>
+				<input type="text" disabled value="<%= data[0].plano %>">
+			</div>
+
+			<div class="input-field col s12">
+				<label for="titulo">Valor</label>
+				<input type="text" disabled value="<%= data[0].valor %>">
+			</div>
+
+			<%if(data[0].arquivo!=undefined){%>
+			<div class="input-field col s12">
+				<a download class="btn primary" href="<%= data[0].arquivo %>">Baixar Comprovante</a>					
+			</div>
+
+			<div>OU</div>
+
+			<div class="input-field col s12">
+				<a class="btn primary ajax-submit-one-item" data-href="<%= data.link_sistema%>/administracao/pedido-aporte/enviar-email" data-arquivo="<%= data[0].arquivo %>" data-mensagem-sucesso="Email Enviado com Sucesso!">Enviar para o meu E-mail</a>
+			</div>
+
+
+			<%}else{%>
+			<div class="center margin-b-10">Cliente não enviou comprovante!</div>
 			<%}%>
-			
+
+			<button data-href="/sistema/administracao/pedido-aporte/confirmar" data-action="<%= data.link_sistema%>/administracao/pedidos-aportes/" class="btn secondary ajax-submit-update-mensagem margin-b-10" data-mensagem-sucesso="Aporte Aprovado com Sucesso!">
+				Aceitar Pedido <i class="far fa-save-o" aria-hidden="true"></i>
+			</button>
+
+
+
 		</div>
+	</form>
+
+
+
+
+
+	<%}else{%>
+	<div class="card light">Você não possui permissão para acessar esse conteúdo</div>
+	<%}%>
+
+</div>

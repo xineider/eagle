@@ -246,6 +246,17 @@ $(document).on('ready', function () {
 		}
 	});
 
+	$(document).on('click', '.ajax-submit-one-item', function(e) {
+		e.preventDefault();
+		var informacao = $(this).data('arquivo');
+		var link = $(this).data('href');
+		var back = $(this).data('action');
+		var sucessMessage = $(this).data('mensagem-sucesso');
+		var sucessClass = 'green';
+		EnviarUmaInformacao(informacao,link,sucessMessage,sucessClass);
+
+	});
+
 	$(document).on('click', '.ajax-submit-delete', function(e) {
 		e.preventDefault();
 		var form = $(this).parents('form');
@@ -881,9 +892,9 @@ function UploadImagemPerfil(isso,container) {
 				adicionarLoader();
 			},
 			success: function (data) {
-
 				if (typeof data == 'object' && data['error'] != null){
-					AddErrorTexto($(data['element']),data['texto']);	
+					AddErrorTexto($(data['element']),data['texto']);
+					LogSistema('POST',link+'_failed');	
 				}else if(data != undefined){
 					$('.file-path').val('');
 
@@ -913,11 +924,6 @@ function UploadImagemPerfil(isso,container) {
 	else{
 		AddErrorTexto(isso,'Arquivo Muito Grande, envie outro!');
 	}
-
-
-
-
-
 }
 
 function UploadComprovante(isso,container) {
@@ -959,6 +965,45 @@ function UploadComprovante(isso,container) {
 				');
 			console.debug(data);
 			LogSistema('POST',link);
+		},
+		error: function (xhr, e, t) {
+			console.debug((xhr.responseText));
+		},
+		complete: function() {
+			removerLoader();
+		}
+	});
+}
+
+
+function EnviarUmaInformacao(informacao,link,sucessMessage,sucessClass) {
+	console.log('!!!!!!! Enviar uma Informação !!!!!!!!');
+	console.log(informacao);
+	console.log('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
+	var formData = new FormData();
+	formData.append('informacao', informacao);
+
+	$.ajax({
+		url: link,
+		type: 'POST',
+		data: formData,
+		dataType: 'json',
+		processData: false,
+		contentType: false,
+		beforeSend: function(request) {
+			request.setRequestHeader("Authority-Eagle-hash", $('input[name="hash_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-id", $('input[name="id_usuario_sessao"]').val());
+			request.setRequestHeader("Authority-Eagle-nivel", $('input[name="nivel_usuario_sessao"]').val());
+			adicionarLoader();
+		},
+		success: function (data) {
+			if (typeof data == 'object' && data['error'] != null){
+				AddErrorTexto($(data['element']),data['texto']);	
+			}else if(data != undefined){
+				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
+				LogSistema('POST',link);
+			}
+			
 		},
 		error: function (xhr, e, t) {
 			console.debug((xhr.responseText));
