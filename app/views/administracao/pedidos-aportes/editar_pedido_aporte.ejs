@@ -34,8 +34,10 @@
 
 			<div>OU</div>
 
+			<input type="hidden" name="arquivo" value="<%= data[0].arquivo %>">
+
 			<div class="input-field col s12">
-				<a class="btn primary ajax-submit-one-item" data-href="<%= data.link_sistema%>/administracao/pedido-aporte/enviar-email" data-arquivo="<%= data[0].arquivo %>" data-mensagem-sucesso="Email Enviado com Sucesso!">Enviar para o meu E-mail</a>
+				<button class="btn primary ajax-submit-update-mensagem" data-href="<%= data.link_sistema%>/administracao/pedido-aporte/enviar-email" data-action="" data-mensagem-sucesso="Email Enviado com Sucesso!">Enviar para o meu E-mail</button>
 			</div>
 
 

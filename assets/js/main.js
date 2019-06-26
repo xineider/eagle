@@ -239,6 +239,10 @@ $(document).on('ready', function () {
 		var post = form.serializeArray();
 		var link = $(this).data('href');
 		var back = $(this).data('action');
+		console.log('bbbbbbbbbbbb back bbbbbbbbb');
+		console.log(back);
+		console.log('bbbbbbbbbbbb back bbbbbbbbb');
+
 		var sucessMessage = $(this).data('mensagem-sucesso');
 		var sucessClass = 'green';
 		if (VerificarForm(form) == true) {
@@ -668,7 +672,9 @@ function SubmitAjax(post, link, back,sucessMessage,sucessClass) {
 				AddErrorTexto($(data['element']),data['texto']);	
 			}else if(data != undefined){
 				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
-				GoTo(back, true);
+				if(back != ''){
+					GoTo(back, true);
+				}
 			}
 			LogSistema('POST',link);
 		},
