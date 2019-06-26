@@ -129,12 +129,12 @@ SendMailAttachment(para, assunto,text, html,nomeAnexo,caminhoAnexo) {
 
 					// create reusable transporter object using the default SMTP transport
 					let transporter = nodemailer.createTransport({
-							host: 'smtp.ethereal.email',
+							host: 'smtp.hostinger.com.br',
 							port: 587,
 							secure: false, // true for 465, false for other ports
 							auth: {
-									user: 'odwi55vnlucbzhjg@ethereal.email', // generated ethereal user
-									pass: 'p6aDEXSrHBcDEwP6Ys'  // generated ethereal password
+									user: 'noreply@eagle.finance', // generated ethereal user
+									pass: 'QeRCn2yixWyi'  // generated ethereal password
 							},
 	    				tls: {
 	    					rejectUnauthorized: false

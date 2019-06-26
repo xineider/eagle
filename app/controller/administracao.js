@@ -765,6 +765,8 @@ router.post('/pedido-aporte/enviar-email/', function(req, res, next) {
 	console.log(POST);
 	console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@');
 
+	console.log(POST.informacao);
+
 	var html = "Olá Você está recebendo este e-mail pois pediu o comprovante por e-mail. O mesmo está em anexo."+
 	"<br><b>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!</b>";
 
@@ -772,7 +774,7 @@ router.post('/pedido-aporte/enviar-email/', function(req, res, next) {
 	"<br>Por-favor não responda essa mensagem, pois ela é enviada automaticamente!";
 
 	model.GetUsuario(req.session.usuario.id).then(data_usuario =>{
-		control.SendMailAttachment(data_usuario[0].email, 'Comprovante Deposito', text, html,'Comprovante',POST.informacao);
+		control.SendMailAttachment(data_usuario[0].email, 'Comprovante Deposito', text, html,'comprovante.png',POST.informacao);
 		res.json(POST.informacao);
 	});
 });
