@@ -797,8 +797,8 @@ function AddErrorAjax() {
 }
 // ALTERE PARA FUNCIONAR CORRETAMENTE
 function UploadImagem(isso,container) {
+	var link = isso.data('href');
 	if(isso[0].files[0].size < 5120000){
-		var link = isso.data('href');
 		console.log('FILE UPLOAD');
 		console.log(isso[0].files[0]);
 		var formData = new FormData();
@@ -851,6 +851,7 @@ function UploadImagem(isso,container) {
 			}
 		});
 	}else{
+		LogSistema('POST',link+'_failed_arquivo_grande');
 		AddErrorTexto(isso,'Arquivo Muito Grande, envie outro!');
 	}
 }
@@ -883,8 +884,8 @@ function validateEmail(email) {
 
 
 function UploadImagemPerfil(isso,container) {
+	var link = isso.data('href');
 	if(isso[0].files[0].size < 5120000){
-		var link = isso.data('href');
 		var formData = new FormData();
 
 		formData.append('arquivo', isso[0].files[0]);
@@ -938,13 +939,14 @@ function UploadImagemPerfil(isso,container) {
 			}
 		});
 	}else{
+		LogSistema('POST',link+'_failed_arquivo_grande');
 		AddErrorTexto(isso,'Arquivo Muito Grande, envie outro!');
 	}
 }
 
 function UploadComprovante(isso,container) {
-	if(isso[0].files[0].size < 10240000){
-		var link = isso.data('href');
+	var link = isso.data('href');
+	if(isso[0].files[0].size < 10240000){		
 		console.log('FILE UPLOAD');
 		console.log(isso[0].files[0]);
 		var formData = new FormData();
@@ -1001,6 +1003,7 @@ function UploadComprovante(isso,container) {
 			}
 		});
 	}else{
+		LogSistema('POST',link+'_failed_arquivo_grande');
 		AddErrorTexto(isso,'Arquivo Muito Grande, envie outro!');
 	}
 }
@@ -1028,7 +1031,8 @@ function EnviarUmaInformacao(informacao,link,sucessMessage,sucessClass) {
 		},
 		success: function (data) {
 			if (typeof data == 'object' && data['error'] != null){
-				AddErrorTexto($(data['element']),data['texto']);	
+				AddErrorTexto($(data['element']),data['texto']);
+				LogSistema('POST',link+'_failed');	
 			}else if(data != undefined){
 				M.toast({html:'<div class="center-align" style="width:100%;">'+sucessMessage+'</div>', displayLength:5000, classes: sucessClass});
 				LogSistema('POST',link);
