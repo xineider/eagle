@@ -9,19 +9,19 @@ var crypto = require('crypto');
 // 	"database" : "eagle"
 // };
 
-var config = {
-	"host"     : "mysql995.umbler.com",
-	"user"     : "adm-eagle-teste",
-	"password" : "fr(97cL|jD3",
-	"database" : "eagle-teste"
-};
-
 // var config = {
-// 	"host"     : "localhost",
-// 	"user"     : "root",
-// 	"password" : "root",
-// 	"database" : "eagle"
+// 	"host"     : "mysql995.umbler.com",
+// 	"user"     : "adm-eagle-teste",
+// 	"password" : "fr(97cL|jD3",
+// 	"database" : "eagle-teste"
 // };
+
+var config = {
+	"host"     : "localhost",
+	"user"     : "root",
+	"password" : "root",
+	"database" : "eagle"
+};
 
 
 // // CONEXÃO MYSQL

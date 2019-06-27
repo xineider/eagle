@@ -8,6 +8,7 @@ var model = new FinanceiroModel;
 var data = {};
 var app = express();
 app.use(require('express-is-ajax-request'));
+const btcValue = require('btc-value');
 
 /* GET pagina de login. */
 router.get('/', function(req, res, next) {	
@@ -19,6 +20,11 @@ router.get('/', function(req, res, next) {
 			console.log('FFFFFFFFFFFFFFFFFFFF FINANCEIRO FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
 			console.log(data);
 			console.log('FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF');
+			
+			btcValue({isDecimal: true}).then(value => {
+				console.log('$' + value);
+   			 // => e.g. $11048
+   			});
 			res.render(req.isAjaxRequest() == true ? 'api' : 'montador', {html: 'financeiro/financeiro', data: data, usuario: req.session.usuario});
 		});
 	});
