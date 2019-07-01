@@ -230,7 +230,7 @@ class AdministracaoModel {
 
 	GetUsuarios() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM usuarios WHERE deletado = ?	ORDER BY data_cadastro ', [0]).then(data => {
+			helper.Query('SELECT * FROM usuarios WHERE deletado = ?	ORDER BY nome ', [0]).then(data => {
 				resolve(data);
 			});
 		});
