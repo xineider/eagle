@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	<link rel='stylesheet' href='/assets/css/fontawesome.min.css' />
 	<link rel='stylesheet' href='/assets/css/materialize.min.css' />
-	<link rel='stylesheet' href='/assets/css/style.css' />
+	<link rel='stylesheet' href='/assets/css/login.css' />
 	<script src="/assets/js/jquery.min.js"></script>
 	<script src="/assets/js/materialize.min.js"></script>
 </head>
@@ -46,7 +46,7 @@
 			<div>
 				<form method="POST" action="/">
 
-					<div class="box" style="background: black;">
+					<div class="box">
 						<div class="icon center-align">
 							<img class="gif_rotatorio" src="/assets/imgs/logo_animation.gif">
 							<div class="imagem_subtitle_container">
@@ -72,22 +72,22 @@
 						}
 						%>
 
-						<div class="input-field" style="margin-top: 2rem;">
+						<div class="input-field center-align" style="margin-top: 2rem;">
 							
 							<input type="text" name="login" id="login" class="validate" autocomplete="on" placeholder="Usuário">
 							
 						</div>
-						<div class="input-field">
+						<div class="input-field center-align">
 							<input type="password" name="senha" id="senha" class="validate" autocomplete="on" placeholder="Senha">
 							
 							
 						</div>
-						<p class="right-align">
+						<p class="right-align forgot-password-container">
 							<a class="white-text modal-trigger" href="#modalforgot">Esqueci minha senha</a>
 						</p>
 
 						<div class="center-align">
-							<button class="btn light waves-effect waves-light">
+							<button class="btn light waves-effect waves-light btn-acessar">
 								Acessar
 							</button>
 						</div>
@@ -95,171 +95,38 @@
 				</form>
 			</div>
 		</section>
-		<style type="text/css">
-			html {
-				height: 100%;
-				min-height: 100%;
-			}
 
-			.underline{
-				text-decoration: underline;
-			}
-			
-			
-			.login main{
-				margin-top: 0;
-			}
-			
-			.login .icon {
-				font-size: 6em;
-				
-			}
+		<script>
+			$(document).on('ready', function () {
 
-			.login .icon .gif_rotatorio{
-				max-height: 300px;
-				max-width: 100%;
-			}
-			
+				$('.modal').modal();
 
-			.login .imagem_subtitle_container{
-				max-width: 700px;
-				margin: 0 auto;
-			}
-
-			.login .imagem_subtitle_container img{
-				width: 100%;
-			}
-			
-			
-			.login .box {
-				padding: 15px;
-				box-sizing: content-box;
-				background:#000000;				
-			}
-			
-			.input-field .prefix.active {
-				color: #1976D2 ;
-			}
-			
-			
-			.login .box .input-field input{
-				height:50px;
-				border-bottom-color: #d6c282;
-			}
-			
-			.login .box .input-field input::placeholder{
-				color:#000;
-			}
-			
-			.login .box .input-field label{
-				margin-left: 5px;
-				color: #fff;
-			}
-
-
-/*			.login input::-webkit-input-placeholder {
-				color: pink;
-			}
-			.login input::-moz-placeholder { 
-				color: pink;
-			}
-			.login input::-ms-input-placeholder { 
-				color: pink;
-			}
-			.login input::-moz-placeholder { 
-				color: pink;
-			}*/
-
-			input::placeholder {
-				color: #fff;
-				text-align:center;
-			}
-
-
-			
-			input:not([type]):focus:not([readonly]), 
-			input[type=text]:not(.browser-default):focus:not([readonly]), 
-			input[type=password]:not(.browser-default):focus:not([readonly]), 
-			input[type=email]:not(.browser-default):focus:not([readonly]), 
-			input[type=url]:not(.browser-default):focus:not([readonly]), 
-			input[type=time]:not(.browser-default):focus:not([readonly]), 
-			input[type=date]:not(.browser-default):focus:not([readonly]), 
-			input[type=datetime]:not(.browser-default):focus:not([readonly]), 
-			input[type=datetime-local]:not(.browser-default):focus:not([readonly]), 
-			input[type=tel]:not(.browser-default):focus:not([readonly]), 
-			input[type=number]:not(.browser-default):focus:not([readonly]), 
-			input[type=search]:not(.browser-default):focus:not([readonly]), 
-			textarea.materialize-textarea:focus:not([readonly]){
-				border-bottom: 0;
-				background:#fff;
-				box-shadow:1px 1px 1px 0 #000;
-			}
-			
-			input:not([type]):focus:not([readonly])+label, 
-			input[type=text]:not(.browser-default):focus:not([readonly])+label, 
-			input[type=password]:not(.browser-default):focus:not([readonly])+label, 
-			input[type=email]:not(.browser-default):focus:not([readonly])+label, 
-			input[type=url]:not(.browser-default):focus:not([readonly])+label, 
-			input[type=time]:not(.browser-default):focus:not([readonly])+label, 
-			input[type=date]:not(.browser-default):focus:not([readonly])+label, 
-			input[type=datetime]:not(.browser-default):focus:not([readonly])+label, 
-			input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label, 
-			input[type=tel]:not(.browser-default):focus:not([readonly])+label, 
-			input[type=number]:not(.browser-default):focus:not([readonly])+label, 
-			input[type=search]:not(.browser-default):focus:not([readonly])+label, 
-			textarea.materialize-textarea:focus:not([readonly])+label{
-				color: #000;
-			}
-			
-			.input-field>label:not(.label-icon).active{
-				-webkit-transform: translateY(-18px) scale(0.8);
-				transform: translateY(-18px) scale(0.8);
-				-webkit-transform-origin: 0 0;
-				transform-origin: 0 0;
-			}
-			
-			
-			
-			/*		input:not([type]):focus:not([readonly]), input[type=text]:focus:not([readonly]), input[type=password]:focus:not([readonly]), input[type=email]:focus:not([readonly]), input[type=url]:focus:not([readonly]), input[type=time]:focus:not([readonly]), input[type=date]:focus:not([readonly]), input[type=datetime]:focus:not([readonly]), input[type=datetime-local]:focus:not([readonly]), input[type=tel]:focus:not([readonly]), input[type=number]:focus:not([readonly]), input[type=search]:focus:not([readonly]), textarea.materialize-textarea:focus:not([readonly]) {
-				border-bottom: 1px solid #1976D2 ;
-				box-shadow: 0 1px 0 0 #1976D2 ;
-			}
-			input:not([type]):focus:not([readonly])+label, input[type=text]:focus:not([readonly])+label, input[type=password]:focus:not([readonly])+label, input[type=email]:focus:not([readonly])+label, input[type=url]:focus:not([readonly])+label, input[type=time]:focus:not([readonly])+label, input[type=date]:focus:not([readonly])+label, input[type=datetime]:focus:not([readonly])+label, input[type=datetime-local]:focus:not([readonly])+label, input[type=tel]:focus:not([readonly])+label, input[type=number]:focus:not([readonly])+label, input[type=search]:focus:not([readonly])+label, textarea.materialize-textarea:focus:not([readonly])+label {
-				color: #1976D2 ;
-				}*/
-			</style>
-
-			<script>
-				$(document).on('ready', function () {
-
-					$('.modal').modal();
-
-					$(document).on('click', '.resend-pass', function(e) {
-						e.preventDefault();
-						var form = $(this).closest('form');
-						var post = form.serializeArray();
-						$.ajax({
-							method: 'POST',
-							async: true,
-							data: post,
-							url: '/sistema/api/recuperar/senha',
-							success: function(data) {
-								if(data == "email_nao_cadastrado"){
-									$('.error_container_resend').removeClass('hide');
-									$('.error_container_resend').find('.error_resend_mensagem').html('Não existe ninguém cadastrado com este e-mail!');
-								}else{
-									M.toast({html:'<div class="center-align" style="width:100%;">Senha enviada para seu email com sucesso!!!</div>', displayLength:7000, classes: 'rounded green'});
-									$('.modal').modal('close');
-								}
-							},
-							error: function(xhr) { 
-								alert("Error, contate o administrador ou reinicie a pagina.");
+				$(document).on('click', '.resend-pass', function(e) {
+					e.preventDefault();
+					var form = $(this).closest('form');
+					var post = form.serializeArray();
+					$.ajax({
+						method: 'POST',
+						async: true,
+						data: post,
+						url: '/sistema/api/recuperar/senha',
+						success: function(data) {
+							if(data == "email_nao_cadastrado"){
+								$('.error_container_resend').removeClass('hide');
+								$('.error_container_resend').find('.error_resend_mensagem').html('Não existe ninguém cadastrado com este e-mail!');
+							}else{
+								M.toast({html:'<div class="center-align" style="width:100%;">Senha enviada para seu email com sucesso!!!</div>', displayLength:7000, classes: 'rounded green'});
+								$('.modal').modal('close');
 							}
-						});
+						},
+						error: function(xhr) { 
+							alert("Error, contate o administrador ou reinicie a pagina.");
+						}
 					});
-
 				});
-			</script>
-		</main>
-	</body>
-	</html>
+
+			});
+		</script>
+	</main>
+</body>
+</html>
