@@ -25,9 +25,16 @@ html {
 .login .box {
 	padding: 15px;
 	box-sizing: content-box;
-	background:#000000;				
+	background-image: url('/assets/imgs/login_background.png');
+	background-color: #000000;
+	background-size: cover;
 }
 
+
+.login .box-container{
+	max-width: 700px;
+	margin: 0 auto;
+}
 
 .loader {
 	position: fixed;
@@ -147,4 +154,17 @@ html {
 .btn-acessar{
 	font-family: lato;
 	font-weight: bold;
+	background: #9c792b;
+	background: -moz-linear-gradient(-45deg, #9c792b 0%, #d9c686 50%, #9c792b 100%);
+	background: -webkit-linear-gradient(-45deg, #9c792b 0%,#d9c686 50%,#9c792b 100%);
+	background: linear-gradient(135deg, #9c792b 0%,#d9c686 50%,#9c792b 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9c792b', endColorstr='#9c792b',GradientType=1 );
+}
+
+.btn-acessar:hover, .btn-acessar:focus{
+background: #775a1a;
+background: -moz-linear-gradient(-45deg, #775a1a 0%, #d4c07f 50%, #775a1a 100%);
+background: -webkit-linear-gradient(-45deg, #775a1a 0%,#d4c07f 50%,#775a1a 100%);
+background: linear-gradient(135deg, #775a1a 0%,#d4c07f 50%,#775a1a 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#775a1a', endColorstr='#775a1a',GradientType=1 );
 }

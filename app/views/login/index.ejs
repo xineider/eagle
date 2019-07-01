@@ -47,49 +47,51 @@
 				<form method="POST" action="/">
 
 					<div class="box">
-						<div class="icon center-align">
-							<img class="gif_rotatorio" src="/assets/imgs/logo_animation.gif">
-							<div class="imagem_subtitle_container">
-								<img src="/assets/imgs/logo_subtitle.png"> 
+						<div class="box-container">
+							<div class="icon center-align">
+								<img class="gif_rotatorio" src="/assets/imgs/logo_animation.gif">
+								<div class="imagem_subtitle_container">
+									<img src="/assets/imgs/logo_subtitle.png"> 
+								</div>
+
+								<!-- <img src="/assets/imgs/logo.png"> -->
 							</div>
 
-							<!-- <img src="/assets/imgs/logo.png"> -->
-						</div>
-
-						<%
-						if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
-							%>
-							<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
-								<span class="white-text"><%= erro %></span>
-							</div>
 							<%
-						} else if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == 'login') {
+							if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == '404') {
+								%>
+								<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
+									<span class="white-text"><%= erro %></span>
+								</div>
+								<%
+							} else if (typeof erro != 'undefined' && typeof tipo_erro != 'undefined' && tipo_erro == 'login') {
+								%>
+								<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
+									<span class="white-text"><%= erro %></span>
+								</div>
+								<%
+							}
 							%>
-							<div class="card-panel red darken-1 center-align" style="margin-bottom: 25px;">
-								<span class="white-text"><%= erro %></span>
+
+							<div class="input-field center-align" style="margin-top: 2rem;">
+								
+								<input type="text" name="login" id="login" class="validate" autocomplete="on" placeholder="Usuário">
+								
 							</div>
-							<%
-						}
-						%>
+							<div class="input-field center-align">
+								<input type="password" name="senha" id="senha" class="validate" autocomplete="on" placeholder="Senha">
+								
+								
+							</div>
+							<p class="right-align forgot-password-container">
+								<a class="white-text modal-trigger" href="#modalforgot">Esqueci minha senha</a>
+							</p>
 
-						<div class="input-field center-align" style="margin-top: 2rem;">
-							
-							<input type="text" name="login" id="login" class="validate" autocomplete="on" placeholder="Usuário">
-							
-						</div>
-						<div class="input-field center-align">
-							<input type="password" name="senha" id="senha" class="validate" autocomplete="on" placeholder="Senha">
-							
-							
-						</div>
-						<p class="right-align forgot-password-container">
-							<a class="white-text modal-trigger" href="#modalforgot">Esqueci minha senha</a>
-						</p>
-
-						<div class="center-align">
-							<button class="btn light waves-effect waves-light btn-acessar">
-								Acessar
-							</button>
+							<div class="center-align">
+								<button class="btn light waves-effect waves-light btn-acessar">
+									Acessar
+								</button>
+							</div>
 						</div>
 					</div>
 				</form>
