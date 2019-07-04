@@ -273,7 +273,7 @@ class AdministracaoModel {
 
 	GetPlanos() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT * FROM planos WHERE deletado = ?', [0]).then(data => {
+			helper.Query('SELECT * FROM planos', []).then(data => {
 				resolve(data);
 			});
 		});
@@ -326,10 +326,10 @@ class AdministracaoModel {
 
 	GetPedidosSaques() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
+			helper.Query('SELECT a.*,REPLACE(ROUND(a.valor,2),".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
 				(SELECT b.nome FROM usuarios as b WHERE b.id = a.id_usuario AND b.deletado = ?) as nome, \
-				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano AND c.deletado = ?) as plano \
-				FROM caixa as a WHERE a.deletado = ? AND (a.tipo = ? OR a.tipo = ?) AND a.confirmado = ?', [0,0,0,1,3,0]).then(data => {
+				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano) as plano \
+				FROM caixa as a WHERE a.deletado = ? AND (a.tipo = ? OR a.tipo = ?) AND a.confirmado = ?', [0,0,1,3,0]).then(data => {
 					resolve(data);
 				});
 			});
@@ -338,10 +338,10 @@ class AdministracaoModel {
 
 	GetPedidosAportes() {
 		return new Promise(function(resolve, reject) {
-			helper.Query('SELECT a.*,REPLACE(a.valor,".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
+			helper.Query('SELECT a.*,REPLACE(ROUND(a.valor,2),".",",") as valor,DATE_FORMAT(data_cadastro, "%d/%m/%Y") as data_cadastro, \
 				(SELECT b.nome FROM usuarios as b WHERE b.id = a.id_usuario AND b.deletado = ?) as nome, \
-				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano AND c.deletado = ?) as plano \
-				FROM caixa as a WHERE a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,0,0,0,0]).then(data => {
+				(SELECT c.nome FROM planos as c WHERE c.id = a.id_plano) as plano \
+				FROM caixa as a WHERE a.deletado = ? AND a.tipo = ? AND a.confirmado = ?', [0,0,0,0]).then(data => {
 					resolve(data);
 				});
 			});
